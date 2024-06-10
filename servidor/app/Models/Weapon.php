@@ -12,10 +12,17 @@ class Weapon extends Model
     protected $hidden =['updated_at','created_at'];
     protected $fillable=[
         'name', // Name of the Weapon
+        'slug',
         'a', // Attack
         'bs-ws', // Ballistic Skill or Weapon Skill
         'd', // Damage
         'sv', // Save
         't', // Tipe of weapon
     ];
+    public function soldiers(){
+        return $this->belongsToMany(Soldier::class);
+    }
+    public function getRouteKeyName(){
+        return 'slug';
+    }
 }

@@ -12,8 +12,18 @@ class Army extends Model
     protected $hidden = ['updated_at', 'created_at'];
     protected $fillable = [
         'name',
+        'slug',
         'description',
         'image',
         'faction_id' // Faction its in
     ];
+    public function squads(){
+        return $this->hasMany(Squadron::class);
+    }
+    public function faction(){
+        return $this->belongsTo(Faction::class);
+    }
+    public function getRouteKeyName(){
+        return 'slug';
+    }
 }
