@@ -13,7 +13,8 @@ class Soldier extends Model
     protected $fillable=[
         'name', // Name of the Soldier
         'slug',
-        'squadron_id', //Id of the Squadron the soldier its in
+        'description', // Description of the soldier
+        'squadron_id', // Id of the Squadron the soldier its in
         'm', // Movement
         'apl', // Action Point Limit
         'ga', // Group Action
@@ -30,6 +31,12 @@ class Soldier extends Model
     }
     public function keywords(){
         return $this->belongsToMany(KeyWord::class);
+    }
+    public function uniqueactions(){
+        return $this->belongsToMany(UniqueAction::class);
+    }
+    public function abilities(){
+        return $this->belongsToMany(Abilitie::class);
     }
     public function getRouteKeyName(){
         return 'slug';
