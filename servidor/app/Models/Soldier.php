@@ -13,6 +13,7 @@ class Soldier extends Model
     protected $fillable=[
         'name', // Name of the Soldier
         'slug',
+        'image',
         'description', // Description of the soldier
         'squadron_id', // Id of the Squadron the soldier its in
         'm', // Movement
