@@ -21,6 +21,14 @@ class ArmySeeder extends Seeder
             'faction_id'=>'1'
         ],
         [
+            'name'=>'Adepta Sororitas',
+            'slug'=>'adepta-sororitas',
+            'description'=>'Las Adepta Sororitas, coloquialmente llamadas "Hermandad", cuyo brazo militar también se conoce como Hermanas de Batalla y anteriormente como Hijas del Emperador, son una división exclusivamente femenina de la iglesia estatal del Imperio del Hombre conocida como Eclesiarquía o, más formalmente, como Adeptus Ministorum.',
+            'image'=>'adeptaSororitasLogo.jpg',
+            // https://64.media.tumblr.com/013b51645110f4b781d5e1ba5c376e64/tumblr_nbple5VhN01teiu7jo1_1280.pnj
+            'faccion_id'=>'1'
+        ],
+        [
             'name'=>'Grey Knights',
             'slug'=>'grey-knights',
             'description'=>'Son un Capítulo secreto y misterioso de Marines Espaciales encargado específicamente de combatir las peligrosas entidades demoníacas de la Disformidad y todos aquellos mortales que ejercen el poder corrupto de los Dioses del Caos.',
@@ -37,6 +45,14 @@ class ArmySeeder extends Seeder
             'faction_id'=>'1'
         ],
         [
+            'name'=>'Agents of the Imperium',
+            'slug'=>'agents-of-the-imperium',
+            'description'=>'Agentes del Imperio son una colección de organizaciones y facciones que trabajan en secreto para proteger y mantener el Imperio del Hombre. Estas organizaciones incluyen la Inquisición, el Officio Assassinorum, el Adeptus Arbites y el Adeptus Custodes, entre otros.',
+            'image'=>'AgentsOfTheImperiumLogo.jpg',
+            // https://static.wikia.nocookie.net/warhammer40k/images/3/3f/IoMhighres.png/revision/latest?cb=20190630130844
+            'faction_id'=>'1'
+        ],
+        [
             'name'=>'Adeptus Custodes',
             'slug'=>'adeptus-custodes',
             'description'=>'Los Adeptus Custodes fueron los primeros y más grandes de los supersoldados diseñados por el Emperador. Cada uno es un guerrero de poder superlativo y resistencia sobrehumana, un estratega y táctico que rivaliza con los más grandes generales y muchas tropas más. Son ejemplares de leyenda casi inmortales, que no se detienen ante nada para defender al Emperador y su mundo trono.',
@@ -45,11 +61,11 @@ class ArmySeeder extends Seeder
             'faction_id'=>'1'
         ],
         [
-            'name'=>'Ángeles Sangrientos',
-            'slug'=>'angeles-sangrientos',
-            'description'=>'Los Ángeles Sangrientos se cuentan entre los Marines Espaciales más nobles y honorables, con una historia de lealtad inquebrantable al Imperium que se remonta a la Gran Cruzada. Se esfuerzan sin vacilar por proteger a los inocentes, pero su heroica reputación oculta una espantosa maldición. Cada hermano de batalla lucha día y noche para resistir esta aflicción y mantenerla oculta a los extraños.',
-            'image'=>'angelesSangrientosLogo.jpg',
-            // https://warhammer40000.com/wp-content/uploads/2023/07/58BjlT974guAVcSm.png
+            'name'=>'Space Marines',
+            'slug'=>'space-marines',
+            'description'=>'Los Marines Espaciales o Astartes de Aeptus son los principales defensores de la Humanidad, el más grande del Emperador de los guerreros de la Humanidad. Apenas son humanos, pero sobrehumanos; habiendo sido hechos superiores en todos los aspectos a un hombre normal por un duro régimen de modificación genética, psico-acondicionamiento y entrenamiento riguroso.',
+            'image'=>'spaceMarinesLogo.jpg',
+            // https://drawshield.net/catalog/charges/warhammer//adeptus-astartes-symbol.png
             'faccion_id'=>'1'
         ],
         #endregion
