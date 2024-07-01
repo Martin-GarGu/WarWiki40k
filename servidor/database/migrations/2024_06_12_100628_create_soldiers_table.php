@@ -18,7 +18,7 @@ return new class extends Migration
             $table->longText('description');
             $table->string('image')->nullable();
             $table->foreignId('squadron_id');
-            $table->foreignId('squadron_id')->references('id')->on('squads')->onDelete('cascade');
+            $table->foreign('squadron_id')->references('id')->on('squads')->onDelete('cascade');
             $table->string('m');
             $table->integer('apl');
             $table->integer('ga');

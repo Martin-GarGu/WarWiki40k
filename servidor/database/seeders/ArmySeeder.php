@@ -20,7 +20,7 @@ class ArmySeeder extends Seeder
             'description'=>'Las Adepta Sororitas, coloquialmente llamadas "Hermandad", cuyo brazo militar también se conoce como Hermanas de Batalla y anteriormente como Hijas del Emperador, son una división exclusivamente femenina de la iglesia estatal del Imperio del Hombre conocida como Eclesiarquía o, más formalmente, como Adeptus Ministorum.',
             'image'=>'adeptaSororitasLogo.jpg',
             // https://64.media.tumblr.com/013b51645110f4b781d5e1ba5c376e64/tumblr_nbple5VhN01teiu7jo1_1280.pnj
-            'faccion_id'=>'1'
+            'faction_id'=>'1'
         ],
         [
             'name'=>'Adeptus Custodes',
@@ -69,7 +69,7 @@ class ArmySeeder extends Seeder
             'description'=>'Los Marines Espaciales o Astartes de Aeptus son los principales defensores de la Humanidad, el más grande del Emperador de los guerreros de la Humanidad. Apenas son humanos, pero sobrehumanos; habiendo sido hechos superiores en todos los aspectos a un hombre normal por un duro régimen de modificación genética, psico-acondicionamiento y entrenamiento riguroso.',
             'image'=>'spaceMarinesLogo.jpg',
             // https://drawshield.net/catalog/charges/warhammer//adeptus-astartes-symbol.png
-            'faccion_id'=>'1'
+            'faction_id'=>'1'
         ],
         #endregion
         #region chaos
@@ -77,6 +77,7 @@ class ArmySeeder extends Seeder
             'name'=>'Chaos Daemons',
             // 'slug'=>'chaos-daemons',
             'description'=>'Los Demonios del Caos, o simplemente Demonios (pronunciado en ingles DEE-mahns), también conocidos como "Nunca nacidos" entre las fuerzas del Caos, son entidades inteligentes y generalmente malévolas de la Disformidad compuestas de energía puramente psíquica.',
+            'image'=>'chaosDaemonsLogo.jpg',
             // https://p7.hiclipart.com/preview/274/317/230/warhammer-40-000-symbol-of-chaos-chaos-magic-symbol-thumbnail.jpg
             'faction_id'=>'2'
         ],
@@ -84,6 +85,7 @@ class ArmySeeder extends Seeder
             'name'=>'Chaos Space Marines',
             // 'slug'=>'chaos-space-marines',
             'description'=>'Los Marines Espaciales del Caos, también llamados a veces Marines Traidores, Marines Renegados o Astartes Herejes, son antiguos Marines Espaciales del Imperio de la Humanidad que han elegido abandonar el servicio del Emperador de la Humanidad y dedicarse al Caos para lograr sus propios fines.',
+            'image'=>'chaosSpaceMarinesLogo.jpg',
             // https://static.wikia.nocookie.net/warhammer40k/images/d/da/ChaosSpaceMarinesIcon.jpg/revision/latest/scale-to-width-down/1200?cb=20220727154127
             'faction_id'=>'2'
         ],
@@ -91,6 +93,7 @@ class ArmySeeder extends Seeder
             'name'=>'Cultists',
             // 'slug'=>'cultists',
             'description'=>'Un Culto del Caos es la más peligrosa de todas aquellas organizaciones que conspiran para derrocar el gobierno del Imperio del Hombre desde dentro. Todos los planetas y civilizaciones que pertenecen al Imperio pueden albergar organizaciones contaminadas por el Caos, que son tan diversas en prácticas y miembros como sea imaginable.',
+            'image'=>'cultistsLogo.jpg',
             // https://p7.hiclipart.com/preview/934/248/963/warhammer-40-000-warhammer-online-age-of-reckoning-symbol-of-chaos-chaos-space-marines-symbol.jpg
             'faction_id'=>'2'
         ],
@@ -100,7 +103,7 @@ class ArmySeeder extends Seeder
             'description'=>'La Guardia de la Muerte es la Legión Traidora más favorecida por Nurgle, el Dios del Caos de la plaga y la desesperación. Dedicados a propagar las espantosas infecciones del Padre de la Plaga por los mundos del Imperium, estos mórbidos Marines Espaciales son vectores de plaga vivos dotados de una resistencia grotesca.',
             'image'=>'guardiaDeLaMuerteLogo.jpg',
             // https://ih1.redbubble.net/image.4968566957.5087/raf,360x360,075,t,fafafa:ca443f4786.jpg
-            'faccion_id'=>'2'
+            'faction_id'=>'2'
         ], 
         [
             'name'=>'Thousand Sons',

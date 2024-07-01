@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('armies', function (Blueprint $table) {
+        Schema::create('weapons', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
             $table->string('slug')->unique();
-            $table->longText('description');
-            $table->string('image')->nullable();
-            $table->foreignId('faction_id');
-            $table->foreign('faction_id')->references('id')->on('factions')->onDelete('cascade');
+            $table->integer('a');
+            $table->string('bs-ws');
+            $table->string('d');
+            
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('armies');
+        Schema::dropIfExists('weapons');
     }
 };

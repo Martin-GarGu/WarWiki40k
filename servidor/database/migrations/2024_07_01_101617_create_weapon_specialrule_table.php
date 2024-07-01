@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('soldier_weapon', function (Blueprint $table) {
+        Schema::create('weapon_specialrule', function (Blueprint $table) {
             // $table->id();
-            $table->foreignId('soldier_id');
             $table->foreignId('weapon_id');
+            $table->foreignId('specialrule_id');
 
-            $table->foreign('soldier_id')->references('id')->on('soldiers')->onDelete('cascade');
             $table->foreign('weapon_id')->references('id')->on('weapons')->onDelete('cascade');
-            $table->primary(['soldier_id', 'weapon_id']);
-
+            $table->foreign('specialrule_id')->references('id')->on('specialrules')->onDelete('cascade');
+            $table->primary(['weapon_id', 'specialrule_id']);
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('soldier_weapon');
+        Schema::dropIfExists('weapon_specialrule');
     }
 };

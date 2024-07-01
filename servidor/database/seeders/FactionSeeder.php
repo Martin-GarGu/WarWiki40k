@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Faction;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class FactionSeeder extends Seeder
 {
@@ -49,7 +50,7 @@ class FactionSeeder extends Seeder
         foreach($this->factions as $faction){
             $f = new Faction();
             $f->name = $faction['name'];
-            $f->slug = $faction['slug'];
+            $f->slug = Str::slug($faction['name']);
             $f->image = $faction['image'];
             $f->description = $faction['description'];
             $f->save();

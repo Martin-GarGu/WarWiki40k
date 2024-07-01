@@ -11,14 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('squads', function (Blueprint $table) {
+        Schema::create('criticalhitrules', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->string('slug')->unique();
-            $table->longText('description');
-            $table->string('image')->nullable();
-            $table->foreignId('army_id');
-            $table->foreign('army_id')->references('id')->on('armies')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -28,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('squads');
+        Schema::dropIfExists('criticalhitrules');
     }
 };

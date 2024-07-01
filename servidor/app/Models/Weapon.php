@@ -16,9 +16,14 @@ class Weapon extends Model
         'a', // Attack
         'bs-ws', // Ballistic Skill or Weapon Skill
         'd', // Damage
-        'sv', // Save
-        't', // Tipe of weapon
+        '!', // Critical hit rules
     ];
+    public function specialRules(){
+        return $this->belongsToMany(SpecialRule::class);
+    }
+    public function criticalHitRules(){
+        return $this->belongsToMany(CriticalHitRule::class);
+    }
     public function soldiers(){
         return $this->belongsToMany(Soldier::class);
     }
