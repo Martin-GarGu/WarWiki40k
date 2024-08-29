@@ -3250,6 +3250,6 @@ class SoldierSeeder extends Seeder
             $s->base = $soldier['base'];
             $s->save();
         }
-        $this->command->info('Squadrons created with data success!');
+        $this->command->info('Soldiers created with data success!');
     }
 }
