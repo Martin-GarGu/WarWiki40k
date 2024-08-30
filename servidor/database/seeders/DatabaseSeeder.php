@@ -14,11 +14,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // DB::table('soldiers')->delete();
+        // $this->call(SoldierSeeder::class);
+        
         DB::table('factions')->delete();
         $this->call(FactionSeeder::class);
         DB::table('armies')->delete();
         $this->call(ArmySeeder::class);
-
+        DB::table('squads')->delete();
+        $this->call(SquadronSeeder::class);
+        DB::table('soldiers')->delete();
+        $this->call(SoldierSeeder::class);
         // User::factory(10)->create();
 
         // User::factory()->create([
