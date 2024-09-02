@@ -126,7 +126,6 @@ class SpecialRuleSeeder extends Seeder
             $s->name = $specialRule['name'];
             $s->slug = Str::slug($specialRule['name']);
             $s->description = $specialRule['description'];
-
             $s->save();
         }
         $this->command->info('Special Rules created with data success!');
