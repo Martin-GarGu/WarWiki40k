@@ -25,6 +25,9 @@ class DatabaseSeeder extends Seeder
         $this->call(SquadronSeeder::class);
         DB::table('soldiers')->delete();
         $this->call(SoldierSeeder::class);
+        DB::table('specialrules')->delete();
+        $this->call(SpecialRuleSeeder::class);
+
         // User::factory(10)->create();
 
         // User::factory()->create([
