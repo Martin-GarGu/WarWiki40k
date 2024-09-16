@@ -16,6 +16,7 @@ class Weapon extends Model
         'a', // Attack
         'bs-ws', // Ballistic Skill or Weapon Skill
         'd', // Damage
+        'type', // Type of weapon
         '!', // Critical hit rules
     ];
     public function specialRules(){

@@ -13,12 +13,11 @@ return new class extends Migration
     {
         Schema::create('weapons', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->string('slug')->unique();
+            $table->string('name');
             $table->integer('a');
-            $table->string('bs-ws');
+            $table->string('bs_ws');
             $table->string('d');
-            
+            $table->string('type');
             $table->timestamps();
         });
     }
