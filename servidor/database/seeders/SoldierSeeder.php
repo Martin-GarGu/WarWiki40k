@@ -17,7 +17,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Las Novitiates Militant son hermanas de batalla en entrenamiento. Todavía tienen que ganarse la servoarmadura y los bólteres de las Hermanas de Batalla de pleno derecho, pero de todos modos son celosos guerreros del Emperador, ansiosos por unirse a las filas de su Orden Militante.',
             'squadron_id' => 1,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -31,7 +31,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Una Novitiate Superior, una Hermana de Batalla de pleno derecho de una Orden Militante, tiene la tarea de liderar a las Novitiates en la batalla. Toman decisiones de mando, dirigen la fe de sus pupilos y sirven como ejemplos inspiradores de cómo actúa un guerrero del Adepta Sororitas en todo momento.',
             'squadron_id' => 1,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -45,7 +45,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'A algunas Novitiate se les ordena empuñar brutales evisceradores como señal de vergüenza por transgresiones menores. Instadas a ganar su redención cara a cara con el enemigo, estas Hermanas lucharán con furia desenfrenada para recuperar su honor.',
             'squadron_id' => 1,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -59,7 +59,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Las Novitiate Purgatus tienen el santo deber de llevar la llama purificadora a los enemigos de la Humanidad. Cuando desatan sus lanzallamas Ministorum contra el enemigo, dejan poco más que cenizas.',
             'squadron_id' => 1,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -73,7 +73,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Para servir en las Órdenes Pronatus, un candidato debe aprender todo lo que hay que saber sobre innumerables tipos de reliquias, además de ser guerreros altamente capacitados. Se espera que recuperen y protejan artefactos muy valiosos y, a veces, extremadamente peligrosos.',
             'squadron_id' => 1,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -87,7 +87,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'A algunas Novitiate celosas se les dan látigos neuronales con los que infligir angustia física y mental al enemigo. En ocasiones, la portadora utilizará estas armas contra compañeras Novitiate que considere que carecen de compromiso y que necesitan ser disuadidos de cometer errores de valentía y fe.',
             'squadron_id' => 1,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -101,7 +101,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Algunas Novitiate llevan íconos inspiradores, como un tapiz ornamentado, un relicario que contiene los restos mortales de un santo o un simulacro de un artefacto famoso. Las Novitiate que contemplan tales reliquias saben que el poder sagrado del Dios Emperador está con ellas y luchan con más ahínco por conseguirlo.',
             'squadron_id' => 1,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -115,7 +115,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Curar los males físicos y espirituales de los heridos en el campo de batalla del Imperio es una tarea onerosa, que requiere innumerables horas de práctica. Las Novitiate que buscan ser admitidas en las Órdenes Hospitaller perfeccionan sus habilidades en el campo, ayudando a sus compañeras Novitiate en todo lo que puedan.',
             'squadron_id' => 1,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -129,7 +129,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Se espera que estas Novitiate hagan cumplir rígidamente los preceptos de su Orden, asegurando que sus compañeras cumplan fielmente las normas prescritas. A menudo son elegidas como segundos al mando de su Superior y sirven como ejemplo al entrar con entusiasmo en la refriega para derrotar a los enemigos del Emperador.',
             'squadron_id' => 1,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -143,7 +143,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Estas Novitiate están entrenándose para unirse a Orders Dialogus, mientras aprenden la guerra bajo la guía de Hermanas de Batalla experimentadas. Su formación en criptografía las hace de gran valor para matar equipos: pueden desbloquear cifrados oscuros y encontrar patrones ocultos en comunicados.',
             'squadron_id' => 1,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -157,7 +157,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Algunas Novitiate tienen una afinidad natural por el trabajo con espadas, y sus tiempos de reacción y destreza son mayores que los de sus compañeras guerreras. Salen al campo ansiosas por demostrar su habilidad, deseando reclamar las cabezas de los enemigos más capaces y emular a los guerreros o santos de la leyenda.',
             'squadron_id' => 1,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -171,7 +171,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los hechiceros y las brujas se encuentran entre los enemigos más odiados del Adepta Sororitas. Estas abominaciones psíquicas son amenazas terribles para el reino del Emperador, y acabar con ellas es una prioridad clave. Las Novitiate Condemnor están especialmente equipadas para hacer frente a este tipo de enemigos.',
             'squadron_id' => 1,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -187,7 +187,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Una vez maestra del Nuevo Amanecer, la comerciante independiente Elucia Vhane proviene de una antigua dinastía. Su formación familiar perfeccionó su liderazgo innato y empuña su bastón estoque, Blur, como una maestra duelista. Siempre está atento a los enemigos a través de un auspicador multiespectral.',
             'squadron_id' => 2,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -201,7 +201,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Se crían o cultivan en cubas innumerables variedades de cánidos para cumplir funciones de caza, ataque o intimidación, y muchos comerciantes independientes aprecian la combinación de lealtad y agresión. Elucia Vhane llamó a su bestia Aximillion, sus hombres del Vacío la entrenaron como guardiana y compañera.',
             'squadron_id' => 2,
-            'm' => "4 2Circles",
+            'm' => "4 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -215,7 +215,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Para un Death Cult Executioner, el acto de vivir es una blasfemia que sólo se equilibra con la cantidad de almas que cosecha. Entregan la muerte de cerca y dominan numerosos estilos de combate. Un seguidor de Vhane, el Death Cult Executioner, Knosso Prond, ha prometido matar a mil xenos diferentes.',
             'squadron_id' => 2,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 3,
             'ga' => 1,
             'df' => 3,
@@ -229,7 +229,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Al albergar una conexión con la Fuerza Motriz, estos Tecnosacerdotes son seguidores del Culto Mechanicus, capaces de generar un campo voltagheist protector a partir del mecanismo en su espalda. El Lectro-Maester Larsen van der Grauss se unió a las exploraciones de Vhane en busca de descubrimientos esotéricos.',
             'squadron_id' => 2,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -243,7 +243,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Estos agentes son maestros de la curación y la longevidad. Proporcionan agentes anestésicos y cirugía de emergencia, incluso en los entornos más horribles. Rejuvenat Adept Sanistasia Minst se unió a los Starstriders en su búsqueda obsesiva de una panacea.',
             'squadron_id' => 2,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -257,7 +257,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Voidmaster lideran escuadrones de soldados navales. Ladrando órdenes para garantizar la disciplina en el fuego, su cumplimiento de los códigos navales es inquebrantable. El Voidmaster Nitsch y su escuadrón fueron enviados a Vhane desde el buque de guerra Vengeance, y su valentía bajo el fuego es legendaria.',
             'squadron_id' => 2,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -271,7 +271,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Voidsman suelen servir en buques de guerra, matando a cualquiera que amenace su nave o su tripulación. Ceñidos con una armadura barroca, mantienen a raya a los enemigos con disparos láser. Entre el escuadrón de Voidmaster Nitsch, el veterano Stromian Grell lleva un cañón de rotor gracias a sus consistentes patrones de disparo.',
             'squadron_id' => 2,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -287,7 +287,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Exaction Squad son seleccionados y dirigidos por Proctors-exactant. Estos árbitros experimentados son tácticos despiadados y luchadores inteligentes. También son encarnaciones intimidantes de la justicia imperial y emplean nuncio-aquilas para transmitir discursos ensordecedores que intimidan a los culpables para que se sometan.',
             'squadron_id' => 3,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -301,7 +301,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'El papel del Arbites Castigator es garantizar que los culpables reciban el castigo debido, y sus yelmos con forma de capucha fortalecen su determinación contra maldiciones y súplicas por igual. Una vez localizada la cantera, los Castigator se encargan de someterlos por cualquier medio, una tarea que realizan con celosa dedicación.',
             'squadron_id' => 3,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -315,7 +315,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Estos Arbites son especialistas médicos altamente calificados, acostumbrados a tratar heridas debilitantes infligidas por quienes se resisten a la detención. También son expertos en el interrogatorio táctico de prisioneros y han estudiado los límites hasta los cuales se puede empujar el cuerpo para obtener respuestas.',
             'squadron_id' => 3,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -329,7 +329,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Arbites Gunner proporcionan una potencia de fuego sustancial a las operaciones del Exaction Squad utilizando armas como ametralladoras pesadas: cañones de disparo rápido cuyo disparo sólido puede atravesar a las turbas. Las armas más especializadas pueden disparar sustancias químicas que paralizan o granadas que abren puertas y armaduras por igual.',
             'squadron_id' => 3,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -343,7 +343,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Leashmasters son especialistas que dirigen a los servidores caniformes conocidos como Cyber-mastiffs. Anulan directamente los protocolos básicos de la construcción con comandos avanzados y transmiten órdenes a gritos a su presa acosada por la culpa a través de los emisores del Cyber-mastiff.',
             'squadron_id' => 3,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -357,7 +357,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Arbitrators emplean muchas servoconstrucciones para intimidación, seguridad y persecución. El Venatus Reclamotor clase Rantal es un Cyber-mastiff avanzado utilizado por los Escuadrones de Exacción. Los detectores del R-VR les permiten rastrear a sus presas, mientras que sus mandíbulas de hierro pueden romper huesos o matar cuando se les ordena.',
             'squadron_id' => 3,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -371,7 +371,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Técnicamente dotados, los Malocators llevan extractores de muestras biológicas para recopilar evidencia de rastros en la cantera de su equipo. Operan con una calma helada bajo el fuego, examinando pruebas a través de su conjunto veriscante de múltiples lentes e informando a su equipo sobre las debilidades del enemigo.',
             'squadron_id' => 3,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -385,7 +385,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'El agitador que se esconde detrás de aquellos a quienes incita, el guardaespaldas fuertemente armado o el criminal que huye y está a punto de escapar: tales son los objetivos del Marksman. Sus escopetas de cañón largo disparan proyectiles tan potentes que dejan heridas más parecidas a cráteres sangrientos que a agujeros de bala.',
             'squadron_id' => 3,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -399,7 +399,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Revelatums reconocen los movimientos de su objetivo antes que el resto del equipo, explorando escondites y determinando contactos criminales. Luego guían a otros Arbites directamente hacia los culpables, utilizando sus escáneres de culpa del alma para identificar amenazas a sus compañeros oficiales.',
             'squadron_id' => 3,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -413,7 +413,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Arbites Subductor poseen una de las siluetas más reconocibles (y temidas) de las clases criminales del Imperio. Con escudos de asalto con patrón de subyugación y mazos de choque crepitantes, son brutales luchadores de primera línea capaces de aplastar al disidente más obstinado.',
             'squadron_id' => 3,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -427,7 +427,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Arbites Vigilant barren brutalmente a los culpables con la escopeta de combate característica del Adeptus Arbites. Estos hombres y mujeres sombríos están siempre alerta ante las malas prácticas y son inquebrantables en su castigo, desatando explosiones devastadoras a corta distancia.',
             'squadron_id' => 3,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -441,7 +441,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'El significante Vox-signifier escucha misivas codificadas del comando de misión en su poderoso relé de voz del distrito. Publican actualizaciones para el resto del Exaction Squad a partir de cambios en las prioridades de la misión y nueva inteligencia, probablemente extraída dolorosamente de los prisioneros.',
             'squadron_id' => 3,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -457,7 +457,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Como luchadores disciplinados, a menudo con años de experiencia en los mástiles, los líderes de los escuadrones Breacher de la Armada Imperial son tan hábiles en el combate cuerpo a cuerpo como en el diseño de tácticas ganadoras de batallas en movimiento.',
             'squadron_id' => 4,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -471,7 +471,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Bien entrenados y bien equipados, los equipos de combate de Armsmen del Imperial Navy Breacher son tropas formidables en los estrechos confines del combate barco a barco. Cualquier enemigo al que no puedan derribar con sus poderosas escopetas lo derriban con feroces golpes de sus hachas.',
             'squadron_id' => 4,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 2,
             'df' => 3,
@@ -485,7 +485,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'A veces, la única solución a un problema al que se enfrentan los Breachers de la Armada Imperial es un hacha pesada de dos manos. Los Axejacks que portan estas armas no sólo pueden atravesar obstáculos bloqueados en las puertas, sino que también son luchadores formidables que destrozan a cualquier enemigo en su camino.',
             'squadron_id' => 4,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -499,7 +499,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Las Cyber-Altered Task Units son vehículos de reconocimiento con orugas que han servido al Imperio durante milenios. Equipados con equipos de grabación de imágenes y augurios de escaneo de frecuencia, pueden operarse de forma remota para proporcionar información táctica vital para su equipo de ataque.',
             'squadron_id' => 4,
-            'm' => "4 2Circles",
+            'm' => "4 Circles",
             'apl' => 1,
             'ga' => 1,
             'df' => 2,
@@ -513,7 +513,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Sólo los soldados más grandes de un escuadrón pasan a ser conocidos como Endurants. A ellos les corresponde la tarea de llevar un escudo Endurant y una escopeta pesada mientras apuntan o protegen la retaguardia del escuadrón. Su gran tamaño los hace muy intimidantes para sus enemigos.',
             'squadron_id' => 4,
-            'm' => "2 2Circles",
+            'm' => "2 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -527,7 +527,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Estos servocráneos suelen estar hechos de cabezas de antiguos Breachers de la Armada Imperial. Como resultado, a menudo se les llama "La venganza del hombre muerto" o se los considera la "Última risa" del soldado fallecido por su capacidad para detonar y matar a todos los que los rodean en un acto final de desafío hacia el enemigo.',
             'squadron_id' => 4,
-            'm' => "4 2Circles",
+            'm' => "4 Circles",
             'apl' => 1,
             'ga' => 1,
             'df' => 2,
@@ -541,7 +541,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'La vida de un Breacher de la Armada Imperial es acostumbrarse a las explosiones. Más aún para los Grenadier. Estos soldados llevan cargas de demolición diseñadas para atravesar mamparos y puertas selladas, lo que permite a sus compañeros de escuadrón seguir moviéndose y alcanzar sus objetivos.',
             'squadron_id' => 4,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -555,7 +555,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Las tropas más grandes del escuadrón que no cumplen el papel de Endurants llevan las armas a distancia más pesadas de su escuadrón. Una descarga láser desata salvas devastadoras, el calor abrasador de un disparo de pistola de fusión quema a través de un mamparo reforzado e incluso los enemigos fuertemente blindados no pueden resistir una pistola de plasma.',
             'squadron_id' => 4,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -569,7 +569,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Es vital para los Breachers de la Armada Imperial poder moverse rápidamente a través de los barcos enemigos para alcanzar sus objetivos. Los Hatchcutters no sólo pueden atravesar barricadas con sus puños de cadena y antorchas de plasma, sino que también pueden usar estas últimas para sellar caminos que el enemigo podría usar de otro modo.',
             'squadron_id' => 4,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -583,7 +583,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Saber lo que hay a la vuelta de la esquina puede significar vida o muerte para los Breachers de la Armada Imperial. Al utilizar un C.A.T. unidad, que es capaz de navegar por túneles y agujeros estrechos, un Surveyor puede investigar y preparar su escuadrón para lo que podría venir.',
             'squadron_id' => 4,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -597,7 +597,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Corresponde a los Void-Jammers en un equipo de combate Breacher de la Armada Imperial operar los gheistskulls, servocráneos equipados con un dispositivo explosivo y un emisor de pulsos electromagnéticos. Estos dispositivos pueden moverse rápidamente, volar por el aire y navegar por terrenos demasiado densos para que los Armsmen puedan alcanzar al enemigo.',
             'squadron_id' => 4,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -613,7 +613,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Despiadados, ingeniosos y hábiles en todo tipo de habilidades clandestinas y bélicas, los Interrogator son seleccionados por el Inquisidor al que sirven por su tenaz determinación y lealtad inquebrantable, y están en camino de convertirse ellos mismos en Inquisidores.',
             'squadron_id' => 5,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 2,
             'df' => 3,
@@ -627,7 +627,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Estos familiares son servocráneos especializados diseñados para asegurar y mantener abierto un volumen preciado. Los libros elegidos por los Interrogadores para que un Tome-Skull los lleve al campo están impregnados de poder sagrado y llenos de conocimientos arcanos, santificando la tierra y renunciando a los espíritus demoníacos.',
             'squadron_id' => 5,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 1,
             'ga' => 2,
             'df' => 2,
@@ -641,7 +641,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Pocos restos quedan del Humano original que alguna vez fue el Autosavant. Gran parte de su forma ha sido reemplazada por biónica dedicada al registro de información. Ya sea en su base de operaciones o en el fragor de la batalla, nunca dejan de escribir cada palabra y hecho que presencian.',
             'squadron_id' => 5,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -655,7 +655,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Questkeeper, conocidos también como Caballeros Andantes, Penitentes y muchos otros nombres, son fanáticos dedicados al Credo Imperial. Con un odio intenso hacia los enemigos del Emperador, ejecutan misiones juradas para masacrar a herejes y traidores.',
             'squadron_id' => 5,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -669,7 +669,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Todo Inquisidor sabe que los mundos de la muerte producen los soldados más duros del Imperio. Muchos hacen todo lo posible para reclutar a Death World Veterans, ya que las habilidades de lucha de estos guerreros son vitales para cazar al hereje.',
             'squadron_id' => 5,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -683,7 +683,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Conocidos por algunos como Excruciators o Truth-Peelers, estos sádicos individuos son muy valorados por los Inquisidores por su total falta de piedad y su asombrosa habilidad para extraer información valiosa, incluso de los prisioneros menos cooperativos.',
             'squadron_id' => 5,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -697,7 +697,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Más máquinas que humanos, los Gun Servitors son comunes en todo el Imperio y están lobotomizados hasta el punto de carecer de cualquier tipo de capacidad de pensamiento independiente. Utilizados para realizar tareas mundanas y difíciles, transportan cargas pesadas que a menudo incluyen armas pesadas.',
             'squadron_id' => 5,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 1,
             'ga' => 1,
             'df' => 3,
@@ -711,7 +711,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Hexorcists son hombres y mujeres santos que los no iniciados suelen confundir con sacerdotes. Creen que la Fe Imperial sólo se difundirá con el cañón de un arma, y tienen suficiente experiencia en los muchos horrores de la galaxia para saber que deben luchar con uñas y dientes por ella.',
             'squadron_id' => 5,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -725,7 +725,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Utilizando sus sentidos empíricos para "ver" verdades ocultas y las almas de aquellos a quienes cazan, los Mystics se involucran en las misiones más arcanas. Proporcionan un apoyo vital a su equipo, adivinando el futuro en busca de peligros o creando escudos de energía psíquica.',
             'squadron_id' => 5,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -739,7 +739,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Hay pocas fuentes mejores de luchadores prescindibles con habilidades inusuales y necesidad de arrepentimiento que una Legión Penal Imperial. Estos criminales empedernidos son útiles con la espada y no tienen nada que perder: perfectos para el tipo de misiones suicidas que los agentes inquisitoriales deben afrontar al servicio del Emperador.',
             'squadron_id' => 5,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -753,7 +753,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'A veces conocidos como Desperados, estos agentes son asesinos expertos que han perfeccionado sus talentos en las entrañas plagadas de crímenes de los mundos colmena. Además del desenvainado rápido, han aprendido el valor de la matanza silenciosa, así como del ostentosamente explosivo.',
             'squadron_id' => 5,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -767,7 +767,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Protegidos de la malevolencia de las brujas por su rara mutación antipsíquica y protegidos de las armas del enemigo por su servoarmadura finamente diseñada, Prosecutors avanzan resueltos hacia el corazón de la batalla. Sus bólters truenan sin cesar y cada proyectil explosivo acaba con otra vida hereje.',
             'squadron_id' => 5,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -781,7 +781,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'La forma más segura de poner fin al maléfico ataque de una bruja es separarle la cabeza del cuerpo. Ésa es la doctrina de los Vigilantes, que recorren el campo de batalla como fantasmas antes de lanzarse de cabeza a la refriega, mientras sus espadas de energía a dos manos entonan una canción de muerte.',
             'squadron_id' => 5,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -795,7 +795,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Witchseeker empuñan lanzallamas santificados mientras cazan. Para cerrar con su presa herética, emplean sus poderes nulos para cerrar el engaño psíquico que hace que las brujas sean tan letales, antes de desatar una conflagración rugiente para inmolar al enemigo.',
             'squadron_id' => 5,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -809,7 +809,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Equipados con poderosas unidades de comunicación, estos Tempestus Scions pueden transmitir órdenes y datos tácticos precisos a sus compañeros de escuadrón de manera rápida y eficiente. Algunos también están entrenados en contrainteligencia e interceptación de señales, lo que permite a sus compañeros agentes superar al enemigo.',
             'squadron_id' => 5,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -823,7 +823,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Tempestus Scions tiene acceso a una variedad más amplia de armas especiales que se adaptan idealmente a todo tipo de misiones. Los artilleros están bien entrenados en su uso, ya sea limpiando un búnker con un lanzallamas o derribando a un enjambre de enemigos fuertemente blindados con una pistola de salvas.',
             'squadron_id' => 5,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -837,7 +837,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'En misiones muy detrás de las líneas enemigas, los Tempestus Scions pueden sufrir bajas a muchos kilómetros de su base de operaciones. Sus médicos son vitales para proporcionar ayuda vital a los heridos, para que vuelvan a la lucha antes o para mantenerlos con vida el tiempo suficiente para llevarlos a un lugar seguro.',
             'squadron_id' => 5,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -851,7 +851,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Soldados de élite y altamente disciplinados, los Tempestus Scion Troopers cumplen las órdenes sin pestañear. Habiendo recibido un entrenamiento despiadado desde su juventud, hay pocas dificultades que no puedan soportar y pocos enemigos que no puedan vencer.',
             'squadron_id' => 5,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -867,7 +867,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los sargentos, líderes de los equipos de combate de Kasrkin, son soldados extremadamente hábiles y experimentados que lideran desde el frente. Experimentan las mismas dificultades que quienes los siguen y son figuras de autoridad imperturbables que saben cómo sacar lo mejor de sus tropas.',
             'squadron_id' => 6,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -881,7 +881,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Aunque los Kasrkin se enorgullecen de poder seguir luchando, incluso si están heridos, muchos equipos de exterminio incluyen médicos de combate. Estos Kasrkin cuentan con entrenamiento y equipo adicional para tratar a los heridos y devolverlos a la lucha lo antes posible.',
             'squadron_id' => 6,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -895,7 +895,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Vestidos con una armadura más pesada y portando una devastadora mina de fusión, estos Kasrkin desempeñan un papel necesario pero increíblemente peligroso. Su trabajo, a menudo bajo fuego enemigo, es colocar, preparar y detonar una mina de fusión, abriéndose paso hasta un búnker blindado o a través de los muros de una fortaleza.',
             'squadron_id' => 6,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -909,7 +909,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Estos especialistas reciben entrenamiento adicional en el uso de una variedad de armas diferentes, ya sean lanzallamas para quemar a los enemigos desde la cobertura, pistolas de salvas para atravesar a la infantería pesada enemiga o pistolas de fusión para quemar las armaduras más resistentes.',
             'squadron_id' => 6,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -923,7 +923,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Con sus avanzados sistemas auspex, estos Kasrkin son los ojos y oídos de sus equipos de matanza. Pueden detectar tropas enemigas y emboscadas desde distancias significativas, y pueden escanear el terreno local y analizar los sonidos ambientales en busca de peligros.',
             'squadron_id' => 6,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -937,7 +937,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Estos Kasrkin, pacientes y de mirada aguda, son hábiles francotiradores. Con sus rifles de francotirador pueden matar objetivos clave y proporcionar fuego de cobertura para el resto de su equipo de ataque. Gracias a sus capas de camuflaje, los Sharpshooter pueden infiltrarse en zonas en disputa y permanecer ocultos durante períodos prolongados.',
             'squadron_id' => 6,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -951,7 +951,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Estos soldados, pertenecientes a las bases de los escuadrones de Kasrkin, son profesionales consumados. Muchos han visto acción en las zonas de muerte más duras y han salido victoriosos.',
             'squadron_id' => 6,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -965,7 +965,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Estos Kasrkin, que cuentan con sistemas de comunicación avanzados, son el vínculo de su equipo de ataque con el mando superior. Su trabajo es transmitir órdenes e inteligencia entre los oficiales superiores y sus camaradas, todos los cuales usan sus propios enlaces de voz para una comunicación rápida dentro del escuadrón.',
             'squadron_id' => 6,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -981,7 +981,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los veteranos de Astra Militarum tienen una gran experiencia de combate, adquirida tras experimentar duros combates durante meses o incluso años. Armados con rifles láser y bayonetas, se han enfrentado a terribles peligros una y otra vez.',
             'squadron_id' => 7,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 2,
             'df' => 3,
@@ -995,7 +995,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Sergeant Veterans dirigen escuadrones de veteranos en batalla. Calmados bajo presión y sin verse afectados por los horrores de la guerra, son líderes de combate sólidos que lucharán con uñas y dientes para lograr la victoria y verán a sus camaradas sobrevivir para luchar otro día.',
             'squadron_id' => 7,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1009,7 +1009,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Tiradores expertos, con sus habilidades perfeccionadas en las duras condiciones de numerosos campos de batalla, los Sniper Veterans son francotiradores que se especializan en derribar tropas enemigas clave a distancias extremas, todo ello sin ser visto por el enemigo.',
             'squadron_id' => 7,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1023,7 +1023,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Con experiencia y habilidades para manejar una gran cantidad de armas especializadas, los Gunner Veterans son llamados ya sea que un Sargento Veterano necesite un nido xenos reducido a nada, un búnker reducido a lodo derretido o para derribar a la infantería enemiga pesada para la que los rifles láser son insuficientes.',
             'squadron_id' => 7,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1037,7 +1037,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Incluso los mejores sargentos veteranos necesitan recurrir a consejos tácticos sólidos, y sus confidentes son expertos. Se puede confiar en que son tropas experimentadas y líderes capaces para llevar a cabo las órdenes del sargento en el campo y contribuir a la formulación de un plan de batalla sólido.',
             'squadron_id' => 7,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1051,7 +1051,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Ya sea haciendo estallar depósitos de municiones o abriendo defensas, muchos equipos de exterminio necesitan expertos en explosivos. Los Demolition Veterans son esas tropas. Atrevidos por naturaleza, a menudo tienen que ponerse en peligro para plantar sus minas remotas en el punto óptimo para hacer volar a su objetivo en pedazos.',
             'squadron_id' => 7,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1065,7 +1065,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Zealot Veterans son guerreros profundamente espirituales y a menudo afirman que su supervivencia en los horribles campos de batalla que han experimentado se debe únicamente a la intervención directa del propio Emperador.',
             'squadron_id' => 7,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1079,7 +1079,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los esfuerzos del Medic Veteran es lo único que separa la vida y la miserable muerte de las tropas de su escuadrón. Equipados con poco más que equipo médico básico, se esfuerzan por mantener con vida a sus camaradas en las condiciones más peligrosas.',
             'squadron_id' => 7,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1093,7 +1093,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Comms Veterans son profesionales consumados, acompañan a sus líderes donde sea necesario mientras transportan equipo pesado, todo para recibir y transmitir comunicaciones que son vitales para que sus camaradas y superiores comprendan la inevitable confusión de la batalla.',
             'squadron_id' => 7,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1107,7 +1107,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Para algunos, la guerra y la lucha simplemente les sientan bien. Los Bruiser Veterans son esas personas. Miran a los ojos las interminables amenazas malévolas de la galaxia con un garrote de trinchera en la mano, listos para matar a golpes cualquier cosa.',
             'squadron_id' => 7,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1121,7 +1121,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Algunos veteranos son más resilientes que incluso sus pares. Estas tropas son de acero tanto en cuerpo como en mente, con biónica en lugar de partes del cuerpo perdidas en la batalla. A pesar de las horribles heridas que han sufrido, siguen luchando inmóviles, imperturbables.',
             'squadron_id' => 7,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1135,7 +1135,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Para dirigir el fuego pesado que gana la batalla, los observadores avanzados forman parte de los equipos de combate. Estos Spotter Veterans poseen una gran concentración y guían con precisión salvas de fuego de mortero desde líneas seguras incluso cuando se encuentran bajo una inmensa presión. Con esto pueden bloquear los ataques enemigos o inmovilizarlos en sus defensas.',
             'squadron_id' => 7,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1151,7 +1151,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'El Infiltrator Commsman actúa como un nexo estratégico en el campo de batalla, un conducto a través del cual los intercambios de voz y las cargas de inteligencia pasan como un rayo. La presencia de un hermano de batalla así aumenta la versatilidad y rapidez de acción del equipo de ataque.',
             'squadron_id' => 8,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 3,
             'ga' => 1,
             'df' => 3,
@@ -1165,7 +1165,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Operando como lo hacen, muy detrás de las líneas enemigas sin apoyo, los Phobos Strike Teams requieren el apoyo médico de los Adeptos de Helix para que los hermanos de batalla heridos vuelvan a la lucha y para recuperar la semilla genética de los caídos para el Capítulo.',
             'squadron_id' => 8,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 3,
             'ga' => 1,
             'df' => 3,
@@ -1179,7 +1179,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Llevando a la batalla una letal variedad de cargas de fusión, municiones súper krak e incluso botes antiplantas, el Infiltrator Saboteur está bien preparado para manipular cualquier objetivo para su destrucción. Completada esta tarea, retroceden rápidamente antes de desencadenar una explosión como la ira del Emperador.',
             'squadron_id' => 8,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 3,
             'ga' => 1,
             'df' => 3,
@@ -1193,7 +1193,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los hermanos de batalla Infiltrator más experimentados acechan a sus enemigos como fantasmas blindados, empuñando armas seleccionadas de las armerías más exclusivas de su Capítulo, cada una mejorada gracias a la cuidadosa atención de maestros artífices. Así armados, pueden actuar como enemigos de cualquier enemigo.',
             'squadron_id' => 8,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 3,
             'ga' => 1,
             'df' => 3,
@@ -1207,7 +1207,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'El Voxbreaker hace la guerra tanto en el ámbito físico como en el de datos espectrales. Su equipo especializado no sólo les permite escanear y aislar las amenazas enemigas, sino que también pueden irrumpir en las comunicaciones del enemigo y saquearlas en busca de inteligencia estratégica.',
             'squadron_id' => 8,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 3,
             'ga' => 1,
             'df' => 3,
@@ -1221,7 +1221,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Infiltrados que luchan como parte de los Phobos Strike Teams son rápidos y agresivos en pensamiento y acción, incluso para los estándares de su hermandad guerrera. Pocos enemigos pueden evadir por mucho tiempo sus puntiagudas andanadas o los destrozadores golpes de sus puños blindados.',
             'squadron_id' => 8,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 3,
             'ga' => 1,
             'df' => 3,
@@ -1235,7 +1235,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Ejemplar para sus hermanos; líder estratégico y táctico de habilidad excepcional; Enemigo mortal de los enemigos del Emperador: el Infiltrator Sergeant debe ser todas estas cosas, porque es por sus palabras y acciones que el Equipo de Ataque Phobos se mantiene o cae.',
             'squadron_id' => 8,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 3,
             'ga' => 1,
             'df' => 3,
@@ -1249,7 +1249,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Como si la combinación de un Marine Espacial altamente entrenado y una potente marca de carabina bólter no fuera lo suficientemente letal, el Incursor Marksman emplea su auspex clase Adivinador para rastrear precognitivamente dónde estarán sus objetivos y luego realiza disparos mortales en consecuencia.',
             'squadron_id' => 8,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 3,
             'ga' => 1,
             'df' => 3,
@@ -1263,7 +1263,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Algunos Incursor llevan minas pesadas y descontroladas a la batalla y las colocan en nexos premeditados de probable movimiento enemigo. Las explosiones electrofantasmáticas de estas armas pueden desterrar los espíritus de las máquinas del equipo enemigo y paralizar las mejoras augméticas.',
             'squadron_id' => 8,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 3,
             'ga' => 1,
             'df' => 3,
@@ -1277,7 +1277,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Incursor son potentes hostigadores ofensivos. Utilizan auspex oraculares acoplados a sus carabinas de perno occulus para detectar objetivos enemigos, incluso a través de paredes sólidas. Luego presionan rápidamente las posiciones de sus enemigos antes de entablar sangrientos tiroteos unilaterales con el enemigo superado.',
             'squadron_id' => 8,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 3,
             'ga' => 1,
             'df' => 3,
@@ -1291,7 +1291,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Tendiendo estrategias agresivas y dinámicas, los Incursor Sergeants lideran los Phobos Strike Teams en furiosas ofensivas encubiertas que dejan las estructuras de mando y las cadenas logísticas enemigas hechas jirones, listas para el ataque planetario de una fuerza de ataque de Marines Espaciales en toda regla.',
             'squadron_id' => 8,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 3,
             'ga' => 1,
             'df' => 3,
@@ -1305,7 +1305,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Surgiendo de las sombras en medio de aullidos amplificados por voz, los Reivers caen sobre sus horrorizadas víctimas con pistolas retumbando y espadas blandiendo. Mientras sus enemigos se tambalean por las desorientadoras explosiones de sus granadas de choque, los Reivers hacen un trabajo breve y sangriento con sus víctimas.',
             'squadron_id' => 8,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 3,
             'ga' => 1,
             'df' => 3,
@@ -1319,7 +1319,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Reiver Sergeants son maestros de la guerra psicológica y las tácticas terroristas. Su misión es manejar su Phobos Strike Team como un bisturí, cortando los tenues hilos de la moral enemiga hasta que las fuerzas del enemigo queden reducidas a una maraña rota y sin nervios.',
             'squadron_id' => 8,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 3,
             'ga' => 1,
             'df' => 3,
@@ -1335,7 +1335,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Veteranos de su Capítulo, estos guerreros altamente experimentados eligen entrenar a la próxima generación de hermanos de batalla. Predican con el ejemplo y se imponen el respeto de sus pupilos con su valentía y perspicacia táctica.',
             'squadron_id' => 9,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 3,
             'ga' => 1,
             'df' => 3,
@@ -1349,7 +1349,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Estos agentes son guerreros muy capaces que utilizan armas pesadas, desde lanzadores de misiles hasta bólters pesados, para atacar y destruir objetivos enemigos poderosos.',
             'squadron_id' => 9,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1363,7 +1363,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Armados con lanzadores de garfios, los Hunters pueden atravesar rápidamente terrenos peligrosos y negociar terrenos desafiantes para circunnavegar puntos fuertes enemigos, preparar emboscadas o evadir a sus perseguidores.',
             'squadron_id' => 9,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1377,7 +1377,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Snipers se destacan en el cumplimiento de los elementos fundamentales de asesinato y reconocimiento en las misiones del Escuadrón Scout. Observan cuidadosamente los movimientos del enemigo desde posiciones ocultas que mantienen durante días, esperando el momento preciso para disparar.',
             'squadron_id' => 9,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1391,7 +1391,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Trackers llevan auspex muy potentes: escáneres capaces de analizar el campo de batalla. Gracias a la información que proporcionan estos dispositivos, los escuadrones de exploradores pueden identificar objetivos o planificar rápidamente emboscadas mortales.',
             'squadron_id' => 9,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1405,7 +1405,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Estos agentes son luchadores expertos, comprometidos con su escuadrón y decididos a ascender al estatus de hermano de batalla. No importa lo que la misión les exija, lucharán furiosamente para derrotar al enemigo y demostrar su valía.',
             'squadron_id' => 9,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1421,7 +1421,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Estas repugnantes criaturas alguna vez fueron simples pulgas, de esas que infestan las túnicas de todos los peregrinos y las camisas de los trabajadores. Al volverse monstruosos, pueden saltar por el aire tan rápido como una bala de una pistola automática y drenar la sangre de un humano adulto en unos momentos.',
             'squadron_id' => 10,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 2,
             'df' => 2,
@@ -1435,7 +1435,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'El estridente chirrido de las alas de los insectos advierte de la aproximación de los Eyestinger Swarms. Estos extraños insectos no sólo son peligrosos por derecho propio, sino que también ponen sus huevos en los ojos de sus víctimas, donde rápidamente se gestan y estallan en nuevos enjambres.',
             'squadron_id' => 10,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 2,
             'df' => 2,
@@ -1449,7 +1449,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Estos gusanos nocivos, engordados con pus y limo, pueden escupir trozos de bilis corrosiva a grandes distancias para cegar y mutilar a sus presas. Si se acercan, se aferran a ellos con salvaje tenacidad y obligan a sus víctimas a desgarrarlos y reventarlos, empapando al enemigo con inmundicia ácida.Estos gusanos nocivos, engordados con pus y limo, pueden escupir trozos de bilis corrosiva a grandes distancias para cegar y mutilar a sus presas. Si se acercan, se aferran a ellos con salvaje tenacidad y obligan a sus víctimas a desgarrarlos y reventarlos, empapando al enemigo con inmundicia ácida.',
             'squadron_id' => 10,
-            'm' => "2 2Circles",
+            'm' => "2 Circles",
             'apl' => 2,
             'ga' => 2,
             'df' => 2,
@@ -1463,7 +1463,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Una vez, este enorme horror fue el maestro de los caldereros del Nuevo Amanecer. Ahora, él y otros como él se han convertido en monstruos inflados, fusionados con aquellos que confiaban en ellos y con las máquinas contaminadas que alguna vez estuvieron a su cuidado.',
             'squadron_id' => 10,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1477,7 +1477,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Se dice que son cosas nacidas de la pesadilla más oscura, Bloatspawn gotea baba acuosa con cada paso. Sus masas retorcidas de tentáculos agarran y desgarran todo lo que les rodea, arrastrando a las víctimas que lloran a las fétidas prisiones de sus cuerpos hinchados.',
             'squadron_id' => 10,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1491,7 +1491,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Agarrando implementos de carnicería brutal, el coro de docenas de bocas lamentantes acompaña a los Fleshscreamers en la pelea. Siempre hambrientos por llenar sus numerosas fauces con carne podrida y maquinaria chispeante, se adentran en el enemigo como pesadillas a las que se les ha dado forma.',
             'squadron_id' => 10,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1505,7 +1505,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Estos Nightmare Hulks muestran horripilantes signos de corrupción verminosa. Extremidades y cabezas de insectos brotan de sus cuerpos mutantes, retorciéndose con su propia vida espantosa. Es la muerte estar frente a un monstruo tan resistente, porque atacan con febril salvajismo.',
             'squadron_id' => 10,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1519,7 +1519,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'La Gellerpox produce cambios de pesadilla en sus víctimas, amortiguando sus nervios y retorciendo sus cuerpos en nuevas formas groseras y peligrosas. Fusionados con trozos de tecnología que funciona mal y piezas de metal robadas, se lanzan a la pelea con gemidos cargados de estática.',
             'squadron_id' => 10,
-            'm' => "2 2Circles",
+            'm' => "2 Circles",
             'apl' => 2,
             'ga' => 2,
             'df' => 3,
@@ -1533,7 +1533,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Estos ácaros de la plaga desviados hacen cabriolas y ríen mientras infestan las líneas enemigas. Se deleitan con el caos tecnológico que su presencia propaga y están muy felices de enterrar a sus víctimas en una masa que araña y muerde para la gloria del abuelo Nurgle.',
             'squadron_id' => 10,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 2,
             'df' => 2,
@@ -1549,7 +1549,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Heretic Astartes son guerreros posthumanos con la fuerza, velocidad, resistencia y agudeza mental naturales de tales seres. Ahora se han vuelto contra el Imperio.',
             'squadron_id' => 11,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 3,
             'ga' => 1,
             'df' => 3,
@@ -1563,7 +1563,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Armados con lanzallamas, los Heretic Astartes atraviesan franjas de infantería ligera enemiga. Con armas de fusión destruyen búnkeres blindados y con armas de plasma representan una amenaza para las tropas enemigas más pesadas.',
             'squadron_id' => 11,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 3,
             'ga' => 1,
             'df' => 3,
@@ -1577,7 +1577,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Heretic Astartes que portan armas pesadas proporcionan una devastadora potencia de fuego antiinfantería y antiblindaje, dominando grandes extensiones de cualquier zona de destrucción.',
             'squadron_id' => 11,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 3,
             'ga' => 1,
             'df' => 3,
@@ -1591,7 +1591,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Algunos Heretic Astartes tienen sed de poder a cualquier precio y se ofrecen por completo al Caos. Se convierten en anfitriones voluntariosos de las criaturas inmateriales de la disformidad. Este es un proceso lento y doloroso, y aquellos que se encuentran en las primeras etapas son conocidos como Ungidos debido a sus mutaciones.',
             'squadron_id' => 11,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 3,
             'ga' => 1,
             'df' => 3,
@@ -1605,7 +1605,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Locos sedientos de sangre, los Butchers son Heretic Astartes que luchan sin sutilezas de ningún tipo en el combate. Asestan furiosos golpes con sus enormes hachas de cadena, que pueden despedazar a los enemigos.',
             'squadron_id' => 11,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 3,
             'ga' => 1,
             'df' => 3,
@@ -1619,7 +1619,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Infligir dolor y tortura se convierte casi en una adicción para algunos Heretic Astartes. Aquellos que abrazan esta propensión se conocen como Shrivetalons y acechan el campo de batalla en busca de enemigos a quienes atormentar.',
             'squadron_id' => 11,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 3,
             'ga' => 1,
             'df' => 3,
@@ -1633,7 +1633,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Muchos equipos de matanza de Heretic Astartes incluyen Icon Bearers: guerreros que portan tótems, estandartes o estandartes dedicados a la gloria de los Dioses Oscuros.',
             'squadron_id' => 11,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 3,
             'ga' => 1,
             'df' => 3,
@@ -1647,7 +1647,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los  Balefire Acolytes son psíquicos bendecidos por los Dioses del Caos con el poder oscuro del empíreo, que dirigen indiscriminadamente contra el enemigo. Muchos también portan espadas que se vuelven aún más letales gracias al poder de la disformidad que les infunde.',
             'squadron_id' => 11,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 3,
             'ga' => 1,
             'df' => 3,
@@ -1661,7 +1661,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los elegidos se encuentran entre los Heretic Astartes más experimentados y dedicados. Son los favorecidos dentro de sus amargas hermandades, visten armaduras barrocas y están equipados con el mejor equipo de guerra. Son más duros e insensibles que incluso otros de su especie.',
             'squadron_id' => 11,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 3,
             'ga' => 1,
             'df' => 3,
@@ -1675,7 +1675,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Aspiring Champions son los más fuertes y despiadados de sus hermanos. Estos guerreros empapados de sangre hacen cumplir su voluntad a través de brutales actos de poder, buscando ser favorecidos por los dioses.',
             'squadron_id' => 11,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 3,
             'ga' => 1,
             'df' => 3,
@@ -1691,7 +1691,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Brimstone Grenadier tienen una inclinación poco saludable por las matanzas con explosivos, y no les importa empuñar explosivos inestables capaces de bañar a sus víctimas con ácidos y venenos alquímicos impuros, o incluso tragarlas en nubes turbulentas de hechicería disforme infernal.',
             'squadron_id' => 12,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1705,7 +1705,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Algunos entre los Militarum Traitoris hacen caso omiso de su humanidad por completo, disfrutando de un placer monstruoso al destrozar a sus enemigos a corta distancia y devorar trozos de carne caliente y sangrienta, a veces mientras sus desafortunadas víctimas todavía gritan por última vez.',
             'squadron_id' => 12,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1719,7 +1719,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Actuando como portavoces de sus amos tiránicos, los Traitor Commsmen escupían órdenes transmitidas a través de las corruptas redes de voz de los equipos de asesinato Blooded, transmitiendo exhortaciones amplificadas para que sus camaradas lucharan más duro en nombre del bendito Octed.',
             'squadron_id' => 12,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1733,7 +1733,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Habiendo dejado de lado la ética y los juramentos de los verdaderos médicos, estos retorcidos cirujanos de campo se especializan en preparar potentes estimulantes de combate. Estos los reparten para llevar a sus camaradas a un salvaje frenesí de batalla, y también para controlarlos a través de una creciente dependencia.',
             'squadron_id' => 12,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1747,7 +1747,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Enforcers son agentes de moral sádicos. Algunos comenzaron como comisarios supuestamente incorruptibles, tentados o destrozados por artificios diabólicos. Otros son pequeños tiranos surgidos de las filas y ataviados burlonamente con las vestimentas andrajosas (o incluso las pieles desolladas) de sus antiguos amos.',
             'squadron_id' => 12,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1761,7 +1761,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Incluso sus compañeros Traitor Guardsmen miran con recelo a los Flensers, quienes murmuran y se ríen mientras chocan sus espadas desolladoras en anticipación de los tormentos que infligirán en nombre de los Dioses Oscuros. Muchos han muerto bajo sus malvados cuchillos, pero pocos rápidamente.',
             'squadron_id' => 12,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1775,7 +1775,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Mientras que a los Imperial Guardsmen se les pueden entregar armas especiales como lanzallamas o pistolas de plasma, los renegados las reclaman a sus víctimas como trofeos, llevándolas como símbolos de poder y estatus. Empuñar un arma tan potente les ayuda a ofrecer sacrificios más sangrientos a los dioses.',
             'squadron_id' => 12,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1789,7 +1789,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Brutos salvajes incluso antes de convertirse en traidores, los Ogryns jurados al Caos rápidamente obtienen bendiciones mutantes a través de su fuerza y salvajismo. Sin embargo, son lentos y fácilmente explotados como guardaespaldas, escudos vivientes o toscos rompedores de líneas por sus camaradas humanos más astutos.',
             'squadron_id' => 12,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1803,7 +1803,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Blooded a menudo desprecian a los tiradores expertos por su falta de voluntad para buscar la gloria de cerca. Sin embargo, los Sharpshooters conocen su propio valor y ofrecen las almas de cada nueva víctima mientras las eliminan con sus armas largas.',
             'squadron_id' => 12,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1817,7 +1817,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Entre el Militarum Traitoris, la fuerza y la brutalidad cuentan más que la disciplina o la lealtad. Muchos son los Thugs entre sus irregulares filas: hombres y mujeres violentos que se han convertido prácticamente en ogros gracias a su salvajismo interior y la mancha de la herejía.',
             'squadron_id' => 12,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1831,7 +1831,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Trench Sweepers son algo muy raro: un traidor que sigue siendo leal a sus camaradas. Conservando algo de su antigua disciplina, se concentran en proteger a sus superiores directos durante el avance, antes de avanzar para despejar un camino sangriento a corta distancia.',
             'squadron_id' => 12,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1845,7 +1845,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Incluso los Troopers de los Blooded son asesinos empedernidos, templados en medio de los fuegos de la herejía y consumidos por un deseo egoísta de abrirse camino hacia el poder. Crueles y motivados, lo arriesgarán todo para llamar la atención de un Dios Oscuro.',
             'squadron_id' => 12,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 2,
             'df' => 3,
@@ -1859,7 +1859,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'A través de la fuerza de voluntad, la amenaza de violencia y puro carisma, los Chieftains gobiernan los equipos de matanza de Blooded y los llevan a la guerra. Su posición les permite elegir entre las riquezas del campo de batalla, lo que garantiza que se lancen a la batalla empuñando las armas y el equipo de guerra más potentes.',
             'squadron_id' => 12,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1875,7 +1875,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los líderes de los Fellgor Ravagers son guerreros que han luchado hasta llegar a la cima de su manada. Son asesinos uniformemente feroces, poseedores de una astucia inhumana que utilizan con efectos despiadados.',
             'squadron_id' => 13,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1889,7 +1889,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Hombres Bestia son cazadores y los Fellgor Ravagers tienen habilidades superiores al resto de su especie. Los Deathknells llevan a la batalla grandes gongs de guerra que utilizan para vencer la caza, enviar señales a sus compañeros de manada y anunciar la perdición del enemigo.',
             'squadron_id' => 13,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1903,7 +1903,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Muchos Fellgor Ravager desean las bendiciones de los dioses. A los Fluxbrays se les ha dotado de una extremidad adicional, mucho mejor para llevar armas adicionales a la batalla. Cuando llegan a la pelea, lanzan una multitud de golpes que son casi imposibles de evadir por mucho tiempo.',
             'squadron_id' => 13,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1917,7 +1917,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Fellgor Ravagers nunca dejan de luchar, ya sea por sus presas o por su lugar en el orden jerárquico. Pocos duran mucho, pero los que lo hacen quedan con muchas cicatrices y han sufrido muchas lesiones. A algunos se les proporciona biónica tosca después de sufrir la pérdida de una extremidad o un ojo, lo que hace que su apariencia sea aún más temible.',
             'squadron_id' => 13,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1931,7 +1931,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Algunos Fellgor Ravagers albergan una sed de sangre mayor que la de sus compañeros y se lanzan a la batalla con salvaje abandono. La matanza se produce rápidamente mientras cortan los brazos y las cabezas de sus enemigos en violentos chorros de vísceras.',
             'squadron_id' => 13,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1945,7 +1945,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Fellgor Ravagers tienen sentidos poderosos como corresponde a cazadores tan capaces. Algunos disfrutan la sensación de dolor e infligen sensaciones tortuosas a otros. Estos Herd-goads son bendecidos por los dioses con látigos imbuidos de poder empírico, que los Hombres Bestia utilizan para enfurecer a sus compañeros y dañar al enemigo.',
             'squadron_id' => 13,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1959,7 +1959,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Manglers tienen rabia y poder que les otorga la disformidad, lo que les permite atravesar mamparos y asestar cabezazos aplastantes. Aunque usan máscaras, poseen sentidos mejorados: algunos Hombres Bestia afirman que los Manglers pueden ver las almas de sus víctimas mientras las destrozan.',
             'squadron_id' => 13,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1973,7 +1973,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Fellgor Shaman, que sirven como predicadores obscenos para sus parientes y como asesores malévolos de los Ironhorns, son capaces de ejercer el poder puro del Caos. También son los chamanes quienes toman la iniciativa en los sangrientos sacrificios rituales de los Fellgor Ravagers ante la piedra de manada.',
             'squadron_id' => 13,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -1987,7 +1987,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Incluso más que el resto de su especie, los Toxhorn disfrutan especialmente destruyendo la tecnología de sus enemigos. Se deleitan con la descomposición y liberan las sustancias químicas y toxinas que la aceleran, ya sea contra máquinas o seres vivos.',
             'squadron_id' => 13,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2001,7 +2001,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Vandals, portadores de inmensos aplastadores de dos manos, tienen una tarea sencilla entre los Fellgor Ravagers: destrozar todo lo que ellos o sus Ironhorns deseen. Con cada martilleo pulverizan armaduras, huesos y carne.',
             'squadron_id' => 13,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2015,7 +2015,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Warriors, la columna vertebral de las manadas de Fellgor Ravager, tienen un único deber: matar al enemigo. Lo hacen con gusto, sabiendo que cuanto más devastación causen, más favor obtendrán del resto de su rebaño, así como de los propios dioses.',
             'squadron_id' => 13,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2031,7 +2031,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Corsairs son guerreros ágiles y ágiles, hábiles tiradores y espadachines. Luchadores veloces, compensan la falta de fuerza física con pura agilidad.',
             'squadron_id' => 14,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2045,7 +2045,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Corsairs utilizan armas provenientes de todas las sociedades Aeldari. Las trituradoras desatan una malla de monofilamento en expansión, enredando a los enemigos en una red y cortándolos, mientras que los blásters utilizan una misteriosa tecnología de luz oscura, letal incluso para el enemigo más blindado.',
             'squadron_id' => 14,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2059,7 +2059,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Con rápidas ráfagas de fuego shuriken, los Corsairs pueden destruir la infantería enemiga y proporcionar cobertura a su camarilla. Algunos Corsairs empuñan cañones espectrales. Estas armas abren brechas entre el espacio warp y el real, destrozando objetivos atrapados en el vórtice.',
             'squadron_id' => 14,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2073,7 +2073,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Temerarios y arrogantes, los Starstorm Duellists  son expertos portadores de pistolas que se sumergen en la refriega para lanzar salvas de fuego preciso a corta distancia.',
             'squadron_id' => 14,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2087,7 +2087,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Esos Corsairs conocidos como cazadores kurnitas son seguidores de Kurnous, los Aeldari de la caza. Su vínculo con las criaturas de la caza, como Faolchú, suele ser más fuerte que el que tienen con sus compañeros Corsairs.',
             'squadron_id' => 14,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2101,7 +2101,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Shade Runners son expertos en ataques sorpresa. Utilizando sus mochilas parpadeantes, que funcionan de manera similar a los generadores de salto warp utilizados por las Arañas Warp de Asuryani, flanquean a sus enemigos, atacando con los rápidos y salvajes golpes de sus espadas Hekatarii.',
             'squadron_id' => 14,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2115,7 +2115,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Kurnathi son verdaderos maestros de la espada. Todos asesinos, han aprendido su sangriento oficio en los Santuarios del Aspecto Asuryani, en las arenas de Commorragh o incluso junto a los Harlequins. Ahora ponen sus habilidades a trabajar como mejor les parezca.',
             'squadron_id' => 14,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2129,7 +2129,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Una vez que un Fate Dealer tiene un enemigo en la mira, es la marca de la muerte del alma desafortunada. Infiltrados expertos, se esconden en posiciones con mayor supervisión de todo el campo de batalla y las capas de camuflaje los vuelven casi invisibles.',
             'squadron_id' => 14,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2143,7 +2143,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'El papel de los Way Seekers es guiar y dirigir barcos corsarios más pequeños en sus viajes. También son poderosos psíquicos en el campo de batalla que trabajan en estrecha colaboración con Fate Dealers y Kurnathi, identificando objetivos para estos asesinos del mismo modo que identificarían obstáculos a su oficio.',
             'squadron_id' => 14,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2157,7 +2157,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Místicos espirituales, los Soul Weavers utilizan el poder y el conocimiento de las almas Aeldari en las piedras espirituales que llevan. Con esta energía pueden potenciar las habilidades de los guerreros en combate o curar a los heridos.',
             'squadron_id' => 14,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2171,7 +2171,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Felarchs son veteranos Corsairs, con siglos o incluso milenios de experiencia asaltando las estrellas. Han luchado contra innumerables razas diferentes y dominan numerosas armas, lo que los convierte en enemigos mortales para cualquiera que se enfrente a ellos.',
             'squadron_id' => 14,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2187,7 +2187,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Estos guerreros son maestros de su Aspecto y devotos de su mundo astronave. De acuerdo con la flexibilidad táctica de su Aspecto, todos son maestros tiradores y espadachines, y se sienten cómodos destrozando enemigos con andanadas de afilados shuriken mientras se enfrentan a héroes enemigos en combate singular.',
             'squadron_id' => 15,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 3,
             'ga' => 1,
             'df' => 3,
@@ -2201,7 +2201,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Estos agentes son famosos por ser tan mortíferos en el ataque como inamovibles en la defensa, y se les considera los más tácticamente flexibles de todos los Aspectos. Usan sus catapultas shuriken para crear una tormenta impenetrable de espadas monomoleculares.',
             'squadron_id' => 15,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 3,
             'ga' => 1,
             'df' => 3,
@@ -2215,7 +2215,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'No sólo las habilidades en el elegante manejo de la espada mostradas por una Howling Banshee Exarch superan a las de los guerreros que ella lidera, sino que sus gritos son tan desgarradores y mordaces que sus resonantes reverberaciones persiguen a quienes los escuchan mucho después de que los gritos se hayan extinguido.',
             'squadron_id' => 15,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 3,
             'ga' => 1,
             'df' => 3,
@@ -2229,7 +2229,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'El grito penetrante y psicosónico que precede al asalto de estos agentes con armadura ósea deja a quienes lo escuchan casi impotentes. Estas ondas de choque les dan a las Howling Banshees tiempo suficiente para atacar, cada una tomando una cabeza con un movimiento de su brillante arma de poder.',
             'squadron_id' => 15,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 3,
             'ga' => 1,
             'df' => 3,
@@ -2243,7 +2243,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Estas siniestras figuras son incluso más hábiles que los Guerreros de Aspecto 1 que lideran. Con la gigantesca espada sierra conocida como hoja mordedora, un Striking Scorpion Exarch puede dividir a sus enemigos en dos con un solo movimiento y usar su garra de escorpión para abrir la servoarmadura de los Space Marine con facilidad.',
             'squadron_id' => 15,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 3,
             'ga' => 1,
             'df' => 3,
@@ -2257,7 +2257,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Con una paciencia ilimitada, después de acechar a sus presas durante horas o esperar en posición durante días, los Striking Scorpions salen de su escondite. Con espadas sierra zumbando y mandiblasters escupiendo agujas de fuego blanco, la armadura verde esmeralda de los Aspect Warriors pronto se tiñe de rojo.',
             'squadron_id' => 15,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 3,
             'ga' => 1,
             'df' => 3,
@@ -2273,7 +2273,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Aquellos que ejercen superioridad entre la élite de su Arconte han llegado al poder mediante la crueldad y la manipulación. También son temibles combatientes, ya que se requiere habilidad en el manejo de la espada y fuerza atlética para mantener la autoridad.',
             'squadron_id' => 16,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2287,7 +2287,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Bien equipados y con talentos asesinos perfeccionados por la supervivencia en Commorragh, los equipos de matanza de los Agentes de Hand of the Archon son ejecutores malévolos. Cualquier presa que no puedan cortar dolorosamente con sus rifles de astillas, la cortan con elegantes movimientos de sus numerosas espadas.',
             'squadron_id' => 16,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2301,7 +2301,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Crimson Duellists son despiadados artistas asesinos que trabajan con una paleta sangrienta de las vísceras de sus enemigos. Maestros de diversas armas, muchos cazan con el ostentoso mazo de afeitar, realizando asesinatos característicos cuando su Arconte requiere una demostración de poder muy visible.',
             'squadron_id' => 16,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2315,7 +2315,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Yaelindra fundó un infame culto de envenenadores, del que se dice que elaboran las toxinas más potentes conocidas en la Ciudad Oscura. Sus adeptos utilizan venenos mortales como armas, transformándolos en granadas de tormento o entregándolos a través de astillas huecas disparadas con pistolas aguijón con resultados horribles.',
             'squadron_id' => 16,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2329,7 +2329,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Elixicants son expertos aplicadores de los diversos productos de las industrias bioquímicas de su Kabal. Estos estimulantes, narcóticos virulentos y arcanas hormonas sintéticas vigorizan a sus compañeros Kabalites de diversas maneras. Al enemigo, sin embargo, sólo ofrecen una muerte lenta y dolorosa.',
             'squadron_id' => 16,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2343,7 +2343,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Drukhari tienen hambre del dolor de los demás, y los Flayers son terriblemente expertos en generarlo en sus víctimas. Sus asesinatos no son rápidos ni limpios, y con cada grito placentero que provocan de sus enemigos, desatan oleadas de agonía empoderadora.',
             'squadron_id' => 16,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2357,7 +2357,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Desde la caricia de la luz oscura de los blásters hasta la malla de púas de monofilamento desatadas por las trituradoras, los Gunners de las Kabals especialistas se deleitan desatando el tormento en movimiento. Estos guerreros pueden obtener estas potentes armas mediante su habilidad o matar para llegar a la posición.',
             'squadron_id' => 16,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2371,7 +2371,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'La tecnología de armas de los Drukhari está muy por delante de las capacidades de la mayoría de las razas, y los Kabalite Heavy Gunners empuñan armamentos de poder infernal. Las lanzas oscuras disparan rayos de medianoche que pueden vaporizar a los enemigos, mientras que los cañones de astillas atraviesan al enemigo con fragmentos envenenados.',
             'squadron_id' => 16,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2385,7 +2385,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Acostumbrados a explorar el futuro, estos agentes se mantienen alejados de sus camaradas y se considera que albergan agendas secretas. Esa paranoia es una herramienta que saben cómo utilizar a su favor, y la siniestra visión de sus alas afiladas persigue tanto a los enemigos como a los llamados "aliados".',
             'squadron_id' => 16,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2401,7 +2401,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Farstalker Kinbands están liderados por Kill-brokers. Estos Kroot no sólo son expertos tácticos y hábiles luchadores, sino también hábiles negociadores, lo que garantiza que sus parientes reciban recompensas justas por sus servicios.',
             'squadron_id' => 17,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2415,7 +2415,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los arcos aceleradores que empuñan estos Kroot son armas distintivas, con un rifle Kroot en su núcleo. Cuando se dispara, las curvas del arco crepitan con energía, cargando la punta de la flecha cargada. Los efectos sobre los enemigos golpeados varían según el material del que está hecha la punta de flecha.',
             'squadron_id' => 17,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2429,7 +2429,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'De hecho, los Cold-bloods han luchado como mercenarios durante muchos años. Han visto y experimentado mucho, y poco les inspira miedo. El conocimiento que han adquirido los hace expertos en diferentes tipos de munición, seleccionando el disparo óptimo para cada muerte que desean realizar.',
             'squadron_id' => 17,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2443,7 +2443,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Estos Kroot han abrazado plenamente el combate cuerpo a cuerpo. Rápidos y feroces, los Cut-skins lanzan una ráfaga de golpes salvajes contra sus enemigos, sin darles oportunidad de contraatacar antes de ser eliminados.',
             'squadron_id' => 17,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2457,7 +2457,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Kroot luchará a favor o en contra de casi cualquier raza de la galaxia. En el proceso, se les paga con (o roban) armas exóticas como los desolladores Dvorgite, que cargan material biológico para crear una corriente abrasadora de energía, o los tribales Londaxi, armas antiblindajes que disparan tiros sólidos a altas velocidades.',
             'squadron_id' => 17,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2471,7 +2471,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Rápidos, ágiles, feroces e increíblemente leales a sus amos Kroot, los Kroot Hounds son compañeros naturales de los Farstalker Kinbands. Estas bestias pueden infiltrarse en pasillos estrechos, recuperar objetos y destrozar a los enemigos con sus mandíbulas picudas.',
             'squadron_id' => 17,
-            'm' => "4 2Circles",
+            'm' => "4 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2485,7 +2485,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los mejores tiradores de Farstalker Kinbands, los Long-sights, llevan rifles de caza Kroot de cañón largo. Con mucho gusto se ocultarán en su posición durante días para tomar la foto perfecta. Pocos de ellos viven para contarlo.',
             'squadron_id' => 17,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2499,7 +2499,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Tranquilos bajo presión y cómodos luchando cerca del enemigo, los Kroot Pistoliers son luchadores diestros y reflexivos. Una vez en el rango óptimo, desatan una ráfaga de sus pistolas de la que es casi imposible escapar.',
             'squadron_id' => 17,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2513,7 +2513,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Incluso entre los Kroot, estos guerreros son infiltradores y cazadores particularmente hábiles. Poseen una comprensión casi sobrenatural del terreno y el arte de ocultarse, capaces de acercarse mucho a un enemigo antes de atacarlo.',
             'squadron_id' => 17,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2527,7 +2527,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Estos Kroot comparten un vínculo personal muy fuerte con su Pech'ra, un pájaro que proviene del mismo Pech. Los dos trabajan de manera sincronizada para ayudar a su Kinband. El Pech'ra no sólo puede distraer a los enemigos, sino también advertir a los Kroot de su presencia.",
             'squadron_id' => 17,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2541,7 +2541,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => 'Los Kroot Warriors son feroces luchadores, cazadores expertos y rastreadores implacables. Los miembros de Farstalker Kindreds han pasado muchos años como mercenarios, adquiriendo mucha experiencia en la guerra y consumiendo material genético para mejorar el futuro de su especie.',
             'squadron_id' => 17,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 2,
             'df' => 3,
@@ -2557,7 +2557,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Aquellos Hearthkyn Salvagers que muestran una aptitud particular para el liderazgo son nominados por sus superiores o camaradas para ser promovidos al rango de Theyn. Al mando de su propio escuadrón, los Theyn son excavadores de cascos altamente experimentados con innumerables acciones de abordaje a su nombre.",
             'squadron_id' => 18,
-            'm' => "2 2Circles",
+            'm' => "2 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2571,7 +2571,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "La sutileza y los matices son conceptos para los que estos parientes musculosos tienen poco tiempo. Pueden romper escotillas selladas o incluso paredes sólidas con sus knux de conmoción cerebral, abriendo camino para sus familiares. En la batalla, sus armas son aún más devastadoras para sus desafortunados enemigos.",
             'squadron_id' => 18,
-            'm' => "2 2Circles",
+            'm' => "2 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2585,7 +2585,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Estos Hearthkyn Salvagers reciben una formación exhaustiva en primeros auxilios bajo fuego, así como una formación limitada en ingeniería que les permite brindar atención a los Ironkin dañados. En una acción de abordaje, sus habilidades son vitales, ya que su escuadrón estará lejos de un centro médico Kin completamente equipado.",
             'squadron_id' => 18,
-            'm' => "2 2Circles",
+            'm' => "2 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2599,7 +2599,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Armados con bandoleras de granadas y explosivos, los Grenadiers desempeñan una función vital para los equipos de Hearthkyn Salvager. Pueden limpiar un corredor de enemigos en un instante, atravesar puertas cerradas y brindar apoyo táctico a sus parientes en el fragor de un tiroteo.",
             'squadron_id' => 18,
-            'm' => "2 2Circles",
+            'm' => "2 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2613,7 +2613,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Dado que los restos de naufragios suelen ser el hogar de innumerables bestias, monstruos y enemigos, los Hearthkyn Salvagers tienen acceso a una amplia variedad de armas especiales y pesadas. Los Gunners seleccionan las herramientas que mejor se adaptan a la tarea en cuestión, y sus ráfagas de fuego pesado han salvado a muchos equipos de combate.",
             'squadron_id' => 18,
-            'm' => "2 2Circles",
+            'm' => "2 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2627,7 +2627,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Los Hearthkyn Salvagers tienen que superar innumerables obstáculos en sus misiones. Aquellos que usan mochilas de salto pueden navegar por terrenos difíciles con facilidad y, en la batalla, pueden utilizar el poder de su equipo para aumentar el impacto de su carga.",
             'squadron_id' => 18,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2641,7 +2641,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Las energías empíreas, el blindaje de las naves del vacío y las rocas gruesas amenazan con interferir con las comunicaciones del escuadrón, y los Kinlynks tienen que trabajar incansablemente para garantizar que todos sus parientes puedan permanecer en contacto. Transmiten tranquilamente información táctica en el fragor de la batalla e incluso interrumpen las comunicaciones enemigas.",
             'squadron_id' => 18,
-            'm' => "2 2Circles",
+            'm' => "2 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2655,7 +2655,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Estos Ironkin poseen inteligencias artificiales extremadamente complejas y utilizan este inmenso poder cognitivo para apoyar a su escuadrón. Al recibir, organizar y analizar datos constantemente, Kognitâar proporciona increíble información táctica en tiempo real a sus parientes cuando es necesario.",
             'squadron_id' => 18,
-            'm' => "2 2Circles",
+            'm' => "2 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2669,7 +2669,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Con peligros acechando en cada esquina, en cada respiradero e incluso dentro de las paredes de un naufragio, los escáneres pan spectral de los Lokâtrs son esenciales para permitir a sus parientes anticipar amenazas y reaccionar de la forma más práctica.",
             'squadron_id' => 18,
-            'm' => "2 2Circles",
+            'm' => "2 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2683,7 +2683,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "En un accidente, donde es difícil insertar vehículos, estos temibles familiares llevan enormes cargas de equipos y suministros esenciales sin quejarse. Al contribuir con cada gramo de fuerza que tienen a su causa, son muy apreciados por sus parientes.",
             'squadron_id' => 18,
-            'm' => "2 2Circles",
+            'm' => "2 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2697,7 +2697,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Los Hearthkyn Warriors son individuos robustos y canosos, tremendamente orgullosos de su papel en peligrosas operaciones de abordaje. Los Warriors brindan apoyo vital a los especialistas de su escuadrón, disparando a los enemigos mientras sus camaradas realizan tareas esenciales para la misión.",
             'squadron_id' => 18,
-            'm' => "2 2Circles",
+            'm' => "2 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2713,7 +2713,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Con sus bastones de eones y lanzas entrópicas, los Chronomancers pueden ralentizar o acelerar el tiempo armado. Astutos manipuladores de energías temporales, pueden reducir a sus enemigos a polvo antiguo con sólo una palabra o un gesto.",
             'squadron_id' => 19,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 3,
             'ga' => 1,
             'df' => 3,
@@ -2727,7 +2727,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Los Psychomancers estudian la ciencia del miedo. Son manipuladores expertos, que evocan fantasmas y construcciones temporales de luz dura que desencadenan instintos primarios de supervivencia en las mentes de sus víctimas, o sobrecargan incluso los sentidos más avanzados. Ningún ser está a salvo del arte del Psychomancer.",
             'squadron_id' => 19,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 3,
             'ga' => 1,
             'df' => 3,
@@ -2741,7 +2741,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Maestros manipuladores de tecnología de todo tipo, los Technomancers son particularmente hábiles para reparar construcciones de Necrones y Canoptek caídos, o mejorar sus habilidades.",
             'squadron_id' => 19,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 3,
             'ga' => 1,
             'df' => 3,
@@ -2755,7 +2755,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "El propósito de estos Plasmacytes es mejorar las capacidades de procesamiento mental de los Necrons cercanos y mejorar su eficiencia operativa.",
             'squadron_id' => 19,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 2,
@@ -2769,7 +2769,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Estos Plasmacytes han sido diseñados para garantizar que los Necrones cercanos se reanimen más rápidamente si sufren daños graves, utilizando su probóscide monomolecular para inyectar fluidos que permitan una reparación rápida.",
             'squadron_id' => 19,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 2,
@@ -2783,7 +2783,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Más que simples asistentes de sus amos y amantes de Cryptek, los Apprenteks son conductos para su poder. Ellos y su personal sirven como nodos y lentes de enfoque para las habilidades de los Crypteks, quienes incluso pueden ver a través de sus ojos a voluntad.",
             'squadron_id' => 19,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 3,
             'ga' => 1,
             'df' => 3,
@@ -2797,7 +2797,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Ningún objetivo puede evadir los Deathmarks. Observando desde mazmorras dimensionales, estos francotiradores expertos rastrean los movimientos y las comunicaciones del enemigo e incluso teletransportan firmas antes de atacar. Lo hacen en una llamarada de fuego desintegrador sináptico que destroza no sólo los cuerpos de sus víctimas, sino también sus propias mentes.",
             'squadron_id' => 19,
-            'm' => "2 2Circles",
+            'm' => "2 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2811,7 +2811,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Inmortales de nivel superior, un Despotek sirve como portavoz y ejecutor de su Cryptek en los Círculos Hierotek, así como un conducto estratégico. Además de esto, son magníficos guerreros por derecho propio.",
             'squadron_id' => 19,
-            'm' => "2 2Circles",
+            'm' => "2 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2825,7 +2825,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Los Immortal Guardians proporcionan a sus amos un poderoso núcleo de soldados expertos. Al conservar un nivel de individualidad después de la biotransferencia, pueden emplear una serie de estrategias incluso sin comando, y su potencia de fuego los hace mortales en enfrentamientos a corta y media distancia.",
             'squadron_id' => 19,
-            'm' => "2 2Circles",
+            'm' => "2 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2841,7 +2841,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Los Kommandos personifican la virtud Orky de la baja astucia. Pocas cosas los hacen más felices que acercarse sigilosamente a un enemigo desprevenido y cortarlo, cortarlo y dispararle antes de que contraataque.",
             'squadron_id' => 20,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2855,7 +2855,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "A los Slasha Boyz les encanta meterse en el meollo de la acción, incluso para los estándares Orkos. Ataviados con todo tipo de espadas, se abren camino a través de enemigos tras enemigos.",
             'squadron_id' => 20,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2869,7 +2869,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Los Kommando Breacha Boys tienen la tarea de irrumpir en lugares y enemigos por igual y destrozarlos con sus Breacha Rams. Es algo que les encanta, y aquellos que los ven en acción y sobreviven pronto aprenden a temer especialmente a estos brutales pieles verdes.",
             'squadron_id' => 20,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2883,7 +2883,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Aunque pocos Orkos tienen la paciencia para ser un Kommando Snipa Boy, aquellos que desempeñan el papel son expertos en encontrar los mejores lugares para disparar al enemigo, matar a un objetivo y disfrutar viendo a los supervivientes agitarse y entrar en pánico ante la confusión inevitablemente causada.",
             'squadron_id' => 20,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2897,7 +2897,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "El sonido del rugiente dakka es música para los oídos de muchos Orkos, entre ellos los Kommando Dakka Boys. Les encanta lanzar grandes cantidades de balas al enemigo, destruir coberturas ligeras, hacer que los enemigos huyan y provocar un caos.",
             'squadron_id' => 20,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2911,7 +2911,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "No hay excusa para no seguir el plan del jefe, por cuestionable que parezca. Los Kommando Comms Boys realizan la función de garantizar que ningún Orko 'olvide' sus órdenes en el campo transmitiendo las instrucciones del jefe.",
             'squadron_id' => 20,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2925,7 +2925,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Los Burna Boyz son todos pirómanos, obsesionados con infiernos furiosos: cuanto más grandes y calientes, mejor. Los miembros de los Kommandos muestran una paciencia extraordinaria, sabiendo que la espera hace que la devastación que causan con sus burnas sea aún más satisfactoria.",
             'squadron_id' => 20,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2939,7 +2939,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Surgiendo de lugares ocultos, los Kommando Rokkit Boyz disparan cohetes contra búnkeres, silos de combustible, depósitos de munición o incluso en medio de un enemigo desprevenido, todo con una amplia sonrisa ante los estragos que han causado.",
             'squadron_id' => 20,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2953,7 +2953,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Para que los Grots duren mucho tiempo en la brutal realidad de la sociedad Orka, tienen que aprender a mentir, engañar, robar, escabullirse, adular y planear, rasgos todos ellos valiosos para los equipos de exterminio de Kommando.",
             'squadron_id' => 20,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2967,7 +2967,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Los Kommando Nobs, los más astutos de los idiotas, son lo suficientemente brutales y astutos como para mandar a los más intrigantes de su especie.",
             'squadron_id' => 20,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2981,7 +2981,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Los Bomb squigs se encuentran entre los más peligrosos de su tipo. Además de ser depredadores voraces, como su nombre indica llevan todo tipo de explosivos. En la batalla corren hacia el enemigo, haciendo volar las tropas enemigas y destruyendo sus defensas.",
             'squadron_id' => 20,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -2997,7 +2997,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Los Pathfinders Shas'ui son guerreros veteranos que han luchado en muchas campañas. Han superado peligrosas pruebas de fuego para alcanzar el rango y son tácticos dinámicos y consumados más que capaces de llevar a su equipo a la victoria.",
             'squadron_id' => 21,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -3011,7 +3011,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Incluso las bases de los equipos Pathfinder son partidarios desinteresados ​​del Bien Mayor y se ofrecen como voluntarios con entusiasmo para las misiones más peligrosas. Operan cerca del enemigo para aprender todo lo que puedan de él, así como para enfrentarse a él cuando sea necesario.",
             'squadron_id' => 21,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -3025,7 +3025,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Muchos Conquistadores experimentados y respetados se ganan el nombre personal de Mont'yr, que se traduce como 'Blooded'. Muchos llevan dispositivos biónicos muy avanzados en lugar de extremidades perdidas y se les confía tecnología especializada, como armas suprimidas.",
             'squadron_id' => 21,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -3039,7 +3039,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Los Drone Controller Pathfinders reciben capacitación adicional en el pilotaje remoto de los drones que frecuentemente acompañan a sus equipos. Con trabajo cuidadoso y paciencia, pueden manipular un dron para llevar a cabo tareas complejas que los drones no pueden completar utilizando únicamente su programación.",
             'squadron_id' => 21,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -3053,7 +3053,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Los Transpectral Interference Pathfinders tienen la tarea de interferir las comunicaciones enemigas mediante el uso de codificadores de señales complejos que pueden apagar los sistemas eléctricos.",
             'squadron_id' => 21,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -3067,7 +3067,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Los Pathfinders más apasionados están entrenados para llevar a cabo ataques extremadamente peligrosos contra posiciones enemigas, utilizando sus granadas para aturdir a las tropas enemigas y destruir búnkeres. También están equipados con cascos avanzados que los hacen inmunes a los esfuerzos enemigos para aturdirlos.",
             'squadron_id' => 21,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -3081,7 +3081,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Los Communications Specialists se encuentran en la mayoría de los equipos de combate de Pathfinder y brindan una conexión con los comandantes del equipo, otros equipos de combate y recursos de apoyo vitales.",
             'squadron_id' => 21,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -3095,7 +3095,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "En un equipo de combate Pathfinder, las vidas de los T'au suelen estar en manos de un Medical Technician. Estos curanderos desinteresados desafían las tormentas de fuego enemigo para llegar a los heridos.",
             'squadron_id' => 21,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -3109,7 +3109,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Los Weapons Experts Pathfinders empuñan las armas pesadas de su equipo de matanza. Su tarea es relativamente sencilla: matar o destruir lo que sus Shas'ui les ordenan o lo que consideran un objetivo importante.",
             'squadron_id' => 21,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -3123,7 +3123,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Los Marksman Pathfinders llevan rifles de riel personalizados con ópticas avanzadas y amortiguadores inerciales sofisticados para garantizar una precisión increíble. Estos Pathfinders también cuentan con munición de dardos experimental que es prácticamente inaudible para el enemigo cuando se dispara.",
             'squadron_id' => 21,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -3137,7 +3137,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Estos grandes drones son capaces de recopilar datos vitales en el campo de batalla que pueden marcar la diferencia entre la victoria y la derrota. Al ser más grandes, también pueden montarse con armamento más pesado: su cañón de ráfaga puede suprimir o reducir eficazmente la infantería enemiga.",
             'squadron_id' => 21,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -3151,7 +3151,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Utilizando motores antigravíticos y propulsores a reacción, los Gun Drones se ciernen sobre el paisaje, moviéndose rápidamente para enfrentarse al enemigo y registrar datos del campo de batalla. En las misiones de Kill Team, pueden distraer a los enemigos y participar en ataques junto a los guerreros T'au a los que sirven.",
             'squadron_id' => 21,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -3165,7 +3165,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Los Shield Drones están equipados con generadores de escudos en lugar de armamento. Su tarea es proteger a los Conquistadores a los que acompañan. Sus protocolos de salvación garantizan que, en caso de que un T'au se vea amenazado directamente, el Drone Escudo los protegerá de cualquier daño.",
             'squadron_id' => 21,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -3179,7 +3179,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Las luces marcadoras de alta intensidad utilizadas por los Marker Drones son vitales para la sinergia de las fuerzas T'au. Indican objetivos prioritarios tanto para los Conquistadores con los que están como para otros poderosos activos T'au. Todo lo que escojan pronto será destruido.",
             'squadron_id' => 21,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -3193,7 +3193,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Los Pulse Accelerator Drones potencian las armas de pulso que llevan los Pathfinders, haciendo que la tecnología sea mucho más poderosa y dándoles una ventaja vital contra el enemigo.",
             'squadron_id' => 21,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -3207,7 +3207,7 @@ class SoldierSeeder extends Seeder
             //
             'description' => "Los Grav-inhibitor Drones son capaces de manipular la gravedad y ralentizar significativamente el progreso de las tropas enemigas que se aproximan. En innumerables ocasiones los equipos de matanza de Pathfinder han escapado de una muerte casi segura gracias a la tecnología que llevan estos drones.",
             'squadron_id' => 21,
-            'm' => "3 2Circles",
+            'm' => "3 Circles",
             'apl' => 2,
             'ga' => 1,
             'df' => 3,
@@ -3222,7 +3222,7 @@ class SoldierSeeder extends Seeder
         //     //
         //     'description' => "",
         //     'squadron_id' => 1,
-        //     'm' => "3 2Circles",
+        //     'm' => "3 Circles",
         //     'apl' => 2,
         //     'ga' => 1,
         //     'df' => 3,

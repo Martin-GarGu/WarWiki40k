@@ -15,6 +15,7 @@ return new class extends Migration
             // $table->id();
             $table->foreignId('weapon_id');
             $table->foreignId('specialrule_id');
+            $table->string('type')->nullable();
 
             $table->foreign('weapon_id')->references('id')->on('weapons')->onDelete('cascade');
             $table->foreign('specialrule_id')->references('id')->on('specialrules')->onDelete('cascade');

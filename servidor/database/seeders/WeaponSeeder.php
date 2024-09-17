@@ -79,7 +79,7 @@ class WeaponSeeder extends Seeder
         [
             'name'=>'Penitent eviscerator',
             'a'=>'4',
-            'bs-ws'=>'3+',
+            'bs-ws'=>'4+',
             'd'=>'5/6',
             'type'=>'melee',
         ],
