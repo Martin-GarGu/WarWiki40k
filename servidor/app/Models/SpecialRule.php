@@ -16,6 +16,6 @@ class SpecialRule extends Model
         'description', // Description of the Special Rule
     ];
     public function weapons(){
-        return $this->belongsToMany(Weapon::class);
+        return $this->belongsToMany(Weapon::class, 'weapon_specialrule',  'weapon_id','specialrule_id')->withPivot('type');
     }
 }

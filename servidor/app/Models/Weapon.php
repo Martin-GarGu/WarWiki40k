@@ -20,7 +20,7 @@ class Weapon extends Model
         '!', // Critical hit rules
     ];
     public function specialRules(){
-        return $this->belongsToMany(SpecialRule::class);
+        return $this->belongsToMany(SpecialRule::class, 'weapon_specialrule', 'weapon_id', 'specialrule_id')->withPivot('type');
     }
     public function criticalHitRules(){
         return $this->belongsToMany(CriticalHitRule::class);

@@ -347,7 +347,7 @@ class WeaponSeeder extends Seeder
             'a'=>'4',
             'bs-ws'=>'4+',
             'd'=>'1/2',
-            'type'=>'',
+            'type'=>'ranged',
         ],
         [
             'name'=>'Chainsword',
@@ -683,6 +683,13 @@ class WeaponSeeder extends Seeder
             'a'=>'4',
             'bs-ws'=>'4+',
             'd'=>'3/4',
+            'type'=>'ranged',
+        ],
+        [
+            'name'=>'Remote mine',
+            'a'=>'4',
+            'bs-ws'=>'2+',
+            'd'=>'4/5',
             'type'=>'ranged',
         ],
         [
@@ -1882,6 +1889,13 @@ class WeaponSeeder extends Seeder
             'bs-ws'=>'4+',
             'd'=>'4/5',
             'type'=>'ranged',
+        ],
+        [
+            'name'=>'Bonding knife',
+            'a'=>'3',
+            'bs-ws'=>'4+',
+            'd'=>'3/4',
+            'type'=>'melee',
         ],
         [
             'name'=>'Fists',
