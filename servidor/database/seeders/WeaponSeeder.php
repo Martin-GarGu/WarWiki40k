@@ -756,6 +756,13 @@ class WeaponSeeder extends Seeder
             'type'=>'ranged',
         ],
         [
+            'name'=>'Bolt carbine',
+            'a'=>'4',
+            'bs-ws'=>'3+',
+            'd'=>'3/4',
+            'type'=>'ranged',
+        ],
+        [
             'name'=>'Occulus bolt carbine',
             'a'=>'4',
             'bs-ws'=>'3+',
@@ -1019,6 +1026,13 @@ class WeaponSeeder extends Seeder
             'a'=>'4',
             'bs-ws'=>'4+',
             'd'=>'5/7',
+            'type'=>'melee',
+        ],
+        [
+            'name'=>'Skinning blades',
+            'a'=>'4',
+            'bs-ws'=>'3+',
+            'd'=>'3/4',
             'type'=>'melee',
         ],
         [
@@ -1398,6 +1412,13 @@ class WeaponSeeder extends Seeder
             'a'=>'5',
             'bs-ws'=>'4+',
             'd'=>'1/2',
+            'type'=>'ranged',
+        ],
+        [
+            'name'=>'Splinter cannon',
+            'a'=>'5',
+            'bs-ws'=>'3+',
+            'd'=>'3/5',
             'type'=>'ranged',
         ],
         [
