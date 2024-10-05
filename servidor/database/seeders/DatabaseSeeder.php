@@ -33,6 +33,8 @@ class DatabaseSeeder extends Seeder
         $this->call(WeaponSpecialRuleSeeder::class);
         DB::table('soldier_weapon')->delete();
         $this->call(SoldierWeaponSeeder::class);
+        DB::table("keywords")->delete();
+        $this->call(KeywordSeeder::class);
         
         // User::factory(10)->create();
 
