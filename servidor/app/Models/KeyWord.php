@@ -15,7 +15,7 @@ class KeyWord extends Model
         'slug',
     ];
     public function soldiers(){
-        return $this->belongsToMany(Soldier::class);
+        return $this->belongsToMany(Soldier::class, 'soldier_keyword', 'keyword_id', 'soldier_id');
     }
     public function getRouteKeyName(){
         return 'slug';

@@ -35,6 +35,8 @@ class DatabaseSeeder extends Seeder
         $this->call(SoldierWeaponSeeder::class);
         DB::table("keywords")->delete();
         $this->call(KeywordSeeder::class);
+        DB::table("soldier_keyword")->delete();
+        $this->call(SoldierKeywordSeeder::class);
         
         // User::factory(10)->create();
 

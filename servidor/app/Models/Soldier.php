@@ -31,7 +31,7 @@ class Soldier extends Model
         return $this->belongsToMany(Weapon::class);
     }
     public function keywords(){
-        return $this->belongsToMany(KeyWord::class);
+        return $this->belongsToMany(KeyWord::class,'soldier_keyword','soldier_id','keyword_id');
     }
     public function uniqueactions(){
         return $this->belongsToMany(UniqueAction::class);

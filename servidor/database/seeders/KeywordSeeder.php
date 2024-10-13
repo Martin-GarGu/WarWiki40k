@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\KeyWord;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class KeywordSeeder extends Seeder
 {
@@ -169,6 +170,9 @@ class KeywordSeeder extends Seeder
             'name' => 'Gheistskull',
         ],
         [
+            'name' => 'Hatchcutter',
+        ],
+        [
             'name' => 'Grenadier',
         ],
         [
@@ -215,9 +219,6 @@ class KeywordSeeder extends Seeder
         ],
         [
             'name' => 'Penal Legionnaire',
-        ],
-        [
-            'name' => 'Pistolier',
         ],
         [
             'name' => 'Anathema Psykana',
@@ -316,6 +317,9 @@ class KeywordSeeder extends Seeder
             'name' => 'Spotter Veteran',
         ],
         [
+            'name' => 'Phobos Strike Team',
+        ],
+        [
             'name' => '<Chapter>',
         ],
         [
@@ -356,6 +360,9 @@ class KeywordSeeder extends Seeder
         ],
         [
             'name' => 'Adeptus Astartes',
+        ],
+        [
+            'name' => 'Incursor',
         ],
         [
             'name' => 'Heavy Gunner',
@@ -658,9 +665,6 @@ class KeywordSeeder extends Seeder
             'name' => 'Stalker',
         ],
         [
-            'name' => 'Tracker',
-        ],
-        [
             'name' => 'Hearthkyn Salvager',
         ],
         [
@@ -683,6 +687,9 @@ class KeywordSeeder extends Seeder
         ],
         [
             'name' => 'Lokâtr',
+        ],
+        [
+            'name' => 'Kognitâar',
         ],
         [
             'name' => 'Lugger',
@@ -840,6 +847,7 @@ class KeywordSeeder extends Seeder
         foreach ($this->keywords as $keyword){
             $k = new KeyWord();
             $k->name = $keyword['name'];
+            $k->slug= Str::slug($keyword['name']);
             $k->save();
         }
         $this->command->info('Keywords inserted');
