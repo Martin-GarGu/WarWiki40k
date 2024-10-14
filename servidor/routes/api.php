@@ -17,3 +17,10 @@ Route::get('/armys', [ArmyController::class, 'index']);
 Route::get('/soldiers', [SoldierController::class, 'index']);
 Route::get('/weapons', [WeaponController::class, 'index']);
 Route::get('/specialrules', [SpecialruleController::class, 'index']);
+
+Route::post('/factions/create',[FactionController::class,'store']);
+
+Route::put('/factions/{faction}',[FactionController::class,'update']);
+Route::patch('/factions/{faction}',[FactionController::class,'update']);
+
+Route::delete('/factions/delete/{id}',[FactionController::class,'destroy']);

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Resources\FactionCollection;
 use App\Models\Faction;
 use Illuminate\Http\Request;
+use App\Http\Resources\FactionResource;
+use App\Http\Requests\UpdateFactionRequest;
+use Illuminate\Support\Str;
 
 class FactionController extends Controller
 {
@@ -30,7 +33,10 @@ class FactionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $faction = $request->all();
+        $slug = Str::slug($faction['name']);
+        $faction['slug'] = $slug;
+        return new FactionResource(Faction::create($faction));
     }
 
     /**
@@ -52,9 +58,10 @@ class FactionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateFactionRequest $request, Faction $faction)
     {
-        //
+        $faction->update($request->all);
+        return new FactionResource($faction);
     }
 
     /**
@@ -62,6 +69,8 @@ class FactionController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $faction= Faction::find($id);
+        $faction->delete();
+        return "Faction eliminated";
     }
 }
