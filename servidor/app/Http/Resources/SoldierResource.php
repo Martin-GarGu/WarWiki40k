@@ -1,0 +1,31 @@
+<?php
+
+namespace App\Http\Resources;
+
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
+
+class SoldierResource extends JsonResource
+{
+    /**
+     * Transform the resource into an array.
+     *
+     * @return array<string, mixed>
+     */
+    public function toArray(Request $request): array
+    {
+        return [
+            'name'=>$this->name,
+            'description'=>$this->description,
+            'imagen'=>$this->imagen,
+            'squadron_id'=>$this->squadron_id,
+            'm'=>$this->m,
+            'apl'=>$this->apl,
+            'ga'=>$this->ga,
+            'df'=>$this->df,
+            'sv'=>$this->sv,
+            'w'=>$this->w,
+            'base'=>$this->base
+        ];
+    }
+}

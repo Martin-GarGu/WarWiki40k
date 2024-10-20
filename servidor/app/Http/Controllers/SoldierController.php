@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Soldier;
 use App\Http\Resources\SoldierCollection;
+use Illuminate\Support\Str;
+use App\Http\Resources\SoldierResource;
 
 class SoldierController extends Controller
 {
@@ -30,7 +32,10 @@ class SoldierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $soldier = $request->all();
+        $slug = Str::slug($soldier['name']);
+        $soldier['slug'] = $slug;
+        return Soldier::create($soldier);
     }
 
     /**
@@ -52,9 +57,10 @@ class SoldierController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Soldier $soldier)
     {
-        //
+        $soldier->update($request->all);
+        return new SoldierResource($soldier);
     }
 
     /**
@@ -62,6 +68,8 @@ class SoldierController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $soldier=Soldier::find($id);
+        $soldier->delete();
+        return "Soldier deleted";
     }
 }

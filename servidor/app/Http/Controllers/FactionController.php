@@ -71,6 +71,6 @@ class FactionController extends Controller
     {
         $faction= Faction::find($id);
         $faction->delete();
-        return "Faction eliminated";
+        return "Faction deleted";
     }
 }

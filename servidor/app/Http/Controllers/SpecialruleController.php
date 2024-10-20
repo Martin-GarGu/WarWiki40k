@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Specialrule;
+use App\Models\SpecialRule;
 use App\Http\Resources\SpecialruleCollection;
+use App\Http\Resources\SpecialRuleResource;
+use Illuminate\Support\Str;
 
 class SpecialruleController extends Controller
 {
@@ -13,7 +15,7 @@ class SpecialruleController extends Controller
      */
     public function index()
     {
-        $specialrules = Specialrule::all();
+        $specialrules = SpecialRule::all();
         return new SpecialruleCollection($specialrules);
     }
 
@@ -30,7 +32,10 @@ class SpecialruleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $specialrule = $request->all();
+        $slug = Str::slug($specialrule['name']);
+        $specialrule['slug'] = $slug;
+        return new SpecialRuleResource(SpecialRule::create($specialrule));
     }
 
     /**
@@ -52,9 +57,10 @@ class SpecialruleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, SpecialRule $specialRule)
     {
-        //
+        $specialRule->update($request->all);
+        return new SpecialRuleResource($specialRule);
     }
 
     /**
@@ -62,6 +68,8 @@ class SpecialruleController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $specialrule = SpecialRule::find($id);
+        $specialrule->delete();
+        return "SpecialRule deleted";
     }
 }

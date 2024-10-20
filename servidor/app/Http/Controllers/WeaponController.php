@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Weapon;
 use App\Http\Resources\WeaponCollection;
+use App\Http\Resources\WeaponResource;
 
 class WeaponController extends Controller
 {
@@ -30,7 +31,8 @@ class WeaponController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $weapon = $request->all();
+        return new WeaponResource(Weapon::create($weapon));
     }
 
     /**
@@ -52,9 +54,10 @@ class WeaponController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Weapon $weapon)
     {
-        //
+        $weapon->update($request->all);
+        return new WeaponResource($weapon);
     }
 
     /**
@@ -62,6 +65,8 @@ class WeaponController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $weapon=Weapon::find($id);
+        $weapon->delete();
+        return "Weapon deleted";
     }
 }

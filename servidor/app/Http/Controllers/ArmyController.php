@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Army;
 use App\Http\Resources\ArmyCollection;
+use Illuminate\Support\Str;
 
 class ArmyController extends Controller
 {
@@ -30,7 +31,10 @@ class ArmyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $army = $request->all();
+        $slug = Str::slug($army['name']);
+        $army['slug'] = $slug;
+        return Army::create($army);
     }
 
     /**
@@ -62,6 +66,8 @@ class ArmyController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $army = Army::find($id);
+        $army->delete();
+        return "Army deleted";
     }
 }
