@@ -21,7 +21,7 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $middleware->alias([
             'verified' => \App\Http\Middleware\EnsureEmailIsVerified::class,
-            // 'cors' => \Fruitcake\Cors\HandleCors::class,
+            'cors' => \Illuminate\Http\Middleware\HandleCors::class,
             'ability'=>\Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             'abilities'=>\Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
         ]);

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Army;
 use App\Http\Resources\ArmyCollection;
 use Illuminate\Support\Str;
+use App\Models\Faction;
 
 class ArmyController extends Controller
 {
@@ -17,6 +18,25 @@ class ArmyController extends Controller
         $armys = Army::all();
         return new ArmyCollection($armys);
     }
+
+    public function getByFaction(Request $request, string $id)
+    {
+        // Validar que el ID de la facción exista
+        if (!Faction::find($id)) {
+            return response()->json(['message' => 'Faction not found'], 404);
+        }
+
+        // Obtener ejércitos por ID de facción
+        $armies = Army::where('faction_id', $id)->get();
+
+        // Manejar la respuesta si no se encuentran ejércitos
+        if ($armies->isEmpty()) {
+            return response()->json(['message' => 'No armies found for this faction'], 404);
+        }
+
+        return new ArmyCollection($armies);
+    }
+
 
     /**
      * Show the form for creating a new resource.

@@ -1,35 +1,58 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter, Routes, Route} from "react-router-dom";
+import Registro from "./components/register/Register.jsx";
+import Header from "./components/header/header.jsx";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Inicio from "./components/complements/Inicio.jsx";
+import Faction from "./components/complements/Faction.jsx";
+// import Login from "./components/login/Login";
+// import Footer from "./components/footer/Footer";
+import { useEffect, useRef, useState } from "react";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const headerRef = useRef(null);
+  const footerRef = useRef(null);
+  const [routeHeight, setAlturaRuta] = useState("100vh");
+
+  useEffect(() => {
+    const headerHeight = headerRef.current ? headerRef.current.offsetHeight : 0;
+    const footerHeight = footerRef.current ? footerRef.current.offsetHeight : 0;
+    const alturaRuta = `calc(100vh - ${headerHeight}px - ${footerHeight}px)`;
+
+    setAlturaRuta(alturaRuta);
+  }, []);
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <BrowserRouter>
+        <Header ref={headerRef}></Header>
+        <div className="routes-container" style={{ minHeight: routeHeight }}>
+          <Routes>
+            <Route path="/" element={<Inicio/>} />
+            <Route
+              path="/register"
+              element={
+                <div className="d-flex justify-content-center registro">
+                  <div
+                    className="col-sm-10 col-md-8 col-lg-6 col-xl-5"
+                    style={{
+                      height: routeHeight
+                    }}
+                  >
+                    <Registro />
+                  </div>
+                </div>
+              }
+            />
+            <Route
+              path="/faction/:slug"
+              element={<Faction/>}
+            />
+          </Routes>
+          
+        </div>
+      </BrowserRouter>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

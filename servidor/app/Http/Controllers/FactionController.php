@@ -39,6 +39,12 @@ class FactionController extends Controller
         return new FactionResource(Faction::create($faction));
     }
 
+    public function getbySlug(string $slug)
+    {
+        $faction = Faction::where('slug', $slug)->first();
+        return new FactionResource($faction);
+    }
+
     /**
      * Display the specified resource.
      */

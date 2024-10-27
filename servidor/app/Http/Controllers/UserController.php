@@ -14,20 +14,29 @@ use Illuminate\Validation\Rules;
 
 class UserController extends Controller
 {
-    // public function login(Request $request)
-    // {
-    //     $credentials = $request->only('email', 'password');
+    public function login(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:6',
+        ]);
 
-    //     if (Auth::attempt($credentials)) {
-    //         $user = Auth::user();
+        $credentials = $request->only('email', 'password');
 
-    //         $token = $user->createToken('API Token')->plainTextToken;
+        if (!Auth::attempt($credentials)) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
 
-    //         return response()->json(['token' => $token]);
-    //     } else {
-    //         return response()->json(['message' => 'Unauthorized'], 401);
-    //     }
-    // }
+        $user = Auth::user();
+        // $token = $user->createToken('API Token')->plainTextToken;
+        $token = $request->user()->createToken($user->email . '_Token')->plainTextToken;
+
+        return response()->json([
+            'token' => $token,
+            'user' => $user
+        ]);
+    }
+
 
     public function registro(Request $request)
     {
