@@ -19,22 +19,22 @@ RUN echo "https://M2gargu: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@github.com" >
 RUN git config --global credential.helper store
 
 # Clonar el repositorio en un directorio temporal
-RUN git clone --no-checkout https://github.com/DAW2A-PDAW-24-25/WarWiki40k-MartinGarcia.git temp_repo
+RUN git clone --no-checkout https://github.com/DAW2A-PDAW-24-25/WarWiki40k-MartinGarcia.git /app/temp_repo
 
 # Configurar sparse checkout
-RUN cd temp_repo && git config core.sparseCheckout true
+RUN git -C /app/temp_repo config core.sparseCheckout true
 
 # Especificar la carpeta que queremos clonar
-RUN echo "servidor/" >> temp_repo/.git/info/sparse-checkout
+RUN echo "servidor/" > /app/temp_repo/.git/info/sparse-checkout
 
 # Hacer checkout del commit específico
-RUN cd temp_repo && git checkout e06b9d8ff3ddde7076d7d6e0e40d2742378deceb
+RUN git -C /app/temp_repo checkout e06b9d8ff3ddde7076d7d6e0e40d2742378deceb
 
 # Mover la carpeta 'servidor' al directorio de trabajo
-RUN mv temp_repo/servidor /var/www/html/servidor
+RUN mv /app/temp_repo/servidor /var/www/html/servidor
 
 # Limpiar el directorio temporal
-RUN rm -rf temp_repo
+RUN rm -rf /app/temp_repo
 
 # Copiar el archivo .env al directorio correcto
 COPY .env /var/www/html/servidor/.env
@@ -45,8 +45,13 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Cambiar al directorio del servidor
 WORKDIR /var/www/html/servidor
 
+# Inicializar un nuevo repositorio y configurar el remoto
+RUN git init
+RUN git remote add origin https://github.com/DAW2A-PDAW-24-25/WarWiki40k-MartinGarcia.git
+RUN git fetch origin # Obtener los datos del remoto
+RUN git branch --set-upstream-to=origin/master master
+
 # Instalar las dependencias de Composer
-RUN composer update
 RUN composer install
 
 # Comando para iniciar Apache

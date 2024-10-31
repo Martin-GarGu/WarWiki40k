@@ -1,0 +1,64 @@
+#nav {
+  justify-content: space-evenly;
+}
+
+#account {
+  justify-content: right;
+}
+
+#headerNavbar {
+  background-color: #54763c;
+}
+
+/* src/Carousel.css */
+.carousel {
+  position: relative;
+  max-width: 100%;
+  overflow: hidden;
+  text-align: center;
+}
+
+.carousel__btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 1.5rem;
+  border: none;
+  padding: 1rem;
+  cursor: pointer;
+  z-index: 1;
+  transition: background-color 0.3s;
+}
+
+.carousel__btn:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.carousel__btn--prev {
+  left: 0;
+}
+
+.carousel__btn--next {
+  right: 0;
+}
+
+.carousel__img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.3s ease-in-out;
+}
+
+.carousel__img:hover {
+  transform: scale(1.05);
+}
+
+#logo {
+  width: 60px;
+  height: 60px;
+  background-image: url("../../../assets/images/logo.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}

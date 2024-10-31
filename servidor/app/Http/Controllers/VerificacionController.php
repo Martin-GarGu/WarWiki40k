@@ -6,7 +6,7 @@ use App\Models\User;
 use http\Env\Response;
 use Illuminate\Http\Request;
 
-class VerificacionApiController extends Controller
+class VerificacionController extends Controller
 {
     public function buscarEmail(string $email){
         $emails = User::all()->pluck('email');

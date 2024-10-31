@@ -4,7 +4,7 @@ import Header from "./components/header/header.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Inicio from "./components/complements/Inicio.jsx";
 import Faction from "./components/complements/Faction.jsx";
-// import Login from "./components/login/Login";
+import Login from "./components/login/Login.jsx";
 // import Footer from "./components/footer/Footer";
 import { useEffect, useRef, useState } from "react";
 
@@ -39,6 +39,21 @@ function App() {
                     }}
                   >
                     <Registro />
+                  </div>
+                </div>
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <div className="d-flex justify-content-center login">
+                  <div
+                    className="col-sm-10 col-md-8 col-lg-6 col-xl-5"
+                    style={{
+                      height: routeHeight
+                    }}
+                  >
+                    <Login />
                   </div>
                 </div>
               }

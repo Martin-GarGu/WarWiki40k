@@ -8,7 +8,7 @@ export default function Faction() {
     const [armies, setArmies] = useState([]);
     // const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(true);
-    console.log(faction);
+    // console.log(faction);
     useEffect(() => {
         const fetchFactionData = async () => {
             if (faction) {
@@ -33,7 +33,7 @@ export default function Faction() {
         fetchFactionData();
     }, [faction]);
 
-    console.log(armies);
+    // console.log(armies);
     return (
         <div>
             <img src={faction.image} alt={faction.name} />

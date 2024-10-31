@@ -3,17 +3,17 @@ version: '3'
 services:
   app-backend:
     container_name: backend
-    image: m2gargu/backend_warwiki40k
+    image: m2gargu/back_warwiki40k:back_warwiki40k
     ports:
       - "8000:80"
     restart: always
   
   app-frontend:
     container_name: frontend
-    image: m2gargu/frontend_warwiki40k
+    image: m2gargu/front_warwiki40k:front_warwiki40k
     ports:
       - "80:80"
     depends_on:
-      - backend
+      - app-backend
     restart: always
     

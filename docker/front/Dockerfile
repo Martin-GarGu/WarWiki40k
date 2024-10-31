@@ -1,39 +1,39 @@
 FROM node:20.11.1
 
-# Establecer el directorio de trabajo
-WORKDIR /app
+# Establecer el directorio de trabajo temporal para clonar
+WORKDIR /app/temp
 
 # Instalar git
 RUN apt-get update && apt-get install -y git
 
-# Crear un archivo de credenciales de Git (Asegúrate de usar un token válido aquí)
+# Configurar Git para almacenar credenciales
+RUN git config --global credential.helper store
 RUN echo "https://M2gargu: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@github.com" > ~/.git-credentials
 
-# Configurar Git para usar el archivo de credenciales
-RUN git config --global credential.helper store
+# Inicializar el repositorio en el directorio temporal y configurar sparse checkout
+RUN git init
+RUN git remote add origin https://github.com/DAW2A-PDAW-24-25/WarWiki40k-MartinGarcia.git
+RUN git config core.sparseCheckout true
+RUN echo "cliente/" > .git/info/sparse-checkout
 
-# Clonar el repositorio especificando la ruta correcta
-RUN git clone --no-checkout https://github.com/DAW2A-PDAW-24-25/WarWiki40k-MartinGarcia.git temp_repo
-
-# Establecer sparse checkout
-RUN cd temp_repo && git config core.sparseCheckout true
-
-# Especificar la carpeta que queremos clonar
-RUN echo "cliente/" >> temp_repo/.git/info/sparse-checkout
+# Cambiar a la rama correcta (puede ser 'master' o cualquier otro nombre)
+RUN git pull origin master 
 
 # Hacer checkout del commit específico
-RUN cd temp_repo && git checkout e06b9d8ff3ddde7076d7d6e0e40d2742378deceb
+RUN git checkout e06b9d8ff3ddde7076d7d6e0e40d2742378deceb
 
-# Mover la carpeta 'cliente' al directorio de trabajo
-RUN mv temp_repo/cliente /app/cliente
+# Mover la carpeta 'cliente' al directorio final
+RUN mv cliente /app/cliente
 
-# Limpiar el directorio temporal
-RUN rm -rf temp_repo
-
-# Cambiar al directorio del cliente
+# Cambiar el directorio de trabajo al directorio final y reinicializar Git
 WORKDIR /app/cliente
+RUN rm -rf /app/temp 
 
-# Instalar dependencias de npm
+# Inicializar un nuevo repositorio para permitir futuros pulls
+RUN git init
+RUN git remote add origin https://github.com/DAW2A-PDAW-24-25/WarWiki40k-MartinGarcia.git
+
+# Instalar dependencias de npm en /app/cliente
 RUN npm install
 RUN npm install @rollup/rollup-linux-x64-gnu
 

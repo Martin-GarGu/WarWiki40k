@@ -9,7 +9,7 @@ use App\Http\Controllers\SpecialruleController;
 use App\Http\Controllers\WeaponController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\VerificacionApiController;
+use App\Http\Controllers\VerificacionController;
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
@@ -21,8 +21,8 @@ Route::post('/register',[UserController::class,'registro']);
 Route::get(('/factions/{slug}'),[FactionController::class,'getbySlug']);
 Route::get(('/armies/{id}'),[ArmyController::class,'getByFaction']);
 
-Route::get('buscarEmail/{email}', [VerificacionApiController::class, 'buscarEmail']);
-Route::get('buscarUsername/{username}', [VerificacionApiController::class, 'buscarUsername']);
+Route::get('buscarEmail/{email}', [VerificacionController::class, 'buscarEmail']);
+Route::get('buscarUsername/{username}', [VerificacionController::class, 'buscarUsername']);
 
 Route::get('/factions', [FactionController::class, 'index']);
 Route::get('/armies', [ArmyController::class, 'index']);

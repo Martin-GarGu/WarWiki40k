@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
-import '../styles/scss/Carousel.scss';
+import '../styles/scss/styles.scss';
 
 
 export default function Carrousel({ factions, handleClickFactions }) {

@@ -5,24 +5,16 @@ import { TextField } from "@mui/material";
 import { useState } from "react";
 import Alert from "react-bootstrap/Alert";
 import Typography from "@mui/material/Typography";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import SpinnerFormulario from "../SpinnerFormulario";
 import InputAdornment from "@mui/material/InputAdornment";
 
 const Registro = () => {
-//   const navigate = useNavigate();
-  const [name, setName] = useState("");
-  const [lastname, setLastname] = useState("");
+  const navigate = useNavigate();
   const [pass, setPass] = useState("");
   const [confpass, setConfpass] = useState("");
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
-  const [fecha, setFecha] = useState(new Date());
-  const [errorname, setErrorName] = useState({ color: false, text: "" });
-  const [errorlastname, setErrorLastname] = useState({
-    color: false,
-    text: ""
-  });
   const [errorpass, setErrorPass] = useState({ color: false, text: "" });
   const [errorconfpass, setErrorConfpass] = useState({
     color: false,
@@ -90,25 +82,6 @@ const Registro = () => {
 
   function validar() {
     let valid = true;
-    if (name === "") {
-      setErrorName({ color: true, text: "Completa este campo" });
-      valid = false;
-    } else if (enieRegEx.test(name)) {
-      setErrorName({ color: true, text: "El carácter 'ñ' no es válido" });
-      return false;
-    } else {
-      setErrorName({ color: false, text: "" });
-    }
-    if (lastname === "") {
-      setErrorLastname({ color: true, text: "Completa este campo" });
-      valid = false;
-    } else if (enieRegEx.test(lastname)) {
-      setErrorLastname({ color: true, text: "El carácter 'ñ' no es válido" });
-      return false;
-    } else {
-      setErrorLastname({ color: false, text: "" });
-    }
-
     if (pass === "") {
       setErrorPass({ color: true, text: "Completa este campo" });
       valid = false;
@@ -162,7 +135,7 @@ const Registro = () => {
   }
 
   function redirigir() {
-    // navigate("/login");
+    navigate("/login");
   }
 
   function handleRegistro(e) {
@@ -181,25 +154,23 @@ const Registro = () => {
   async function fetchPost() {
     setLoading(true);
     const result = await fetch(
-      `http://${import.meta.env.VITE_APP_PETICION_IP}/api/registro`,
+      `http://localhost:8000/api/register`,
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          nombre: name,
-          apellidos: lastname,
-          nombre_usuario: username,
+          username: username,
           password: pass,
           password_confirmation: confpass,
           email: email,
-          fecha_nacimiento: fecha
         })
       }
     );
 
     // const jsonData = await result.json();
+    // console.log(jsonData);
 
     if (result.ok) {
       setAlertMessage("Usuario registrado correctamente");
@@ -233,26 +204,6 @@ const Registro = () => {
         </Typography>
         <form onSubmit={handleRegistro}>
           <Grid container spacing={2}>
-            <Grid item xs={6}>
-              <TextField
-                placeholder={"Nombre *"}
-                fullWidth
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                helperText={errorname.text}
-                error={errorname.color}
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <TextField
-                placeholder={"Apellidos *"}
-                fullWidth
-                value={lastname}
-                onChange={(e) => setLastname(e.target.value)}
-                helperText={errorlastname.text}
-                error={errorlastname.color}
-              />
-            </Grid>
             <Grid item xs={12}>
               <TextField
                 placeholder={"Nombre de usuario *"}
@@ -332,26 +283,6 @@ const Registro = () => {
                 }}
                 helperText={erroremail.text}
                 error={erroremail.color}
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <TextField
-                fullWidth
-                type="date"
-                label={"Fecha nacimiento *"}
-                value={fecha}
-                onChange={(event) => {
-                  setFecha(event.target.value);
-                  let aux = new Date(event.target.value).getTime();
-                  let fechaHoy = new Date().getTime();
-                  if (aux > fechaHoy) {
-                    event.target.setCustomValidity(
-                      "La fecha debe ser anterior a hoy"
-                    );
-                  } else {
-                    event.target.setCustomValidity("");
-                  }
-                }}
               />
             </Grid>
             <Grid item xs={12}>
