@@ -1,6 +1,9 @@
 
-import { useLocation} from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from "react";
+import Card from "react-bootstrap/Card";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 export default function Faction() {
     const location = useLocation();
@@ -18,7 +21,7 @@ export default function Faction() {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
                     const jsonData = await response.json();
-                    setArmies(jsonData.data); 
+                    setArmies(jsonData.data);
                 } catch (error) {
                     console.error("Error fetching faction data:", error);
                     // navigate('/error'); // Manejar el error de manera adecuada
@@ -43,15 +46,23 @@ export default function Faction() {
             {isLoading ? (
                 <p>Loading...</p>
             ) : (
-                <ul>
+                <div className="p-1">
                     {armies.map((army) => (
-                        <li key={army.id}>
-                            <h3>{army.name}</h3>
-                            <p>{army.description}</p>
-                            <img src={army.image} alt={army.name} />
-                        </li>
+                         <Card key={army.id}>
+                         <Row className="g-2 flex-md">
+                           <Col lg={8} md={12}>
+                             <Card.Body>
+                               <Card.Title>{army.name}</Card.Title>
+                               <Card.Text>{army.description}</Card.Text>
+                             </Card.Body>
+                           </Col>
+                           <Col lg={4} md={12} className="d-flex justify-content-center">
+                             <Card.Img src={`${army.image}`} alt="image"/>
+                           </Col>
+                         </Row>
+                       </Card>
                     ))}
-                </ul>
+                </div>
             )}
         </div>
     );
