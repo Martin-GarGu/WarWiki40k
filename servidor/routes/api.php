@@ -8,6 +8,7 @@ use App\Http\Controllers\SoldierController;
 use App\Http\Controllers\SpecialruleController;
 use App\Http\Controllers\WeaponController;
 use App\Http\Controllers\GameController;
+use App\Http\Controllers\SquadronController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VerificacionController;
 
@@ -19,7 +20,9 @@ Route::post('/login',[UserController::class,'login']);
 Route::post('/register',[UserController::class,'registro']);
 
 Route::get(('/factions/{slug}'),[FactionController::class,'getbySlug']);
+Route::get(('/squadronsArmy/{slug}'),[SquadronController::class,'getByArmyId']);
 Route::get(('/armies/{id}'),[ArmyController::class,'getByFaction']);
+
 
 Route::get('buscarEmail/{email}', [VerificacionController::class, 'buscarEmail']);
 Route::get('buscarUsername/{username}', [VerificacionController::class, 'buscarUsername']);

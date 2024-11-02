@@ -7,6 +7,7 @@ use App\Models\Soldier;
 use App\Http\Resources\SoldierCollection;
 use Illuminate\Support\Str;
 use App\Http\Resources\SoldierResource;
+use App\Models\Squadron;
 
 class SoldierController extends Controller
 {
@@ -18,6 +19,29 @@ class SoldierController extends Controller
         $soldiers = Soldier::all();
         return new SoldierCollection($soldiers);
     }
+
+    public function getBySquadronSlug(string $slug)
+    {
+        // Obtener el escuadrón correspondiente al slug
+        $squadron = Squadron::where('slug', $slug)->first();
+
+        // Si no se encuentra el escuadrón, responder con error 404
+        if (!$squadron) {
+            return response()->json(['message' => 'Squadron not found'], 404);
+        }
+
+        // Obtener los soldados correspondientes al escuadrón
+        $soldiers = Soldier::where('squadron_id', $squadron->id)->get();
+
+        // Manejar la respuesta si no se encuentran soldados
+        if ($soldiers->isEmpty()) {
+            return response()->json(['message' => 'No soldiers found for this squadron'], 404);
+        }
+
+        // Retornar la colección de soldados
+        return new SoldierCollection($soldiers);
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -68,7 +92,7 @@ class SoldierController extends Controller
      */
     public function destroy(string $id)
     {
-        $soldier=Soldier::find($id);
+        $soldier = Soldier::find($id);
         $soldier->delete();
         return "Soldier deleted";
     }

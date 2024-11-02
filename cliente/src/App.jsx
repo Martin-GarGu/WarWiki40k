@@ -1,12 +1,13 @@
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 import Registro from "./components/register/Register.jsx";
-import Header from "./components/header/Header.jsx";
+// import Header from "./components/header/Header.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Inicio from "./components/complements/Inicio.jsx";
 import Faction from "./components/complements/Faction.jsx";
 import Login from "./components/login/Login.jsx";
 // import Footer from "./components/footer/Footer";
 import { useEffect, useRef, useState } from "react";
+import Army from "./components/complements/Army.jsx";
 
 function App() {
   const headerRef = useRef(null);
@@ -24,7 +25,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Header ref={headerRef}></Header>
+        {/* <Header ref={headerRef}></Header> */}
         <div className="routes-container" style={{ minHeight: routeHeight }}>
           <Routes>
             <Route path="/" element={<Inicio/>} />
@@ -61,6 +62,10 @@ function App() {
             <Route
               path="/faction/:slug"
               element={<Faction/>}
+            />
+            <Route
+              path="/faction/:slug/:slug"
+              element={<Army/>}
             />
           </Routes>
           
