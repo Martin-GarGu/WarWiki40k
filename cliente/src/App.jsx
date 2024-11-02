@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 import Registro from "./components/register/Register.jsx";
-// import Header from "./components/header/Header.jsx";
+import Header from "./components/header/Header.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Inicio from "./components/complements/Inicio.jsx";
 import Faction from "./components/complements/Faction.jsx";
@@ -25,7 +25,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        {/* <Header ref={headerRef}></Header> */}
+        <Header ref={headerRef}></Header>
         <div className="routes-container" style={{ minHeight: routeHeight }}>
           <Routes>
             <Route path="/" element={<Inicio/>} />
