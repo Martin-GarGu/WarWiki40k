@@ -1,5 +1,5 @@
 import React from "react";
-import Collapsible from "./collapsible.jsx";
+import Collapsible from "./Collapsible.jsx";
 
 const Header = React.forwardRef((props, ref) => {
   return (
