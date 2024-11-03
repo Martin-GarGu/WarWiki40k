@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Inicio from "./components/complements/Inicio.jsx";
 import Faction from "./components/complements/Faction.jsx";
 import Login from "./components/login/Login.jsx";
+import Squad from "./components/complements/Squad.jsx";
 // import Footer from "./components/footer/Footer";
 import { useEffect, useRef, useState } from "react";
 import Army from "./components/complements/Army.jsx";
@@ -60,12 +61,16 @@ function App() {
               }
             />
             <Route
-              path="/faction/:slug"
+              path="/:slug"
               element={<Faction/>}
             />
             <Route
-              path="/faction/:slug/:slug"
+              path="/:slug/:slug"
               element={<Army/>}
+            />
+            <Route
+              path="/:slug/:slug/:slug"
+              element={<Squad/>}
             />
           </Routes>
           

@@ -19,24 +19,19 @@ class SquadronController extends Controller
 
     public function getByArmyId(string $slug)
     {
-        // Obtener el ejército correspondiente al slug
         $army = Army::where('slug', $slug)->first();
 
-        // Si no se encuentra el ejército, responder con error 404
         if (!$army) {
             return response()->json(['message' => 'Army not found'], 404);
         }
 
-        // Obtener los escuadrones correspondientes al army_id
         $squads = Squadron::where('army_id', $army->id)->get();
 
-        // Manejar la respuesta si no se encuentran escuadrones
-        if ($squads->isEmpty()) {
-            return response()->json(['message' => 'No squadrons found for this army'], 404);
-        }
-
-        // Retornar la colección de escuadrones
-        return new SquadronCollection($squads);
+        // En lugar de devolver un error 404 si no hay escuadrones, devuelve un array vacío
+        return response()->json([
+            'data' => $squads,
+            'message' => $squads->isEmpty() ? 'No squadrons found for this army' : null
+        ]);
     }
 
 

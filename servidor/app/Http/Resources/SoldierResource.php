@@ -4,6 +4,8 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\WeaponResource;
+use App\Http\Resources\KeyWordsResource;
 
 class SoldierResource extends JsonResource
 {
@@ -15,17 +17,19 @@ class SoldierResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'name'=>$this->name,
-            'description'=>$this->description,
-            'imagen'=>$this->imagen,
-            'squadron_id'=>$this->squadron_id,
-            'm'=>$this->m,
-            'apl'=>$this->apl,
-            'ga'=>$this->ga,
-            'df'=>$this->df,
-            'sv'=>$this->sv,
-            'w'=>$this->w,
-            'base'=>$this->base
+            'name' => $this->name,
+            'description' => $this->description,
+            'imagen' => $this->imagen,
+            'squadron_id' => $this->squadron_id,
+            'm' => $this->m,
+            'apl' => $this->apl,
+            'ga' => $this->ga,
+            'df' => $this->df,
+            'sv' => $this->sv,
+            'w' => $this->w,
+            'base' => $this->base,
+            'weapons' => WeaponResource::collection($this->whenLoaded('weapons')),
+            'keywords' => KeyWordsResource::collection($this->whenLoaded('keywords')),
         ];
     }
 }

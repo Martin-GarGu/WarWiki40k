@@ -25,7 +25,7 @@ function Inicio() {
   }, []);
 
   const handleClickFactions = (faction) => {
-    navigate(`/faction/${faction.slug}`, { state: { faction } });
+    navigate(`/${faction.slug}`, { state: { faction } });
   };
 
   return (

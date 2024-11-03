@@ -16,30 +16,27 @@ class SoldierController extends Controller
      */
     public function index()
     {
-        $soldiers = Soldier::all();
+
+        $soldiers = Soldier::with(['weapons.specialRules', 'keywords'])->get();
+
         return new SoldierCollection($soldiers);
     }
 
     public function getBySquadronSlug(string $slug)
     {
-        // Obtener el escuadrón correspondiente al slug
         $squadron = Squadron::where('slug', $slug)->first();
 
-        // Si no se encuentra el escuadrón, responder con error 404
         if (!$squadron) {
-            return response()->json(['message' => 'Squadron not found'], 404);
+            return response()->json(['message' => 'Army not found'], 404);
         }
 
-        // Obtener los soldados correspondientes al escuadrón
-        $soldiers = Soldier::where('squadron_id', $squadron->id)->get();
+        $soldiers = Soldier::where('squadron_id', $squadron->id)->with(['weapons.specialRules', 'keywords'])->get();
 
-        // Manejar la respuesta si no se encuentran soldados
-        if ($soldiers->isEmpty()) {
-            return response()->json(['message' => 'No soldiers found for this squadron'], 404);
-        }
-
-        // Retornar la colección de soldados
-        return new SoldierCollection($soldiers);
+        // En lugar de devolver un error 404 si no hay escuadrones, devuelve un array vacío
+        return response()->json([
+            'data' => SoldierResource::collection($soldiers),
+            'message' => $soldiers->isEmpty() ? 'No squadrons found for this army' : null
+        ]);
     }
 
 

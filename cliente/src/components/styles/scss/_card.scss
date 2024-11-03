@@ -1,0 +1,47 @@
+/* Contenedor general de cada card */
+.card {
+    display: flex;
+    flex-direction: row; /* Alinea imagen y contenido en fila */
+    max-width: 500px; /* Tamaño máximo de cada card */
+    margin: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.02);
+    cursor: pointer;
+}
+
+/* Imagen de la card */
+.card-image {
+    width: 100%;
+    max-width: 150px; /* Tamaño máximo de la imagen */
+    border-radius: 8px;
+    object-fit: cover;
+    margin-right: 15px;
+}
+
+/* Contenido de la card */
+.card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Título de la card */
+.card-title {
+    font-size: 1.1em;
+    margin: 0;
+    color: #333;
+}
+
+/* Contenedor de múltiples cards */
+.p-1 {
+    display: flex;
+    flex-wrap: wrap; /* Permite que las cards se envuelvan si el espacio es limitado */
+    gap: 20px;
+    justify-content: center; /* Centra las cards en el contenedor */
+}

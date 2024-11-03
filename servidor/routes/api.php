@@ -21,6 +21,7 @@ Route::post('/register',[UserController::class,'registro']);
 
 Route::get(('/factions/{slug}'),[FactionController::class,'getbySlug']);
 Route::get(('/squadronsArmy/{slug}'),[SquadronController::class,'getByArmyId']);
+Route::get(('/soldiersSquadron/{slug}'),[SoldierController::class,'getBySquadronSlug']);
 Route::get(('/armies/{id}'),[ArmyController::class,'getByFaction']);
 
 

@@ -21,24 +21,31 @@ export default function Faction() {
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
+
                     const jsonData = await response.json();
-                    setArmies(jsonData.data);
+
+                    // Si jsonData.data no tiene elementos, setea armies como un array vacío
+                    setArmies(jsonData.data || []);
                 } catch (error) {
                     console.error("Error fetching faction data:", error);
-                    // navigate('/error'); // Manejar el error de manera adecuada
+                    // Opcional: maneja la navegación en caso de error
+                    // navigate('/error');
+                    setArmies([]); // Para asegurar que sea un array vacío en caso de error
                 } finally {
-                    setIsLoading(false);
+                    setIsLoading(false); // Asegura que isLoading se desactive
                 }
             } else {
                 console.error("No faction data provided!");
+                setIsLoading(false);
             }
         };
 
         fetchFactionData();
     }, [faction]);
 
+
     const handleArmyClick = (army) => {
-        navigate(`/faction/${faction.slug}/${army.slug}`, { state: { army } });
+        navigate(`/${faction.slug}/${army.slug}`, { state: { army } });
     }
 
     // console.log(armies);
@@ -48,30 +55,37 @@ export default function Faction() {
             <h1>{faction.name}</h1>
             <p>{faction.description}</p>
             <h2>Armies</h2>
+
             {isLoading ? (
                 <p>Loading...</p>
             ) : (
-                <div className="p-1">
-                    {armies.map((army) => (
-                        <div key={army.id} onClick={() => handleArmyClick(army)}>
-                            <Card >
-                                <Row className="g-2 flex-md">
-                                    <Col lg={4} md={12} className="d-flex justify-content-center">
-                                        <Card.Img src={`${army.image}`} alt="image" />
-                                    </Col>
-                                    <Col lg={8} md={12}>
-                                        <Card.Body>
-                                            <Card.Title>{army.name}</Card.Title>
-                                            <Card.Text>{army.description}</Card.Text>
-                                        </Card.Body>
-                                    </Col>
-
-                                </Row>
-                            </Card>
-                        </div>
-                    ))}
-                </div>
+                armies.length === 0 ? (
+                    <p>No hay datos</p>
+                ) : (
+                    <div className="p-1">
+                        {armies.map((army) => (
+                            <div key={army.id} className="card" onClick={() => handleArmyClick(army)}>
+                                <Card>
+                                    <Row className="g-2">
+                                        <Col lg={4} md={12} className="d-flex justify-content-center">
+                                            <Card.Img src={`${army.image}`} alt="image" className="card-image" />
+                                        </Col>
+                                        <Col lg={8} md={12} className="card-content">
+                                            <Card.Body>
+                                                <Card.Title className="card-title">
+                                                    <strong>{army.name}</strong>
+                                                </Card.Title>
+                                            </Card.Body>
+                                        </Col>
+                                    </Row>
+                                </Card>
+                            </div>
+                        ))}
+                    </div>
+                )
             )}
         </div>
+
+
     );
 }
