@@ -10,9 +10,9 @@ RUN docker-php-ext-install zip
 
 RUN docker-php-ext-install pdo pdo_mysql
 
-COPY ./servidor /var/www/html/
+COPY ./servidor /var/www/html/servidor
 
-COPY .env /var/www/html/servidor
+COPY .env /var/www/html/servidor/
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
