@@ -38,6 +38,21 @@ class ArmyController extends Controller
     }
 
 
+    public function getArmyBySlug(string $slug){
+        // Intentamos encontrar el ejército por el slug
+        $army = Army::where('slug', $slug)->first();
+
+        // Si no se encuentra el ejército, retornamos un error
+        if (!$army) {
+            return response()->json(['message' => 'Army not found'], 404);
+        }
+
+        // Si lo encontramos, retornamos los datos del ejército
+        return response()->json([
+            'data' => $army
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

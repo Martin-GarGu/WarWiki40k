@@ -34,6 +34,20 @@ class SquadronController extends Controller
         ]);
     }
 
+    public function getSquadBySlug(string $slug)
+    {
+        // Buscar el escuadrón por el `slug`
+        $squad = Squadron::where('slug', $slug)->first();
+
+        // Verificar si el escuadrón fue encontrado
+        if (!$squad) {
+            return response()->json(['message' => 'Squad not found'], 404);
+        }
+
+        // Retorna el escuadrón encontrado
+        return response()->json($squad);
+    }
+
 
     public function store(Request $request)
     {

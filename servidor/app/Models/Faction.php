@@ -16,10 +16,16 @@ class Faction extends Model
         'description',
         'image'
     ];
-    public function armies(){
+    public function armies()
+    {
         return $this->hasMany(Army::class);
     }
-    public function getRouteKeyName(){
+    public function favorites()
+    {
+        return $this->morphMany(Favorite::class, 'favorites');
+    }
+    public function getRouteKeyName()
+    {
         return 'slug';
     }
 }

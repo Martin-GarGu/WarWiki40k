@@ -17,13 +17,20 @@ class Squadron extends Model
         'image',
         'army_id', //Army its in
     ];
-    public function army(){
+    public function army()
+    {
         return $this->belongsTo(Army::class);
     }
-    public function soldiers(){
+    public function soldiers()
+    {
         return $this->hasMany(Soldier::class);
     }
-    public function getRouteKeyName(){
+    public function getRouteKeyName()
+    {
         return 'slug';
+    }
+    public function favorites()
+    {
+        return $this->morphMany(Favorite::class, 'favorites');
     }
 }

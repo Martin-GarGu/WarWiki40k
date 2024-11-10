@@ -9,6 +9,8 @@ import Squad from "./components/complements/Squad.jsx";
 // import Footer from "./components/footer/Footer";
 import { useEffect, useRef, useState } from "react";
 import Army from "./components/complements/Army.jsx";
+import Perfil from "./components/complements/Perfil.jsx";
+import CrudAdmin from "./components/complements/CrudAdmin.jsx";
 
 function App() {
   const headerRef = useRef(null);
@@ -65,12 +67,20 @@ function App() {
               element={<Faction/>}
             />
             <Route
-              path="/:slug/:slug"
+              path="/armies/:slug"
               element={<Army/>}
             />
             <Route
-              path="/:slug/:slug/:slug"
+              path="/squads/:slug"
               element={<Squad/>}
+            />
+            <Route
+              path="/perfil"
+              element={<Perfil/>}
+            />
+            <Route
+              path="/crud"
+              element={<CrudAdmin/>}
             />
           </Routes>
           

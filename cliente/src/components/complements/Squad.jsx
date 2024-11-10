@@ -1,66 +1,76 @@
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 export default function Squad() {
-    const location = useLocation();
-    const squad = location.state?.squad;
+    const { slug } = useParams();  // Obtener el slug directamente desde la URL
+    const [squad, setSquad] = useState(null);
     const [soldiers, setSoldiers] = useState([]);
     const [errorMessage, setErrorMessage] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchSquadData = async () => {
-            if (squad) {
-                try {
-                    const response = await fetch(`http://127.0.0.1:8000/api/soldiersSquadron/${squad.slug}`);
+            if (!slug) {
+                setErrorMessage("No se pudo obtener el slug del escuadrón.");
+                setIsLoading(false);
+                return;
+            }
 
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-
-                    const jsonData = await response.json();
-
-                    if (jsonData.data) {
-                        if (jsonData.data.length === 0) {
-                            setErrorMessage("No hay escuadrones para este ejército.");
-                        } else {
-                            setSoldiers(jsonData.data);
-                            setErrorMessage(null);
-                        }
-                    }
-                } catch (error) {
-                    console.error("Error fetching squad data:", error);
-                    setErrorMessage("Error al cargar los datos. Inténtalo nuevamente.");
-                } finally {
-                    setIsLoading(false);
+            try {
+                // Obtener los datos del escuadrón
+                const squadResponse = await fetch(`http://127.0.0.1:8000/api/squads/${slug}`);
+                if (!squadResponse.ok) {
+                    throw new Error(`Error HTTP al obtener datos del escuadrón: ${squadResponse.status}`);
                 }
-            } else {
-                console.error("No army data provided!");
+                const squadData = await squadResponse.json();
+                setSquad(squadData);  // Datos del escuadrón
+
+                // Obtener los soldados del escuadrón
+                const soldiersResponse = await fetch(`http://127.0.0.1:8000/api/soldiersSquadron/${slug}`);
+                if (!soldiersResponse.ok) {
+                    throw new Error(`Error HTTP al obtener soldados: ${soldiersResponse.status}`);
+                }
+                const soldiersData = await soldiersResponse.json();
+                setSoldiers(soldiersData.data || []);  // Datos de los soldados
+                setErrorMessage(null);
+            } catch (error) {
+                console.error("Error al cargar los datos:", error);
+                setErrorMessage("Error al cargar los datos. Inténtalo nuevamente.");
+            } finally {
                 setIsLoading(false);
             }
         };
 
         fetchSquadData();
-    }, [squad]);
+    }, [slug]);
+
+    // Mostrar un mensaje de carga mientras se obtienen los datos
+    if (isLoading) return <p>Cargando...</p>;
+
+    // Mostrar mensaje de error si ocurre algún problema
+    if (errorMessage) return <p>{errorMessage}</p>;
 
     return (
         <div className="container">
-            <img src={squad.image} alt={squad.name} />
-            <h1>{squad.name}</h1>
-            <p>{squad.description}</p>
-            <h2>Soldiers</h2>
+            {squad && (
+                <>
+                    <img src={squad.image} alt={squad.name} />
+                    <h1>{squad.name}</h1>
+                    <p>{squad.description}</p>
+                </>
+            )}
 
-            {isLoading ? (
-                <p>Loading...</p>
-            ) : errorMessage ? (
-                <p>{errorMessage}</p>
+            <h2>Soldados</h2>
+
+            {soldiers.length === 0 ? (
+                <p>No hay soldados disponibles para este escuadrón.</p>
             ) : (
                 <div>
                     {soldiers.map((soldier, index) => (
-                        <Card key={`${soldier.id}-${index}-soldier`} className="squad-card"> 
+                        <Card key={`${soldier.id}-${index}-soldier`} className="squad-card">
                             <div className="squad-card-content">
                                 <Row className="g-2">
                                     <Col lg={4} md={12} className="d-flex justify-content-center">
@@ -88,7 +98,7 @@ export default function Squad() {
                                                 </thead>
                                                 <tbody>
                                                     {soldier.weapons.map((weapon, index) => (
-                                                        <tr key={`${weapon.id}-${index}-weapon`}> 
+                                                        <tr key={`${weapon.id}-${index}-weapon`}>
                                                             <td>{weapon.name}</td>
                                                             <td>{weapon.a}</td>
                                                             <td>{weapon.bs_ws}</td>

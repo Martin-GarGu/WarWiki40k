@@ -1,23 +1,34 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-
-// import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useEffect, useState } from "react";
 
 function Collapsible() {
   const [logeado, setLogeado] = useState(false);
+  const [role, setRole] = useState("");
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    // Verificar si hay un token y usuario en localStorage
+    const token = localStorage.getItem("token");
+    const user = JSON.parse(localStorage.getItem("user")); // Cargar el objeto user completo
+    
+    if (token) {
       setLogeado(true);
     } else {
       setLogeado(false);
+    }
+
+    // Asignar rol si el usuario está definido
+    if (user && user.role) {
+      setRole(user.role);
     }
   }, []);
 
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setLogeado(false);
+    setRole("");
   };
 
   return (
@@ -39,46 +50,30 @@ function Collapsible() {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          {/* <Nav className="col-8 me-auto" id="nav">
-            <NavLink
-              to="/crearRuta"
-              className={`nav-link fs-5 ${
-                location.pathname === "/crearRuta" ? "active" : ""
-              }`}
-            >
-              Planificar Ruta
-            </NavLink>
-            <NavLink
-              to="/sitiosSecretos"
-              className={`nav-link fs-5 ${
-                location.pathname === "/sitiosSecretos" ? "active" : ""
-              }`}
-            >
-              Sitios Secretos
-            </NavLink>
-            <NavLink
-              to="/formasDescubrirlo"
-              className={`nav-link fs-5 ${
-                location.pathname === "/formasDescubrirlo" ? "active" : ""
-              }`}
-            >
-              Formas de Descubrirlo
-            </NavLink>
-          </Nav> */}
           <Nav className="col-4" id="account">
             {!logeado ? (
               <>
-                <Nav.Link href="/login" className=" fs-5">
+                <Nav.Link href="/login" className="fs-5">
                   Login
                 </Nav.Link>
-                <Nav.Link eventKey={2} href="/register" className=" fs-5">
+                <Nav.Link eventKey={2} href="/register" className="fs-5">
                   Register
                 </Nav.Link>
               </>
             ) : (
-              <Nav.Link href="/" className=" fs-5" onClick={logout}>
-                Logout
-              </Nav.Link>
+              <>
+                {role === "admin" && (
+                  <Nav.Link href="/crud" className="fs-5">
+                    Admin Panel
+                  </Nav.Link>
+                )}
+                <Nav.Link href="/perfil" className="fs-5">
+                  Perfil
+                </Nav.Link>
+                <Nav.Link href="/" className="fs-5" onClick={logout}>
+                  Logout
+                </Nav.Link>
+              </>
             )}
           </Nav>
         </Navbar.Collapse>

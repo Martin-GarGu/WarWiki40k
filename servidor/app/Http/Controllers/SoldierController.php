@@ -22,22 +22,53 @@ class SoldierController extends Controller
         return new SoldierCollection($soldiers);
     }
 
+    // public function getBySquadronSlug(string $slug)
+    // {
+    //     $squadron = Squadron::where('slug', $slug)->first();
+
+    //     if (!$squadron) {
+    //         return response()->json(['message' => 'Army not found'], 404);
+    //     }
+
+    //     $soldiers = Soldier::where('squadron_id', $squadron->id)->with(['weapons.specialRules', 'keywords'])->get();
+
+    //     // En lugar de devolver un error 404 si no hay escuadrones, devuelve un array vacío
+    //     return response()->json([
+    //         'data' => SoldierResource::collection($soldiers),
+    //         'message' => $soldiers->isEmpty() ? 'No squadrons found for this army' : null
+    //     ]);
+    // }
+
     public function getBySquadronSlug(string $slug)
     {
+        // Buscar el escuadrón por el slug
         $squadron = Squadron::where('slug', $slug)->first();
 
+        // Si no se encuentra el escuadrón, devolver 404
         if (!$squadron) {
-            return response()->json(['message' => 'Army not found'], 404);
+            return response()->json(['message' => 'Squadron not found'], 404);
         }
 
-        $soldiers = Soldier::where('squadron_id', $squadron->id)->with(['weapons.specialRules', 'keywords'])->get();
+        // Buscar los soldados asociados al escuadrón
+        $soldiers = Soldier::where('squadron_id', $squadron->id)
+            ->with(['weapons.specialRules', 'keywords'])  // Asegúrate de que las relaciones están definidas
+            ->get();
 
-        // En lugar de devolver un error 404 si no hay escuadrones, devuelve un array vacío
+        // Si no se encuentran soldados, devolver un mensaje informativo
+        if ($soldiers->isEmpty()) {
+            return response()->json([
+                'data' => [],
+                'message' => 'No soldiers found for this squadron'
+            ]);
+        }
+
+        // Devolver los soldados con los datos requeridos
         return response()->json([
             'data' => SoldierResource::collection($soldiers),
-            'message' => $soldiers->isEmpty() ? 'No squadrons found for this army' : null
+            'message' => null
         ]);
     }
+
 
 
     /**

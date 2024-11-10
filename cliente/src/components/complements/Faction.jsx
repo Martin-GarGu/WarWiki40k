@@ -1,91 +1,91 @@
-
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-
 export default function Faction() {
-    const location = useLocation();
-    const faction = location.state?.faction;
+    const { slug } = useParams();  // Usamos useParams para obtener el slug de la URL
+    const [faction, setFaction] = useState(null);  // Usamos un estado para almacenar los datos de la facción
     const [armies, setArmies] = useState([]);
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(true);
-    // console.log(faction);
+
     useEffect(() => {
+        // Primero obtenemos los datos de la facción usando el slug de la URL
         const fetchFactionData = async () => {
-            if (faction) {
-                try {
-                    const response = await fetch(`http://127.0.0.1:8000/api/armies/${faction.id}`);
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-
-                    const jsonData = await response.json();
-
-                    // Si jsonData.data no tiene elementos, setea armies como un array vacío
-                    setArmies(jsonData.data || []);
-                } catch (error) {
-                    console.error("Error fetching faction data:", error);
-                    // Opcional: maneja la navegación en caso de error
-                    // navigate('/error');
-                    setArmies([]); // Para asegurar que sea un array vacío en caso de error
-                } finally {
-                    setIsLoading(false); // Asegura que isLoading se desactive
+            try {
+                const response = await fetch(`http://127.0.0.1:8000/api/factions/${slug}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
-            } else {
-                console.error("No faction data provided!");
-                setIsLoading(false);
+                const jsonData = await response.json();
+                setFaction(jsonData.data);  // Guardamos los datos de la facción
+
+                // Después de obtener la facción, obtenemos sus ejércitos
+                const armiesResponse = await fetch(`http://127.0.0.1:8000/api/armies/${jsonData.data.id}`);
+                if (!armiesResponse.ok) {
+                    throw new Error(`HTTP error! status: ${armiesResponse.status}`);
+                }
+
+                const armiesData = await armiesResponse.json();
+                setArmies(armiesData.data || []);  // Guardamos los ejércitos de la facción
+            } catch (error) {
+                console.error("Error fetching faction data:", error);
+                setArmies([]); // En caso de error, aseguramos que armies sea un array vacío
+            } finally {
+                setIsLoading(false); // Terminamos la carga de datos
             }
         };
 
-        fetchFactionData();
-    }, [faction]);
-
+        fetchFactionData();  // Llamamos a la función cuando el componente se monta o el slug cambia
+    }, [slug]);  // Repetimos la solicitud solo si el slug cambia
 
     const handleArmyClick = (army) => {
-        navigate(`/${faction.slug}/${army.slug}`, { state: { army } });
-    }
+        navigate(`/armies/${army.slug}`);
+    };
 
-    // console.log(armies);
     return (
         <div>
-            <img src={faction.image} alt={faction.name} />
-            <h1>{faction.name}</h1>
-            <p>{faction.description}</p>
-            <h2>Armies</h2>
+            {faction ? (
+                <>
+                    <img src={faction.image} alt={faction.name} />
+                    <h1>{faction.name}</h1>
+                    <p>{faction.description}</p>
+                    <h2>Armies</h2>
 
-            {isLoading ? (
-                <p>Loading...</p>
-            ) : (
-                armies.length === 0 ? (
-                    <p>No hay datos</p>
-                ) : (
-                    <div className="p-1">
-                        {armies.map((army) => (
-                            <div key={army.id} className="card" onClick={() => handleArmyClick(army)}>
-                                <Card>
-                                    <Row className="g-2">
-                                        <Col lg={4} md={12} className="d-flex justify-content-center">
-                                            <Card.Img src={`${army.image}`} alt="image" className="card-image" />
-                                        </Col>
-                                        <Col lg={8} md={12} className="card-content">
-                                            <Card.Body>
-                                                <Card.Title className="card-title">
-                                                    <strong>{army.name}</strong>
-                                                </Card.Title>
-                                            </Card.Body>
-                                        </Col>
-                                    </Row>
-                                </Card>
+                    {isLoading ? (
+                        <p>Loading...</p>
+                    ) : (
+                        armies.length === 0 ? (
+                            <p>No armies available</p>
+                        ) : (
+                            <div className="p-1">
+                                {armies.map((army) => (
+                                    <div key={army.id} className="card" onClick={() => handleArmyClick(army)}>
+                                        <Card>
+                                            <Row className="g-2">
+                                                <Col lg={4} md={12} className="d-flex justify-content-center">
+                                                    <Card.Img src={army.image} alt="image" className="card-image" />
+                                                </Col>
+                                                <Col lg={8} md={12} className="card-content">
+                                                    <Card.Body>
+                                                        <Card.Title className="card-title">
+                                                            <strong>{army.name}</strong>
+                                                        </Card.Title>
+                                                    </Card.Body>
+                                                </Col>
+                                            </Row>
+                                        </Card>
+                                    </div>
+                                ))}
                             </div>
-                        ))}
-                    </div>
-                )
+                        )
+                    )}
+                </>
+            ) : (
+                <p>Faction not found</p>
             )}
         </div>
-
-
     );
 }

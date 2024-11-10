@@ -17,13 +17,20 @@ class Army extends Model
         'image',
         'faction_id' // Faction its in
     ];
-    public function squads(){
+    public function squads()
+    {
         return $this->hasMany(Squadron::class);
     }
-    public function faction(){
+    public function faction()
+    {
         return $this->belongsTo(Faction::class);
     }
-    public function getRouteKeyName(){
+    public function getRouteKeyName()
+    {
         return 'slug';
+    }
+    public function favorites()
+    {
+        return $this->morphMany(Favorite::class, 'favorites');
     }
 }
