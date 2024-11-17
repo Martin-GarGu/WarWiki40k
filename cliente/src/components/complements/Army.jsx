@@ -17,7 +17,7 @@ export default function Army() {
         const fetchArmyData = async () => {
             try {
                 // Petición para obtener el ejército por slug
-                const response = await fetch(`http://127.0.0.1:8000/api/armiesSlug/${slug}`);
+                const response = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/armiesSlug/${slug}`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -25,7 +25,7 @@ export default function Army() {
                 setArmy(jsonData.data); // Guardamos los datos del ejército
 
                 // Luego obtenemos los escuadrones para ese ejército
-                const squadsResponse = await fetch(`http://127.0.0.1:8000/api/squadronsArmy/${jsonData.data.slug}`);
+                const squadsResponse = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/squadronsArmy/${jsonData.data.slug}`);
                 if (!squadsResponse.ok) {
                     throw new Error(`HTTP error! status: ${squadsResponse.status}`);
                 }

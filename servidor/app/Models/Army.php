@@ -31,6 +31,7 @@ class Army extends Model
     }
     public function favorites()
     {
-        return $this->morphMany(Favorite::class, 'favorites');
+        return $this->hasMany(Favorite::class, 'favorites_id')
+                    ->where('favorites_type', 'Army');
     }
 }

@@ -15,7 +15,7 @@ export default function Faction() {
         // Primero obtenemos los datos de la facción usando el slug de la URL
         const fetchFactionData = async () => {
             try {
-                const response = await fetch(`http://127.0.0.1:8000/api/factions/${slug}`);
+                const response = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/factions/${slug}`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -23,7 +23,7 @@ export default function Faction() {
                 setFaction(jsonData.data);  // Guardamos los datos de la facción
 
                 // Después de obtener la facción, obtenemos sus ejércitos
-                const armiesResponse = await fetch(`http://127.0.0.1:8000/api/armies/${jsonData.data.id}`);
+                const armiesResponse = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/armies/${jsonData.data.id}`);
                 if (!armiesResponse.ok) {
                     throw new Error(`HTTP error! status: ${armiesResponse.status}`);
                 }

@@ -40,7 +40,7 @@ const Registro = () => {
 
   function usernameBD() {
     fetch(
-      `http://localhost:8000/api/buscarUsername/${username}`,
+      `http://${import.meta.env.VITE_APP_PETICION_IP}/api/buscarUsername/${username}`,
       { method: "get" }
     )
       .then(function (respuesta) {

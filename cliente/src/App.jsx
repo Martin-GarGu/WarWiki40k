@@ -11,6 +11,7 @@ import { useEffect, useRef, useState } from "react";
 import Army from "./components/complements/Army.jsx";
 import Perfil from "./components/complements/Perfil.jsx";
 import CrudAdmin from "./components/complements/CrudAdmin.jsx";
+import Favoritos from "./components/complements/Favoritos.jsx";
 
 function App() {
   const headerRef = useRef(null);
@@ -81,6 +82,10 @@ function App() {
             <Route
               path="/crud"
               element={<CrudAdmin/>}
+            />
+            <Route
+            path="/favorites"
+            element={<Favoritos/>}
             />
           </Routes>
           

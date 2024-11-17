@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Favorite;
 use App\Http\Resources\FavoriteCollection;
 use Illuminate\Http\Request;
+use App\Models\Faction;
+use App\Models\Army;
+use App\Models\Squadron;
 
 class FavoriteController extends Controller
 {
@@ -50,6 +53,64 @@ class FavoriteController extends Controller
             'data' => $favorite
         ], 201);
     }
+
+    /**
+     * Obtener los favoritos de un usuario específico.
+     *
+     * @param  int  $userId
+     * @return \Illuminate\Http\Response
+     */
+    public function getByUser(int $userId)
+    {
+        try {
+            // Obtener todos los favoritos del usuario
+            $favorites = Favorite::where('user_id', $userId)->get();
+
+            if ($favorites->isEmpty()) {
+                return response()->json([
+                    'data' => [],
+                    'message' => 'No tienes favoritos todavía.'
+                ], 200);
+            }
+
+            // Procesar favoritos y obtener nombres según el tipo
+            $result = $favorites->map(function ($favorite) {
+                $name = 'No disponible';
+
+                // Consultar el nombre basado en el tipo
+                if ($favorite->favorites_type === 'Faction') {
+                    $faction = Faction::find($favorite->favorites_id);
+                    $name = $faction ? $faction->name : $name;
+                } elseif ($favorite->favorites_type === 'Army') {
+                    $army = Army::find($favorite->favorites_id);
+                    $name = $army ? $army->name : $name;
+                } elseif ($favorite->favorites_type === 'Squadron') {
+                    $squadron = Squadron::find($favorite->favorites_id);
+                    $name = $squadron ? $squadron->name : $name;
+                }
+
+                return [
+                    'id' => $favorite->id,
+                    'user_id' => $favorite->user_id,
+                    'favorites_id' => $favorite->favorites_id,
+                    'favorites_type' => $favorite->favorites_type,
+                    'name' => $name,
+                ];
+            });
+
+            return response()->json([
+                'data' => $result,
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Error al obtener los favoritos',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+
+
 
     /**
      * Eliminar un favorito.

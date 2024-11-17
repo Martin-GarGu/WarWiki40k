@@ -18,8 +18,21 @@ class Favorite extends Model
     ];
 
     // Relación polimórfica que permite asociarse a múltiples modelos
-    public function favoritable()
+    // Relación con Squadron
+    public function squadron()
     {
-        return $this->morphTo();
+        return $this->belongsTo(Squadron::class, 'favorites_id')->where('favorites_type', 'Squadron');
+    }
+
+    // Relación con Army
+    public function army()
+    {
+        return $this->belongsTo(Army::class, 'favorites_id')->where('favorites_type', 'Army');
+    }
+
+    // Relación con Faction
+    public function faction()
+    {
+        return $this->belongsTo(Faction::class, 'favorites_id')->where('favorites_type', 'Faction');
     }
 }

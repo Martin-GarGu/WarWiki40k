@@ -60,7 +60,7 @@ function Login() {
 
     async function fetchPost() {
         setLoading(true);
-        const url = `http://localhost:8000/api/login`;
+        const url = `http://${import.meta.env.VITE_APP_PETICION_IP}/api/login`;
         const opciones = {
             method: "POST",
             headers: {

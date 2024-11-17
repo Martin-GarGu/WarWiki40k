@@ -11,6 +11,41 @@ export default function Squad() {
     const [errorMessage, setErrorMessage] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
+    // Función para agregar el escuadrón a favoritos
+    const createFavoriteSquad = async () => {
+        const user = JSON.parse(localStorage.getItem('user')); // Obtén el usuario desde el localStorage
+        const squadId = squad.id; // Asumiendo que tienes el ID del escuadrón
+    
+        try {
+            const response = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/create`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    user_id: user.id,      // ID del usuario
+                    favorites_id: squadId, // ID del escuadrón
+                    favorites_type: 'Squadron', // Tipo de favorito
+                }),
+            });
+    
+            const data = await response.json(); // Convierte la respuesta en JSON
+    
+            if (response.ok) {
+                // Si la respuesta fue exitosa, puedes mostrar un mensaje en la UI o en consola
+                console.log(data.message); // Esto es solo un ejemplo
+            } else {
+                // Si la respuesta no fue exitosa, puedes manejarlo aquí, pero sin usar un dialog de error
+                console.error("Error al crear el favorito:", data.message);
+            }
+        } catch (error) {
+            // Aquí ya no es necesario el `dialog` de error ni mostrarlo en la UI
+            console.error('Error al crear el favorito:', error);
+        }
+    };
+    
+    
+
     useEffect(() => {
         const fetchSquadData = async () => {
             if (!slug) {
@@ -21,7 +56,7 @@ export default function Squad() {
 
             try {
                 // Obtener los datos del escuadrón
-                const squadResponse = await fetch(`http://127.0.0.1:8000/api/squads/${slug}`);
+                const squadResponse = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/squads/${slug}`);
                 if (!squadResponse.ok) {
                     throw new Error(`Error HTTP al obtener datos del escuadrón: ${squadResponse.status}`);
                 }
@@ -29,7 +64,7 @@ export default function Squad() {
                 setSquad(squadData);  // Datos del escuadrón
 
                 // Obtener los soldados del escuadrón
-                const soldiersResponse = await fetch(`http://127.0.0.1:8000/api/soldiersSquadron/${slug}`);
+                const soldiersResponse = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/soldiersSquadron/${slug}`);
                 if (!soldiersResponse.ok) {
                     throw new Error(`Error HTTP al obtener soldados: ${soldiersResponse.status}`);
                 }
@@ -60,6 +95,11 @@ export default function Squad() {
                     <img src={squad.image} alt={squad.name} />
                     <h1>{squad.name}</h1>
                     <p>{squad.description}</p>
+
+                    {/* Botón para agregar el escuadrón a favoritos */}
+                    <button onClick={createFavoriteSquad} className="btn btn-primary">
+                        Agregar a favoritos
+                    </button>
                 </>
             )}
 

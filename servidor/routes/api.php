@@ -26,6 +26,7 @@ Route::get(('/squadronsArmy/{slug}'),[SquadronController::class,'getByArmyId']);
 Route::get(('/soldiersSquadron/{slug}'),[SoldierController::class,'getBySquadronSlug']);
 Route::get(('/armies/{id}'),[ArmyController::class,'getByFaction']);
 Route::get(('/squads/{slug}'),[SquadronController::class,'getSquadBySlug']);
+Route::get('/favorites/user/{userId}', [FavoriteController::class, 'getByUser']);
 
 
 Route::get('buscarEmail/{email}', [VerificacionController::class, 'buscarEmail']);
