@@ -1,50 +1,72 @@
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 export default function Squad() {
-    const { slug } = useParams();  // Obtener el slug directamente desde la URL
+    const { slug } = useParams(); // Obtener el slug directamente desde la URL
     const [squad, setSquad] = useState(null);
     const [soldiers, setSoldiers] = useState([]);
     const [errorMessage, setErrorMessage] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [isFavorite, setIsFavorite] = useState(false); // Nuevo estado para verificar favoritos
 
     // Función para agregar el escuadrón a favoritos
     const createFavoriteSquad = async () => {
-        const user = JSON.parse(localStorage.getItem('user')); // Obtén el usuario desde el localStorage
-        const squadId = squad.id; // Asumiendo que tienes el ID del escuadrón
-    
+        const user = JSON.parse(localStorage.getItem("user")); // Obtén el usuario desde el localStorage
+        const squadId = squad.id; // ID del escuadrón
+
         try {
             const response = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/create`, {
-                method: 'POST',
+                method: "POST",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    user_id: user.id,      // ID del usuario
+                    user_id: user.id, // ID del usuario
                     favorites_id: squadId, // ID del escuadrón
-                    favorites_type: 'Squadron', // Tipo de favorito
+                    favorites_type: "Squadron", // Tipo de favorito
                 }),
             });
-    
-            const data = await response.json(); // Convierte la respuesta en JSON
-    
+
+            const data = await response.json();
+
             if (response.ok) {
-                // Si la respuesta fue exitosa, puedes mostrar un mensaje en la UI o en consola
-                console.log(data.message); // Esto es solo un ejemplo
+                console.log("Escuadrón añadido a favoritos"); // Muestra un mensaje en la consola
+                setIsFavorite(true); // Actualiza el estado
             } else {
-                // Si la respuesta no fue exitosa, puedes manejarlo aquí, pero sin usar un dialog de error
                 console.error("Error al crear el favorito:", data.message);
             }
         } catch (error) {
-            // Aquí ya no es necesario el `dialog` de error ni mostrarlo en la UI
-            console.error('Error al crear el favorito:', error);
+            console.error("Error al crear el favorito:", error);
         }
     };
-    
-    
+
+    // Función para verificar si el escuadrón ya está en favoritos
+    const checkFavorite = async () => {
+        const user = JSON.parse(localStorage.getItem("user")); // Obtener el usuario del localStorage
+
+        try {
+            const response = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/check`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("authToken")}`, // Token de autenticación si usas autenticación basada en token
+                },
+                body: JSON.stringify({
+                    user_id: user.id, // ID del usuario
+                    favorites_id: squad.id, // ID del escuadrón
+                    favorites_type: "Squadron", // Tipo de favorito
+                }),
+            });
+
+            const data = await response.json();
+            setIsFavorite(data.isFavorite); // Actualiza el estado según la respuesta
+        } catch (error) {
+            console.error("Error al comprobar favorito:", error);
+        }
+    };
 
     useEffect(() => {
         const fetchSquadData = async () => {
@@ -61,15 +83,18 @@ export default function Squad() {
                     throw new Error(`Error HTTP al obtener datos del escuadrón: ${squadResponse.status}`);
                 }
                 const squadData = await squadResponse.json();
-                setSquad(squadData);  // Datos del escuadrón
+                setSquad(squadData); // Datos del escuadrón
 
                 // Obtener los soldados del escuadrón
-                const soldiersResponse = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/soldiersSquadron/${slug}`);
+                const soldiersResponse = await fetch(
+                    `http://${import.meta.env.VITE_APP_PETICION_IP}/api/soldiersSquadron/${slug}`
+                );
                 if (!soldiersResponse.ok) {
                     throw new Error(`Error HTTP al obtener soldados: ${soldiersResponse.status}`);
                 }
                 const soldiersData = await soldiersResponse.json();
-                setSoldiers(soldiersData.data || []);  // Datos de los soldados
+                setSoldiers(soldiersData.data || []); // Datos de los soldados
+
                 setErrorMessage(null);
             } catch (error) {
                 console.error("Error al cargar los datos:", error);
@@ -81,6 +106,13 @@ export default function Squad() {
 
         fetchSquadData();
     }, [slug]);
+
+    // Verificar si está en favoritos después de cargar el escuadrón
+    useEffect(() => {
+        if (squad) {
+            checkFavorite();
+        }
+    }, [squad]);
 
     // Mostrar un mensaje de carga mientras se obtienen los datos
     if (isLoading) return <p>Cargando...</p>;
@@ -96,10 +128,14 @@ export default function Squad() {
                     <h1>{squad.name}</h1>
                     <p>{squad.description}</p>
 
-                    {/* Botón para agregar el escuadrón a favoritos */}
-                    <button onClick={createFavoriteSquad} className="btn btn-primary">
-                        Agregar a favoritos
-                    </button>
+                    {/* Mostrar el botón o mensaje según el estado de favoritos */}
+                    {isFavorite ? (
+                        <p>Este escuadrón ya está en tus favoritos.</p>
+                    ) : (
+                        <button onClick={createFavoriteSquad} className="btn btn-primary">
+                            Agregar a favoritos
+                        </button>
+                    )}
                 </>
             )}
 
@@ -114,7 +150,11 @@ export default function Squad() {
                             <div className="squad-card-content">
                                 <Row className="g-2">
                                     <Col lg={4} md={12} className="d-flex justify-content-center">
-                                        <img src={soldier.imagen} alt={soldier.name} className="squad-card-image" />
+                                        <img
+                                            src={soldier.imagen}
+                                            alt={soldier.name}
+                                            className="squad-card-image"
+                                        />
                                     </Col>
                                     <Col lg={8} md={12}>
                                         <Card.Body>
@@ -155,7 +195,8 @@ export default function Squad() {
                                             <p className="squad-keywords">
                                                 {soldier.keywords.map((keyword, index) => (
                                                     <span key={`${soldier.id}-${keyword.name}`}>
-                                                        {keyword.name}{index < soldier.keywords.length - 1 ? ', ' : ''}
+                                                        {keyword.name}
+                                                        {index < soldier.keywords.length - 1 ? ", " : ""}
                                                     </span>
                                                 ))}
                                             </p>

@@ -54,6 +54,28 @@ class FavoriteController extends Controller
         ], 201);
     }
 
+    public function checkFavorite(Request $request)
+{
+    // Validar los parámetros requeridos
+    $validated = $request->validate([
+        'user_id' => 'required|integer|exists:users,id', // Verifica que el user_id exista
+        'favorites_id' => 'required|integer',           // ID del favorito (escuadrón)
+        'favorites_type' => 'required|string',          // Tipo de favorito
+    ]);
+
+    // Buscar en la base de datos si el favorito ya existe
+    $isFavorite = Favorite::where('user_id', $validated['user_id'])
+        ->where('favorites_id', $validated['favorites_id'])
+        ->where('favorites_type', $validated['favorites_type'])
+        ->exists();
+
+    // Responder con un JSON
+    return response()->json([
+        'isFavorite' => $isFavorite,
+    ]);
+}
+
+
     /**
      * Obtener los favoritos de un usuario específico.
      *
@@ -61,53 +83,65 @@ class FavoriteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function getByUser(int $userId)
-    {
-        try {
-            // Obtener todos los favoritos del usuario
-            $favorites = Favorite::where('user_id', $userId)->get();
+{
+    try {
+        // Obtener todos los favoritos del usuario
+        $favorites = Favorite::where('user_id', $userId)->get();
 
-            if ($favorites->isEmpty()) {
-                return response()->json([
-                    'data' => [],
-                    'message' => 'No tienes favoritos todavía.'
-                ], 200);
+        if ($favorites->isEmpty()) {
+            return response()->json([
+                'data' => [],
+                'message' => 'No tienes favoritos todavía.'
+            ], 200);
+        }
+
+        // Procesar favoritos y obtener nombres y slugs según el tipo
+        $result = $favorites->map(function ($favorite) {
+            $name = 'No disponible';
+            $slug = null;
+
+            // Consultar el nombre y el slug basado en el tipo
+            if ($favorite->favorites_type === 'Faction') {
+                $faction = Faction::find($favorite->favorites_id);
+                if ($faction) {
+                    $name = $faction->name;
+                    $slug = $faction->slug;
+                }
+            } elseif ($favorite->favorites_type === 'Army') {
+                $army = Army::find($favorite->favorites_id);
+                if ($army) {
+                    $name = $army->name;
+                    $slug = $army->slug;
+                }
+            } elseif ($favorite->favorites_type === 'Squadron') {
+                $squadron = Squadron::find($favorite->favorites_id);
+                if ($squadron) {
+                    $name = $squadron->name;
+                    $slug = $squadron->slug;
+                }
             }
 
-            // Procesar favoritos y obtener nombres según el tipo
-            $result = $favorites->map(function ($favorite) {
-                $name = 'No disponible';
+            return [
+                'id' => $favorite->id,
+                'user_id' => $favorite->user_id,
+                'favorites_id' => $favorite->favorites_id,
+                'favorites_type' => $favorite->favorites_type,
+                'name' => $name,
+                'slug' => $slug, // Incluye el slug
+            ];
+        });
 
-                // Consultar el nombre basado en el tipo
-                if ($favorite->favorites_type === 'Faction') {
-                    $faction = Faction::find($favorite->favorites_id);
-                    $name = $faction ? $faction->name : $name;
-                } elseif ($favorite->favorites_type === 'Army') {
-                    $army = Army::find($favorite->favorites_id);
-                    $name = $army ? $army->name : $name;
-                } elseif ($favorite->favorites_type === 'Squadron') {
-                    $squadron = Squadron::find($favorite->favorites_id);
-                    $name = $squadron ? $squadron->name : $name;
-                }
-
-                return [
-                    'id' => $favorite->id,
-                    'user_id' => $favorite->user_id,
-                    'favorites_id' => $favorite->favorites_id,
-                    'favorites_type' => $favorite->favorites_type,
-                    'name' => $name,
-                ];
-            });
-
-            return response()->json([
-                'data' => $result,
-            ], 200);
-        } catch (\Exception $e) {
-            return response()->json([
-                'error' => 'Error al obtener los favoritos',
-                'message' => $e->getMessage(),
-            ], 500);
-        }
+        return response()->json([
+            'data' => $result,
+        ], 200);
+    } catch (\Exception $e) {
+        return response()->json([
+            'error' => 'Error al obtener los favoritos',
+            'message' => $e->getMessage(),
+        ], 500);
     }
+}
+
 
 
 

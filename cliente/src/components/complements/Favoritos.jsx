@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Favoritos() {
     const [user, setUser] = useState(null);
     const [favorites, setFavorites] = useState([]);
     const [loading, setLoading] = useState(true); 
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const userData = localStorage.getItem("user");
@@ -34,6 +36,25 @@ export default function Favoritos() {
         }
     };
 
+    const handleNavigate = (favorite) => {
+        const { favorites_type, slug } = favorite;
+
+        // Redirigir según el tipo de favorito
+        switch (favorites_type) {
+            case "Faction":
+                navigate(`/${slug}`); // Ruta para factions
+                break;
+            case "Army":
+                navigate(`/armies/${slug}`); // Ruta para armies
+                break;
+            case "Squadron":
+                navigate(`/squads/${slug}`); // Ruta para squads
+                break;
+            default:
+                console.warn("Tipo de favorito desconocido:", favorites_type);
+        }
+    };
+
     if (loading) {
         return <div>Cargando favoritos...</div>;
     }
@@ -60,11 +81,7 @@ export default function Favoritos() {
                                 <td>{favorite.name || "No disponible"}</td>
                                 <td>{favorite.favorites_type}</td>
                                 <td>
-                                    <button
-                                        onClick={() =>
-                                            window.location.href = `/details/${favorite.favorites_type.toLowerCase()}/${favorite.favorites_id}`
-                                        }
-                                    >
+                                    <button onClick={() => handleNavigate(favorite)}>
                                         Ir
                                     </button>
                                 </td>
