@@ -141,11 +141,6 @@ class FavoriteController extends Controller
         ], 500);
     }
 }
-
-
-
-
-
     /**
      * Eliminar un favorito.
      *

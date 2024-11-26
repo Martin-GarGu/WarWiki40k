@@ -55,6 +55,20 @@ export default function Favoritos() {
         }
     };
 
+    const handleEliminate= async (id)=>{
+        try {
+            const response = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/delete/${id}`);
+            
+            if (!response.ok) {
+                throw new Error("Error al obtener los favoritos");
+            } 
+        }catch(err){
+            setError(err.message);
+        }finally{
+            setLoading(false);
+        }
+    };
+
     if (loading) {
         return <div>Cargando favoritos...</div>;
     }
@@ -83,6 +97,11 @@ export default function Favoritos() {
                                 <td>
                                     <button onClick={() => handleNavigate(favorite)}>
                                         Ir
+                                    </button>
+                                </td>
+                                <td>
+                                    <button onClick={()=>handleEliminate(favorite.id)}>
+                                        Eliminar
                                     </button>
                                 </td>
                             </tr>

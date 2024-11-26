@@ -19,6 +19,31 @@ class GameController extends Controller
         $games = Game::all();
         return new GameCollection($games);
     }
+
+    public function searchById(int $userid){
+        try{
+            $games= Game::where('user1_id',$userid)->get();
+            if ($games->isEmpty()) {
+                return response()->json([
+                    'data' => [],
+                    'message' => 'No existe el usuario.'
+                ], 200);
+            }
+
+            return response()->json([
+                'data' => $games
+            ]);
+
+        }catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Error al obtener el usuario',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+        
+
+    }
+
     public function update(Request $request, string $id)
     {
         $game = Game::find($id);

@@ -21,7 +21,7 @@ export default function Perfil() {
     };
 
     const handlePartidas = () => {
-        navigate('');
+        navigate('/games');
     };
 
     return (
