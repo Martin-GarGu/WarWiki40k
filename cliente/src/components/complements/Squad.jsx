@@ -164,16 +164,16 @@ export default function Squad() {
                                             <p>{soldier.description}</p>
                                         </Card.Body>
                                         <div className="squad-card-weapons">
-                                            <h5>Weapons:</h5>
+                                            <h5>Armas:</h5>
                                             <table className="squad-card-table">
                                                 <thead>
                                                     <tr>
-                                                        <th>Weapon Name</th>
+                                                        <th>Nombre del arma</th>
                                                         <th>A</th>
                                                         <th>BS/WS</th>
                                                         <th>D</th>
-                                                        <th>Type</th>
-                                                        <th>Special Rule</th>
+                                                        <th>Tipo de daño</th>
+                                                        <th>Reglas especiales</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>

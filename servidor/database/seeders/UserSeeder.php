@@ -17,6 +17,12 @@ class UserSeeder extends Seeder
             'email'=>'admin@admin.com',
             'password'=>'Admin123456',
             'role'=>'admin'
+        ],
+        [
+            'username'=>'prueba',
+            'email'=>'prueba@prueba.com',
+            'password'=>'Prueba123456',
+            'role'=>'user'
         ]
     ];
 

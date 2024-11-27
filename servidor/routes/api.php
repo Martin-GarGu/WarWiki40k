@@ -29,6 +29,8 @@ Route::get(('/squads/{slug}'),[SquadronController::class,'getSquadBySlug']);
 Route::get('/favorites/user/{userId}', [FavoriteController::class, 'getByUser']);
 Route::post('/favorites/check', [FavoriteController::class, 'checkFavorite']);
 Route::get(('/games/{id}'),[GameController::class,'searchById']);
+Route::get(('/userId/{id}'),[UserController::class,'searchUserbyId']);
+Route::get(('/userUsername/{username}'),[UserController::class,'searchUserbyUsername']);
 
 
 Route::get('buscarEmail/{email}', [VerificacionController::class, 'buscarEmail']);

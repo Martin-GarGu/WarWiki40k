@@ -60,4 +60,50 @@ class UserController extends Controller
 
         return response()->json($user);
     }
+
+    public function searchUserbyUsername(string $username)
+    {
+        try {
+            $user = User::where('username', $username)->get();
+
+            if ($user->isEmpty()) {
+                return response()->json([
+                    'data' => [],
+                    'message' => 'No existe ningún usuario asociado a este nombre.'
+                ], 200);
+            }
+
+            return response()->json([
+                'data' => $user
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Error al obtener el usuario',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function searchUserbyId(int $id)
+    {
+        try {
+            $user = User::where('id', $id)->get();
+
+            if ($user->isEmpty()) {
+                return response()->json([
+                    'data' => [],
+                    'message' => 'No existe ningún usuario asociado a este id.'
+                ], 200);
+            }
+
+            return response()->json([
+                'data' => $user
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Error al obtener el usuario',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
 }
