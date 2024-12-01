@@ -61,14 +61,14 @@ class UserController extends Controller
         return response()->json($user);
     }
 
-    public function searchUserbyUsername(string $username)
+    public function searchUserByUsername(string $username)
     {
         try {
-            $user = User::where('username', $username)->get();
+            $user = User::where('username', $username)->first(); // Usamos first() en lugar de get()
 
-            if ($user->isEmpty()) {
+            if (!$user) {
                 return response()->json([
-                    'data' => [],
+                    'data' => null,
                     'message' => 'No existe ningún usuario asociado a este nombre.'
                 ], 200);
             }
@@ -84,22 +84,26 @@ class UserController extends Controller
         }
     }
 
+
+
     public function searchUserbyId(int $id)
     {
         try {
-            $user = User::where('id', $id)->get();
+            // Buscar el usuario por su ID
+            $user = User::find($id);
 
-            if ($user->isEmpty()) {
+            if (!$user) {
                 return response()->json([
                     'data' => [],
-                    'message' => 'No existe ningún usuario asociado a este id.'
-                ], 200);
+                    'message' => 'No existe ningún usuario asociado a este ID.'
+                ], 404); // Código HTTP 404
             }
 
             return response()->json([
                 'data' => $user
             ]);
         } catch (\Exception $e) {
+            // Manejo de errores
             return response()->json([
                 'error' => 'Error al obtener el usuario',
                 'message' => $e->getMessage(),

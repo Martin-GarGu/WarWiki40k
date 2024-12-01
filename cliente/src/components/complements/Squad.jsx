@@ -12,9 +12,13 @@ export default function Squad() {
     const [isLoading, setIsLoading] = useState(true);
     const [isFavorite, setIsFavorite] = useState(false); // Nuevo estado para verificar favoritos
 
+    // Verificar si hay un usuario logueado
+    const user = JSON.parse(localStorage.getItem("user"));
+
     // Función para agregar el escuadrón a favoritos
     const createFavoriteSquad = async () => {
-        const user = JSON.parse(localStorage.getItem("user")); // Obtén el usuario desde el localStorage
+        if (!user) return; // Si no hay usuario logueado, no hacemos nada
+
         const squadId = squad.id; // ID del escuadrón
 
         try {
@@ -45,7 +49,7 @@ export default function Squad() {
 
     // Función para verificar si el escuadrón ya está en favoritos
     const checkFavorite = async () => {
-        const user = JSON.parse(localStorage.getItem("user")); // Obtener el usuario del localStorage
+        if (!user) return; // Si no hay usuario logueado, no comprobamos favoritos
 
         try {
             const response = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/check`, {
@@ -109,10 +113,10 @@ export default function Squad() {
 
     // Verificar si está en favoritos después de cargar el escuadrón
     useEffect(() => {
-        if (squad) {
+        if (squad && user) {
             checkFavorite();
         }
-    }, [squad]);
+    }, [squad, user]);
 
     // Mostrar un mensaje de carga mientras se obtienen los datos
     if (isLoading) return <p>Cargando...</p>;
@@ -128,14 +132,14 @@ export default function Squad() {
                     <h1>{squad.name}</h1>
                     <p>{squad.description}</p>
 
-                    {/* Mostrar el botón o mensaje según el estado de favoritos */}
-                    {isFavorite ? (
-                        <p>Este escuadrón ya está en tus favoritos.</p>
-                    ) : (
+                    {/* Solo mostrar el botón de favoritos si hay un usuario logueado */}
+                    {user && !isFavorite && (
                         <button onClick={createFavoriteSquad} className="btn btn-primary">
                             Agregar a favoritos
                         </button>
                     )}
+
+                    {isFavorite && <p>Este escuadrón ya está en tus favoritos.</p>}
                 </>
             )}
 

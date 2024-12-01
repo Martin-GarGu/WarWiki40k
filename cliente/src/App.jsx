@@ -13,6 +13,7 @@ import Perfil from "./components/complements/Perfil.jsx";
 import CrudAdmin from "./components/complements/CrudAdmin.jsx";
 import Favoritos from "./components/complements/Favoritos.jsx";
 import Games from "./components/complements/Games.jsx";
+import CreateGames from "./components/complements/CreateGames.jsx";
 
 function App() {
   const headerRef = useRef(null);
@@ -91,6 +92,10 @@ function App() {
             <Route
             path="/games"
             element={<Games/>}
+            />
+            <Route
+            path="/games/create"
+            element={<CreateGames/>}
             />
           </Routes>
           

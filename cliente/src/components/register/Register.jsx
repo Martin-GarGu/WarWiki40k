@@ -22,8 +22,7 @@ const Registro = () => {
   });
   const [erroremail, setErrorEmail] = useState({ color: false, text: "" });
   const [errorusername, setErrorUsername] = useState({
-    color: false,
-    text: ""
+    color: false, text: ""
   });
   const emailRegEx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const passRegEx = /^(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
@@ -38,46 +37,88 @@ const Registro = () => {
     showConfPassword: false
   });
 
-  function usernameBD() {
-    fetch(
-      `http://${import.meta.env.VITE_APP_PETICION_IP}/api/buscarUsername/${username}`,
-      { method: "get" }
-    )
-      .then(function (respuesta) {
-        return respuesta.json();
-      })
-      .then(function (jsonData) {
-        jsonData.repuesta === "si"
-          ? setErrorUsername({
-              color: true,
-              text: "Este nombre de usuario ya está registrado"
-            })
-          : setErrorUsername({ color: false, text: "" });
-      })
-      .catch(function (ex) {
-        console.error("Error", ex.message);
-      });
+  async function emailBD() {
+    try {
+      const response = await fetch(
+        `http://${import.meta.env.VITE_APP_PETICION_IP}/api/buscarEmail/${email}`,
+        { method: "GET" }
+      );
+
+      if (!response.ok) {
+        throw new Error("Error al verificar el correo electrónico");
+      }
+
+      const data = await response.json();
+
+      if (data.repuesta === "si") {
+        setErrorEmail({
+          color: true,
+          text: "Este email ya está registrado",
+        });
+        return false;
+      } else {
+        setErrorEmail({ color: false, text: "" });
+        return true;
+      }
+    } catch (error) {
+      console.error("Error:", error.message);
+      setErrorEmail({ color: true, text: "Error al verificar el email." });
+      return false;
+    }
   }
 
-  function emailBD() {
-    fetch(
-      `http://localhost:8000/api/buscarUsername/${email}`,
-      { method: "get" }
-    )
-      .then(function (respuesta) {
-        return respuesta.json();
-      })
-      .then(function (jsonData) {
-        jsonData.repuesta === "si"
-          ? setErrorEmail({
-              color: true,
-              text: "Este email ya está registrado"
-            })
-          : setErrorEmail({ color: false, text: "" });
-      })
-      .catch(function (ex) {
-        console.error("Error", ex.message);
-      });
+  async function fetchPost() {
+    setLoading(true);
+
+    try {
+      const response = await fetch(
+        `http://${import.meta.env.VITE_APP_PETICION_IP}/api/register`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: username,
+            password: pass,
+            password_confirmation: confpass,
+            email: email,
+          }),
+        }
+      );
+
+      const jsonData = await response.json();
+
+      if (response.ok) {
+        setAlertMessage("Usuario registrado correctamente");
+        setAlertVariant("success");
+        setShowAlert(true);
+        setTimeout(redirigir, 3000);
+      } else {
+        if (jsonData?.message?.includes("email")) {
+          setErrorEmail({
+            color: true,
+            text: "Este email ya está registrado",
+          });
+        } else if (jsonData?.message?.includes("username")) {
+          setErrorUsername({
+            color: true,
+            text: "Este nombre de usuario ya está registrado",
+          });
+        } else {
+          setAlertMessage("Error al registrar el usuario");
+          setAlertVariant("danger");
+          setShowAlert(true);
+        }
+      }
+    } catch (error) {
+      console.error("Error en registro:", error.message);
+      setAlertMessage("Hubo un problema al registrar el usuario");
+      setAlertVariant("danger");
+      setShowAlert(true);
+    } finally {
+      setLoading(false);
+    }
   }
 
   function validar() {
@@ -88,7 +129,7 @@ const Registro = () => {
     } else if (!passRegEx.test(pass)) {
       setErrorPass({
         color: true,
-        text: "La contraseña debe tener al menos 8 caracteres, con masyúsculas y minúsculas"
+        text: "La contraseña debe tener al menos 8 caracteres, con mayúsculas y minúsculas",
       });
       valid = false;
     } else if (enieRegEx.test(pass)) {
@@ -127,15 +168,9 @@ const Registro = () => {
     } else if (enieRegEx.test(username)) {
       setErrorUsername({ color: true, text: "El carácter 'ñ' no es válido" });
       return false;
-    } else {
-      usernameBD();
     }
 
     return valid;
-  }
-
-  function redirigir() {
-    navigate("/login");
   }
 
   function handleRegistro(e) {
@@ -147,39 +182,13 @@ const Registro = () => {
         setAlertMessage("Hubo un problema al registrar el usuario");
         setAlertVariant("danger");
         setShowAlert(true);
-        setLoading(false)
+        setLoading(false);
       });
     }
   }
-  async function fetchPost() {
-    setLoading(true);
-    const result = await fetch(
-      `http://localhost:8000/api/register`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          username: username,
-          password: pass,
-          password_confirmation: confpass,
-          email: email,
-        })
-      }
-    );
 
-    // const jsonData = await result.json();
-    // console.log(jsonData);
-
-    if (result.ok) {
-      setAlertMessage("Usuario registrado correctamente");
-      setAlertVariant("success");
-      setShowAlert(true);
-      setTimeout(redirigir, 3000);
-    } else {
-      setLoading(false)
-    }
+  function redirigir() {
+    navigate("/login");
   }
 
   return (
@@ -233,12 +242,12 @@ const Registro = () => {
                         onClick={() =>
                           setShowPassword({
                             ...showPassword,
-                            showPassword: !showPassword.showPassword
+                            showPassword: !showPassword.showPassword,
                           })
                         }
                       ></i>
                     </InputAdornment>
-                  )
+                  ),
                 }}
               />
             </Grid>
@@ -262,12 +271,12 @@ const Registro = () => {
                         onClick={() =>
                           setShowPassword({
                             ...showPassword,
-                            showConfPassword: !showPassword.showConfPassword
+                            showConfPassword: !showPassword.showConfPassword,
                           })
                         }
                       ></i>
                     </InputAdornment>
-                  )
+                  ),
                 }}
               />
             </Grid>
@@ -277,22 +286,20 @@ const Registro = () => {
                 fullWidth
                 type="email"
                 value={email}
-                onChange={(e) => {
-                  e.target.value = e.target.value.toLowerCase();
-                  setEmail(e.target.value);
-                }}
+                onChange={(e) => setEmail(e.target.value)}
                 helperText={erroremail.text}
                 error={erroremail.color}
               />
             </Grid>
-            <Grid item xs={12}>
-              {loading ? (
-                <SpinnerFormulario />
-              ) : (
-                <Button type="submit" variant="contained" color="success">
-                  Crear Usuario
-                </Button>
-              )}
+            <Grid item xs={4} className="d-flex align-items-center">
+              <Button
+                variant="contained"
+                type="submit"
+                fullWidth
+                disabled={loading}
+              >
+                {loading ? <SpinnerFormulario /> : "Registrar"}
+              </Button>
             </Grid>
           </Grid>
         </form>

@@ -11,9 +11,38 @@ class GameController extends Controller
 {
     public function store(Request $request)
     {
-        $keyword = $request->all();
-        return Game::create($keyword);
+        // Validación de los datos recibidos
+        $request->validate([
+            'user1_id' => 'required|exists:users,id',
+            'user2_id' => 'required|exists:users,id',
+            'winner' => 'required|in:1,2',  // Puede ser 1 o 2 para el ID del ganador
+            'points_user1' => 'required|integer',
+            'points_user2' => 'required|integer',
+        ]);
+
+        // Crear una nueva instancia del modelo Game y asignar los valores
+        $game = new Game();
+        $game->user1_id = $request->user1_id;
+        $game->user2_id = $request->user2_id;
+        $game->winner = $request->winner;
+        $game->points_user1 = $request->points_user1;
+        $game->points_user2 = $request->points_user2;
+
+        // Guardar la partida en la base de datos
+        if ($game->save()) {
+            return response()->json([
+                'message' => 'Partida creada exitosamente.',
+                'data' => $game,
+            ], 201);
+        } else {
+            return response()->json([
+                'message' => 'Error al crear la partida.',
+            ], 500);
+        }
     }
+
+
+
     public function index()
     {
         $games = Game::all();

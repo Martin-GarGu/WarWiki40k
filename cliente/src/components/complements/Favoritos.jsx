@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 export default function Favoritos() {
     const [user, setUser] = useState(null);
     const [favorites, setFavorites] = useState([]);
-    const [loading, setLoading] = useState(true); 
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ export default function Favoritos() {
     const fetchFavorites = async (userId) => {
         try {
             const response = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/user/${userId}`);
-            
+
             if (!response.ok) {
                 throw new Error("Error al obtener los favoritos");
             }
@@ -55,19 +55,29 @@ export default function Favoritos() {
         }
     };
 
-    const handleEliminate= async (id)=>{
+    const handleEliminate = async (id) => {
         try {
-            const response = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/delete/${id}`);
-            
+            // Realiza la solicitud DELETE al backend
+            const response = await fetch(
+                `http://${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/delete/${id}`,
+                {
+                    method: "DELETE",
+                }
+            );
+
             if (!response.ok) {
-                throw new Error("Error al obtener los favoritos");
-            } 
-        }catch(err){
+                throw new Error("Error al eliminar el favorito");
+            }
+
+            // Elimina el favorito localmente del estado
+            setFavorites((prevFavorites) =>
+                prevFavorites.filter((favorite) => favorite.id !== id)
+            );
+        } catch (err) {
             setError(err.message);
-        }finally{
-            setLoading(false);
         }
     };
+
 
     if (loading) {
         return <div>Cargando favoritos...</div>;
@@ -100,7 +110,7 @@ export default function Favoritos() {
                                     </button>
                                 </td>
                                 <td>
-                                    <button onClick={()=>handleEliminate(favorite.id)}>
+                                    <button onClick={() => handleEliminate(favorite.id)}>
                                         Eliminar
                                     </button>
                                 </td>

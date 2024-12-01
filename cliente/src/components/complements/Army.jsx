@@ -5,140 +5,127 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 export default function Army() {
-    const { slug } = useParams(); // Obtener el slug del ejército desde la URL
-    const [army, setArmy] = useState(null); // Estado para almacenar los datos del ejército
+    const { slug } = useParams();
+    const navigate = useNavigate();
+
+    const [army, setArmy] = useState(null);
     const [squads, setSquads] = useState([]);
     const [errorMessage, setErrorMessage] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
-    const [isFavorite, setIsFavorite] = useState(false); // Estado para comprobar favoritos
-    const navigate = useNavigate();
+    const [isFavorite, setIsFavorite] = useState(false);
 
-    // Función para agregar el ejército a favoritos
+    // Verificar si hay un usuario logueado
+    const user = JSON.parse(localStorage.getItem("user"));
+
     const addToFavorites = async () => {
-        const user = JSON.parse(localStorage.getItem("user")); // Obtener el usuario desde el localStorage
+        if (!user) return; // Si no hay usuario logueado, no hacemos nada
 
         try {
             const response = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/create`, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    user_id: user.id, // ID del usuario
-                    favorites_id: army.id, // ID del ejército
-                    favorites_type: "Army", // Tipo de favorito
+                    user_id: user.id,
+                    favorites_id: army.id,
+                    favorites_type: "Army",
                 }),
             });
 
-            const data = await response.json();
-            if (response.ok) {
-                // console.log("Ejército añadido a favoritos");
-                setIsFavorite(true); // Actualizar estado a "ya en favoritos"
-            } else {
-                console.error("Error al añadir a favoritos:", data.message);
+            if (!response.ok) {
+                const { message } = await response.json();
+                throw new Error(message || "Error al agregar a favoritos");
             }
+
+            setIsFavorite(true);
         } catch (error) {
             console.error("Error al añadir a favoritos:", error);
         }
     };
 
-    // Función para verificar si el ejército ya está en favoritos
     const checkFavorite = async () => {
-        const user = JSON.parse(localStorage.getItem("user")); // Obtener el usuario desde el localStorage
+        if (!user) return; // Si no hay usuario logueado, no comprobamos favoritos
 
         try {
             const response = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/check`, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    user_id: user.id, // ID del usuario
-                    favorites_id: army.id, // ID del ejército
-                    favorites_type: "Army", // Tipo de favorito
+                    user_id: user.id,
+                    favorites_id: army.id,
+                    favorites_type: "Army",
                 }),
             });
 
             const data = await response.json();
-            setIsFavorite(data.isFavorite); // Actualizar el estado con la respuesta del servidor
+            setIsFavorite(data.isFavorite);
         } catch (error) {
             console.error("Error al comprobar favoritos:", error);
         }
     };
 
     useEffect(() => {
-        // Función para cargar datos del ejército y sus escuadrones
         const fetchArmyData = async () => {
             try {
-                // Obtener datos del ejército
                 const response = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/armiesSlug/${slug}`);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                const jsonData = await response.json();
-                setArmy(jsonData.data); // Guardar datos del ejército
+                if (!response.ok) throw new Error(`Error al obtener el ejército: ${response.status}`);
 
-                // Obtener escuadrones del ejército
+                const armyData = await response.json();
+                setArmy(armyData.data);
+
                 const squadsResponse = await fetch(
-                    `http://${import.meta.env.VITE_APP_PETICION_IP}/api/squadronsArmy/${jsonData.data.slug}`
+                    `http://${import.meta.env.VITE_APP_PETICION_IP}/api/squadronsArmy/${armyData.data.slug}`
                 );
-                if (!squadsResponse.ok) {
-                    throw new Error(`HTTP error! status: ${squadsResponse.status}`);
-                }
+                if (!squadsResponse.ok) throw new Error(`Error al obtener los escuadrones: ${squadsResponse.status}`);
+
                 const squadsData = await squadsResponse.json();
-                setSquads(squadsData.data || []); // Guardar escuadrones
+                setSquads(squadsData.data || []);
             } catch (error) {
-                console.error("Error fetching army data:", error);
+                console.error("Error al cargar datos del ejército:", error);
                 setErrorMessage("Error al cargar los datos. Inténtalo nuevamente.");
             } finally {
-                setIsLoading(false); // Finaliza la carga
+                setIsLoading(false);
             }
         };
 
-        fetchArmyData(); // Llamar a la función al montar el componente
+        fetchArmyData();
     }, [slug]);
 
     useEffect(() => {
-        // Comprobar si el ejército está en favoritos después de cargar los datos
-        if (army) {
-            checkFavorite();
-        }
-    }, [army]);
+        if (army && user) checkFavorite();
+    }, [army, user]);
 
-    const handleSquadClick = (squad) => {
-        const newPath = `/squads/${squad.slug}`; // Crear la ruta del escuadrón con su slug
-        navigate(newPath); // Navegar a la página del escuadrón
-    };
+    const handleSquadClick = (squad) => navigate(`/squads/${squad.slug}`);
+
+    if (isLoading) return <p>Cargando...</p>;
+    if (errorMessage) return <p>{errorMessage}</p>;
+    if (!army) return <p>No se encontró el ejército solicitado.</p>;
 
     return (
-        <div>
-            {isLoading ? (
-                <p>Cargando...</p>
-            ) : errorMessage ? (
-                <p>{errorMessage}</p>
-            ) : army ? (
-                <>
-                    <img src={army.image} alt={army.name} />
-                    <h1>{army.name}</h1>
-                    <p>{army.description}</p>
+        <div className="container">
+            <div>
+                <img src={army.image} alt={army.name} className="army-image" />
+                <h1>{army.name}</h1>
+                <p>{army.description}</p>
 
-                    {/* Mostrar botón o mensaje dependiendo del estado de favoritos */}
-                    {isFavorite ? (
-                        <p>Este ejército ya está en tus favoritos.</p>
-                    ) : (
-                        <button onClick={addToFavorites} className="btn btn-primary">
-                            Agregar a favoritos
-                        </button>
-                    )}
+                {/* Solo mostrar el botón de favoritos si hay un usuario logueado */}
+                {user && !isFavorite && (
+                    <button onClick={addToFavorites} className="btn btn-primary">
+                        Agregar a favoritos
+                    </button>
+                )}
 
-                    <h2>Squads</h2>
-                    <div className="p-1">
+                {/* Mostrar mensaje si el ejército ya está en favoritos */}
+                {isFavorite && <p>Este ejército ya está en tus favoritos.</p>}
+
+                <h2>Escuadrones</h2>
+                {squads.length > 0 ? (
+                    <div className="squad-list">
                         {squads.map((squad) => (
-                            <div key={squad.id} className="card" onClick={() => handleSquadClick(squad)}>
+                            <div key={squad.id} className="card squad-card" onClick={() => handleSquadClick(squad)}>
                                 <Card>
                                     <Row className="g-2 flex-md">
                                         <Col lg={4} md={12} className="d-flex justify-content-center">
-                                            <Card.Img src={squad.image} alt="image" className="card-image" />
+                                            <Card.Img src={squad.image} alt={squad.name} className="card-image" />
                                         </Col>
                                         <Col lg={8} md={12} className="card-content">
                                             <Card.Body>
@@ -152,10 +139,10 @@ export default function Army() {
                             </div>
                         ))}
                     </div>
-                </>
-            ) : (
-                <p>Ejército no encontrado</p>
-            )}
+                ) : (
+                    <p>No se encontraron escuadrones para este ejército.</p>
+                )}
+            </div>
         </div>
     );
 }

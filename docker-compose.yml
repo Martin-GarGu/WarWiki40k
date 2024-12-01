@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: back.dockerfile
     ports:
-      - "8000:80"
+      - "8000:8000"
     restart: always
     depends_on:
       - db
@@ -17,8 +17,6 @@ services:
       DB_DATABASE: pruebas_proyecto
       DB_USERNAME: root
       DB_PASSWORD: root
-    networks:
-      - app
 
   app-frontend:
     container_name: frontend
@@ -30,12 +28,8 @@ services:
     depends_on:
       - app-backend
     restart: always
-    networks:
-      - app
 
   db:
-    networks:
-      - app
     container_name: db
     image: mysql:5.7
     ports:
@@ -46,7 +40,5 @@ services:
       MYSQL_ROOT_PASSWORD: root
     volumes:
       - dbdata:/var/lib/mysql
-networks:
-  app: 
 volumes:
   dbdata:
