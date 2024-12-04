@@ -4,7 +4,7 @@ const CrudAdmin = () => {
     const navigate = useNavigate();
 
     const handleCreate = () => {
-        navigate('/create'); // Redirige a la página de crear
+        navigate('/createMenu'); // Redirige a la página de crear
     };
 
     const handleEdit = () => {
@@ -12,7 +12,7 @@ const CrudAdmin = () => {
     };
 
     const handleDelete = () => {
-        navigate('/delete'); // Redirige a la página de eliminar
+        navigate('/eliminateMenu'); // Redirige a la página de eliminar
     };
 
     return (

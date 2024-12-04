@@ -1,0 +1,14 @@
+.footer {
+    display: flex;
+    width: 100%;
+    background-color: $verde-principal;
+    color: #fff;
+    text-align: center;
+    grid-row-start: 3;
+    grid-row-end: 4;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}

@@ -121,7 +121,7 @@ export default function Army() {
                 {squads.length > 0 ? (
                     <div className="squad-list">
                         {squads.map((squad) => (
-                            <div key={squad.id} className="card squad-card" onClick={() => handleSquadClick(squad)}>
+                            <div key={squad.id} className="card normalCard squad-card" onClick={() => handleSquadClick(squad)}>
                                 <Card>
                                     <Row className="g-2 flex-md">
                                         <Col lg={4} md={12} className="d-flex justify-content-center">

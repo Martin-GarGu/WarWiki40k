@@ -132,7 +132,7 @@ export default function Faction() {
                     ) : (
                         <div className="p-1">
                             {armies.map((army) => (
-                                <div key={army.id} className="card" onClick={() => handleArmyClick(army)}>
+                                <div key={army.id} className="card normalCard" onClick={() => handleArmyClick(army)}>
                                     <Card>
                                         <Row className="g-2">
                                             <Col lg={4} md={12} className="d-flex justify-content-center">

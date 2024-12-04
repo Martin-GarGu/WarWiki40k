@@ -1,0 +1,157 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+const CreateSoldier = () => {
+
+    const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
+    const [image, setImage] = useState("");
+    const [squadId, setSquadId] = useState(0);
+    const [m, setM] = useState("");
+    const [apl, setApl] = useState(0);
+    const [ga, setGa] = useState(0);
+    const [df, setDf] = useState(0);
+    const [sv, setSv] = useState(0);
+    const [w, setW] = useState(0);
+    const [base, setBase] = useState("");
+    const [errorMessage, setErrorMessage] = useState(""); // Mensaje de error
+    const [successMessage, setSuccessMessage] = useState(""); // Mensaje de éxito
+    const navigate = useNavigate(); // Hook para la redirección
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        setErrorMessage("");
+        setSuccessMessage("");
+
+        // Verificar que todos los campos estén completos
+        if (!name || !description || !squadId || !m || !apl || !ga || !df || !sv || !w || !base) {
+            setErrorMessage("Por favor, completa todos los campos obligatorios(*) correctamente.");
+            return;
+        }
+
+        const newEscuadron = {
+            name: name,
+            description: description,
+            image: image,
+            squadron_id: squadId,
+            m: m,
+            apl: apl,
+            ga: ga,
+            df: df,
+            sv: sv,
+            w: w,
+            base: base
+        };
+
+        try {
+            const response = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/soldiers/create`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(newEscuadron),
+            });
+
+            const responseText = await response.text();
+
+            // Manejo adecuado del formato de la respuesta
+            let data = null;
+            try {
+                data = JSON.parse(responseText);
+                console.log(data);
+            } catch (parseError) {
+                console.error("Error al parsear JSON:", parseError.message);
+                throw new Error("El servidor devolvió un formato inesperado.");
+            }
+
+            if (response.ok) {
+                setSuccessMessage("Ejercito creada exitosamente.");
+                setErrorMessage("");
+                // Esperar un poco antes de redirigir para que el usuario vea el mensaje de éxito
+                setTimeout(() => {
+                    navigate("/");
+                }, 2000); // Retraso de 2 segundos
+            } else {
+                throw new Error(data?.message || "Hubo un error al crear el soldado.");
+            }
+        } catch (error) {
+            console.error("Error en handleSubmit:", error.message);
+            setErrorMessage(error.message || "Hubo un error al procesar los datos.");
+        }
+    };
+
+
+    return (
+        <div>
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label htmlFor="name">Nombre del Soldado*</label>
+                    <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} required />
+                </div>
+                <div>
+                    <label htmlFor="description">Descripción del Soldado *</label>
+                    <input type="text" id="description" value={description} onChange={(e) => setDescription(e.target.value)} required />
+                </div>
+                <div>
+                    <label htmlFor="image">Url de la imagen del Soldado</label>
+                    <input type="text" id="image" value={image} onChange={(e) => setImage(e.target.value)} />
+                </div>
+                <div>
+                    <label htmlFor="squadId">Id del escuadron al que pertenece el Soldado *</label>
+                    <input type="number" id="squadId" value={squadId} onChange={(e) => setSquadId(e.target.value)} required />
+                </div>
+                <div>
+                    <label htmlFor="m">Momiviento del Soldado *</label>
+                    <select
+                        id="m"
+                        value={m || ""}
+                        onChange={(e) => setM(e.target.value)}
+                        required
+                    >
+                        <option disabled>
+                            Selecciona el movimiento del soldado
+                        </option>
+                        <option>2 Circles</option>
+                        <option>3 Circles</option>
+                        <option>4 Circles</option>
+                    </select>
+                </div>
+                <div>
+                    <label htmlFor="apl">Acciones por turno del Soldado *</label>
+                    <input type="number" id="apl" value={apl} onChange={(e) => setApl(e.target.value)} required />
+                </div>
+                <div>
+                    <label htmlFor="ga">Acciones de grupo del Soldado *</label>
+                    <input type="number" id="ga" value={ga} onChange={(e) => setGa(e.target.value)} required />
+                </div>
+                <div>
+                    <label htmlFor="df">Defensa del Soldado *</label>
+                    <input type="number" id="df" value={df} onChange={(e) => setDf(e.target.value)} required />
+                </div>
+                <div>
+                    <label htmlFor="sv">Tirada de salvación del Soldado *</label>
+                    <input type="text" id="sv" value={sv} onChange={(e) => setSv(e.target.value)} required />
+                </div>
+                <div>
+                    <label htmlFor="w">Heridas del Soldado *</label>
+                    <input type="number" id="w" value={w} onChange={(e) => setW(e.target.value)} required />
+                </div>
+                <div>
+                    <label htmlFor="base">Base del Soldado *</label>
+                    <input type="text" id="base" value={base} onChange={(e) => setBase(e.target.value)} required />
+                </div>
+                {/* Mostrar mensajes */}
+                {errorMessage && <div style={{ color: "red" }}>{errorMessage}</div>}
+                {successMessage && <div style={{ color: "green" }}>{successMessage}</div>}
+
+                <div>
+                    <button type="submit">Crear Soldado</button>
+                </div>
+            </form>
+        </div>
+    );
+
+};
+
+export default CreateSoldier;

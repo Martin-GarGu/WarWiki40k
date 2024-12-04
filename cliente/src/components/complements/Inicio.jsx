@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import FactionCarousel from "./Carrousel"; // Asegúrate de que este componente esté correctamente importado
+import FactionCarousel from "./Carrousel";
+
 
 function Inicio() {
   const [factions, setFactions] = useState([]);

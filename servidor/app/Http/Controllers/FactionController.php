@@ -36,6 +36,8 @@ class FactionController extends Controller
         $faction = $request->all();
         $slug = Str::slug($faction['name']);
         $faction['slug'] = $slug;
+        $imagePath = asset('storage/app/public/factionImages/' . $faction['image']);
+        $faction['image']=$imagePath;
         return new FactionResource(Faction::create($faction));
     }
 

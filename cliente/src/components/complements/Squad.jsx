@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -11,6 +12,7 @@ export default function Squad() {
     const [errorMessage, setErrorMessage] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [isFavorite, setIsFavorite] = useState(false); // Nuevo estado para verificar favoritos
+    const navigate = useNavigate();
 
     // Verificar si hay un usuario logueado
     const user = JSON.parse(localStorage.getItem("user"));
@@ -110,7 +112,6 @@ export default function Squad() {
 
         fetchSquadData();
     }, [slug]);
-
     // Verificar si está en favoritos después de cargar el escuadrón
     useEffect(() => {
         if (squad && user) {
@@ -148,68 +149,96 @@ export default function Squad() {
             {soldiers.length === 0 ? (
                 <p>No hay soldados disponibles para este escuadrón.</p>
             ) : (
-                <div>
-                    {soldiers.map((soldier, index) => (
-                        <Card key={`${soldier.id}-${index}-soldier`} className="squad-card">
-                            <div className="squad-card-content">
-                                <Row className="g-2">
-                                    <Col lg={4} md={12} className="d-flex justify-content-center">
-                                        <img
-                                            src={soldier.imagen}
-                                            alt={soldier.name}
-                                            className="squad-card-image"
-                                        />
-                                    </Col>
-                                    <Col lg={8} md={12}>
-                                        <Card.Body>
-                                            <Card.Title className="squad-card-title">
-                                                <strong>{soldier.name}</strong>
-                                            </Card.Title>
-                                            <p>{soldier.description}</p>
-                                        </Card.Body>
-                                        <div className="squad-card-weapons">
-                                            <h5>Armas:</h5>
-                                            <table className="squad-card-table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Nombre del arma</th>
-                                                        <th>A</th>
-                                                        <th>BS/WS</th>
-                                                        <th>D</th>
-                                                        <th>Tipo de daño</th>
-                                                        <th>Reglas especiales</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {soldier.weapons.map((weapon, index) => (
-                                                        <tr key={`${weapon.id}-${index}-weapon`}>
-                                                            <td>{weapon.name}</td>
-                                                            <td>{weapon.a}</td>
-                                                            <td>{weapon.bs_ws}</td>
-                                                            <td>{weapon.d}</td>
-                                                            <td>{weapon.type}</td>
-                                                            <td>{weapon.special_rule_description}</td>
-                                                        </tr>
-                                                    ))}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div className="squad-card-footer">
-                                            <strong>Keywords:</strong>
-                                            <p className="squad-keywords">
-                                                {soldier.keywords.map((keyword, index) => (
-                                                    <span key={`${soldier.id}-${keyword.name}`}>
-                                                        {keyword.name}
-                                                        {index < soldier.keywords.length - 1 ? ", " : ""}
-                                                    </span>
-                                                ))}
-                                            </p>
-                                        </div>
-                                    </Col>
-                                </Row>
+                <div className="row">
+                    <div className="justify-content-center col-12 squadsDivDatos ms-2">
+                        {soldiers.map((soldier, index) => (
+                            <div key={index} className="d-flex justify-content-center row squadsDivDatos">
+                                <Card key={`${soldier.id}-${index}-soldier`} className="squad-card card col-12" style={{ width: '100vh' }}>
+                                    <div className="squad-card-content">
+                                        <Row className="g-2">
+                                            <Col lg={4} md={12} className="d-flex justify-content-center">
+                                                <img
+                                                    src={soldier.imagen}
+                                                    alt={soldier.name}
+                                                    className="squad-card-image"
+                                                />
+                                            </Col>
+                                            <Col lg={8} md={12}>
+                                                <Card.Body>
+                                                    <Card.Title className="squad-card-title">
+                                                        <strong>{soldier.name}</strong>
+                                                    </Card.Title>
+                                                    <p>{soldier.description}</p>
+                                                    <table className="squad-card-table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Movimiento</th>
+                                                                <th>Acciones por turno</th>
+                                                                <th>Acciones de grupo</th>
+                                                                <th>Defensa</th>
+                                                                <th>Tirada de salvación</th>
+                                                                <th>Heridas</th>
+                                                                <th>Base figura</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>{soldier.m}</td>
+                                                                <td>{soldier.apl}</td>
+                                                                <td>{soldier.ga}</td>
+                                                                <td>{soldier.df}</td>
+                                                                <td>{soldier.sv}</td>
+                                                                <td>{soldier.w}</td>
+                                                                <td>{soldier.base}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </Card.Body>
+                                                <div className="squad-card-weapons">
+                                                    <h5>Armas:</h5>
+                                                    <table className="squad-card-table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Nombre del arma</th>
+                                                                <th>A</th>
+                                                                <th>BS/WS</th>
+                                                                <th>Dmg</th>
+                                                                <th>Tipo de daño</th>
+                                                                <th>Reglas especiales</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {soldier.weapons.map((weapon, index) => (
+                                                                <tr key={`${weapon.id}-${index}-weapon`}>
+                                                                    <td>{weapon.name}</td>
+                                                                    <td>{weapon.a}</td>
+                                                                    <td>{weapon.bs_ws}</td>
+                                                                    <td>{weapon.d}</td>
+                                                                    <td>{weapon.type}</td>
+                                                                    <td>{weapon.specialRules.map((specialRule, index) => (<p key={index}>{specialRule.name.endsWith("x") ? ("" + (specialRule.name.substring(0, specialRule.name.length - 1) + "" + specialRule.type)) : specialRule.name}</p>))}</td>
+                                                                </tr>
+                                                            ))}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div className="squad-card-footer">
+                                                    <strong>Keywords:</strong>
+                                                    <p className="squad-keywords">
+                                                        {soldier.keywords.map((keyword, index) => (
+                                                            <span key={`${soldier.id}-${keyword.name}`}>
+                                                                {keyword.name}
+                                                                {index < soldier.keywords.length - 1 ? ", " : ""}
+                                                            </span>
+                                                        ))}
+                                                    </p>
+                                                </div>
+                                            </Col>
+                                        </Row>
+                                    </div>
+                                </Card>
                             </div>
-                        </Card>
-                    ))}
+                        ))}
+                    </div>
                 </div>
             )}
         </div>

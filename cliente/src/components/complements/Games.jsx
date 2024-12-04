@@ -72,6 +72,26 @@ export default function Games() {
         }
     };
 
+    const handleEliminate = async (id) => {
+        try {
+            // Realiza la solicitud DELETE al backend
+            const response = await fetch(
+                `http://${import.meta.env.VITE_APP_PETICION_IP}/api/games/delete/${id}`,
+                {
+                    method: "DELETE",
+                }
+            );
+
+            if (!response.ok) {
+                throw new Error("Error al eliminar la partida");
+            }
+
+        } catch (err) {
+            setError(err.message);
+        }
+    };
+
+
     // Función para redirigir al componente CreateGame
     const handleCreateGame = () => {
         navigate("/games/create");
@@ -107,6 +127,11 @@ export default function Games() {
                                     <td>{game.winner}</td>
                                     <td>{game.points_user1}</td>
                                     <td>{game.points_user2}</td>
+                                    <td>
+                                        <button onClick={() => handleEliminate(game.id)}>
+                                            Eliminar
+                                        </button>
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
