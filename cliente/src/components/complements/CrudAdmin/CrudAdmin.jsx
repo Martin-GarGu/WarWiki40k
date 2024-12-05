@@ -8,7 +8,7 @@ const CrudAdmin = () => {
     };
 
     const handleEdit = () => {
-        navigate('/edit'); // Redirige a la página de editar
+        navigate('/updateMenu'); // Redirige a la página de editar
     };
 
     const handleDelete = () => {

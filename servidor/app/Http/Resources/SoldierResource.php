@@ -17,9 +17,10 @@ class SoldierResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' =>$this->id,
             'name' => $this->name,
             'description' => $this->description,
-            'imagen' => $this->imagen,
+            'image' => $this->image,
             'squadron_id' => $this->squadron_id,
             'm' => $this->m,
             'apl' => $this->apl,

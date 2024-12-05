@@ -17,7 +17,6 @@ class Weapon extends Model
         'bs-ws', // Ballistic Skill or Weapon Skill
         'd', // Damage
         'type', // Type of weapon
-        '!', // Critical hit rules
     ];
     public function specialRules(){
         return $this->belongsToMany(SpecialRule::class, 'weapon_specialrule', 'weapon_id', 'specialrule_id')->withPivot('type');

@@ -59,7 +59,6 @@ const CreateSoldier = () => {
             let data = null;
             try {
                 data = JSON.parse(responseText);
-                console.log(data);
             } catch (parseError) {
                 console.error("Error al parsear JSON:", parseError.message);
                 throw new Error("El servidor devolvió un formato inesperado.");

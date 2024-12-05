@@ -18,9 +18,9 @@ const CreateMenu = () => {
     const handleSoldier = () => {
         navigate('/create/soldier');
     };
-    const handleWeapon = () => {
-        navigate('/create/weapon');
-    };
+    // const handleWeapon = () => {
+    //     navigate('/create/weapon');
+    // };
 
     return (
         <div className="crud-admin">
@@ -38,9 +38,9 @@ const CreateMenu = () => {
                 <button onClick={handleSoldier} className="btn btn-primary">
                     Crear Soldado
                 </button>
-                <button onClick={handleWeapon} className="btn btn-primary">
+                {/* <button onClick={handleWeapon} className="btn btn-primary">
                     Crear Arma
-                </button>
+                </button> */}
             </div>
         </div>
     );

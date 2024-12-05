@@ -57,9 +57,24 @@ class SquadronController extends Controller
         return Squadron::create($squad);
     }
 
-    public function update(Request $request, Squadron $squad)
+    public function updateById(Request $request, $id)
     {
-        $squad->update($request->all);
+        
+        $squad = Squadron::findOrFail($id);
+
+        // Actualiza los campos de la facción con los datos proporcionados
+        $squad->name = $request->input('name', $squad->name); // Usa el valor del request o deja el actual
+        $squad->description = $request->input('description', $squad->description);
+        $squad->image = $request->input('image', $squad->image);
+        $squad->army_id = $request->input('army_id',$squad->army_id);
+
+        // Actualiza el slug basado en el nuevo nombre
+        $squad->slug = Str::slug($squad->name);
+
+        // Guarda los cambios
+        $squad->save();
+
+        // Devuelve la facción actualizada como respuesta
         return new SquadronResource($squad);
     }
 

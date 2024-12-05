@@ -109,9 +109,31 @@ class SoldierController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Soldier $soldier)
+    public function updateById(Request $request, $id)
     {
-        $soldier->update($request->all);
+
+        $soldier = Soldier::findOrFail($id);
+
+        // Actualiza los campos de la facción con los datos proporcionados
+        $soldier->name = $request->input('name', $soldier->name); // Usa el valor del request o deja el actual
+        $soldier->description = $request->input('description', $soldier->description);
+        $soldier->image = $request->input('image', $soldier->image);
+        $soldier->squadron_id = $request->input('squadron_id', $soldier->squadron_id);
+        $soldier->m = $request->input('m',$soldier->m);
+        $soldier->apl = $request->input('apl',$soldier->apl);
+        $soldier->ga = $request->input('ga',$soldier->ga);
+        $soldier->df = $request->input('df',$soldier->df);
+        $soldier->sv = $request->input('sv',$soldier->sv);
+        $soldier->w = $request->input('w',$soldier->w);
+        $soldier->base = $request->input('base',$soldier->base);
+
+        // Actualiza el slug basado en el nuevo nombre
+        $soldier->slug = Str::slug($soldier->name);
+
+        // Guarda los cambios
+        $soldier->save();
+
+        // Devuelve la facción actualizada como respuesta
         return new SoldierResource($soldier);
     }
 

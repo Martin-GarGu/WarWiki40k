@@ -26,6 +26,15 @@ import EliminateFaction from './components/complements/CrudAdmin/Eliminate/Elimi
 import EliminateArmy from './components/complements/CrudAdmin/Eliminate/EliminateArmy.jsx';
 import EliminateSquad from './components/complements/CrudAdmin/Eliminate/EliminateSquad.jsx';
 import EliminateSoldier from './components/complements/CrudAdmin/Eliminate/EliminateSoldier.jsx';
+import UpdateMenu from './components/complements/CrudAdmin/Update/UpdateMenu.jsx';
+import UpdateFaction from './components/complements/CrudAdmin/Update/UpdateFaction.jsx';
+import UpdateFactionMenu from './components/complements/CrudAdmin/Update/UpdateFactionMenu.jsx';
+import UpdateArmyMenu from './components/complements/CrudAdmin/Update/UpdateArmyMenu.jsx';
+import UpdateArmy from './components/complements/CrudAdmin/Update/UpdateArmy.jsx';
+import UpdateSquadMenu from './components/complements/CrudAdmin/Update/UpdateSquadMenu.jsx';
+import UpdateSquad from './components/complements/CrudAdmin/Update/UpdateSquad.jsx';
+import UpdateSoldierMenu from './components/complements/CrudAdmin/Update/UpdateSoldierMenu.jsx';
+import UpdateSoldier from './components/complements/CrudAdmin/Update/UpdateSoldier.jsx';
 
 function App() {
   const headerRef = useRef(null);
@@ -86,6 +95,10 @@ function App() {
               element={<EliminateMenu />}
             />
             <Route
+              path='/updateMenu'
+              element={<UpdateMenu />}
+            />
+            <Route
               path="/:slug"
               element={<Faction />}
             />
@@ -137,21 +150,53 @@ function App() {
               path='/create/weapon'
               element={<CreateWeapon />}
             />
-            <Route 
+            <Route
               path='/eliminate/faction'
               element={<EliminateFaction />}
             />
-            <Route 
+            <Route
               path='/eliminate/army'
               element={<EliminateArmy />}
             />
-            <Route 
+            <Route
               path='/eliminate/squad'
-              element={<EliminateSquad/>}
+              element={<EliminateSquad />}
             />
-            <Route 
+            <Route
               path='/eliminate/soldier'
-              element={<EliminateSoldier/>}
+              element={<EliminateSoldier />}
+            />
+            <Route
+              path='/update/factionMenu'
+              element={<UpdateFactionMenu />}
+            />
+            <Route
+              path='/update/armyMenu'
+              element={<UpdateArmyMenu />}
+            />
+            <Route
+              path='/update/squadMenu'
+              element={<UpdateSquadMenu />}
+            />
+            <Route
+              path='/update/soldierMenu'
+              element={<UpdateSoldierMenu />}
+            />
+            <Route
+              path='/update/faction'
+              element={<UpdateFaction />}
+            />
+            <Route
+              path='/update/army'
+              element={<UpdateArmy />}
+            />
+            <Route
+              path='/update/squad'
+              element={<UpdateSquad />}
+            />
+            <Route
+              path='/update/soldier'
+              element={<UpdateSoldier />}
             />
           </Routes>
 

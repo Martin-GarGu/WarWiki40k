@@ -37,7 +37,7 @@ class FactionController extends Controller
         $slug = Str::slug($faction['name']);
         $faction['slug'] = $slug;
         $imagePath = asset('storage/app/public/factionImages/' . $faction['image']);
-        $faction['image']=$imagePath;
+        $faction['image'] = $imagePath;
         return new FactionResource(Faction::create($faction));
     }
 
@@ -66,18 +66,35 @@ class FactionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateFactionRequest $request, Faction $faction)
+    public function updateById(Request $request, $id)
     {
-        $faction->update($request->all);
+        // Busca la facción por su ID
+        $faction = Faction::findOrFail($id); // Lanza un error 404 si no encuentra la facción
+
+        // Actualiza los campos de la facción con los datos proporcionados
+        $faction->name = $request->input('name', $faction->name); // Usa el valor del request o deja el actual
+        $faction->description = $request->input('description', $faction->description);
+        $faction->image = $request->input('image', $faction->image);
+
+        // Actualiza el slug basado en el nuevo nombre
+        $faction->slug = Str::slug($faction->name);
+
+        // Guarda los cambios
+        $faction->save();
+
+        // Devuelve la facción actualizada como respuesta
         return new FactionResource($faction);
     }
+
+
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        $faction= Faction::find($id);
+        $faction = Faction::find($id);
         $faction->delete();
         return "Faction deleted";
     }

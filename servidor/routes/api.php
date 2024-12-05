@@ -54,21 +54,21 @@ Route::post('/games/create',[GameController::class,'store']);
 Route::post('/favorites/create',[FavoriteController::class,'store']);
 Route::post("/squads/create", [SquadronController::class, 'store']);
 
-Route::put('/factions/{faction}',[FactionController::class,'update']);
-Route::put('/armies/{army}',[ArmyController::class,'update']);
-Route::put('/soldiers/{soldier}',[SoldierController::class,'update']);
+Route::put('/factions/{id}',[FactionController::class,'updateById']);
+Route::put('/armies/{id}',[ArmyController::class,'updateById']);
+Route::put('/soldiers/{id}',[SoldierController::class,'updateById']);
 Route::put('/weapons/{weapon}',[WeaponController::class,'update']);
 Route::put('/specialrules/{specialrule}',[SpecialruleController::class,'update']);
 Route::put('/games/{game}',[GameController::class,'update']);
-Route::put("/squads/{squad}", [SquadronController::class, 'update']);
+Route::put("/squads/{id}", [SquadronController::class, 'updateById']);
 
-Route::patch('/factions/{faction}',[FactionController::class,'update']);
-Route::patch('/armies/{army}',[ArmyController::class,'update']);
-Route::patch('/soldiers/{soldier}',[SoldierController::class,'update']);
+Route::patch('/factions/{id}',[FactionController::class,'updateById']);
+Route::patch('/armies/{id}',[ArmyController::class,'updateById']);
+Route::patch('/soldiers/{id}',[SoldierController::class,'updateById']);
 Route::patch('/weapons/{weapon}',[WeaponController::class,'update']);
 Route::patch('/specialrules/{specialrule}',[SpecialruleController::class,'update']);
 Route::patch('/games/{game}',[GameController::class,'update']);
-Route::patch("/squads/{squad}", [SquadronController::class, 'update']);
+Route::patch("/squads/{id}", [SquadronController::class, 'updateById']);
 
 Route::delete('/factions/delete/{id}',[FactionController::class,'destroy']);
 Route::delete('/armies/delete/{id}',[ArmyController::class,'destroy']);

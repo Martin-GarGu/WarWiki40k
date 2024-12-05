@@ -18,9 +18,9 @@ const EliminateMenu = () => {
     const handleSoldier = () => {
         navigate('/eliminate/soldier');
     };
-    const handleWeapon = () => {
-        navigate('/eliminate/weapon');
-    };
+    // const handleWeapon = () => {
+    //     navigate('/eliminate/weapon');
+    // };
 
     return (
         <div className="crud-admin">
@@ -38,9 +38,9 @@ const EliminateMenu = () => {
                 <button onClick={handleSoldier} className="btn btn-danger">
                     Eliminar Soldado
                 </button>
-                <button onClick={handleWeapon} className="btn btn-danger">
+                {/* <button onClick={handleWeapon} className="btn btn-danger">
                     Eliminar Arma
-                </button>
+                </button> */}
             </div>
         </div>
     );

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Army;
 use App\Http\Resources\ArmyCollection;
+use App\Http\Resources\ArmyResource;
 use Illuminate\Support\Str;
 use App\Models\Faction;
 
@@ -91,9 +92,25 @@ class ArmyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function updateById(Request $request, $id)
     {
-        //
+        
+        $army = Army::findOrFail($id);
+
+        // Actualiza los campos de la facción con los datos proporcionados
+        $army->name = $request->input('name', $army->name); // Usa el valor del request o deja el actual
+        $army->description = $request->input('description', $army->description);
+        $army->image = $request->input('image', $army->image);
+        $army->faction_id = $request->input('faction_id',$army->faction_id);
+
+        // Actualiza el slug basado en el nuevo nombre
+        $army->slug = Str::slug($army->name);
+
+        // Guarda los cambios
+        $army->save();
+
+        // Devuelve la facción actualizada como respuesta
+        return new ArmyResource($army);
     }
 
     /**
