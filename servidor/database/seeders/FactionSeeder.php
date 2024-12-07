@@ -15,13 +15,6 @@ class FactionSeeder extends Seeder
 
     private $factions = [
         [
-            'name' => 'Marines Espaciales',
-            // 'slug' => 'marines-espaciales',
-            'image' => 'marinesEspacialesLogo.png',
-            // https://warhammer40000.com/wp-content/uploads/2023/07/sPTkCEkJZwCBxpWw.png
-            'description' => 'Los Marines Espaciales o Astartes son los mejores guerreros del Imperio, dedicados por completo a defender al Emperador y al Imperio de la Humanidad.'
-        ],
-        [
             'name' => 'Ejercitos del Imperium',
             // 'slug' => 'imperium',
             'image' => 'imperiumLogo.png',
@@ -36,9 +29,16 @@ class FactionSeeder extends Seeder
             'description' => 'El Caos es casi un sinónimo de la Disformidad, pues son inseparables: el Caos es el océano sin límites de energía espiritual y emocional que define a la Disformidad. Es una enorme y terrible fuerza de cambio y poder, y es corruptora tanto para el cuerpo como para el espíritu.'
         ],
         [
+            'name' => 'Aeldari',
+            // 'slug' => 'aeldari',
+            'image' => 'aeldariLogo.png',
+            // https://static.wikia.nocookie.net/warhammer40k/images/f/f7/Eldar.png/revision/latest/scale-to-width-down/250?cb=20100601083426
+            'description' => 'Los Aeldari, o los Eldar como fueron conocidos durante mucho tiempo por los forasteros, son una especie antigua y altamente avanzada de xenos humanoides cuyo vasto imperio alguna vez se extendió a lo largo y ancho de la galaxia conocida.'
+        ],
+        [
             'name' => 'La amenaza de los xenos',
             // 'slug' => 'xenos',
-            'image' => 'xenosLogo.webp',
+            'image' => 'xenosLogo.png',
             // https://64.media.tumblr.com/c59a06dec388f37e21f1dc1b2b21b1cc/tumblr_plwjq5Kerf1tdqkuno1_1280.pnj
             'description' => 'Toda especie inteligente, ya sea aliada o enemiga, no humana, alienígena o extraplanetaria.',
             
@@ -51,7 +51,7 @@ class FactionSeeder extends Seeder
             $f = new Faction();
             $f->name = $faction['name'];
             $f->slug = Str::slug($faction['name']);
-            $f->image = $faction['image'];
+            $f->image = 'images/factionsImage/' . $faction['image'];
             $f->description = $faction['description'];
             $f->save();
         }

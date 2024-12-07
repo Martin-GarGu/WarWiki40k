@@ -40,7 +40,7 @@ Route::get('/factions', [FactionController::class, 'index']);
 Route::get('/armies', [ArmyController::class, 'index']);
 Route::get('/soldiers', [SoldierController::class, 'index']);
 Route::get('/weapons', [WeaponController::class, 'index']);
-Route::get('/specialrules', [SpecialruleController::class, 'index']);
+Route::get('/specialRules', [SpecialruleController::class, 'index']);
 Route::get('/games', [GameController::class, 'index']);
 Route::get('/favorites',[FavoriteController::class,'index']);
 Route::get("/squads", [SquadronController::class, 'index']);

@@ -9,15 +9,19 @@ export default function UpdateSoldierMenu() {
 
     useEffect(() => {
         const userData = localStorage.getItem("user");
-        if (userData) {
-            const parsedUser = JSON.parse(userData);
-            fetchArmies();
+        if (!userData) {
+            navigate("/login"); // Si no hay usuario en localStorage, redirige al login
         } else {
-            setLoading(false);
+            const parsedUser = JSON.parse(userData);
+            if (parsedUser.role !== 'admin') {
+                navigate("/access-denied"); // Si el usuario no es admin, redirige a acceso denegado
+            } else {
+                fetchSoldiers(); // Si el usuario es admin, se obtienen los soldados
+            }
         }
-    }, []);
+    }, [navigate]);
 
-    const fetchArmies = async () => {
+    const fetchSoldiers = async () => {
         let isMounted = true; // Para verificar si el componente sigue montado
         try {
             const respuesta = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/soldiers`, {

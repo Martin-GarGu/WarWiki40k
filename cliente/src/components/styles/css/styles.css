@@ -60,12 +60,15 @@
 .card {
   display: flex;
   flex-direction: row; /* Alinea imagen y contenido en fila */
-  max-width: 500px; /* Tamaño máximo de cada card */
   margin: 10px;
   padding: 10px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s;
+}
+
+.normalCard {
+  max-width: 500px;
 }
 
 .card:hover {
@@ -106,10 +109,13 @@
 }
 
 .container {
-  max-width: 1200px; /* Tamaño máximo para centrar el contenedor */
   margin: 0 auto; /* Centrar el contenedor horizontalmente */
   padding: 1rem; /* Espacio interior para el contenedor */
   justify-content: center;
+}
+
+.squadsDivDatos {
+  width: 100%;
 }
 
 .squad-card {
@@ -119,6 +125,7 @@
   background-color: #fff; /* Fondo blanco para la tarjeta */
   overflow: hidden; /* Evitar que los elementos internos sobresalgan */
   box-shadow: none; /* Eliminar sombras de Bootstrap */
+  width: 100vh;
 }
 
 .custom-card {
@@ -131,6 +138,8 @@
   padding: 1rem; /* Espacio interior para el contenido de la tarjeta */
   background-color: #f9f9f9; /* Fondo gris claro para el contenido */
   border-radius: 8px; /* Bordes redondeados para el contenido (opcional) */
+  width: -moz-max-content;
+  width: max-content;
 }
 
 .squad-card-image {
@@ -170,10 +179,36 @@
   margin: 0; /* Sin márgenes para las palabras clave */
 }
 
+.footer {
+  display: flex;
+  width: 100%;
+  background-color: #54763c;
+  color: #fff;
+  text-align: center;
+  grid-row-start: 3;
+  grid-row-end: 4;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 #logo {
   width: 60px;
   height: 60px;
   background-image: url("../../../assets/images/logo.png");
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+body {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.root {
+  width: 100%;
 }

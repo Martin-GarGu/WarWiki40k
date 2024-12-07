@@ -15,7 +15,7 @@ const Rules = () => {
                 <h4>Operativos y Kill Teams</h4>
                 <p>
                     Las miniaturas Citadel que el jugador use son conocidas como agentes.
-                    Tus agentes son conocidos como agentes 'amigables' y los de tu oponente son conocidos como agentes 'enemigos'
+                    Tus agentes son conocidos como agentes 'amigables' y los de tu oponente son conocidos como agentes 'enemigos'.
                 </p>
                 <p>
                     Cuando selecciones tus agentes de batalla, no estas seleccionando individuos, más bien un escuadron especialista que trabajaran juntos.
@@ -203,7 +203,151 @@ const Rules = () => {
                 <p>Usa esta estratagema tactica despues de tirar un dado para defensa o ataque. Puedes tirar de nuevo ese dado</p>
                 <hr />
                 <h6>Usar estratagemas estrategicas</h6>
-                
+                <p>
+                    Comenzando con el jugador que tiene la iniciativa, cada jugador alterna entre usar una Estratagema Estratégica o elegir pasar.
+                    Los jugadores repiten este proceso hasta que ambos hayan pasado de manera consecutiva.
+                </p>
+                <p>
+                    Si un jugador declara que va a usar una Estratagema Estratégica, primero debe pagar su costo de CP eliminando los CP especificados de su reserva.
+                    Si un jugador no tiene suficientes CP para pagar el costo, no puede usar esa Estratagema Estratégica.
+                    Cuando se usa una Estratagema Estratégica, se resuelven sus efectos de inmediato antes de alternar al otro jugador.
+                    Cada jugador no puede usar la misma Estratagema Estratégica más de una vez durante cada fase de Estrategia.
+                </p>
+                <h6>Revelación de Objetivo</h6>
+                <p>
+                    Comenzando con el jugador que tiene la iniciativa,
+                    los jugadores alternan revelando Operaciones Tácticas que pueden revelarse en el paso de Revelación de Objetivo de este Punto de Giro, o eligen pasar.
+                    Cabe señalar que los jugadores no están obligados a revelar una Operación Táctica, pero algunas deben revelarse en ciertos Puntos de Giro para poder lograrse.
+                    Los jugadores repiten este proceso hasta que ambos hayan pasado de manera consecutiva.
+                </p>
+            </div>
+            <div>
+                <h6>Realizar Acciones</h6>
+                <p>
+                    El jugador que tiene la iniciativa activa primero. Selecciona una de sus miniaturas amigas listas y la activa.
+                    Una vez que haya completado la activación de esa miniatura, su oponente selecciona una de sus miniaturas listas y hace lo mismo.
+                    Los jugadores repiten este proceso hasta que todas las miniaturas en la zona de combate hayan sido activadas.
+                </p>
+                <hr />
+                <p>
+                    Si una miniatura tiene una Activación en Grupo de más de 1, debe ser activada en grupo, en lugar de individualmente.
+                    En tales casos, el jugador selecciona una miniatura amiga lista y la activa. Cuando finalice la activación de esa miniatura,
+                    selecciona otra miniatura amiga lista del mismo tipo para ser activada.
+                    Repiten este proceso hasta que hayan activado el número de miniaturas especificado por la característica de Activación en Grupo de esa miniatura,
+                    o no haya más miniaturas amigas de ese tipo para activar. Luego, su oponente activa una de sus miniaturas como de costumbre.
+                </p>
+                <hr />
+                <p>
+                    Cada vez que un jugador activa una de sus miniaturas listas, debe determinar si tiene la orden de Enfrentarse o de Ocultar.
+                    Si es el primer Punto de Giro, tiene la orden que se le dio cuando se desplegó antes de la batalla.
+                    En todos los Puntos de Giro posteriores, puede elegir qué orden darle.
+                </p>
+                <hr />
+                <p>
+                    En las circunstancias adecuadas, una miniatura con la orden de Ocultar
+                    no es un objetivo válido para los ataques a distancia de una miniatura enemiga (como se explica aquí),
+                    pero no puede realizar diversas acciones. Una miniatura con la orden de Enfrentarse puede realizar más acciones,
+                    pero es más vulnerable a los ataques a distancia de las miniaturas enemigas. Cada vez que le des una orden a una miniatura,
+                    coloca el token de orden relevante junto a ella.
+                </p>
+                <hr />
+                <p>
+                    La miniatura luego genera una cantidad de puntos de acción igual a su Límite de Puntos de Acción (LPA),
+                    que se utilizan para realizar acciones. Una vez que todos sus puntos de acción hayan sido usados y no tenga otras acciones que realizar,
+                    su activación termina y ya no está lista.
+                </p>
+                <hr />
+                <p>Cuando la activación de una miniatura termina, voltea su token de orden al lado activado para señalar que ya no está lista.</p>
+                <hr />
+                <p>
+                    Cada acción tiene un costo asociado en puntos de acción, por ejemplo, 1PA.
+                    Cada vez que un jugador desee realizar una acción con una miniatura,
+                    debe restar los puntos de acción especificados del número de puntos de acción que esa miniatura generó durante esa activación.
+                    Si no tiene suficientes puntos de acción para realizar esa acción, debe seleccionar una acción diferente.
+                    Luego, realiza esa acción según lo especificado. Mientras una miniatura está realizando una acción, se la conoce como la miniatura activa.
+                </p>
+                <p>
+                    El jugador controlador no necesita declarar todas las acciones de su miniatura cuando esta es activada.
+                    En su lugar, puede realizar una acción y luego decidir la siguiente acción después de ver sus efectos.
+                    A menos que se especifique lo contrario, una miniatura no puede realizar la misma acción más de una vez durante su activación.
+                </p>
+                <h6>Fuego Preventivo (Overwatch)</h6>
+                <p>
+                    Cuando te toque activar una miniatura, si no tienes ninguna miniatura lista para activar,
+                    pero tu oponente aún no ha activado todas sus miniaturas,
+                    puedes seleccionar una miniatura amiga que tenga la orden de Enfrentarse y que ya haya sido activada en esta fase para realizar una acción de Fuego Preventivo.
+                    Cada miniatura puede realizar una acción de Fuego Preventivo por Punto de Giro,
+                    y solo puedes seleccionar una miniatura para hacerlo si tu oponente aún tiene miniaturas por activar. Esto significa que, una vez que tu oponente haya activado todas sus miniaturas,
+                    la fase de Combate Finaliza.
+                </p>
+                <h6>Acciones</h6>
+                <p>Las acciones se clasifican de la siguiente manera:</p>
+                <ul>
+                    <li><strong>Acciones Universales:</strong> Pueden ser realizadas por todas las miniaturas. Se detallan a continuación.</li>
+                    <li>
+                        <strong>Acciones Únicas:</strong> Son acciones detalladas en la tarjeta de datos de una miniatura que solo ella puede realizar,
+                        como la acción Dakka Dash encontrada en la tarjeta de datos de ejemplo.
+                    </li>
+                    <li>
+                        <strong>Acciones de Misión:</strong> Son específicas para la misión que estás jugando y se detallarán en el resumen de la misión.
+                        Las misiones pueden encontrarse aquí (misión de Juego Abierto) y aquí (misiones Narrativas de Operaciones Especiales).
+                    </li>
+                    <li>
+                        <strong>Acciones Libres:</strong> Solo pueden realizarse cuando otra regla lo especifique.
+                        Cada vez que una miniatura realice una acción libre, se aplican las siguientes reglas:
+                        <ul>
+                            <li>La miniatura puede realizar la acción, siempre que se cumplan los requisitos de la acción.</li>
+                            <li>El jugador no debe restar ningún PA adicional para realizar la acción.</li>
+                            <li>
+                                La miniatura seguirá contando como si hubiera realizado la acción para todos los efectos de las reglas.
+                                Por ejemplo, si la realizó durante su activación, no podría realizarla nuevamente durante esa misma activación.
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <p>
+                    Por ejemplo, cuando un KOMMANDO DAKKA BOY realiza una acción de Dakka Dash (ver acciones únicas, más arriba),
+                    puede realizar una acción de Dash libre y una acción de Disparo libre sin restar PA adicionales (aparte de los PA gastados en la acción de Dakka Dash).
+                    Sin embargo, está sujeto a los requisitos de esas acciones,
+                    por lo que no puede realizar la acción de Dash libre si está dentro del Rango de Enfrentamiento de las miniaturas enemigas,
+                    ni puede realizar la acción de Disparo libre si está dentro del Rango de Enfrentamiento de las miniaturas enemigas o tiene una orden de Ocultar.
+                    Además, por cada una de las acciones libres que realice, no podrá realizarlas nuevamente durante su activación.
+                </p>
+            </div>
+            <div>
+                <h4>Heridas y Daño</h4>
+                <p>
+                    Todas las miniaturas tienen un número inicial de heridas que se utiliza para medir cuánto daño pueden soportar antes de perder efectividad y quedar incapacitados.
+                    Cada vez que se inflige daño a una miniatura, esta pierde un número de heridas igual al valor de ese daño.
+                </p>
+                <p>Si las heridas de una miniatura se reducen a 0 o menos, queda incapacitada.
+                    Cuando una miniatura queda incapacitada, se retira de la zona de combate y ya no se pueden utilizar sus habilidades.
+                    Si una miniatura queda incapacitada durante una secuencia de disparo, se retira después de que se hayan realizado todos los ataques a disparo de esa acción,
+                    como se especifica en la secuencia de disparo. Si una miniatura queda incapacitada durante una secuencia de combate,
+                    cualquier golpe restante se descarta y no se resuelve.
+                </p>
+                <hr />
+                <p>
+                    Ciertos objetivos y Operaciones Tácticas requerirán que las miniaturas amigas incapaciten a miniaturas enemigas,
+                    e incluso pueden especificar la forma en que debe hacerse (por ejemplo, un ataque a disparo).
+                    Esto se logra cuando una miniatura amiga realiza una acción o habilidad (o, cuando sea necesario, la acción o habilidad especificada),
+                    y como resultado de hacerlo, una miniatura enemiga queda incapacitada.
+                </p>
+                <p>
+                    Algunas reglas infligen heridas mortales. Las heridas mortales son una fuente poderosa de daño,
+                    de modo que lanzar dados de defensa no ayudará a la miniatura a defenderse de ellas.
+                    Cada vez que una miniatura sufra una herida mortal, se le aplicará un punto de daño.
+                </p>
+                <p>
+                    Si una miniatura tiene menos de la mitad de sus heridas restantes, está herida. Mientras una miniatura esté herida,
+                    se le resta de su característica de Movimiento y se empeoran las características de Habilidad Balística y Habilidad de Armas de los equipos de disparo y combate cuerpo a cuerpo en 1 respectivamente.
+                </p>
+                <hr />
+                <p>
+                    Es una buena idea marcar las heridas perdidas para que ambos jugadores puedan llevar un control del daño infligido.
+                    Algunos jugadores colocan dados o tokens junto a la miniatura o en su tarjeta de datos, mientras que otros prefieren escribirlo en un papel.
+                </p>
+                <hr />
             </div>
         </div>
     );

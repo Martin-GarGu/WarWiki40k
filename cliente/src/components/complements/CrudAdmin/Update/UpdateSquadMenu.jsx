@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 
-const EliminateSquad = () => {
-
+const UpdateSquadMenu = () => {
     const [squads, setSquads] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -10,13 +9,17 @@ const EliminateSquad = () => {
 
     useEffect(() => {
         const userData = localStorage.getItem("user");
-        if (userData) {
-            const parsedUser = JSON.parse(userData);
-            fetchArmies();
+        if (!userData) {
+            navigate("/login"); // Redirige al login si no hay datos del usuario
         } else {
-            setLoading(false);
+            const parsedUser = JSON.parse(userData);
+            if (parsedUser.role !== 'admin') {  // Comprobar si el usuario es admin
+                navigate("/access-denied"); // Redirige a la página de acceso denegado si el usuario no es admin
+            } else {
+                fetchArmies(); // Si es admin, obtener los escuadrones
+            }
         }
-    }, []);
+    }, [navigate]);
 
     const fetchArmies = async () => {
         let isMounted = true; // Para verificar si el componente sigue montado
@@ -58,10 +61,14 @@ const EliminateSquad = () => {
 
     return (
         <div className="m-2">
+            {loading && <div>Cargando escuadrones...</div>}
+            {error && <div style={{ color: "red" }}>{error}</div>}
+            {!loading && !error && squads.length === 0 && <div>No hay escuadrones disponibles.</div>}
             <table>
                 <thead>
                     <tr>
                         <th>Nombre</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -81,4 +88,4 @@ const EliminateSquad = () => {
     );
 };
 
-export default EliminateSquad;
+export default UpdateSquadMenu;

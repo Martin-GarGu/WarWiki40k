@@ -3240,7 +3240,7 @@ class SoldierSeeder extends Seeder
             $s = new Soldier();
             $s->name = $soldier['name'];
             $s->slug = Str::slug($soldier['name']);
-            $s->image = $soldier['image'];
+            $s->image = 'images/soldiersImage/' . $soldier['image'];
             $s->description = $soldier['description'];
             $s->squadron_id = $soldier['squadron_id'];
             $s->m = $soldier['m'];

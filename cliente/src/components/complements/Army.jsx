@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import routeApi from "../../routeApi";
 
 export default function Army() {
     const { slug } = useParams();
@@ -103,7 +104,7 @@ export default function Army() {
     return (
         <div className="container">
             <div>
-                <img src={army.image} alt={army.name} className="army-image" />
+                <img src={`${routeApi()}${army.image}`} alt={army.name} className="army-image" />
                 <h1>{army.name}</h1>
                 <p>{army.description}</p>
 
@@ -125,7 +126,7 @@ export default function Army() {
                                 <Card>
                                     <Row className="g-2 flex-md">
                                         <Col lg={4} md={12} className="d-flex justify-content-center">
-                                            <Card.Img src={squad.image} alt={squad.name} className="card-image" />
+                                            <Card.Img src={`${routeApi()}${squad.image}`} alt={squad.name} className="card-image" />
                                         </Col>
                                         <Col lg={8} md={12} className="card-content">
                                             <Card.Body>

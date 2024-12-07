@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const CreateArmy = () => {
@@ -10,6 +10,19 @@ const CreateArmy = () => {
     const [errorMessage, setErrorMessage] = useState(""); // Mensaje de error
     const [successMessage, setSuccessMessage] = useState(""); // Mensaje de éxito
     const navigate = useNavigate(); // Hook para la redirección
+
+    // Verificación de usuario autenticado y rol de administrador
+    useEffect(() => {
+        const userFromStorage = localStorage.getItem("user");
+        if (userFromStorage) {
+            const parsedUser = JSON.parse(userFromStorage);
+            if (parsedUser.role !== "admin") {
+                navigate('/access-denied'); // Redirige si no es administrador
+            }
+        } else {
+            navigate('/login'); // Redirige si no hay usuario logueado
+        }
+    }, [navigate]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -52,7 +65,7 @@ const CreateArmy = () => {
             }
 
             if (response.ok) {
-                setSuccessMessage("Ejercito creada exitosamente.");
+                setSuccessMessage("Ejercito creado exitosamente.");
                 setErrorMessage("");
                 // Esperar un poco antes de redirigir para que el usuario vea el mensaje de éxito
                 setTimeout(() => {

@@ -207,7 +207,7 @@ class SquadronSeeder extends Seeder
             $s->name = $squadron['name'];
             $s->slug = Str::slug($squadron['name']);
             $s->description = $squadron['description'];
-            $s->image = $squadron['image'];
+            $s->image = 'images/squadsImage/' . $squadron['image'];
             $s->army_id = $squadron['army_id'];
             $s->save();
         }

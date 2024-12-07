@@ -13,19 +13,19 @@ export default function CreateGame() {
 
     const navigate = useNavigate(); // Hook para la redirección
 
-    // Cargar el usuario1 desde localStorage al montar el componente
+    // Verificar si el usuario está autenticado y cargar datos al montar el componente
     useEffect(() => {
         try {
             const userFromStorage = localStorage.getItem("user");
             if (userFromStorage) {
                 setUser1(JSON.parse(userFromStorage));
             } else {
-                setErrorMessage("No se encontró el usuario logueado en localStorage.");
+                navigate("/login"); // Redirige a /login si no hay usuario logueado
             }
         } catch (error) {
             setErrorMessage("Error al leer los datos del usuario logueado.");
         }
-    }, []);
+    }, [navigate]); // navigate como dependencia para evitar advertencias
 
     // Función para buscar el ID del usuario 2
     const searchUser2ByName = async () => {
@@ -48,8 +48,7 @@ export default function CreateGame() {
                 setUser2Id(newUserId); // Actualiza el estado
                 console.log(newUserId);
                 setErrorMessage(""); // Limpiar errores
-            }
-            else {
+            } else {
                 throw new Error(data.message || "No se encontró el usuario.");
             }
         } catch (error) {

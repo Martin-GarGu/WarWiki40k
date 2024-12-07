@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import routeApi from "../../routeApi";
 
 export default function Faction() {
     const { slug } = useParams(); // Obtenemos el slug de la URL
@@ -111,7 +112,7 @@ export default function Faction() {
                 <p>Cargando...</p>
             ) : faction ? (
                 <>
-                    <img src={faction.image} alt={faction.name} />
+                    <img src={`${routeApi()}${faction.image}`} alt={faction.name} />
                     <h1>{faction.name}</h1>
                     <p>{faction.description}</p>
 
@@ -136,7 +137,7 @@ export default function Faction() {
                                     <Card>
                                         <Row className="g-2">
                                             <Col lg={4} md={12} className="d-flex justify-content-center">
-                                                <Card.Img src={army.image} alt="image" className="card-image" />
+                                                <Card.Img src={`${routeApi()}${army.image}`} alt="image" className="card-image" />
                                             </Col>
                                             <Col lg={8} md={12} className="card-content">
                                                 <Card.Body>

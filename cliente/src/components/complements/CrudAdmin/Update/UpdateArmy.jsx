@@ -1,10 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 export default function UpdateArmy() {
     const location = useLocation();
     const army = location.state?.army || {}; // Obtener el ejército desde el state o un objeto vacío por defecto
-
     const [name, setName] = useState(army.name || "");
     const [description, setDescription] = useState(army.description || "");
     const [image, setImage] = useState(army.image || "");
@@ -12,6 +11,20 @@ export default function UpdateArmy() {
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const userData = localStorage.getItem("user");
+        if (userData) {
+            const parsedUser = JSON.parse(userData);
+
+            // Verificar si el usuario tiene el rol de "admin"
+            if (parsedUser.role !== "admin") {
+                navigate("/access-denied"); // Redirige a la página de acceso denegado si no es admin
+            }
+        } else {
+            navigate("/login"); // Redirige al login si no hay usuario autenticado
+        }
+    }, [navigate]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();

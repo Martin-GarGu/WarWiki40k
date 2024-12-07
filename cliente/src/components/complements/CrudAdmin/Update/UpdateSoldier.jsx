@@ -3,10 +3,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 export default function UpdateSoldier() {
     const location = useLocation();
-    const soldier = location.state.soldier || {}; // Obtener el soldado desde el state o un objeto vacío
+    const soldier = location.state?.soldier || {}; // Obtener el soldado desde el state o un objeto vacío
 
-
-    // Establecer los valores iniciales del estado
     const [name, setName] = useState(soldier.name || "");
     const [image, setImage] = useState(soldier.image || "");
     const [description, setDescription] = useState(soldier.description || "");
@@ -22,6 +20,17 @@ export default function UpdateSoldier() {
     const [errorMessage, setErrorMessage] = useState(""); // Mensaje de error
     const [successMessage, setSuccessMessage] = useState(""); // Mensaje de éxito
     const navigate = useNavigate(); // Hook para la redirección
+
+    // Verificar si el usuario está autenticado y tiene el rol de admin
+    const userData = localStorage.getItem("user");
+    if (!userData) {
+        navigate("/login"); // Si no hay usuario en localStorage, redirige al login
+    } else {
+        const parsedUser = JSON.parse(userData);
+        if (parsedUser.role !== "admin") {
+            navigate("/access-denied"); // Si el usuario no es admin, redirige a acceso denegado
+        }
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();

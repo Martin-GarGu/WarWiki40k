@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import routeApi from "../../routeApi";
 
 export default function Squad() {
     const { slug } = useParams(); // Obtener el slug directamente desde la URL
@@ -125,11 +126,15 @@ export default function Squad() {
     // Mostrar mensaje de error si ocurre algún problema
     if (errorMessage) return <p>{errorMessage}</p>;
 
+    const handleSpecialRules=()=>{
+        navigate("/specialRules");
+    };
+
     return (
         <div className="container">
             {squad && (
                 <>
-                    <img src={squad.image} alt={squad.name} />
+                    <img src={`${routeApi()}${squad.image}`} alt={squad.name} />
                     <h1>{squad.name}</h1>
                     <p>{squad.description}</p>
 
@@ -143,7 +148,9 @@ export default function Squad() {
                     {isFavorite && <p>Este escuadrón ya está en tus favoritos.</p>}
                 </>
             )}
-
+            <button onClick={handleSpecialRules} className="btn btn-primary">
+                Ver reglas especiales
+            </button>
             <h2>Soldados</h2>
 
             {soldiers.length === 0 ? (
@@ -158,7 +165,7 @@ export default function Squad() {
                                         <Row className="g-2">
                                             <Col lg={4} md={12} className="d-flex justify-content-center">
                                                 <img
-                                                    src={soldier.imagen}
+                                                    src={`${routeApi()}${soldier.imagen}`}
                                                     alt={soldier.name}
                                                     className="squad-card-image"
                                                 />

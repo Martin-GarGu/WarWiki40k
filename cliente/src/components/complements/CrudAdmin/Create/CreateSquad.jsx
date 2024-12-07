@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const CreateSquad = () => {
-
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [image, setImage] = useState("");
@@ -10,6 +9,19 @@ const CreateSquad = () => {
     const [errorMessage, setErrorMessage] = useState(""); // Mensaje de error
     const [successMessage, setSuccessMessage] = useState(""); // Mensaje de éxito
     const navigate = useNavigate(); // Hook para la redirección
+
+    // Verificar autenticación y rol de administrador
+    useEffect(() => {
+        const userFromStorage = localStorage.getItem("user");
+        if (userFromStorage) {
+            const parsedUser = JSON.parse(userFromStorage);
+            if (parsedUser.role !== "admin") {
+                navigate('/access-denied'); // Redirige a access-denied si no es administrador
+            }
+        } else {
+            navigate('/login'); // Redirige al login si no hay usuario logueado
+        }
+    }, [navigate]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -23,11 +35,11 @@ const CreateSquad = () => {
             return;
         }
 
-        const newEscuadron = {
+        const newSquad = {
             name: name,
             description: description,
             image: image,
-            army_id: armyId
+            army_id: armyId,
         };
 
         try {
@@ -36,7 +48,7 @@ const CreateSquad = () => {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(newEscuadron),
+                body: JSON.stringify(newSquad),
             });
 
             const responseText = await response.text();
@@ -52,14 +64,14 @@ const CreateSquad = () => {
             }
 
             if (response.ok) {
-                setSuccessMessage("Ejercito creada exitosamente.");
+                setSuccessMessage("Escuadrón creado exitosamente.");
                 setErrorMessage("");
                 // Esperar un poco antes de redirigir para que el usuario vea el mensaje de éxito
                 setTimeout(() => {
                     navigate("/");
                 }, 2000); // Retraso de 2 segundos
             } else {
-                throw new Error(data?.message || "Hubo un error al crear el escuadron.");
+                throw new Error(data?.message || "Hubo un error al crear el escuadrón.");
             }
         } catch (error) {
             console.error("Error en handleSubmit:", error.message);
@@ -71,19 +83,19 @@ const CreateSquad = () => {
         <div>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label htmlFor="name">Nombre del Escuadron *</label>
+                    <label htmlFor="name">Nombre del Escuadrón *</label>
                     <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} required />
                 </div>
                 <div>
-                    <label htmlFor="description">Descripción del Escuadron *</label>
+                    <label htmlFor="description">Descripción del Escuadrón *</label>
                     <input type="text" id="description" value={description} onChange={(e) => setDescription(e.target.value)} required />
                 </div>
                 <div>
-                    <label htmlFor="image">Url de la imagen del Escuadron</label>
+                    <label htmlFor="image">Url de la imagen del Escuadrón</label>
                     <input type="text" id="image" value={image} onChange={(e) => setImage(e.target.value)} />
                 </div>
                 <div>
-                    <label htmlFor="armyId">Id del ejercito al que pertenece el Escuadron *</label>
+                    <label htmlFor="armyId">Id del ejército al que pertenece el Escuadrón *</label>
                     <input type="number" id="armyId" value={armyId} onChange={(e) => setArmyId(e.target.value)} required />
                 </div>
                 {/* Mostrar mensajes */}
@@ -91,12 +103,11 @@ const CreateSquad = () => {
                 {successMessage && <div style={{ color: "green" }}>{successMessage}</div>}
 
                 <div>
-                    <button type="submit">Crear Escuadron</button>
+                    <button type="submit">Crear Escuadrón</button>
                 </div>
             </form>
         </div>
     );
-
 };
 
 export default CreateSquad;

@@ -1,7 +1,22 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const CreateMenu = () => {
     const navigate = useNavigate();
+
+    // Verificar si el usuario está autenticado y es administrador
+    useEffect(() => {
+        const userFromStorage = localStorage.getItem("user");
+
+        if (userFromStorage) {
+            const parsedUser = JSON.parse(userFromStorage);
+            if (parsedUser.role !== "admin") {
+                navigate('/access-denied'); // Redirige si no es administrador
+            }
+        } else {
+            navigate('/login'); // Redirige a /login si no hay usuario logueado
+        }
+    }, [navigate]); // Dependencia navigate para evitar advertencias
 
     const handleFaction = () => {
         navigate('/create/faction');

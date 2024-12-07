@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 export default function UpdateSquad() {
@@ -12,6 +12,18 @@ export default function UpdateSquad() {
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const userData = localStorage.getItem("user");
+        if (!userData) {
+            navigate("/login"); // Si no hay usuario en localStorage, redirige al login
+        } else {
+            const parsedUser = JSON.parse(userData);
+            if (parsedUser.role !== 'admin') {
+                navigate("/access-denied"); // Si el usuario no es admin, redirige a acceso denegado
+            }
+        }
+    }, [navigate]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();

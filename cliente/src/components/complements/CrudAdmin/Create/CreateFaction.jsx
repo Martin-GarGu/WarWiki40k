@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const CreateFaction = () => {
@@ -10,14 +10,27 @@ const CreateFaction = () => {
     const [successMessage, setSuccessMessage] = useState(""); // Mensaje de éxito
     const navigate = useNavigate(); // Hook para la redirección
 
-    const handleSubmit = async (e)=>{
+    // Verificación de usuario autenticado y rol de administrador
+    useEffect(() => {
+        const userFromStorage = localStorage.getItem("user");
+        if (userFromStorage) {
+            const parsedUser = JSON.parse(userFromStorage);
+            if (parsedUser.role !== "admin") {
+                navigate('/access-denied'); // Redirige si no es administrador
+            }
+        } else {
+            navigate('/login'); // Redirige si no hay usuario logueado
+        }
+    }, [navigate]);
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         setErrorMessage("");
         setSuccessMessage("");
 
         // Verificar que todos los campos estén completos
-        if (!name || !description ) {
+        if (!name || !description) {
             setErrorMessage("Por favor, completa todos los campos obligatorios(*) correctamente.");
             return;
         }
@@ -38,7 +51,7 @@ const CreateFaction = () => {
             });
 
             const responseText = await response.text();
-            
+
             // Manejo adecuado del formato de la respuesta
             let data = null;
             try {
@@ -65,7 +78,6 @@ const CreateFaction = () => {
         }
     };
 
-
     return (
         <div>
             <form onSubmit={handleSubmit}>
@@ -79,7 +91,7 @@ const CreateFaction = () => {
                 </div>
                 <div>
                     <label htmlFor="image">Url de la imagen de la Facción</label>
-                    <input type="text" id="image" value={image} onChange={(e) => setImage(e.target.value)}/>
+                    <input type="text" id="image" value={image} onChange={(e) => setImage(e.target.value)} />
                 </div>
                 {/* Mostrar mensajes */}
                 {errorMessage && <div style={{ color: "red" }}>{errorMessage}</div>}
@@ -91,6 +103,6 @@ const CreateFaction = () => {
             </form>
         </div>
     );
-
 };
+
 export default CreateFaction;

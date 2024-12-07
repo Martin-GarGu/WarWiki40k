@@ -15,9 +15,9 @@ export default function Favoritos() {
             setUser(parsedUser);
             fetchFavorites(parsedUser.id);
         } else {
-            setLoading(false);
+            navigate('/login'); // Redirige a /login si no hay usuario logueado
         }
-    }, []);
+    }, [navigate]); // Agregar navigate como dependencia para evitar advertencias
 
     const fetchFavorites = async (userId) => {
         try {
@@ -77,7 +77,6 @@ export default function Favoritos() {
             setError(err.message);
         }
     };
-
 
     if (loading) {
         return <div>Cargando favoritos...</div>;

@@ -67,7 +67,7 @@ function Collapsible() {
                     Admin Panel
                   </Nav.Link>
                 )}
-                <Nav.Link href="/perfil" className="fs-5">
+                <Nav.Link href="/profile" className="fs-5">
                   Perfil
                 </Nav.Link>
                 <Nav.Link href="/" className="fs-5" onClick={logout}>

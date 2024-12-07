@@ -36,7 +36,7 @@ export default function Carrousel({ factions, handleClickFactions }) {
                 &lt;
             </button>
             <div onClick={() => { handleClickFactions(currentFaction) }}>
-                <img src={`${currentFaction.image}`} alt={currentFaction.name} />
+                <img src={`${routeApi()}${currentFaction.image}`} alt={currentFaction.name} />
                 <p>{currentFaction.name}</p>
             </div>
             <button onClick={nextSlide} className="carousel__btn carousel__btn--next">

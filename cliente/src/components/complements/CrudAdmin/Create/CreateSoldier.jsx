@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const CreateSoldier = () => {
-
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [image, setImage] = useState("");
@@ -18,6 +17,19 @@ const CreateSoldier = () => {
     const [successMessage, setSuccessMessage] = useState(""); // Mensaje de éxito
     const navigate = useNavigate(); // Hook para la redirección
 
+    // Verificar autenticación y rol de administrador
+    useEffect(() => {
+        const userFromStorage = localStorage.getItem("user");
+        if (userFromStorage) {
+            const parsedUser = JSON.parse(userFromStorage);
+            if (parsedUser.role !== "admin") {
+                navigate('/access-denied'); // Redirige si no es administrador
+            }
+        } else {
+            navigate('/login'); // Redirige si no hay usuario logueado
+        }
+    }, [navigate]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -30,7 +42,7 @@ const CreateSoldier = () => {
             return;
         }
 
-        const newEscuadron = {
+        const newSoldier = {
             name: name,
             description: description,
             image: image,
@@ -50,7 +62,7 @@ const CreateSoldier = () => {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(newEscuadron),
+                body: JSON.stringify(newSoldier),
             });
 
             const responseText = await response.text();
@@ -65,7 +77,7 @@ const CreateSoldier = () => {
             }
 
             if (response.ok) {
-                setSuccessMessage("Ejercito creada exitosamente.");
+                setSuccessMessage("Soldado creado exitosamente.");
                 setErrorMessage("");
                 // Esperar un poco antes de redirigir para que el usuario vea el mensaje de éxito
                 setTimeout(() => {
@@ -79,7 +91,6 @@ const CreateSoldier = () => {
             setErrorMessage(error.message || "Hubo un error al procesar los datos.");
         }
     };
-
 
     return (
         <div>
@@ -97,11 +108,11 @@ const CreateSoldier = () => {
                     <input type="text" id="image" value={image} onChange={(e) => setImage(e.target.value)} />
                 </div>
                 <div>
-                    <label htmlFor="squadId">Id del escuadron al que pertenece el Soldado *</label>
+                    <label htmlFor="squadId">Id del escuadrón al que pertenece el Soldado *</label>
                     <input type="number" id="squadId" value={squadId} onChange={(e) => setSquadId(e.target.value)} required />
                 </div>
                 <div>
-                    <label htmlFor="m">Momiviento del Soldado *</label>
+                    <label htmlFor="m">Movimiento del Soldado *</label>
                     <select
                         id="m"
                         value={m || ""}
@@ -150,7 +161,6 @@ const CreateSoldier = () => {
             </form>
         </div>
     );
-
 };
 
 export default CreateSoldier;

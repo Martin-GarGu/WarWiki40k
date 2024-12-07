@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 export default function UpdateFaction() {
     const location = useLocation();
-    const faction = location.state.faction || {}; // Obtener la facción desde el state
+    const faction = location.state?.faction || {}; // Obtener la facción desde el state
 
     const [name, setName] = useState(faction.name || "");
     const [description, setDescription] = useState(faction.description || "");
@@ -11,6 +11,20 @@ export default function UpdateFaction() {
     const [errorMessage, setErrorMessage] = useState(""); // Mensaje de error
     const [successMessage, setSuccessMessage] = useState(""); // Mensaje de éxito
     const navigate = useNavigate(); // Hook para la redirección
+
+    useEffect(() => {
+        const userData = localStorage.getItem("user");
+        if (userData) {
+            const parsedUser = JSON.parse(userData);
+
+            // Verificar si el usuario tiene el rol de "admin"
+            if (parsedUser.role !== "admin") {
+                navigate("/access-denied"); // Redirige a la página de acceso denegado si no es admin
+            }
+        } else {
+            navigate("/login"); // Redirige al login si no hay usuario autenticado
+        }
+    }, [navigate]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();

@@ -9,11 +9,13 @@ export default function Perfil() {
         const userData = localStorage.getItem("user");
         if (userData) {
             setUser(JSON.parse(userData));
+        } else {
+            navigate('/login'); // Redirige a /login si no hay usuario logueado
         }
-    }, []);
+    }, [navigate]); // Agregar navigate como dependencia para evitar advertencias
 
     if (!user) {
-        return <p>Cargando...</p>;
+        return <p>Cargando...</p>; // Mostrar un mensaje mientras se valida
     }
 
     const handleFavoritos = () => {

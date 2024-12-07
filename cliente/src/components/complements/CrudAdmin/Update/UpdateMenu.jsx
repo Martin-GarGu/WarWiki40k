@@ -1,8 +1,20 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function UpdateMenu() {
-
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const userData = localStorage.getItem("user");
+        if (!userData) {
+            navigate("/login"); // Si no hay usuario en localStorage, redirige al login
+        } else {
+            const parsedUser = JSON.parse(userData);
+            if (parsedUser.role !== 'admin') {
+                navigate("/access-denied"); // Si el usuario no es admin, redirige a acceso denegado
+            }
+        }
+    }, [navigate]);
 
     const handleFaction = () => {
         navigate('/update/factionMenu');
@@ -38,5 +50,5 @@ export default function UpdateMenu() {
                 </button>
             </div>
         </div>
-    )
+    );
 }

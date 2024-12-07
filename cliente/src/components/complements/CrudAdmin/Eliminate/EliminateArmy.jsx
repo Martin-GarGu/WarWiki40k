@@ -1,20 +1,27 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const EliminateArmy = () => {
-
     const [armies, setArmies] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const userData = localStorage.getItem("user");
         if (userData) {
             const parsedUser = JSON.parse(userData);
-            fetchArmies();
+
+            // Verificar si el usuario tiene el rol de "admin"
+            if (parsedUser.role !== "admin") {
+                navigate("/access-denied"); // Redirige a la página de acceso denegado si no es admin
+            } else {
+                fetchArmies(); // Solo se cargan las tropas si el usuario es admin
+            }
         } else {
-            setLoading(false);
+            navigate("/login"); // Redirige al login si no hay usuario autenticado
         }
-    }, []);
+    }, [navigate]);
 
     const fetchArmies = async () => {
         let isMounted = true; // Para verificar si el componente sigue montado
@@ -61,9 +68,11 @@ const EliminateArmy = () => {
             );
 
             if (!response.ok) {
-                throw new Error("Error al eliminar la partida");
+                throw new Error("Error al eliminar el ejército");
             }
 
+            // Después de eliminar, actualizar la lista de ejércitos
+            setArmies((prevArmies) => prevArmies.filter((army) => army.id !== id));
         } catch (err) {
             setError(err.message);
         }
@@ -71,10 +80,14 @@ const EliminateArmy = () => {
 
     return (
         <div className="m-2">
+            {loading && <p>Cargando ejércitos...</p>}
+            {error && <p style={{ color: "red" }}>{error}</p>}
+            {!loading && !error && armies.length === 0 && <p>No hay ejércitos disponibles.</p>}
             <table>
                 <thead>
                     <tr>
                         <th>Nombre</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -92,6 +105,6 @@ const EliminateArmy = () => {
             </table>
         </div>
     );
-
 };
+
 export default EliminateArmy;

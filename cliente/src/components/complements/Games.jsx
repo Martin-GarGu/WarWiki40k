@@ -16,9 +16,9 @@ export default function Games() {
             setUser(parsedUser);
             fetchGames(parsedUser.id);
         } else {
-            setLoading(false);
+            navigate("/login"); // Redirige a /login si no hay usuario logueado
         }
-    }, []);
+    }, [navigate]); // Incluimos navigate como dependencia para evitar advertencias
 
     const fetchGames = async (userId) => {
         try {
@@ -90,7 +90,6 @@ export default function Games() {
             setError(err.message);
         }
     };
-
 
     // Función para redirigir al componente CreateGame
     const handleCreateGame = () => {

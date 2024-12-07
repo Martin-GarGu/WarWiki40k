@@ -116,7 +116,7 @@ class ArmySeeder extends Seeder
         
         #endregion
         #region aeldari
-         
+        
          [
             'name'=>'Corsairs',
             // 'slug'=>'corsairs',
@@ -217,7 +217,7 @@ class ArmySeeder extends Seeder
             $a->name = $army['name'];
             $a->slug = Str::slug($army["name"]);
             $a->description = $army['description'];
-            $a->image = $army['image'];
+            $a->image = 'images/armiesImage/' . $army['image'];
             $a->faction_id = $army['faction_id'];
             $a->save();
         }

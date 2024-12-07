@@ -51,6 +51,10 @@ function Inicio() {
     navigate(`/${faction.slug}`);
   };
 
+  const handleRules=()=>{
+    navigate('/rules')
+  };
+
   return (
     <div>
       <h1>WarWiki40K</h1>
@@ -61,6 +65,9 @@ function Inicio() {
       ) : (
         <FactionCarousel factions={factions} handleClickFactions={handleClickFactions} />
       )}
+      <button onClick={handleRules} className="btn btn-primary">
+        Reglas
+      </button>
     </div>
   );
 }

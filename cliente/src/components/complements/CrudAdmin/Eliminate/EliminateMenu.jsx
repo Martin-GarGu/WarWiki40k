@@ -1,7 +1,24 @@
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const EliminateMenu = () => {
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const userData = localStorage.getItem("user");
+
+        if (!userData) {
+            navigate("/login"); // Si no hay usuario autenticado, redirige al login
+            return;
+        }
+
+        const parsedUser = JSON.parse(userData);
+
+        // Verificar si el usuario tiene el rol de admin
+        if (parsedUser.role !== "admin") {
+            navigate("/access-denied"); // Redirige a la página de acceso denegado si no es admin
+        }
+    }, [navigate]);
 
     const handleFaction = () => {
         navigate('/eliminate/faction');
@@ -18,6 +35,7 @@ const EliminateMenu = () => {
     const handleSoldier = () => {
         navigate('/eliminate/soldier');
     };
+
     // const handleWeapon = () => {
     //     navigate('/eliminate/weapon');
     // };

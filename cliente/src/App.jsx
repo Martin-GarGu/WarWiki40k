@@ -35,6 +35,9 @@ import UpdateSquadMenu from './components/complements/CrudAdmin/Update/UpdateSqu
 import UpdateSquad from './components/complements/CrudAdmin/Update/UpdateSquad.jsx';
 import UpdateSoldierMenu from './components/complements/CrudAdmin/Update/UpdateSoldierMenu.jsx';
 import UpdateSoldier from './components/complements/CrudAdmin/Update/UpdateSoldier.jsx';
+import Rules from './components/complements/Rules.jsx';
+import SpecialRules from './components/complements/SpecialRules.jsx';
+import AccessDenied from './components/complements/AccessDenied.jsx';
 
 function App() {
   const headerRef = useRef(null);
@@ -87,6 +90,18 @@ function App() {
               }
             />
             <Route
+            path='/rules'
+            element={<Rules/>}
+            />
+            <Route 
+            path="/access-denied" 
+            element={<AccessDenied />} 
+            />
+            <Route
+            path='/specialRules'
+            element={<SpecialRules/>}
+            />
+            <Route
               path='/createMenu'
               element={<CreateMenu />}
             />
@@ -111,7 +126,7 @@ function App() {
               element={<Squad />}
             />
             <Route
-              path="/perfil"
+              path="/profile"
               element={<Perfil />}
             />
             <Route
