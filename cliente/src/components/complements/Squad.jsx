@@ -165,7 +165,7 @@ export default function Squad() {
                                         <Row className="g-2">
                                             <Col lg={4} md={12} className="d-flex justify-content-center">
                                                 <img
-                                                    src={`${routeApi()}${soldier.imagen}`}
+                                                    src={`${routeApi()}${soldier.image}`}
                                                     alt={soldier.name}
                                                     className="squad-card-image"
                                                 />
