@@ -1,0 +1,104 @@
+// Colores personalizados inspirados en Warhammer 40K
+$warhammer-dark: #1e1e1e; // Fondo oscuro
+$warhammer-gold: #d4af37; // Dorado envejecido
+$warhammer-red: #e74c3c; // Rojo oscuro
+$warhammer-orange: #f39c12; // Naranja oscuro
+
+// Estilo general para el CrudAdmin
+.crud-admin {
+  background-color: $warhammer-dark;
+  color: $warhammer-gold;
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Centra verticalmente */
+  padding: 20px;
+  
+  // Centrado del contenido dentro del contenedor
+  .crud-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 800px; /* Limita el ancho */
+    width: 100%;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro para resaltar el contenido */
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.8);
+  }
+
+  h1 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8); // Sombra en el título
+  }
+
+  .crud-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+
+    .btn {
+      font-size: 1.1rem;
+      font-weight: bold;
+      padding: 15px 30px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+
+      &.btn-primary {
+        background-color: $warhammer-gold;
+        color: $warhammer-dark;
+      }
+
+      &.btn-warning {
+        background-color: $warhammer-orange;
+        color: $warhammer-dark;
+      }
+
+      &.btn-danger {
+        background-color: $warhammer-red;
+        color: white;
+      }
+
+      &:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7);
+      }
+
+      &.btn-primary:hover {
+        background-color: darken($warhammer-gold, 10%);
+      }
+
+      &.btn-warning:hover {
+        background-color: darken($warhammer-orange, 10%);
+      }
+
+      &.btn-danger:hover {
+        background-color: darken($warhammer-red, 10%);
+      }
+    }
+  }
+}
+
+// Responsive design (con breakpoints de Bootstrap)
+@media (max-width: 768px) {
+  .crud-admin {
+    padding: 15px;
+  }
+
+  .crud-buttons {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}

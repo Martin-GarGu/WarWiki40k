@@ -79,26 +79,47 @@ const CreateFaction = () => {
     };
 
     return (
-        <div>
+        <div className="create-form">
             <form onSubmit={handleSubmit}>
-                <div>
+                <div className="form-group">
                     <label htmlFor="name">Nombre de la Facción *</label>
-                    <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} required />
+                    <input 
+                        type="text" 
+                        id="name" 
+                        value={name} 
+                        onChange={(e) => setName(e.target.value)} 
+                        required 
+                        className="form-control" 
+                    />
                 </div>
-                <div>
+                <div className="form-group">
                     <label htmlFor="description">Descripción de la Facción *</label>
-                    <input type="text" id="description" value={description} onChange={(e) => setDescription(e.target.value)} required />
+                    <input 
+                        type="text" 
+                        id="description" 
+                        value={description} 
+                        onChange={(e) => setDescription(e.target.value)} 
+                        required 
+                        className="form-control" 
+                    />
                 </div>
-                <div>
+                <div className="form-group">
                     <label htmlFor="image">Url de la imagen de la Facción</label>
-                    <input type="text" id="image" value={image} onChange={(e) => setImage(e.target.value)} />
+                    <input 
+                        type="text" 
+                        id="image" 
+                        value={image} 
+                        onChange={(e) => setImage(e.target.value)} 
+                        className="form-control" 
+                    />
                 </div>
-                {/* Mostrar mensajes */}
-                {errorMessage && <div style={{ color: "red" }}>{errorMessage}</div>}
-                {successMessage && <div style={{ color: "green" }}>{successMessage}</div>}
 
-                <div>
-                    <button type="submit">Crear Facción</button>
+                {/* Mostrar mensajes */}
+                {errorMessage && <div className="error-message">{errorMessage}</div>}
+                {successMessage && <div className="success-message">{successMessage}</div>}
+
+                <div className="form-group">
+                    <button type="submit" className="btn-submit">Crear Facción</button>
                 </div>
             </form>
         </div>

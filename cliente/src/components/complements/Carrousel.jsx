@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types'; // Importa PropTypes al inicio
 import { useState } from 'react';
 import '../styles/scss/styles.scss';
 import routeApi from "../../routeApi";
@@ -6,26 +6,20 @@ import routeApi from "../../routeApi";
 export default function Carrousel({ factions, handleClickFactions }) {
     const [activeIndex, setActiveIndex] = useState(0);
 
-    // Verifica si el arreglo factions está vacío antes de intentar acceder a sus elementos
     if (!factions || factions.length === 0) {
         return <p>No hay facciones disponibles.</p>;
     }
 
     const nextSlide = () => {
-        setActiveIndex((prevIndex) =>
-            prevIndex === factions.length - 1 ? 0 : prevIndex + 1
-        );
+        setActiveIndex((prevIndex) => (prevIndex + 1) % factions.length);
     };
 
     const prevSlide = () => {
-        setActiveIndex((prevIndex) =>
-            prevIndex === 0 ? factions.length - 1 : prevIndex - 1
-        );
+        setActiveIndex((prevIndex) => (prevIndex - 1 + factions.length) % factions.length);
     };
 
-    // Asegúrate de que el objeto actual de la facción tenga los datos necesarios
     const currentFaction = factions[activeIndex];
-    
+
     if (!currentFaction || !currentFaction.image || !currentFaction.name) {
         return <p>Datos de la facción no disponibles.</p>;
     }
@@ -45,3 +39,15 @@ export default function Carrousel({ factions, handleClickFactions }) {
         </div>
     );
 }
+
+// Validación de props
+Carrousel.propTypes = {
+    factions: PropTypes.arrayOf(
+        PropTypes.shape({
+            image: PropTypes.string.isRequired, // La imagen debe ser una cadena
+            name: PropTypes.string.isRequired,  // El nombre debe ser una cadena
+            slug: PropTypes.string,             // Opcional, si se usa
+        })
+    ).isRequired, // La lista de facciones es obligatoria
+    handleClickFactions: PropTypes.func.isRequired, // La función de manejo de clics es obligatoria
+};

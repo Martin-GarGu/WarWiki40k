@@ -1,191 +1,177 @@
-import { Container } from "@mui/material";
-import Button from "@mui/material/Button";
-import { TextField } from "@mui/material";
 import { useState } from "react";
 import Alert from "react-bootstrap/Alert";
 import { useNavigate } from "react-router-dom";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
-import SpinnerFormulario from "../SpinnerFormulario";
-import InputAdornment from "@mui/material/InputAdornment";
 
 function Login() {
     const [email, setEmail] = useState("");
-    const [errorEmail, setErrorEmail] = useState({ color: false, text: "" });
     const [password, setPassword] = useState("");
-    const [errorPassword, setErrorPassword] = useState({
-        color: false,
-        text: ""
-    });
-    const emailRegEx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const enieRegEx = /ñ|Ñ/;
-
-    const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false);
+    const [errorEmail, setErrorEmail] = useState({ color: false, text: "" });
+    const [errorPassword, setErrorPassword] = useState({ color: false, text: "" });
+    const [loading, setLoading] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
     const [alertVariant, setAlertVariant] = useState("");
     const [alertMessage, setAlertMessage] = useState("");
-    const [loading, setLoading] = useState(false);
-    const [showPassword, setShowPassword] = useState(false);
 
-    function redirigir() {
+    const navigate = useNavigate();
+
+    const emailRegEx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const enieRegEx = /ñ|Ñ/;
+
+    const handleRedirection = () => {
         navigate("/");
         window.location.reload();
-    }
+    };
 
-    function validar() {
-        if (email === "") {
-            setErrorEmail({ color: true, text: "Completa este campo" });
-            return false;
+    const validateFields = () => {
+        let isValid = true;
+
+        if (!email) {
+            setErrorEmail({ color: true, text: "El correo es obligatorio" });
+            isValid = false;
         } else if (!emailRegEx.test(email)) {
-            setErrorEmail({ color: true, text: "Introduce un email válido" });
-            return false;
+            setErrorEmail({ color: true, text: "Formato de correo no válido" });
+            isValid = false;
         } else if (enieRegEx.test(email)) {
-            setErrorEmail({ color: true, text: "El carácter 'ñ' no es válido" });
-            return false;
+            setErrorEmail({ color: true, text: "El carácter 'ñ' no está permitido" });
+            isValid = false;
         } else {
             setErrorEmail({ color: false, text: "" });
         }
 
-        if (password === "") {
-            setErrorPassword({ color: true, text: "Completa este campo" });
-            return false;
+        if (!password) {
+            setErrorPassword({ color: true, text: "La contraseña es obligatoria" });
+            isValid = false;
+        } else {
+            setErrorPassword({ color: false, text: "" });
         }
-        return true;
-    }
 
-    function limpiarFormulario() {
-        setEmail("");
-        setPassword("");
-    }
+        return isValid;
+    };
 
-    async function fetchPost() {
+    const fetchLogin = async () => {
         setLoading(true);
-        const url = `http://${import.meta.env.VITE_APP_PETICION_IP}/api/login`;
-        const opciones = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                email,
-                password
-            })
-        };
 
-        const result = await fetch(url, opciones);
-        const jsonData = await result.json();
+        try {
+            const response = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/login`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, password }),
+            });
 
-        if (result.ok) {
-            const { token, user } = jsonData; // Extraer token y user de la respuesta
-            if (token && user) { 
-                localStorage.setItem("token", token);                 // Guardar el token
-                localStorage.setItem("user", JSON.stringify(user));   // Guardar el objeto user completo
+            const data = await response.json();
+
+            if (response.ok && data.token && data.user) {
+                localStorage.setItem("token", data.token);
+                localStorage.setItem("user", JSON.stringify(data.user));
 
                 setAlertVariant("success");
-                setAlertMessage("Usuario logeado exitosamente");
+                setAlertMessage("Inicio de sesión exitoso");
                 setShowAlert(true);
-                setTimeout(redirigir, 3000);
-            } else {
-                setAlertMessage("Error: el usuario o el token no están en la respuesta");
-                setAlertVariant("danger");
-                setShowAlert(true);
-                setLoading(false);
-            }
-        } else {
-            setAlertMessage("Usuario o contraseña incorrecta. Vuelve a intentarlo");
-            setAlertVariant("danger");
-            setShowAlert(true);
-            setLoading(false);
-            limpiarFormulario();
-        }
-    }
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        if (validar()) {
-            fetchPost().catch((error) => {
-                console.error("Error al iniciar sesión:", error);
-                setAlertMessage("Hubo un problema al iniciar sesión");
-                setAlertVariant("danger");
-                setShowAlert(true);
-                setLoading(false);
-            });
+                setTimeout(handleRedirection, 3000);
+            } else {
+                throw new Error(data.message || "Credenciales incorrectas");
+            }
+        } catch (error) {
+            setAlertVariant("danger");
+            setAlertMessage(error.message || "Error al iniciar sesión");
+            setShowAlert(true);
+        } finally {
+            setLoading(false);
         }
-    }
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (validateFields()) {
+            fetchLogin().catch(console.error);
+        }
+    };
 
     return (
-        <main>
+        <main className="login-page">
             {showAlert && (
                 <Alert
                     variant={alertVariant}
-                    onClose={() => setShowAlert(false)}
                     dismissible
                     className="mt-2"
+                    onClose={() => setShowAlert(false)}
                 >
                     {alertMessage}
                 </Alert>
             )}
-            <Container
-                className="rounded-4 p-4 formulario"
-                maxWidth="md"
-                sx={{ marginTop: "50px" }}
-            >
-                <Typography
-                    className="p-3"
-                    variant="h6"
-                    component="div"
-                    sx={{ flexGrow: 1 }}
-                >
-                    <h3>Datos del nuevo usuario</h3>
-                </Typography>
-                <form onSubmit={handleSubmit} noValidate>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <TextField
-                                placeholder="Email *"
-                                fullWidth
-                                value={email}
-                                helperText={errorEmail.text}
-                                error={errorEmail.color}
-                                onChange={(e) => {
-                                    e.target.value = e.target.value.toLowerCase();
-                                    setEmail(e.target.value);
-                                }}
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                placeholder="Contraseña *"
-                                fullWidth
-                                type={showPassword ? "text" : "password"}
-                                helperText={errorPassword.text}
-                                error={errorPassword.color}
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                InputProps={{
-                                    endAdornment: (
-                                        <InputAdornment position="end">
+            <div className="container py-5">
+                <div className="row justify-content-center">
+                    <div className="col-lg-6 col-md-8 col-sm-12">
+                        <div className="form-container p-4">
+                            <h2 className="text-center mb-4">Iniciar Sesión</h2>
+                            <form onSubmit={handleSubmit} noValidate>
+                                <div className="mb-3">
+                                    <label htmlFor="email" className="form-label">
+                                        Correo Electrónico
+                                    </label>
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        className={`form-control ${
+                                            errorEmail.color ? "is-invalid" : ""
+                                        }`}
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value.toLowerCase())}
+                                    />
+                                    {errorEmail.text && (
+                                        <div className="invalid-feedback">{errorEmail.text}</div>
+                                    )}
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="password" className="form-label">
+                                        Contraseña
+                                    </label>
+                                    <div className="input-group">
+                                        <input
+                                            type={showPassword ? "text" : "password"}
+                                            id="password"
+                                            className={`form-control ${
+                                                errorPassword.color ? "is-invalid" : ""
+                                            }`}
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                        />
+                                        <button
+                                            type="button"
+                                            className="btn btn-outline-secondary"
+                                            onClick={() => setShowPassword(!showPassword)}
+                                        >
                                             <i
-                                                className={`fa-solid fa-eye${showPassword ? "-slash" : ""} d-flex justify-content-center align-items-center`}
-                                                onClick={() => setShowPassword(!showPassword)}
+                                                className={`fa-solid fa-eye${
+                                                    showPassword ? "-slash" : ""
+                                                }`}
                                             ></i>
-                                        </InputAdornment>
-                                    )
-                                }}
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            {loading ? (
-                                <SpinnerFormulario />
-                            ) : (
-                                <Button variant="contained" type="submit" color="success">
-                                    Iniciar Sesión
-                                </Button>
-                            )}
-                        </Grid>
-                    </Grid>
-                </form>
-            </Container>
+                                        </button>
+                                    </div>
+                                    {errorPassword.text && (
+                                        <div className="invalid-feedback">{errorPassword.text}</div>
+                                    )}
+                                </div>
+                                <div className="d-grid">
+                                    <button type="submit" className="btn btn-primary">
+                                        {loading ? (
+                                            <span
+                                                className="spinner-border spinner-border-sm"
+                                                role="status"
+                                                aria-hidden="true"
+                                            ></span>
+                                        ) : (
+                                            "Iniciar Sesión"
+                                        )}
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
     );
 }

@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import FactionCarousel from "./Carrousel";
 
-
 function Inicio() {
   const [factions, setFactions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -51,23 +50,27 @@ function Inicio() {
     navigate(`/${faction.slug}`);
   };
 
-  const handleRules=()=>{
-    navigate('/rules')
+  const handleRules = () => {
+    navigate('/rules');
   };
 
   return (
-    <div>
-      <h1>WarWiki40K</h1>
+    <div className="inicio-container">
+      <header className="inicio-header text-center mb-4">
+        <h1 className="inicio-title">WarWiki40K</h1>
+      </header>
       {isLoading ? (
-        <p>Cargando...</p>
+        <p className="text-center">Cargando...</p>
       ) : error ? (
-        <p>Error: {error}</p>
+        <p className="text-center text-danger">Error: {error}</p>
       ) : (
         <FactionCarousel factions={factions} handleClickFactions={handleClickFactions} />
       )}
-      <button onClick={handleRules} className="btn btn-primary">
-        Reglas
-      </button>
+      <div className="text-center mt-4">
+        <button onClick={handleRules} className="btn btn-primary btn-lg">
+          Reglas
+        </button>
+      </div>
     </div>
   );
 }

@@ -1,0 +1,41 @@
+.access-denied-container {
+    text-align: center;
+    padding: 50px;
+    background-color: #1a1a1a; // Fondo oscuro
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h1 {
+        font-family: 'Cinzel', serif;
+        font-size: 3rem;
+        color: #ff4d4d; // Rojo de advertencia
+        margin-bottom: 20px;
+    }
+
+    p {
+        font-size: 1.5rem;
+        color: #d4af37; // Dorado suave
+        margin-bottom: 30px;
+    }
+
+    .btn {
+        font-family: 'Cinzel', serif;
+        background-color: #d4af37;
+        color: #1a1a1a;
+        border: 2px solid #b5862e;
+        padding: 10px 20px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+            background-color: #b5862e;
+            border-color: #8c6924;
+            color: #fff;
+        }
+    }
+}

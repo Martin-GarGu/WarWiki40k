@@ -1,0 +1,63 @@
+/* General */
+body {
+    background-color: #121212;
+    font-family: 'Arial', sans-serif;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+  
+  /* Contenedor principal */
+  .create-menu-container {
+    max-width: 600px;
+    margin: 30px auto;
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5);
+    overflow: hidden; /* Para no mostrar el contenido fuera del contenedor */
+  }
+  
+  /* Título */
+  .create-menu-container h1 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #ffcc00;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+  
+  /* Estilo de los botones */
+  .create-menu-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  /* Estilo de los botones */
+  button {
+    background-color: #8b0000;
+    color: #fff;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.3s;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+  }
+  
+  button:hover {
+    background-color: #ff3333;
+  }
+  
+  /* Añadir el enfoque y estilo de las barras de desplazamiento si hay muchas opciones en el formulario o contenedor */
+  .create-menu-buttons {
+    overflow-y: auto; /* Permite el scroll si el contenido es muy largo */
+    padding-right: 10px; /* Espacio para la barra de scroll */
+    max-height: 300px; /* Limita la altura para agregar el scroll */
+  }
+  

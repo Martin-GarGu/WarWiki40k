@@ -79,30 +79,33 @@ const EliminateArmy = () => {
     };
 
     return (
-        <div className="m-2">
+        <div className="eliminate-army-container">
             {loading && <p>Cargando ejércitos...</p>}
             {error && <p style={{ color: "red" }}>{error}</p>}
             {!loading && !error && armies.length === 0 && <p>No hay ejércitos disponibles.</p>}
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {armies.map((army, index) => (
-                        <tr key={index}>
-                            <td>{army.name}</td>
-                            <td>
-                                <button onClick={() => handleEliminate(army.id)}>
-                                    Eliminar
-                                </button>
-                            </td>
+
+            <div className="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Acciones</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {armies.map((army, index) => (
+                            <tr key={index}>
+                                <td>{army.name}</td>
+                                <td>
+                                    <button onClick={() => handleEliminate(army.id)}>
+                                        Eliminar
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 };

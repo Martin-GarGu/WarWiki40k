@@ -60,26 +60,37 @@ export default function UpdateSoldierMenu() {
     };
 
     return (
-        <div className="m-2">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {soldiers.map((soldier, index) => (
-                        <tr key={index}>
-                            <td>{soldier.name}</td>
-                            <td>
-                                <button onClick={() => handleUpdate(soldier)}>
-                                    Editar
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+        <div className="update-soldier-menu-container">
+            <h1 className="update-soldier-menu-title">Modificar Soldados</h1>
+            {loading ? (
+                <p>Cargando...</p>
+            ) : error ? (
+                <p className="update-soldier-menu-message error">{error}</p>
+            ) : (
+                <div className="update-soldier-menu-table-container">
+                    <table className="update-soldier-menu-table">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {soldiers.map((soldier, index) => (
+                                <tr key={index}>
+                                    <td>{soldier.name}</td>
+                                    <td>
+                                        <button onClick={() => handleUpdate(soldier)} className="update-soldier-menu-button">
+                                            Editar
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            )}
         </div>
     );
+
 }

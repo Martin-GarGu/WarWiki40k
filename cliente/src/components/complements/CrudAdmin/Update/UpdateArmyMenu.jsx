@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 
-const EliminateArmy = () => {
+const UpdateArmyMenu = () => {
     const [armies, setArmies] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -61,32 +61,16 @@ const EliminateArmy = () => {
         navigate("/update/army", {state:{army}});
     };
 
-    const handleDelete = async (armyId) => {
-        try {
-            const response = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/armies/${armyId}`, {
-                method: "DELETE",
-            });
-
-            if (!response.ok) {
-                throw new Error(`Error al eliminar el ejército: ${response.statusText}`);
-            }
-
-            // Eliminar el ejército de la lista de ejércitos sin necesidad de recargar la página
-            setArmies((prevArmies) => prevArmies.filter((army) => army.id !== armyId));
-        } catch (error) {
-            setError(`Error al eliminar el ejército: ${error.message}`);
-        }
-    };
-
     return (
-        <div className="m-2">
+        <div className="update-army-menu-container">
+            <h1 className="update-army-menu-title">Modificar Ejércitos</h1>
             {loading ? (
                 <p>Cargando...</p>
             ) : error ? (
-                <p style={{ color: 'red' }}>{error}</p>
+                <p className="update-army-menu-message error">{error}</p>
             ) : (
                 <>
-                    <table>
+                    <table className="update-army-menu-table">
                         <thead>
                             <tr>
                                 <th>Nombre</th>
@@ -98,11 +82,8 @@ const EliminateArmy = () => {
                                 <tr key={index}>
                                     <td>{army.name}</td>
                                     <td>
-                                        <button onClick={() => handleUpdate(army)}>
+                                        <button onClick={() => handleUpdate(army)} className="update-army-menu-button">
                                             Editar
-                                        </button>
-                                        <button onClick={() => handleDelete(army.id)} style={{ marginLeft: '10px' }}>
-                                            Eliminar
                                         </button>
                                     </td>
                                 </tr>
@@ -115,4 +96,4 @@ const EliminateArmy = () => {
     );
 };
 
-export default EliminateArmy;
+export default UpdateArmyMenu;

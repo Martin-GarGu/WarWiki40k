@@ -126,10 +126,10 @@ export default function CreateGame() {
     };
 
     return (
-        <div>
+        <div className="create-game-form">
             <h2>Crea una nueva partida</h2>
             <form onSubmit={handleSubmit}>
-                <div>
+                <div className="form-group">
                     <label htmlFor="user2Name">Nombre del Jugador 2:</label>
                     <input
                         type="text"
@@ -142,7 +142,7 @@ export default function CreateGame() {
                         Buscar Jugador 2
                     </button>
                 </div>
-                <div>
+                <div className="form-group">
                     <label htmlFor="winner">Selecciona al Ganador:</label>
                     <select
                         id="winner"
@@ -157,7 +157,7 @@ export default function CreateGame() {
                         {user2Id && <option value="user2">Jugador 2</option>}
                     </select>
                 </div>
-                <div>
+                <div className="form-group">
                     <label htmlFor="user1Points">Puntos Jugador 1:</label>
                     <input
                         type="number"
@@ -167,7 +167,7 @@ export default function CreateGame() {
                         required
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label htmlFor="user2Points">Puntos Jugador 2:</label>
                     <input
                         type="number"
@@ -179,8 +179,8 @@ export default function CreateGame() {
                 </div>
 
                 {/* Mostrar mensajes */}
-                {errorMessage && <div style={{ color: "red" }}>{errorMessage}</div>}
-                {successMessage && <div style={{ color: "green" }}>{successMessage}</div>}
+                {errorMessage && <div className="error-message">{errorMessage}</div>}
+                {successMessage && <div className="success-message">{successMessage}</div>}
 
                 <div>
                     <button type="submit">Crear Partida</button>

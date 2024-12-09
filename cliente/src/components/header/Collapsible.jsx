@@ -8,7 +8,6 @@ function Collapsible() {
   const [role, setRole] = useState("");
 
   useEffect(() => {
-    // Verificar si hay un token y usuario en localStorage
     const token = localStorage.getItem("token");
     const user = JSON.parse(localStorage.getItem("user")); // Cargar el objeto user completo
     
@@ -18,7 +17,6 @@ function Collapsible() {
       setLogeado(false);
     }
 
-    // Asignar rol si el usuario está definido
     if (user && user.role) {
       setRole(user.role);
     }
@@ -35,43 +33,44 @@ function Collapsible() {
     <Navbar
       collapseOnSelect
       expand="lg"
-      className=" p-3"
+      className="p-3 d-flex justify-content-center align-items-center"
       id="headerNavbar"
       data-bs-theme="dark"
     >
-      <Container fluid>
-        <Navbar.Brand
-          href="/"
-          className={`nav-link fs-5 ${
-            location.pathname === "/" ? "active" : ""
-          }`}
-        >
+      <Container fluid className="d-flex justify-content-center align-items-center">
+        <Navbar.Brand href="/" className="nav-link fs-5 text-center">
           <div id="logo" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="col-4" id="account">
+        <Navbar.Collapse id="responsive-navbar-nav" className="d-flex justify-content-center">
+          <Nav className="d-flex justify-content-center align-items-center">
             {!logeado ? (
               <>
-                <Nav.Link href="/login" className="fs-5">
+                <Nav.Link href="/login" className="fs-5 text-center">
                   Login
                 </Nav.Link>
-                <Nav.Link eventKey={2} href="/register" className="fs-5">
+                <Nav.Link eventKey={2} href="/register" className="fs-5 text-center">
                   Register
                 </Nav.Link>
               </>
             ) : (
               <>
                 {role === "admin" && (
-                  <Nav.Link href="/crud" className="fs-5">
+                  <Nav.Link href="/crud" className="fs-5 text-center">
                     Admin Panel
                   </Nav.Link>
                 )}
-                <Nav.Link href="/profile" className="fs-5">
+                <Nav.Link href="/profile" className="fs-5 text-center">
                   Perfil
                 </Nav.Link>
-                <Nav.Link href="/" className="fs-5" onClick={logout}>
+                <Nav.Link href="/" className="fs-5 text-center" onClick={logout}>
                   Logout
+                </Nav.Link>
+                <Nav.Link href="/rules" className="fs-5 text-center">
+                  Reglas
+                </Nav.Link>
+                <Nav.Link href="/specialRules" className="fs-5 text-center">
+                  Reglas Especiales Armas
                 </Nav.Link>
               </>
             )}

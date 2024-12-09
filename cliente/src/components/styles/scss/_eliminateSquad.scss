@@ -1,0 +1,78 @@
+/* Contenedor principal */
+.eliminate-squad-container {
+    width: 80%; /* Ancho ajustado */
+    max-width: 1000px; /* Limita el ancho máximo */
+    min-width: 600px; /* Define un ancho mínimo */
+    margin: 50px auto; /* Centrado horizontal */
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Título */
+.eliminate-squad-container h2 {
+    text-align: center;
+    color: #ffcc00;
+    margin-bottom: 20px;
+}
+
+/* Mensaje de error */
+.error-message {
+    color: #ff3333;
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Contenedor de la tabla */
+.table-container {
+    max-height: 400px; /* Limita la altura máxima */
+    overflow-y: auto; /* Habilita scroll vertical si es necesario */
+    border-radius: 8px;
+    background-color: #2a2a2a;
+    padding: 10px;
+    box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+/* Tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    background-color: #2a2a2a;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.6);
+    table-layout: fixed; /* Asegura que las celdas no se deformen */
+}
+
+/* Estilo de celdas */
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #444;
+}
+
+th {
+    background-color: #333;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+td {
+    color: #e0e0e0;
+}
+
+/* Botones */
+button {
+    background-color: #d32f2f;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #ff3333;
+}

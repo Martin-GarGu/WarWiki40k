@@ -38,9 +38,9 @@ const CreateMenu = () => {
     // };
 
     return (
-        <div className="crud-admin">
+        <div className="create-menu-container">
             <h1>Crear Elementos</h1>
-            <div className="crud-buttons">
+            <div className="create-menu-buttons">
                 <button onClick={handleFaction} className="btn btn-primary">
                     Crear Facción
                 </button>

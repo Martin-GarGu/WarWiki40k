@@ -1,70 +1,70 @@
-.container {
-    // max-width: 1200px; /* Tamaño máximo para centrar el contenedor */
-    margin: 0 auto; /* Centrar el contenedor horizontalmente */
-    padding: 1rem; /* Espacio interior para el contenedor */
-    justify-content: center;
-}
+// .container {
+//     // max-width: 1200px; /* Tamaño máximo para centrar el contenedor */
+//     margin: 0 auto; /* Centrar el contenedor horizontalmente */
+//     padding: 1rem; /* Espacio interior para el contenedor */
+//     justify-content: center;
+// }
 
-.squadsDivDatos{
-    width: 100%;
-}
+// .squadsDivDatos{
+//     width: 100%;
+// }
 
-.squad-card {
-    margin-bottom: 1rem; /* Espacio entre las tarjetas */
-    border: 2px solid #ccc; /* Borde exterior de la tarjeta */
-    border-radius: 8px; /* Bordes redondeados para la tarjeta */
-    background-color: #fff; /* Fondo blanco para la tarjeta */
-    overflow: hidden; /* Evitar que los elementos internos sobresalgan */
-    box-shadow: none; /* Eliminar sombras de Bootstrap */
-    width: 100vh;
-}
+// .squad-card {
+//     margin-bottom: 1rem; /* Espacio entre las tarjetas */
+//     border: 2px solid #ccc; /* Borde exterior de la tarjeta */
+//     border-radius: 8px; /* Bordes redondeados para la tarjeta */
+//     background-color: #fff; /* Fondo blanco para la tarjeta */
+//     overflow: hidden; /* Evitar que los elementos internos sobresalgan */
+//     box-shadow: none; /* Eliminar sombras de Bootstrap */
+//     width: 100vh;
+// }
 
-.custom-card {
-    border: none; /* Eliminar el borde de Bootstrap */
-    border-radius: 0; /* Ajustar bordes redondeados si es necesario */
-    background-color: transparent; /* Asegurarte de que no haya un fondo por defecto */
-}
+// .custom-card {
+//     border: none; /* Eliminar el borde de Bootstrap */
+//     border-radius: 0; /* Ajustar bordes redondeados si es necesario */
+//     background-color: transparent; /* Asegurarte de que no haya un fondo por defecto */
+// }
 
-.squad-card-content {
-    padding: 1rem; /* Espacio interior para el contenido de la tarjeta */
-    background-color: #f9f9f9; /* Fondo gris claro para el contenido */
-    border-radius: 8px; /* Bordes redondeados para el contenido (opcional) */
-    width: max-content;
-}
+// .squad-card-content {
+//     padding: 1rem; /* Espacio interior para el contenido de la tarjeta */
+//     background-color: #f9f9f9; /* Fondo gris claro para el contenido */
+//     border-radius: 8px; /* Bordes redondeados para el contenido (opcional) */
+//     width: max-content;
+// }
 
-.squad-card-image {
-    width: 150px; /* Ancho de la imagen */
-    height: auto; /* Mantener la proporción de la imagen */
-    border-radius: 8px; /* Bordes redondeados para la imagen */
-}
+// .squad-card-image {
+//     width: 150px; /* Ancho de la imagen */
+//     height: auto; /* Mantener la proporción de la imagen */
+//     border-radius: 8px; /* Bordes redondeados para la imagen */
+// }
 
-.squad-card-title {
-    font-size: 1.5rem; /* Tamaño de fuente para el título */
-    margin-bottom: 0.5rem; /* Espacio debajo del título */
-}
+// .squad-card-title {
+//     font-size: 1.5rem; /* Tamaño de fuente para el título */
+//     margin-bottom: 0.5rem; /* Espacio debajo del título */
+// }
 
-.squad-card-weapons {
-    margin-top: 1rem; /* Espacio entre el contenido y la tabla de armas */
-}
+// .squad-card-weapons {
+//     margin-top: 1rem; /* Espacio entre el contenido y la tabla de armas */
+// }
 
-.squad-card-table {
-    width: 100%; /* Ancho completo de la tabla */
-    border-collapse: collapse; /* Colapsar bordes de la tabla */
-}
+// .squad-card-table {
+//     width: 100%; /* Ancho completo de la tabla */
+//     border-collapse: collapse; /* Colapsar bordes de la tabla */
+// }
 
-.squad-card-table th, .squad-card-table td {
-    border: 1px solid #ddd; /* Bordes de las celdas */
-    padding: 8px; /* Espacio interior en las celdas */
-    text-align: left; /* Alinear texto a la izquierda */
-}
+// .squad-card-table th, .squad-card-table td {
+//     border: 1px solid #ddd; /* Bordes de las celdas */
+//     padding: 8px; /* Espacio interior en las celdas */
+//     text-align: left; /* Alinear texto a la izquierda */
+// }
 
-.squad-card-footer {
-    margin-top: 1rem; /* Espacio entre la tabla de armas y el pie de la tarjeta */
-    font-size: 0.9rem; /* Tamaño de fuente más pequeño para el footer */
-    color: #777; /* Color de texto gris */
-}
+// .squad-card-footer {
+//     margin-top: 1rem; /* Espacio entre la tabla de armas y el pie de la tarjeta */
+//     font-size: 0.9rem; /* Tamaño de fuente más pequeño para el footer */
+//     color: #777; /* Color de texto gris */
+// }
 
-.squad-keywords {
-    display: inline; /* Asegura que las keywords se alineen en una línea */
-    margin: 0; /* Sin márgenes para las palabras clave */
-}
+// .squad-keywords {
+//     display: inline; /* Asegura que las keywords se alineen en una línea */
+//     margin: 0; /* Sin márgenes para las palabras clave */
+// }

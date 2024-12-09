@@ -15,9 +15,9 @@ export default function Favoritos() {
             setUser(parsedUser);
             fetchFavorites(parsedUser.id);
         } else {
-            navigate('/login'); // Redirige a /login si no hay usuario logueado
+            navigate('/login');
         }
-    }, [navigate]); // Agregar navigate como dependencia para evitar advertencias
+    }, [navigate]);
 
     const fetchFavorites = async (userId) => {
         try {
@@ -39,16 +39,15 @@ export default function Favoritos() {
     const handleNavigate = (favorite) => {
         const { favorites_type, slug } = favorite;
 
-        // Redirigir según el tipo de favorito
         switch (favorites_type) {
             case "Faction":
-                navigate(`/${slug}`); // Ruta para factions
+                navigate(`/${slug}`);
                 break;
             case "Army":
-                navigate(`/armies/${slug}`); // Ruta para armies
+                navigate(`/armies/${slug}`);
                 break;
             case "Squadron":
-                navigate(`/squads/${slug}`); // Ruta para squads
+                navigate(`/squads/${slug}`);
                 break;
             default:
                 console.warn("Tipo de favorito desconocido:", favorites_type);
@@ -57,19 +56,15 @@ export default function Favoritos() {
 
     const handleEliminate = async (id) => {
         try {
-            // Realiza la solicitud DELETE al backend
             const response = await fetch(
                 `http://${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/delete/${id}`,
-                {
-                    method: "DELETE",
-                }
+                { method: "DELETE" }
             );
 
             if (!response.ok) {
                 throw new Error("Error al eliminar el favorito");
             }
 
-            // Elimina el favorito localmente del estado
             setFavorites((prevFavorites) =>
                 prevFavorites.filter((favorite) => favorite.id !== id)
             );
@@ -79,23 +74,24 @@ export default function Favoritos() {
     };
 
     if (loading) {
-        return <div>Cargando favoritos...</div>;
+        return <div className="loading-text">Cargando favoritos...</div>;
     }
 
     if (error) {
-        return <div>Error: {error}</div>;
+        return <div className="error-text">Error: {error}</div>;
     }
 
     return (
-        <div>
-            <h1>Favoritos</h1>
+        <div className="favorites-container">
+            <h2>Mis Favoritos</h2>
             {favorites.length > 0 ? (
-                <table>
+                <table className="favorites-table table table-dark table-striped">
                     <thead>
                         <tr>
                             <th>Nombre</th>
                             <th>Tipo</th>
                             <th>Ir</th>
+                            <th>Eliminar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -104,12 +100,18 @@ export default function Favoritos() {
                                 <td>{favorite.name || "No disponible"}</td>
                                 <td>{favorite.favorites_type}</td>
                                 <td>
-                                    <button onClick={() => handleNavigate(favorite)}>
+                                    <button
+                                        className="btn btn-primary btn-sm"
+                                        onClick={() => handleNavigate(favorite)}
+                                    >
                                         Ir
                                     </button>
                                 </td>
                                 <td>
-                                    <button onClick={() => handleEliminate(favorite.id)}>
+                                    <button
+                                        className="btn btn-danger btn-sm"
+                                        onClick={() => handleEliminate(favorite.id)}
+                                    >
                                         Eliminar
                                     </button>
                                 </td>
@@ -118,7 +120,7 @@ export default function Favoritos() {
                     </tbody>
                 </table>
             ) : (
-                <p>No tienes favoritos todavía.</p>
+                <p className="no-favorites-text">No tienes favoritos todavía.</p>
             )}
         </div>
     );

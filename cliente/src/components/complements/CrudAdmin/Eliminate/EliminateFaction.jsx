@@ -79,30 +79,33 @@ const EliminateFaction = () => {
     };
 
     return (
-        <div className="m-2">
-            {loading && <p>Cargando facciones...</p>}
-            {error && <p style={{ color: "red" }}>{error}</p>}
+        <div className="eliminate-faction-container">
+            {loading && <p className="loading-message">Cargando facciones...</p>}
+            {error && <p className="error-message">{error}</p>}
             {!loading && !error && factions.length === 0 && <p>No hay facciones disponibles.</p>}
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {factions.map((faction, index) => (
-                        <tr key={index}>
-                            <td>{faction.name}</td>
-                            <td>
-                                <button onClick={() => handleEliminate(faction.id)}>
-                                    Eliminar
-                                </button>
-                            </td>
+
+            <div className="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Acciones</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {factions.map((faction, index) => (
+                            <tr key={index}>
+                                <td>{faction.name}</td>
+                                <td>
+                                    <button onClick={() => handleEliminate(faction.id)}>
+                                        Eliminar
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 };

@@ -102,15 +102,15 @@ export default function Army() {
     if (!army) return <p>No se encontró el ejército solicitado.</p>;
 
     return (
-        <div className="container">
+        <div className="army-page">
             <div>
-                <img src={`${routeApi()}${army.image}`} alt={army.name} className="army-image" />
+                <img src={`${routeApi()}${army.image}`} alt={army.name} />
                 <h1>{army.name}</h1>
                 <p>{army.description}</p>
 
                 {/* Solo mostrar el botón de favoritos si hay un usuario logueado */}
                 {user && !isFavorite && (
-                    <button onClick={addToFavorites} className="btn btn-primary">
+                    <button onClick={addToFavorites} className="btn-primary">
                         Agregar a favoritos
                     </button>
                 )}
@@ -120,11 +120,11 @@ export default function Army() {
 
                 <h2>Escuadrones</h2>
                 {squads.length > 0 ? (
-                    <div className="squad-list">
+                    <div className="armies-container">
                         {squads.map((squad) => (
-                            <div key={squad.id} className="card normalCard squad-card" onClick={() => handleSquadClick(squad)}>
+                            <div key={squad.id} className="card-army squad-card" onClick={() => handleSquadClick(squad)}>
                                 <Card>
-                                    <Row className="g-2 flex-md">
+                                    <Row className="g-2">
                                         <Col lg={4} md={12} className="d-flex justify-content-center">
                                             <Card.Img src={`${routeApi()}${squad.image}`} alt={squad.name} className="card-image" />
                                         </Col>

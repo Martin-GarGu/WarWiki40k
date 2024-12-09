@@ -41,8 +41,8 @@ const EliminateMenu = () => {
     // };
 
     return (
-        <div className="crud-admin">
-            <h1>Eliminar Elementos</h1>
+        <div className="eliminate-menu-container">
+            <h1 className="eliminate-menu-title">Eliminar Elementos</h1>
             <div className="crud-buttons">
                 <button onClick={handleFaction} className="btn btn-danger">
                     Eliminar Facción

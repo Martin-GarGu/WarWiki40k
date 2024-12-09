@@ -192,53 +192,51 @@ const Registro = () => {
   }
 
   return (
-    <>
+    <div className="registro-page">
       {showAlert && (
         <Alert
           variant={alertVariant}
           onClose={() => setShowAlert(false)}
           dismissible
-          className="mt-2"
+          className="mt-2 alert"
         >
           {alertMessage}
         </Alert>
       )}
-      <Container
-        className="formulario rounded-4 p-4"
-        maxWidth="md"
-        sx={{ marginTop: "50px" }}
-      >
+      <Container className="formulario rounded-4 p-4" maxWidth="md">
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           <h3>Datos del nuevo usuario</h3>
         </Typography>
         <form onSubmit={handleRegistro}>
-          <Grid container spacing={2}>
+          <Grid container spacing={2} className="form-group">
             <Grid item xs={12}>
               <TextField
-                placeholder={"Nombre de usuario *"}
+                placeholder="Nombre de usuario *"
                 fullWidth
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 helperText={errorusername.text}
                 error={errorusername.color}
+                className="form-control"
               />
             </Grid>
             <Grid item xs={6}>
               <TextField
-                placeholder={"Contraseña *"}
+                placeholder="Contraseña *"
                 fullWidth
                 type={showPassword.showPassword ? "text" : "password"}
                 value={pass}
                 onChange={(e) => setPass(e.target.value)}
                 helperText={errorpass.text}
                 error={errorpass.color}
+                className="form-control"
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
                       <i
                         className={`fa-solid fa-eye${
                           showPassword.showPassword ? "-slash" : ""
-                        } d-flex justify-content-center align-items-center`}
+                        }`}
                         onClick={() =>
                           setShowPassword({
                             ...showPassword,
@@ -253,21 +251,21 @@ const Registro = () => {
             </Grid>
             <Grid item xs={6}>
               <TextField
-                placeholder={"Confirmar contraseña *"}
+                placeholder="Confirmar contraseña *"
                 fullWidth
                 type={showPassword.showConfPassword ? "text" : "password"}
                 value={confpass}
                 onChange={(e) => setConfpass(e.target.value)}
                 helperText={errorconfpass.text}
                 error={errorconfpass.color}
-                password_confirmation
+                className="form-control"
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
                       <i
                         className={`fa-solid fa-eye${
                           showPassword.showConfPassword ? "-slash" : ""
-                        } d-flex justify-content-center align-items-center`}
+                        }`}
                         onClick={() =>
                           setShowPassword({
                             ...showPassword,
@@ -282,13 +280,14 @@ const Registro = () => {
             </Grid>
             <Grid item xs={8}>
               <TextField
-                placeholder={"Email *"}
+                placeholder="Email *"
                 fullWidth
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 helperText={erroremail.text}
                 error={erroremail.color}
+                className="form-control"
               />
             </Grid>
             <Grid item xs={4} className="d-flex align-items-center">
@@ -297,6 +296,7 @@ const Registro = () => {
                 type="submit"
                 fullWidth
                 disabled={loading}
+                className="btn-primary"
               >
                 {loading ? <SpinnerFormulario /> : "Registrar"}
               </Button>
@@ -304,7 +304,7 @@ const Registro = () => {
           </Grid>
         </form>
       </Container>
-    </>
+    </div>
   );
 };
 

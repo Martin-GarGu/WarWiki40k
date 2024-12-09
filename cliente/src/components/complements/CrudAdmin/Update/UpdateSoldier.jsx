@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 export default function UpdateSoldier() {
     const location = useLocation();
-    const soldier = location.state?.soldier || {}; // Obtener el soldado desde el state o un objeto vacío
+    const soldier = location.state?.soldier || {};
 
     const [name, setName] = useState(soldier.name || "");
     const [image, setImage] = useState(soldier.image || "");
@@ -17,34 +17,20 @@ export default function UpdateSoldier() {
     const [w, setW] = useState(soldier.w || "");
     const [base, setBase] = useState(soldier.base || "");
 
-    const [errorMessage, setErrorMessage] = useState(""); // Mensaje de error
-    const [successMessage, setSuccessMessage] = useState(""); // Mensaje de éxito
-    const navigate = useNavigate(); // Hook para la redirección
-
-    // Verificar si el usuario está autenticado y tiene el rol de admin
-    const userData = localStorage.getItem("user");
-    if (!userData) {
-        navigate("/login"); // Si no hay usuario en localStorage, redirige al login
-    } else {
-        const parsedUser = JSON.parse(userData);
-        if (parsedUser.role !== "admin") {
-            navigate("/access-denied"); // Si el usuario no es admin, redirige a acceso denegado
-        }
-    }
+    const [errorMessage, setErrorMessage] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         setErrorMessage("");
         setSuccessMessage("");
 
-        // Verificar que todos los campos obligatorios estén completos
         if (!name || !description || !squadronId || !m || !apl || !ga || !df || !sv || !w || !base) {
             setErrorMessage("Por favor, completa todos los campos obligatorios(*) correctamente.");
             return;
         }
 
-        // Crear el objeto con los datos actualizados
         const updatedSoldier = {
             name,
             image,
@@ -56,7 +42,7 @@ export default function UpdateSoldier() {
             df,
             sv,
             w,
-            base
+            base,
         };
 
         try {
@@ -68,35 +54,23 @@ export default function UpdateSoldier() {
                 body: JSON.stringify(updatedSoldier),
             });
 
-            const responseText = await response.text();
-
-            let data = null;
-            try {
-                data = JSON.parse(responseText);
-            } catch (parseError) {
-                console.error("Error al parsear JSON:", parseError.message);
-                throw new Error("El servidor devolvió un formato inesperado.");
-            }
-
             if (response.ok) {
                 setSuccessMessage("Soldado actualizado exitosamente.");
-                setErrorMessage("");
-                setTimeout(() => {
-                    navigate("/"); // Redirigir a la página principal o a otra ruta después de la actualización
-                }, 2000);
+                setTimeout(() => navigate("/"), 2000);
             } else {
-                throw new Error(data?.message || "Hubo un error al actualizar el soldado.");
+                const errorData = await response.json();
+                setErrorMessage(errorData.message || "Hubo un error al actualizar el soldado.");
             }
         } catch (error) {
-            console.error("Error en handleSubmit:", error.message);
-            setErrorMessage(error.message || "Hubo un error al procesar los datos.");
+            setErrorMessage("Hubo un error al procesar los datos.");
         }
     };
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <div>
+        <div className="update-soldier-container">
+            <h1 className="update-soldier-title">Actualizar Soldado</h1>
+            <form className="update-soldier-form" onSubmit={handleSubmit}>
+                <div className="form-group">
                     <label htmlFor="name">Nombre del Soldado *</label>
                     <input
                         type="text"
@@ -106,7 +80,7 @@ export default function UpdateSoldier() {
                         required
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label htmlFor="image">Imagen del Soldado</label>
                     <input
                         type="text"
@@ -115,7 +89,7 @@ export default function UpdateSoldier() {
                         onChange={(e) => setImage(e.target.value)}
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label htmlFor="description">Descripción del Soldado *</label>
                     <input
                         type="text"
@@ -125,7 +99,7 @@ export default function UpdateSoldier() {
                         required
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label htmlFor="squadronId">ID del Escuadrón *</label>
                     <input
                         type="text"
@@ -135,17 +109,24 @@ export default function UpdateSoldier() {
                         required
                     />
                 </div>
-                <div>
-                    <label htmlFor="m">Movimiento *</label>
-                    <input
-                        type="text"
+                <div className="form-group">
+                    <label htmlFor="m">Movimiento del Soldado *</label>
+                    <select
                         id="m"
-                        value={m}
+                        value={m || ""}
                         onChange={(e) => setM(e.target.value)}
                         required
-                    />
+                        className="form-control"
+                    >
+                        <option value="" disabled>
+                            Selecciona el movimiento del soldado
+                        </option>
+                        <option value="2 Circles">2 Circles</option>
+                        <option value="3 Circles">3 Circles</option>
+                        <option value="4 Circles">4 Circles</option>
+                    </select>
                 </div>
-                <div>
+                <div className="form-group">
                     <label htmlFor="apl">Puntos de Acción *</label>
                     <input
                         type="number"
@@ -155,7 +136,7 @@ export default function UpdateSoldier() {
                         required
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label htmlFor="ga">Acción de Grupo *</label>
                     <input
                         type="number"
@@ -165,7 +146,7 @@ export default function UpdateSoldier() {
                         required
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label htmlFor="df">Defensa *</label>
                     <input
                         type="number"
@@ -175,7 +156,7 @@ export default function UpdateSoldier() {
                         required
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label htmlFor="sv">Tirada de salvación *</label>
                     <input
                         type="text"
@@ -185,7 +166,7 @@ export default function UpdateSoldier() {
                         required
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label htmlFor="w">Heridas *</label>
                     <input
                         type="number"
@@ -195,7 +176,7 @@ export default function UpdateSoldier() {
                         required
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label htmlFor="base">Base del Soldado *</label>
                     <input
                         type="text"
@@ -205,13 +186,9 @@ export default function UpdateSoldier() {
                         required
                     />
                 </div>
-                {/* Mostrar mensajes */}
-                {errorMessage && <div style={{ color: "red" }}>{errorMessage}</div>}
-                {successMessage && <div style={{ color: "green" }}>{successMessage}</div>}
-
-                <div>
-                    <button type="submit">Actualizar Soldado</button>
-                </div>
+                {errorMessage && <div className="error-message">{errorMessage}</div>}
+                {successMessage && <div className="success-message">{successMessage}</div>}
+                <button type="submit" className="update-soldier-button">Actualizar Soldado</button>
             </form>
         </div>
     );

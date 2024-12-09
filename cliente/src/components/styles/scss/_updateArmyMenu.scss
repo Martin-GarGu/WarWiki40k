@@ -1,0 +1,99 @@
+/* Estilos generales */
+body {
+    background-color: #121212; /* Fondo oscuro */
+    font-family: 'Arial', sans-serif;
+    color: #e0e0e0; /* Texto claro */
+    margin: 0;
+    padding: 0;
+    text-align: center; /* Centrado global */
+  }
+  
+  /* Contenedor principal del UpdateArmyMenu */
+  .update-army-menu-container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #1e1e1e; /* Fondo oscuro */
+    border-radius: 10px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Título principal del UpdateArmyMenu */
+  .update-army-menu-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #ffcc00; /* Dorado */
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilo de la tabla de UpdateArmyMenu */
+  .update-army-menu-table {
+    width: 100%;
+    margin-top: 30px;
+    border-collapse: collapse;
+    border: 2px solid #333;
+    background-color: #222;
+  }
+  
+  .update-army-menu-table th, .update-army-menu-table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #444;
+  }
+  
+  .update-army-menu-table th {
+    background-color: #333;
+    color: #ffcc00;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .update-army-menu-table tr:nth-child(even) {
+    background-color: #2a2a2a;
+  }
+  
+  .update-army-menu-table td {
+    color: #f2f2f2;
+  }
+  
+  /* Botones de acción de UpdateArmyMenu */
+  .update-army-menu-button {
+    background-color: #8b0000; /* Rojo metálico */
+    color: #f2f2f2;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px;
+    cursor: pointer;
+    text-transform: uppercase;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+  }
+  
+  .update-army-menu-button:hover {
+    background-color: #ff3333; /* Rojo brillante */
+    box-shadow: 0px 6px 15px rgba(255, 0, 0, 0.7);
+  }
+  
+  /* Mensajes de error y éxito para UpdateArmyMenu */
+  .update-army-menu-message {
+    margin-top: 20px;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    color: #fff;
+  }
+  
+  .update-army-menu-message.error {
+    background-color: #b30000; /* Rojo oscuro */
+  }
+  
+  .update-army-menu-message.success {
+    background-color: #2d6a4f; /* Verde */
+  }
+  

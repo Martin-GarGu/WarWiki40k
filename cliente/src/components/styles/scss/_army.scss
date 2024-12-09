@@ -1,0 +1,100 @@
+.army-page {
+    // Hacer que el contenedor principal ocupe todo el viewport y sea scrollable
+    min-height: 100vh;
+    overflow-y: auto;
+    padding: 20px;
+    background-color: #1c1c1c;
+    color: #d4af37;
+    font-family: Arial, sans-serif;
+    margin-bottom: 50px;
+
+    // Imagen del ejército
+    img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        margin: 0 auto 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+    }
+
+    // Títulos
+    h1,
+    h2 {
+        text-align: center;
+        color: #d4af37;
+        margin-bottom: 20px;
+    }
+
+    // Descripción del ejército
+    p {
+        line-height: 1.6;
+        font-size: 1rem;
+        margin: 10px auto;
+        text-align: justify;
+        max-width: 800px;
+    }
+
+    // Botón de favoritos
+    .btn-primary {
+        display: block;
+        margin: 20px auto;
+        padding: 10px 20px;
+        background-color: #d4af37;
+        border: none;
+        color: #1c1c1c;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: #c39c31;
+        }
+    }
+
+    // Contenedor de escuadrones
+    .armies-container {
+        margin-top: 30px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px; // Espacio entre las cards
+
+        .card-army {
+            margin: 10px 0;
+            border: none;
+            background-color: #2e2e2e;
+            color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+
+            &:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+                cursor: pointer;
+            }
+
+            // Imagen dentro de las tarjetas
+            .card-image {
+                max-height: 200px;
+                object-fit: cover;
+                border-radius: 8px 0 0 8px;
+            }
+
+            .card-content {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding: 10px;
+
+                .card-title {
+                    font-size: 1.2rem;
+                    font-weight: bold;
+                    margin-bottom: 0;
+                    color: #d4af37;
+                }
+            }
+        }
+    }
+}

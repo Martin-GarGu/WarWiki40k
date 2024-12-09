@@ -1,0 +1,84 @@
+// Colores personalizados inspirados en Warhammer 40K
+$warhammer-dark: #1e1e1e; // Fondo oscuro
+$warhammer-gold: #d4af37; // Dorado envejecido
+$warhammer-red: #e74c3c; // Rojo oscuro
+$warhammer-orange: #f39c12; // Naranja oscuro
+
+// Estilos generales para el formulario
+.create-form {
+  background-color: $warhammer-dark;
+  color: $warhammer-gold;
+  font-family: 'Roboto', sans-serif;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.8);
+  max-width: 600px;
+  margin: 50px auto;
+  height: auto; // Cambiado para ajustarse al contenido
+
+  // Permitir desplazamiento si el contenido excede el alto disponible
+  overflow-y: auto;
+
+  // Establecemos un alto máximo para el formulario, que se adapta a la pantalla
+  max-height: 80vh; // Limita la altura máxima para evitar que el formulario ocupe toda la pantalla
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  label {
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+
+  input, select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid $warhammer-gold;
+    background-color: #333;
+    color: $warhammer-gold;
+    font-size: 1rem;
+  }
+
+  input:focus, select:focus {
+    border-color: $warhammer-orange;
+    outline: none;
+  }
+
+  .btn-submit {
+    background-color: $warhammer-gold;
+    color: $warhammer-dark;
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: darken($warhammer-gold, 10%);
+    }
+  }
+
+  .error-message, .success-message {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  .error-message {
+    color: $warhammer-red;
+  }
+
+  .success-message {
+    color: green;
+  }
+
+  // Responsividad
+  @media (max-width: 768px) {
+    padding: 20px;
+    max-width: 100%;
+  }
+}

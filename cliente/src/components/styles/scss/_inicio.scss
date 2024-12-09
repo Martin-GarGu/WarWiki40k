@@ -1,0 +1,38 @@
+.inicio-container {
+    padding: 20px;
+    background-color: #1a1a1a; // Fondo oscuro
+    color: #d4af37; // Dorado estilo Warhammer
+    min-height: 100vh; // Asegura que ocupe toda la pantalla
+  }
+  
+  .inicio-header {
+    margin-bottom: 30px;
+  
+    .inicio-title {
+      font-family: 'Cinzel', serif; // Tipografía temática
+      font-size: 2.5rem;
+      color: #d4af37;
+      text-shadow: 2px 2px #444; // Sombra para mayor impacto
+    }
+  }
+  
+  .text-center {
+    font-size: 1.2rem;
+  
+    &.text-danger {
+      color: #ff4d4d; // Rojo para errores
+    }
+  }
+  
+  .btn-primary {
+    background-color: #d4af37; // Dorado
+    border-color: #444;
+    color: #1a1a1a;
+  
+    &:hover {
+      background-color: #ffc857; // Dorado más claro
+      border-color: #555;
+      color: #000;
+    }
+  }
+  

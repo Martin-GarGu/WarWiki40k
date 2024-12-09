@@ -107,7 +107,7 @@ export default function Faction() {
     };
 
     return (
-        <div>
+        <div className="faction-page">
             {isLoading ? (
                 <p>Cargando...</p>
             ) : faction ? (
@@ -116,7 +116,6 @@ export default function Faction() {
                     <h1>{faction.name}</h1>
                     <p>{faction.description}</p>
 
-                    {/* Mostrar botón o mensaje solo si hay un usuario logueado */}
                     {user && (
                         isFavorite ? (
                             <p>Esta facción ya está en tus favoritos.</p>
@@ -127,30 +126,24 @@ export default function Faction() {
                         )
                     )}
 
-                    <h2>Ejercitos</h2>
+                    <h2>Ejércitos</h2>
                     {armies.length === 0 ? (
                         <p>No armies available</p>
                     ) : (
-                        <div className="p-1">
+                        <Row className="g-3">
                             {armies.map((army) => (
-                                <div key={army.id} className="card normalCard" onClick={() => handleArmyClick(army)}>
-                                    <Card>
-                                        <Row className="g-2">
-                                            <Col lg={4} md={12} className="d-flex justify-content-center">
-                                                <Card.Img src={`${routeApi()}${army.image}`} alt="image" className="card-image" />
-                                            </Col>
-                                            <Col lg={8} md={12} className="card-content">
-                                                <Card.Body>
-                                                    <Card.Title className="card-title">
-                                                        <strong>{army.name}</strong>
-                                                    </Card.Title>
-                                                </Card.Body>
-                                            </Col>
-                                        </Row>
+                                <Col lg={4} md={6} sm={12} key={army.id}>
+                                    <Card className="normalCard" onClick={() => handleArmyClick(army)}>
+                                        <Card.Img variant="top" src={`${routeApi()}${army.image}`} alt="image" className="card-image" />
+                                        <Card.Body>
+                                            <Card.Title className="card-title">
+                                                <strong>{army.name}</strong>
+                                            </Card.Title>
+                                        </Card.Body>
                                     </Card>
-                                </div>
+                                </Col>
                             ))}
-                        </div>
+                        </Row>
                     )}
                 </>
             ) : (

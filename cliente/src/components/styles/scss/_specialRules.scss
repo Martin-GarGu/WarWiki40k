@@ -1,0 +1,48 @@
+/* src/styles/scss/specialRules.scss */
+
+.special-rules-container {
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #1a1a1a; // Fondo oscuro temático
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+
+    .loading-text,
+    .error-text {
+        text-align: center;
+        font-size: 1.2rem;
+        color: #d4af37; // Color dorado temático
+    }
+
+    .special-rules-table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #d4af37; // Fondo dorado
+            color: #1a1a1a; // Texto oscuro
+            font-family: 'Cinzel', serif; // Fuente temática
+        }
+
+        td {
+            background-color: #333; // Fondo oscuro para filas
+            color: #eee; // Texto claro
+        }
+
+        tr:nth-child(even) td {
+            background-color: #444; // Fondo alternativo para filas pares
+        }
+
+        tr:hover td {
+            background-color: #d4af37; // Fondo dorado al pasar el cursor
+            color: #1a1a1a; // Texto oscuro
+        }
+    }
+}

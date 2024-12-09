@@ -16,12 +16,12 @@ const UpdateSquadMenu = () => {
             if (parsedUser.role !== 'admin') {  // Comprobar si el usuario es admin
                 navigate("/access-denied"); // Redirige a la página de acceso denegado si el usuario no es admin
             } else {
-                fetchArmies(); // Si es admin, obtener los escuadrones
+                fetchSquads(); // Si es admin, obtener los escuadrones
             }
         }
     }, [navigate]);
 
-    const fetchArmies = async () => {
+    const fetchSquads = async () => {
         let isMounted = true; // Para verificar si el componente sigue montado
         try {
             const respuesta = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/squads`, {
@@ -60,30 +60,41 @@ const UpdateSquadMenu = () => {
     };
 
     return (
-        <div className="m-2">
-            {loading && <div>Cargando escuadrones...</div>}
-            {error && <div style={{ color: "red" }}>{error}</div>}
-            {!loading && !error && squads.length === 0 && <div>No hay escuadrones disponibles.</div>}
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {squads.map((squad, index) => (
-                        <tr key={index}>
-                            <td>{squad.name}</td>
-                            <td>
-                                <button onClick={() => handleUpdate(squad)}>
-                                    Editar
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+        <div className="update-squad-menu-container">
+            <h1 className="update-squad-menu-title">Modificar Escuadrones</h1>
+            {loading ? (
+                <p className="update-squad-menu-message">Cargando escuadrones...</p>
+            ) : error ? (
+                <p className="update-squad-menu-message error">{error}</p>
+            ) : squads.length === 0 ? (
+                <p className="update-squad-menu-message">No hay escuadrones disponibles.</p>
+            ) : (
+                <div className="update-squad-menu-table-container">
+                    <table className="update-squad-menu-table">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {squads.map((squad, index) => (
+                                <tr key={index}>
+                                    <td>{squad.name}</td>
+                                    <td>
+                                        <button
+                                            onClick={() => handleUpdate(squad)}
+                                            className="update-squad-menu-button"
+                                        >
+                                            Editar
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            )}
         </div>
     );
 };

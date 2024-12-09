@@ -1,5 +1,6 @@
+// src/components/Perfil.jsx
 import { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 export default function Perfil() {
     const navigate = useNavigate();
@@ -10,29 +11,32 @@ export default function Perfil() {
         if (userData) {
             setUser(JSON.parse(userData));
         } else {
-            navigate('/login'); // Redirige a /login si no hay usuario logueado
+            navigate("/login"); // Redirige a /login si no hay usuario logueado
         }
     }, [navigate]); // Agregar navigate como dependencia para evitar advertencias
 
     if (!user) {
-        return <p>Cargando...</p>; // Mostrar un mensaje mientras se valida
+        return <p className="loading-text">Cargando...</p>; // Mostrar un mensaje mientras se valida
     }
 
     const handleFavoritos = () => {
-        navigate('/favorites');
+        navigate("/favorites");
     };
 
     const handlePartidas = () => {
-        navigate('/games');
+        navigate("/games");
     };
 
     return (
-        <>
-            <h3>Username:</h3>
-            <p>{user.username}</p>
-            <h3>Email:</h3>
-            <p>{user.email}</p>
-            <div className="crud-buttons">
+        <div className="perfil-container">
+            <h2 className="perfil-header">Perfil del Usuario</h2>
+            <div className="perfil-details">
+                <h3>Nombre de Usuario:</h3>
+                <p>{user.username}</p>
+                <h3>Email:</h3>
+                <p>{user.email}</p>
+            </div>
+            <div className="perfil-actions">
                 <button onClick={handleFavoritos} className="btn btn-primary">
                     Favoritos
                 </button>
@@ -40,6 +44,6 @@ export default function Perfil() {
                     Partidas
                 </button>
             </div>
-        </>
+        </div>
     );
 }

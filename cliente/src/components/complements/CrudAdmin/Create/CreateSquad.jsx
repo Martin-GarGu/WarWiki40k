@@ -80,30 +80,30 @@ const CreateSquad = () => {
     };
 
     return (
-        <div>
+        <div className="create-form">
             <form onSubmit={handleSubmit}>
-                <div>
+                <div className="form-group">
                     <label htmlFor="name">Nombre del Escuadrón *</label>
                     <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} required />
                 </div>
-                <div>
+                <div className="form-group">
                     <label htmlFor="description">Descripción del Escuadrón *</label>
                     <input type="text" id="description" value={description} onChange={(e) => setDescription(e.target.value)} required />
                 </div>
-                <div>
+                <div className="form-group">
                     <label htmlFor="image">Url de la imagen del Escuadrón</label>
                     <input type="text" id="image" value={image} onChange={(e) => setImage(e.target.value)} />
                 </div>
-                <div>
+                <div className="form-group">
                     <label htmlFor="armyId">Id del ejército al que pertenece el Escuadrón *</label>
                     <input type="number" id="armyId" value={armyId} onChange={(e) => setArmyId(e.target.value)} required />
                 </div>
                 {/* Mostrar mensajes */}
-                {errorMessage && <div style={{ color: "red" }}>{errorMessage}</div>}
-                {successMessage && <div style={{ color: "green" }}>{successMessage}</div>}
+                {errorMessage && <div className="error-message">{errorMessage}</div>}
+                {successMessage && <div className="success-message">{successMessage}</div>}
 
                 <div>
-                    <button type="submit">Crear Escuadrón</button>
+                    <button className="btn-submit" type="submit">Crear Escuadrón</button>
                 </div>
             </form>
         </div>

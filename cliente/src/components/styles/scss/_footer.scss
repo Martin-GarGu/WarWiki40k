@@ -1,14 +1,29 @@
-.footer {
-    display: flex;
-    width: 100%;
-    background-color: $verde-principal;
-    color: #fff;
-    text-align: center;
-    grid-row-start: 3;
-    grid-row-end: 4;
-}
+/* src/styles/scss/footer.scss */
 
-a {
-    text-decoration: none;
-    color: inherit;
+.footer {
+    background-color: #1a1a1a; // Fondo oscuro
+    color: #d4af37; // Dorado estilo Warhammer
+    padding: 20px 0;
+    border-top: 2px solid #444; // Línea superior
+
+    .footer-link {
+        font-family: 'Cinzel', serif; // Fuente temática
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #d4af37;
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: color 0.3s ease, transform 0.3s ease;
+
+        &:hover {
+            color: #fff;
+            transform: scale(1.1);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .footer-link {
+            font-size: 1rem;
+        }
+    }
 }

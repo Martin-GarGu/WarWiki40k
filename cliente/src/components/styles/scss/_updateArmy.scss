@@ -1,0 +1,99 @@
+/* General */
+body {
+    background-color: #121212;
+    font-family: 'Arial', sans-serif;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+  
+  /* Contenedor principal */
+  .update-army-container {
+    max-width: 600px;
+    margin: 30px auto;
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Título */
+  .update-army-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #ffcc00;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+  
+  /* Formulario */
+  .update-army-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+  
+  label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  input, textarea {
+    background-color: #2a2a2a;
+    border: 2px solid #444;
+    color: #e0e0e0;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  textarea {
+    resize: none;
+    height: 80px;
+  }
+  
+  input:focus, textarea:focus {
+    outline: none;
+    border-color: #ffcc00;
+  }
+  
+  /* Mensajes */
+  .error-message {
+    background-color: #b30000;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .success-message {
+    background-color: #2d6a4f;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  /* Botón */
+  .update-army-button {
+    background-color: #8b0000;
+    color: #fff;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.3s;
+  }
+  
+  .update-army-button:hover {
+    background-color: #ff3333;
+  }
+  

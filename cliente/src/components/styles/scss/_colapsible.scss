@@ -1,0 +1,53 @@
+#headerNavbar {
+    background-color: #1a1a1a; // Fondo oscuro estilo Warhammer
+    border-bottom: 2px solid #d4af37; // Línea dorada en la parte inferior
+    padding: 10px 20px;
+  
+    .navbar-brand {
+      font-family: 'Cinzel', serif; // Tipografía temática
+      color: #d4af37;
+      font-size: 1.5rem;
+      text-shadow: 1px 1px #000;
+  
+      #logo {
+        background-image: url('../../../assets/images/logo.png'); // Ruta al logo
+        background-size: cover;
+        height: 50px;
+        width: 50px;
+        display: inline-block;
+      }
+    }
+  
+    .nav-link {
+      color: #d4af37;
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-shadow: 1px 1px #444;
+  
+      &:hover {
+        color: #ffc857; // Dorado más claro
+        text-decoration: underline;
+      }
+  
+      &.active {
+        border-bottom: 2px solid #ffc857; // Indicar la página activa
+      }
+    }
+  
+    .navbar-toggler {
+      background-color: #d4af37; // Botón dorado para colapsar
+      border: none;
+  
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 5px #ffc857;
+      }
+    }
+  }
+  
+  #account {
+    .nav-link {
+      margin-right: 15px; // Espaciado entre enlaces
+    }
+  }
+  

@@ -1,0 +1,82 @@
+/* Contenedor principal */
+.eliminate-army-container {
+    width: 80%; /* Ajusta el ancho al 80% de la pantalla */
+    max-width: 1000px; /* Ancho máximo para que no se estire demasiado */
+    min-width: 600px; /* Ancho mínimo para que no sea muy pequeña */
+    margin: 50px auto; /* Centra el contenedor horizontalmente */
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Mensajes de carga y error */
+.loading-message,
+.error-message {
+    font-size: 16px;
+    color: #ff3333;
+    margin: 10px 0;
+}
+
+/* Contenedor de la tabla con scroll */
+.table-container {
+    max-height: 400px; /* Altura máxima para el contenedor */
+    overflow-y: auto; /* Habilita el scroll vertical cuando el contenido exceda */
+    margin-top: 20px;
+}
+
+/* Tabla */
+table {
+    width: 100%; /* La tabla ocupa el 100% del contenedor, pero no de la pantalla */
+    border-collapse: collapse;
+    text-align: center;
+    background-color: #2a2a2a;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.6);
+    table-layout: fixed; /* Asegura que las celdas no se estiren excesivamente */
+}
+
+/* Cabezera de la tabla */
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #444;
+}
+
+th {
+    background-color: #333;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+td {
+    color: #e0e0e0;
+}
+
+/* Botones */
+button {
+    background-color: #d32f2f;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #ff3333;
+}
+
+/* Centrado de los elementos dentro del contenedor */
+.eliminate-army-container h1 {
+    text-align: center;
+    font-size: 24px;
+    color: #ffcc00;
+    margin-bottom: 20px;
+}
+
+/* Centrado de las filas de la tabla */
+table tr {
+    text-align: center;
+}

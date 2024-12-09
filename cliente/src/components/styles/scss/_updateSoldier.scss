@@ -1,0 +1,108 @@
+/* General */
+body {
+    background-color: #121212;
+    font-family: 'Arial', sans-serif;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+  
+  /* Contenedor principal */
+  .update-soldier-container {
+    max-width: 600px;
+    margin: 30px auto;
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5);
+    overflow: hidden; /* Para no mostrar el contenido fuera del contenedor */
+  }
+  
+  /* Título */
+  .update-soldier-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #ffcc00;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+  
+  /* Estilo del formulario */
+  .update-soldier-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-height: 400px; /* Ajustar el alto máximo según el contenido */
+    overflow-y: auto; /* Permite el scroll vertical */
+    padding-right: 10px; /* Espacio extra para la barra de scroll */
+  }
+  
+  /* Estilos de los campos del formulario */
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+  
+  label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  input, select {
+    background-color: #2a2a2a;
+    border: 2px solid #444;
+    color: #e0e0e0;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  select {
+    appearance: none; /* Elimina la flecha predeterminada del select en algunos navegadores */
+  }
+  
+  textarea {
+    resize: none;
+    height: 80px;
+  }
+  
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #ffcc00;
+  }
+  
+  /* Mensajes */
+  .error-message {
+    background-color: #b30000;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .success-message {
+    background-color: #2d6a4f;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  /* Botón */
+  .update-soldier-button {
+    background-color: #8b0000;
+    color: #fff;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.3s;
+  }
+  
+  .update-soldier-button:hover {
+    background-color: #ff3333;
+  }
+  

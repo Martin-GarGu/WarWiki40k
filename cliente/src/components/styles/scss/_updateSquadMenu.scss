@@ -1,0 +1,127 @@
+/* Estilos generales */
+body {
+    background-color: #121212; /* Fondo oscuro */
+    font-family: 'Arial', sans-serif;
+    color: #e0e0e0; /* Texto claro */
+    margin: 0;
+    padding: 0;
+    text-align: center; /* Centrado global */
+  }
+  
+  /* Contenedor principal */
+  .update-squad-menu-container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #1e1e1e; /* Fondo oscuro */
+    border-radius: 10px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5);
+    overflow: hidden; /* Evitar overflow visual */
+  }
+  
+  /* Título principal */
+  .update-squad-menu-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #ffcc00; /* Dorado */
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  
+  /* Contenedor para la tabla con scrollbar */
+  .update-squad-menu-table-container {
+    max-height: 400px; /* Altura máxima visible */
+    overflow-y: auto; /* Habilitar el scroll vertical */
+    overflow-x: hidden; /* Evitar scroll horizontal */
+    border: 2px solid #333; /* Borde alrededor del área de scroll */
+    border-radius: 8px;
+  }
+  
+  /* Personalización de la scrollbar */
+  .update-squad-menu-table-container::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  .update-squad-menu-table-container::-webkit-scrollbar-thumb {
+    background-color: #8b0000; /* Rojo metálico */
+    border-radius: 5px;
+    border: 2px solid #1e1e1e; /* Espaciado para que parezca flotante */
+  }
+  
+  .update-squad-menu-table-container::-webkit-scrollbar-thumb:hover {
+    background-color: #ff3333; /* Rojo brillante */
+  }
+  
+  .update-squad-menu-table-container::-webkit-scrollbar-track {
+    background-color: #222; /* Fondo del track */
+  }
+  
+  /* Estilo de la tabla */
+  .update-squad-menu-table {
+    width: 100%;
+    margin: 0;
+    border-collapse: collapse;
+    background-color: #222; /* Fondo de la tabla */
+  }
+  
+  .update-squad-menu-table th, .update-squad-menu-table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #444;
+  }
+  
+  .update-squad-menu-table th {
+    background-color: #333;
+    color: #ffcc00; /* Dorado */
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .update-squad-menu-table tr:nth-child(even) {
+    background-color: #2a2a2a;
+  }
+  
+  .update-squad-menu-table td {
+    color: #f2f2f2;
+  }
+  
+  /* Botones de acción */
+  .update-squad-menu-button {
+    background-color: #8b0000; /* Rojo metálico */
+    color: #f2f2f2;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px;
+    cursor: pointer;
+    text-transform: uppercase;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+  }
+  
+  .update-squad-menu-button:hover {
+    background-color: #ff3333; /* Rojo brillante */
+    box-shadow: 0px 6px 15px rgba(255, 0, 0, 0.7);
+  }
+  
+  /* Mensajes de error y éxito */
+  .update-squad-menu-message {
+    margin-top: 20px;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    color: #fff;
+  }
+  
+  .update-squad-menu-message.error {
+    background-color: #b30000; /* Rojo oscuro */
+  }
+  
+  .update-squad-menu-message.success {
+    background-color: #2d6a4f; /* Verde */
+  }
+  

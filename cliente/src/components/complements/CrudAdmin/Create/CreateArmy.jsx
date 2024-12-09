@@ -65,14 +65,14 @@ const CreateArmy = () => {
             }
 
             if (response.ok) {
-                setSuccessMessage("Ejercito creado exitosamente.");
+                setSuccessMessage("Ejército creado exitosamente.");
                 setErrorMessage("");
                 // Esperar un poco antes de redirigir para que el usuario vea el mensaje de éxito
                 setTimeout(() => {
                     navigate("/");
                 }, 2000); // Retraso de 2 segundos
             } else {
-                throw new Error(data?.message || "Hubo un error al crear el ejercito.");
+                throw new Error(data?.message || "Hubo un error al crear el ejército.");
             }
         } catch (error) {
             console.error("Error en handleSubmit:", error.message);
@@ -81,30 +81,58 @@ const CreateArmy = () => {
     };
 
     return (
-        <div>
+        <div className="create-form">
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="name">Nombre del Ejercito *</label>
-                    <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} required />
+                <div className="form-group">
+                    <label htmlFor="name">Nombre del Ejército *</label>
+                    <input 
+                        type="text" 
+                        id="name" 
+                        value={name} 
+                        onChange={(e) => setName(e.target.value)} 
+                        required 
+                        className="form-control" 
+                    />
                 </div>
-                <div>
-                    <label htmlFor="description">Descripción del Ejercito *</label>
-                    <input type="text" id="description" value={description} onChange={(e) => setDescription(e.target.value)} required />
+                <div className="form-group">
+                    <label htmlFor="description">Descripción del Ejército *</label>
+                    <input 
+                        type="text" 
+                        id="description" 
+                        value={description} 
+                        onChange={(e) => setDescription(e.target.value)} 
+                        required 
+                        className="form-control" 
+                    />
                 </div>
-                <div>
-                    <label htmlFor="image">Url de la imagen del Ejercito</label>
-                    <input type="text" id="image" value={image} onChange={(e) => setImage(e.target.value)} />
+                <div className="form-group">
+                    <label htmlFor="image">Url de la imagen del Ejército</label>
+                    <input 
+                        type="text" 
+                        id="image" 
+                        value={image} 
+                        onChange={(e) => setImage(e.target.value)} 
+                        className="form-control" 
+                    />
                 </div>
-                <div>
-                    <label htmlFor="factionId">Id de la facción a la que pertenece el Ejercito *</label>
-                    <input type="number" id="factionId" value={factionId} onChange={(e) => setFactionId(e.target.value)} required />
+                <div className="form-group">
+                    <label htmlFor="factionId">Id de la facción a la que pertenece el Ejército *</label>
+                    <input 
+                        type="number" 
+                        id="factionId" 
+                        value={factionId} 
+                        onChange={(e) => setFactionId(e.target.value)} 
+                        required 
+                        className="form-control" 
+                    />
                 </div>
-                {/* Mostrar mensajes */}
-                {errorMessage && <div style={{ color: "red" }}>{errorMessage}</div>}
-                {successMessage && <div style={{ color: "green" }}>{successMessage}</div>}
 
-                <div>
-                    <button type="submit">Crear Ejercito</button>
+                {/* Mostrar mensajes */}
+                {errorMessage && <div className="error-message">{errorMessage}</div>}
+                {successMessage && <div className="success-message">{successMessage}</div>}
+
+                <div className="form-group">
+                    <button type="submit" className="btn-submit">Crear Ejército</button>
                 </div>
             </form>
         </div>

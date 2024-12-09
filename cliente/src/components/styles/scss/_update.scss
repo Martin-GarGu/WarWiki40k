@@ -1,0 +1,63 @@
+// Colores personalizados para una mejor experiencia visual
+$warhammer-dark: #1e1e1e; // Fondo oscuro
+$warhammer-gold: #d4af37; // Dorado envejecido
+$warhammer-warning: #e74c3c; // Rojo de advertencia
+
+// Estilos generales
+.update-menu-container {
+  background-color: $warhammer-dark;
+  color: $warhammer-gold;
+  padding: 30px;
+  border-radius: 8px;
+  max-width: 800px;
+  margin: 40px auto;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+
+  .crud-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    // Estilo común para los botones
+    .btn {
+      padding: 12px 25px;
+      border-radius: 5px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      transition: background-color 0.3s, transform 0.2s ease-in-out;
+
+      &:hover {
+        transform: scale(1.05); // Efecto de escala al pasar el mouse
+      }
+
+      &.btn-warning {
+        background-color: $warhammer-warning;
+        color: $warhammer-dark;
+      }
+
+      &.btn-warning:hover {
+        background-color: darken($warhammer-warning, 10%);
+      }
+    }
+  }
+}
+
+// Aseguramos que el contenido esté centrado y el diseño sea limpio
+@media (max-width: 768px) {
+  .update-menu-container {
+    padding: 20px;
+    margin: 20px;
+  }
+
+  .crud-buttons {
+    gap: 15px;
+  }
+}

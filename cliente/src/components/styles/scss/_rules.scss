@@ -1,0 +1,76 @@
+.rules-container {
+    // General container style
+    padding: 20px;
+    background-color: #f4f4f4;
+    color: #333;
+    font-family: Arial, sans-serif;
+    max-width: 1200px; // Límite de ancho para el contenedor
+    margin: 0 auto; // Centrar el contenedor
+  
+    // Sección para la imagen
+    .rules-image {
+      display: block;
+      max-width: 80%;  // Controla el tamaño de la imagen
+      height: auto;  // Mantener la proporción de la imagen
+      margin: 30px auto;  // Márgenes superior e inferior y centrado horizontal
+      border-radius: 8px; // Esquinas redondeadas
+    }
+  
+    // Títulos de las reglas
+    .rules-title {
+      font-size: 1.8rem;
+      color: #d4af37;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: bold;
+      margin-top: 30px; // Separación superior
+    }
+  
+    // Textos descriptivos debajo de cada título
+    .rules-text {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #555;
+      text-align: justify;
+      margin: 0 20px 20px 20px; // Márgenes laterales y abajo
+    }
+  
+    // Lista de reglas
+    ul.rules-list {
+      list-style-type: disc; // Estilo de lista con puntos
+      padding-left: 40px; // Espacio a la izquierda para los puntos
+      margin: 0 auto; // Centrado de la lista
+  
+      li {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #555;
+        margin-bottom: 12px; // Separación entre elementos de la lista
+      }
+    }
+  }
+  
+  // Media queries para pantallas pequeñas
+  @media (max-width: 768px) {
+    .rules-container {
+      padding: 10px;
+    }
+  
+    .rules-title {
+      font-size: 1.5rem;
+    }
+  
+    .rules-text {
+      font-size: 0.9rem;
+      margin: 0 10px 15px 10px; // Márgenes ajustados en pantallas pequeñas
+    }
+  
+    .rules-image {
+      max-width: 90%; // Ajustar imagen en pantallas pequeñas
+    }
+  
+    ul.rules-list {
+      padding-left: 30px; // Menos espacio a la izquierda
+    }
+  }
+  

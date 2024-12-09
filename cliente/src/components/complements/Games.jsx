@@ -1,13 +1,14 @@
+// src/components/Games.jsx
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // Importamos useNavigate
+import { useNavigate } from "react-router-dom";
 
 export default function Games() {
     const [user, setUser] = useState(null);
     const [games, setGames] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [usernames, setUsernames] = useState({}); // Almacenamos usernames por ID
-    const navigate = useNavigate(); // Inicializamos el hook de navegación
+    const [usernames, setUsernames] = useState({});
+    const navigate = useNavigate();
 
     useEffect(() => {
         const userData = localStorage.getItem("user");
@@ -16,9 +17,9 @@ export default function Games() {
             setUser(parsedUser);
             fetchGames(parsedUser.id);
         } else {
-            navigate("/login"); // Redirige a /login si no hay usuario logueado
+            navigate("/login");
         }
-    }, [navigate]); // Incluimos navigate como dependencia para evitar advertencias
+    }, [navigate]);
 
     const fetchGames = async (userId) => {
         try {
@@ -27,19 +28,15 @@ export default function Games() {
                 throw new Error("Error al obtener las partidas");
             }
             const data = await response.json();
-
-            // Cargar juegos y luego obtener los usernames
             const gameData = data.data || [];
             setGames(gameData);
 
-            // Obtener todos los user_ids únicos de los juegos
             const userIds = [
                 ...new Set(
                     gameData.flatMap((game) => [game.user1_id, game.user2_id])
                 ),
             ];
 
-            // Filtrar IDs que no hemos resuelto aún
             const unresolvedIds = userIds.filter((id) => !(id in usernames));
             if (unresolvedIds.length > 0) {
                 await fetchUsernames(unresolvedIds);
@@ -62,7 +59,7 @@ export default function Games() {
             for (let i = 0; i < responses.length; i++) {
                 if (responses[i].ok) {
                     const data = await responses[i].json();
-                    resolvedUsernames[userIds[i]] = data.data.username; // Asumiendo que `data.data` contiene `username`
+                    resolvedUsernames[userIds[i]] = data.data.username;
                 }
             }
 
@@ -74,76 +71,80 @@ export default function Games() {
 
     const handleEliminate = async (id) => {
         try {
-            // Realiza la solicitud DELETE al backend
             const response = await fetch(
                 `http://${import.meta.env.VITE_APP_PETICION_IP}/api/games/delete/${id}`,
-                {
-                    method: "DELETE",
-                }
+                { method: "DELETE" }
             );
 
             if (!response.ok) {
                 throw new Error("Error al eliminar la partida");
             }
 
+            setGames((prev) => prev.filter((game) => game.id !== id));
         } catch (err) {
             setError(err.message);
         }
     };
 
-    // Función para redirigir al componente CreateGame
     const handleCreateGame = () => {
         navigate("/games/create");
     };
 
     return (
-        <>
-            <div>
-                {games.length > 0 ? (
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Jugador 1</th>
-                                <th>Jugador 2</th>
-                                <th>Ganador</th>
-                                <th>Puntos jugador 1</th>
-                                <th>Puntos jugador 2</th>
+        <div className="games-container">
+            <h2 className="text-center">Mis Partidas</h2>
+            {loading ? (
+                <p className="loading-text">Cargando...</p>
+            ) : error ? (
+                <p className="error-text">{error}</p>
+            ) : games.length > 0 ? (
+                <table className="games-table table table-dark table-striped">
+                    <thead>
+                        <tr>
+                            <th>Jugador 1</th>
+                            <th>Jugador 2</th>
+                            <th>Ganador</th>
+                            <th>Puntos Jugador 1</th>
+                            <th>Puntos Jugador 2</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {games.map((game) => (
+                            <tr key={game.id}>
+                                <td>
+                                    {game.user1_id === user?.id
+                                        ? user.username
+                                        : usernames[game.user1_id] || "Cargando..."}
+                                </td>
+                                <td>
+                                    {game.user2_id === user?.id
+                                        ? user.username
+                                        : usernames[game.user2_id] || "Cargando..."}
+                                </td>
+                                <td>{game.winner}</td>
+                                <td>{game.points_user1}</td>
+                                <td>{game.points_user2}</td>
+                                <td>
+                                    <button
+                                        className="btn btn-danger btn-sm"
+                                        onClick={() => handleEliminate(game.id)}
+                                    >
+                                        Eliminar
+                                    </button>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            {games.map((game) => (
-                                <tr key={game.id}>
-                                    <td>
-                                        {game.user1_id === user?.id
-                                            ? user.username
-                                            : usernames[game.user1_id] || "Cargando..."}
-                                    </td>
-                                    <td>
-                                        {game.user2_id === user?.id
-                                            ? user.username
-                                            : usernames[game.user2_id] || "Cargando..."}
-                                    </td>
-                                    <td>{game.winner}</td>
-                                    <td>{game.points_user1}</td>
-                                    <td>{game.points_user2}</td>
-                                    <td>
-                                        <button onClick={() => handleEliminate(game.id)}>
-                                            Eliminar
-                                        </button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                ) : (
-                    <p>No tienes partidas todavía.</p>
-                )}
-            </div>
-            <div>
-                <button className="button border-black border" onClick={handleCreateGame}>
+                        ))}
+                    </tbody>
+                </table>
+            ) : (
+                <p className="no-games-text">No tienes partidas todavía.</p>
+            )}
+            <div className="text-center mt-4">
+                <button className="btn btn-primary" onClick={handleCreateGame}>
                     Crear nueva partida
                 </button>
             </div>
-        </>
+        </div>
     );
 }

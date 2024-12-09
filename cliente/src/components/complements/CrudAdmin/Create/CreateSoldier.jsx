@@ -17,7 +17,7 @@ const CreateSoldier = () => {
     const [successMessage, setSuccessMessage] = useState(""); // Mensaje de éxito
     const navigate = useNavigate(); // Hook para la redirección
 
-    // Verificar autenticación y rol de administrador
+    // Verificación de autenticación y rol de administrador
     useEffect(() => {
         const userFromStorage = localStorage.getItem("user");
         if (userFromStorage) {
@@ -93,70 +93,139 @@ const CreateSoldier = () => {
     };
 
     return (
-        <div>
+        <div className="create-form">
             <form onSubmit={handleSubmit}>
-                <div>
+                <div className="form-group">
                     <label htmlFor="name">Nombre del Soldado*</label>
-                    <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} required />
+                    <input 
+                        type="text" 
+                        id="name" 
+                        value={name} 
+                        onChange={(e) => setName(e.target.value)} 
+                        required 
+                        className="form-control" 
+                    />
                 </div>
-                <div>
+                <div className="form-group">
                     <label htmlFor="description">Descripción del Soldado *</label>
-                    <input type="text" id="description" value={description} onChange={(e) => setDescription(e.target.value)} required />
+                    <input 
+                        type="text" 
+                        id="description" 
+                        value={description} 
+                        onChange={(e) => setDescription(e.target.value)} 
+                        required 
+                        className="form-control" 
+                    />
                 </div>
-                <div>
+                <div className="form-group">
                     <label htmlFor="image">Url de la imagen del Soldado</label>
-                    <input type="text" id="image" value={image} onChange={(e) => setImage(e.target.value)} />
+                    <input 
+                        type="text" 
+                        id="image" 
+                        value={image} 
+                        onChange={(e) => setImage(e.target.value)} 
+                        className="form-control" 
+                    />
                 </div>
-                <div>
+                <div className="form-group">
                     <label htmlFor="squadId">Id del escuadrón al que pertenece el Soldado *</label>
-                    <input type="number" id="squadId" value={squadId} onChange={(e) => setSquadId(e.target.value)} required />
+                    <input 
+                        type="number" 
+                        id="squadId" 
+                        value={squadId} 
+                        onChange={(e) => setSquadId(e.target.value)} 
+                        required 
+                        className="form-control" 
+                    />
                 </div>
-                <div>
+                <div className="form-group">
                     <label htmlFor="m">Movimiento del Soldado *</label>
-                    <select
-                        id="m"
-                        value={m || ""}
-                        onChange={(e) => setM(e.target.value)}
-                        required
+                    <select 
+                        id="m" 
+                        value={m || ""} 
+                        onChange={(e) => setM(e.target.value)} 
+                        required 
+                        className="form-control"
                     >
-                        <option disabled>
-                            Selecciona el movimiento del soldado
-                        </option>
+                        <option disabled>Selecciona el movimiento del soldado</option>
                         <option>2 Circles</option>
                         <option>3 Circles</option>
                         <option>4 Circles</option>
                     </select>
                 </div>
-                <div>
+                <div className="form-group">
                     <label htmlFor="apl">Acciones por turno del Soldado *</label>
-                    <input type="number" id="apl" value={apl} onChange={(e) => setApl(e.target.value)} required />
+                    <input 
+                        type="number" 
+                        id="apl" 
+                        value={apl} 
+                        onChange={(e) => setApl(e.target.value)} 
+                        required 
+                        className="form-control" 
+                    />
                 </div>
-                <div>
+                <div className="form-group">
                     <label htmlFor="ga">Acciones de grupo del Soldado *</label>
-                    <input type="number" id="ga" value={ga} onChange={(e) => setGa(e.target.value)} required />
+                    <input 
+                        type="number" 
+                        id="ga" 
+                        value={ga} 
+                        onChange={(e) => setGa(e.target.value)} 
+                        required 
+                        className="form-control" 
+                    />
                 </div>
-                <div>
+                <div className="form-group">
                     <label htmlFor="df">Defensa del Soldado *</label>
-                    <input type="number" id="df" value={df} onChange={(e) => setDf(e.target.value)} required />
+                    <input 
+                        type="number" 
+                        id="df" 
+                        value={df} 
+                        onChange={(e) => setDf(e.target.value)} 
+                        required 
+                        className="form-control" 
+                    />
                 </div>
-                <div>
+                <div className="form-group">
                     <label htmlFor="sv">Tirada de salvación del Soldado *</label>
-                    <input type="text" id="sv" value={sv} onChange={(e) => setSv(e.target.value)} required />
+                    <input 
+                        type="text" 
+                        id="sv" 
+                        value={sv} 
+                        onChange={(e) => setSv(e.target.value)} 
+                        required 
+                        className="form-control" 
+                    />
                 </div>
-                <div>
+                <div className="form-group">
                     <label htmlFor="w">Heridas del Soldado *</label>
-                    <input type="number" id="w" value={w} onChange={(e) => setW(e.target.value)} required />
+                    <input 
+                        type="number" 
+                        id="w" 
+                        value={w} 
+                        onChange={(e) => setW(e.target.value)} 
+                        required 
+                        className="form-control" 
+                    />
                 </div>
-                <div>
+                <div className="form-group">
                     <label htmlFor="base">Base del Soldado *</label>
-                    <input type="text" id="base" value={base} onChange={(e) => setBase(e.target.value)} required />
+                    <input 
+                        type="text" 
+                        id="base" 
+                        value={base} 
+                        onChange={(e) => setBase(e.target.value)} 
+                        required 
+                        className="form-control" 
+                    />
                 </div>
-                {/* Mostrar mensajes */}
-                {errorMessage && <div style={{ color: "red" }}>{errorMessage}</div>}
-                {successMessage && <div style={{ color: "green" }}>{successMessage}</div>}
 
-                <div>
-                    <button type="submit">Crear Soldado</button>
+                {/* Mostrar mensajes */}
+                {errorMessage && <div className="error-message">{errorMessage}</div>}
+                {successMessage && <div className="success-message">{successMessage}</div>}
+
+                <div className="form-group">
+                    <button type="submit" className="btn-submit">Crear Soldado</button>
                 </div>
             </form>
         </div>

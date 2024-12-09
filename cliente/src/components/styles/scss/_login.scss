@@ -1,0 +1,122 @@
+.login-page {
+  background: #1c1c1c;
+  margin-top: 20px;
+  color: #d4af37;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+  border: black;
+  border-radius: 10px;
+
+  .form-container {
+    background: #2e2e2e;
+    border: 1px solid #3a3a3a;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+    padding: 30px;
+    width: 100%;
+    max-width: 400px;
+
+    h2 {
+      color: #d4af37;
+      text-align: center;
+    }
+
+    .btn-primary {
+      background-color: #d4af37;
+      border-color: #d4af37;
+      color: #1c1c1c;
+
+      &:hover {
+        background-color: #c39c31;
+        border-color: #c39c31;
+      }
+    }
+
+    .form-control {
+      background: #2e2e2e;
+      border: 1px solid #555;
+      color: #fff;
+
+      &:focus {
+        border-color: #d4af37;
+        box-shadow: 0 0 5px #d4af37;
+      }
+    }
+
+    .btn-outline-secondary {
+      color: #d4af37;
+      border-color: #555;
+
+      &:hover {
+        color: #c39c31;
+        border-color: #777;
+      }
+    }
+
+    .input-group {
+      display: flex;
+      align-items: center;
+
+      .form-control {
+        flex: 1;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        margin-top: .6rem;
+      }
+
+      .input-group-text {
+        background: #2e2e2e;
+        border: 1px solid #555;
+        color: #d4af37;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        i {
+          font-size: 1.2rem;
+        }
+      }
+    }
+
+    .invalid-feedback {
+      color: #ff6363;
+    }
+
+    // Aseguramos que el botón sea del mismo tamaño que los campos de entrada
+    .btn-primary {
+      height: 38px; // Igualar la altura a la del campo input (aproximadamente)
+      width: 100%; // Coincide con el ancho del formulario
+      border-radius: 4px; // Bordes redondeados consistentes
+    }
+  }
+}
+
+// Footer sigue estando fijo
+footer {
+  background-color: #2e2e2e;
+  color: #d4af37;
+  padding: 20px;
+  text-align: center;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+// Espacio para el footer
+.container {
+  padding-bottom: 80px;
+}
+
+// Evita scroll innecesario
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}

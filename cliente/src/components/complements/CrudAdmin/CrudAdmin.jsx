@@ -30,17 +30,19 @@ const CrudAdmin = () => {
 
     return (
         <div className="crud-admin">
-            <h1>Gestión de Elementos</h1>
-            <div className="crud-buttons">
-                <button onClick={handleCreate} className="btn btn-primary">
-                    Crear
-                </button>
-                <button onClick={handleEdit} className="btn btn-warning">
-                    Editar
-                </button>
-                <button onClick={handleDelete} className="btn btn-danger">
-                    Eliminar
-                </button>
+            <div className="crud-container">
+                <h1>Gestión de Elementos</h1>
+                <div className="crud-buttons">
+                    <button onClick={handleCreate} className="btn btn-primary">
+                        Crear
+                    </button>
+                    <button onClick={handleEdit} className="btn btn-warning">
+                        Editar
+                    </button>
+                    <button onClick={handleDelete} className="btn btn-danger">
+                        Eliminar
+                    </button>
+                </div>
             </div>
         </div>
     );

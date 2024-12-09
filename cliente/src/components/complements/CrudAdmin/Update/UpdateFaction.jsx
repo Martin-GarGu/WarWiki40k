@@ -81,9 +81,10 @@ export default function UpdateFaction() {
     };
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <div>
+        <div className="update-faction-container">
+            <h1 className="update-faction-title">Modificar Facción</h1>
+            <form onSubmit={handleSubmit} className="update-faction-form">
+                <div className="form-group">
                     <label htmlFor="name">Nombre de la Facción *</label>
                     <input
                         type="text"
@@ -93,18 +94,17 @@ export default function UpdateFaction() {
                         required
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label htmlFor="description">Descripción de la Facción *</label>
-                    <input
-                        type="text"
+                    <textarea
                         id="description"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         required
                     />
                 </div>
-                <div>
-                    <label htmlFor="image">Url de la imagen de la Facción</label>
+                <div className="form-group">
+                    <label htmlFor="image">URL de la Imagen de la Facción</label>
                     <input
                         type="text"
                         id="image"
@@ -113,11 +113,11 @@ export default function UpdateFaction() {
                     />
                 </div>
                 {/* Mostrar mensajes */}
-                {errorMessage && <div style={{ color: "red" }}>{errorMessage}</div>}
-                {successMessage && <div style={{ color: "green" }}>{successMessage}</div>}
+                {errorMessage && <div className="error-message">{errorMessage}</div>}
+                {successMessage && <div className="success-message">{successMessage}</div>}
 
-                <div>
-                    <button type="submit">Actualizar Facción</button>
+                <div className="form-group">
+                    <button type="submit" className="update-faction-button">Actualizar Facción</button>
                 </div>
             </form>
         </div>

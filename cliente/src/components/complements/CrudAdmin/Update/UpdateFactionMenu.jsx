@@ -63,13 +63,16 @@ export default function UpdateFactionMenu() {
   };
 
   return (
-    <div className="m-2">
+    <div className="update-faction-menu-container">
+      <h1 className="update-faction-menu-title">Modificar Facciones</h1>
       {loading && <p>Cargando facciones...</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <table>
+      {error && <p className="update-faction-menu-message error">{error}</p>}
+      
+      <table className="update-faction-menu-table">
         <thead>
           <tr>
             <th>Nombre</th>
+            <th>Acción</th>
           </tr>
         </thead>
         <tbody>
@@ -77,7 +80,7 @@ export default function UpdateFactionMenu() {
             <tr key={index}>
               <td>{faction.name}</td>
               <td>
-                <button onClick={() => handleUpdate(faction)}>
+                <button onClick={() => handleUpdate(faction)} className="update-faction-menu-button">
                   Editar
                 </button>
               </td>

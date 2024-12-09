@@ -1,0 +1,70 @@
+/* General */
+body {
+    background-color: #121212;
+    font-family: 'Arial', sans-serif;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* Contenedor principal */
+.eliminate-menu-container {
+    max-width: 600px;
+    margin: 30px auto;
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Título */
+.eliminate-menu-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #ff3333; /* Rojo para eliminar */
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+/* Botones */
+.crud-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+button {
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.3s;
+}
+
+button.btn-danger {
+    background-color: #d9534f; /* Rojo */
+    color: #fff;
+}
+
+button.btn-danger:hover {
+    background-color: #c9302c; /* Rojo más oscuro al pasar el ratón */
+}
+
+/* Mensajes */
+.error-message {
+    background-color: #b30000;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.success-message {
+    background-color: #2d6a4f;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+}

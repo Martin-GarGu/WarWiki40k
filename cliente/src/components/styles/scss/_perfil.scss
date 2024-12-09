@@ -1,0 +1,58 @@
+/* src/styles/scss/perfil.scss */
+
+.perfil-container {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #1a1a1a; // Fondo oscuro temático
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    color: #d4af37; // Texto dorado temático
+
+    .perfil-header {
+        font-family: 'Cinzel', serif; // Fuente temática
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        text-align: center;
+        color: #fff;
+    }
+
+    .perfil-details {
+        margin-bottom: 20px;
+
+        h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: #d4af37;
+        }
+
+        p {
+            font-size: 1rem;
+            margin: 0;
+            color: #eee;
+        }
+    }
+
+    .perfil-actions {
+        display: flex;
+        justify-content: space-between;
+
+        button {
+            width: 48%;
+            font-size: 1rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+
+            &:hover {
+                background-color: #d4af37; // Efecto dorado
+                color: #1a1a1a;
+                transform: scale(1.05);
+            }
+        }
+    }
+}
+
+.loading-text {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #fff;
+}

@@ -113,6 +113,7 @@ export default function Squad() {
 
         fetchSquadData();
     }, [slug]);
+
     // Verificar si está en favoritos después de cargar el escuadrón
     useEffect(() => {
         if (squad && user) {
@@ -126,7 +127,7 @@ export default function Squad() {
     // Mostrar mensaje de error si ocurre algún problema
     if (errorMessage) return <p>{errorMessage}</p>;
 
-    const handleSpecialRules=()=>{
+    const handleSpecialRules = () => {
         navigate("/specialRules");
     };
 
@@ -168,8 +169,10 @@ export default function Squad() {
                                                     src={`${routeApi()}${soldier.image}`}
                                                     alt={soldier.name}
                                                     className="squad-card-image"
+                                                    style={{ width: '100%', height: 'auto', maxHeight: '200px', objectFit: 'contain' }}
                                                 />
                                             </Col>
+
                                             <Col lg={8} md={12}>
                                                 <Card.Body>
                                                     <Card.Title className="squad-card-title">
@@ -222,14 +225,20 @@ export default function Squad() {
                                                                     <td>{weapon.bs_ws}</td>
                                                                     <td>{weapon.d}</td>
                                                                     <td>{weapon.type}</td>
-                                                                    <td>{weapon.specialRules.map((specialRule, index) => (<p key={index}>{specialRule.name.endsWith("x") ? ("" + (specialRule.name.substring(0, specialRule.name.length - 1) + "" + specialRule.type)) : specialRule.name}</p>))}</td>
+                                                                    <td>{weapon.specialRules.map((specialRule, index) => (
+                                                                        <p key={index}>
+                                                                            {specialRule.name.endsWith("x") ? (
+                                                                                `${specialRule.name.substring(0, specialRule.name.length - 1)} ${specialRule.type}`
+                                                                            ) : specialRule.name}
+                                                                        </p>
+                                                                    ))}</td>
                                                                 </tr>
                                                             ))}
                                                         </tbody>
                                                     </table>
                                                 </div>
                                                 <div className="squad-card-footer">
-                                                    <strong>Keywords:</strong>
+                                                    <strong>Keywords: </strong>
                                                     <p className="squad-keywords">
                                                         {soldier.keywords.map((keyword, index) => (
                                                             <span key={`${soldier.id}-${keyword.name}`}>

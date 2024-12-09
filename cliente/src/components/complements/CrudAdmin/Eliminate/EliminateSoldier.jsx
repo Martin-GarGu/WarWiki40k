@@ -83,32 +83,34 @@ const EliminateSoldier = () => {
     };
 
     return (
-        <div className="m-2">
+        <div className="eliminate-soldier-container">
             <h2>Eliminar Soldados</h2>
-            {error && <div style={{ color: "red" }}>{error}</div>}
+            {error && <div className="error-message">{error}</div>}
             {loading ? (
                 <p>Cargando soldados...</p>
             ) : (
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Acción</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {soldiers.map((soldier) => (
-                            <tr key={soldier.id}>
-                                <td>{soldier.name}</td>
-                                <td>
-                                    <button onClick={() => handleEliminate(soldier.id)}>
-                                        Eliminar
-                                    </button>
-                                </td>
+                <div className="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Acción</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {soldiers.map((soldier) => (
+                                <tr key={soldier.id}>
+                                    <td>{soldier.name}</td>
+                                    <td>
+                                        <button onClick={() => handleEliminate(soldier.id)}>
+                                            Eliminar
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             )}
         </div>
     );

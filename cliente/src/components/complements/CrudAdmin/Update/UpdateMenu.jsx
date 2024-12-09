@@ -33,7 +33,7 @@ export default function UpdateMenu() {
     };
 
     return (
-        <div>
+        <div className="update-menu-container">
             <h1>Modificar Elementos</h1>
             <div className="crud-buttons">
                 <button onClick={handleFaction} className="btn btn-warning">
