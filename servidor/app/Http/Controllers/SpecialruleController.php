@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\SpecialRule;
-use App\Http\Resources\SpecialruleCollection;
+use App\Http\Resources\SpecialRuleCollection;
 use App\Http\Resources\SpecialRuleResource;
 use Illuminate\Support\Str;
 
@@ -16,7 +16,7 @@ class SpecialruleController extends Controller
     public function index()
     {
         $specialrules = SpecialRule::all();
-        return new SpecialruleCollection($specialrules);
+        return new SpecialRuleCollection($specialrules);
     }
 
     /**

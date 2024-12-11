@@ -61,7 +61,7 @@ const EliminateArmy = () => {
         try {
             // Realiza la solicitud DELETE al backend
             const response = await fetch(
-                `http://${import.meta.env.VITE_APP_PETICION_IP}/api/armies/delete/${id}`,
+                `${import.meta.env.VITE_APP_PETICION_IP}/api/armies/delete/${id}`,
                 {
                     method: "DELETE",
                 }

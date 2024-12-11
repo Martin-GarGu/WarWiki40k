@@ -10,7 +10,7 @@ export default function SpecialRules() {
         const fetchSpecialRulesData = async () => {
             try {
                 const specialRulesResponse = await fetch(
-                    `http://${import.meta.env.VITE_APP_PETICION_IP}/api/specialRules`
+                    `${import.meta.env.VITE_APP_PETICION_IP}/api/specialRules`
                 );
                 if (!specialRulesResponse.ok) {
                     throw new Error(`Error HTTP al obtener datos: ${specialRulesResponse.status}`);

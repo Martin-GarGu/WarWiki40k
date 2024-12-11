@@ -22,7 +22,7 @@ export default function Army() {
         if (!user) return; // Si no hay usuario logueado, no hacemos nada
 
         try {
-            const response = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/create`, {
+            const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/create`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -47,7 +47,7 @@ export default function Army() {
         if (!user) return; // Si no hay usuario logueado, no comprobamos favoritos
 
         try {
-            const response = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/check`, {
+            const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/check`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -67,14 +67,14 @@ export default function Army() {
     useEffect(() => {
         const fetchArmyData = async () => {
             try {
-                const response = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/armiesSlug/${slug}`);
+                const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/armiesSlug/${slug}`);
                 if (!response.ok) throw new Error(`Error al obtener el ejército: ${response.status}`);
 
                 const armyData = await response.json();
                 setArmy(armyData.data);
 
                 const squadsResponse = await fetch(
-                    `http://${import.meta.env.VITE_APP_PETICION_IP}/api/squadronsArmy/${armyData.data.slug}`
+                    `${import.meta.env.VITE_APP_PETICION_IP}/api/squadronsArmy/${armyData.data.slug}`
                 );
                 if (!squadsResponse.ok) throw new Error(`Error al obtener los escuadrones: ${squadsResponse.status}`);
 

@@ -45,7 +45,7 @@ export default function UpdateSquad() {
         };
 
         try {
-            const response = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/squads/${squad.id}`, {
+            const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/squads/${squad.id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",

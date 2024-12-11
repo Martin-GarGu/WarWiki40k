@@ -46,7 +46,7 @@ export default function UpdateSoldier() {
         };
 
         try {
-            const response = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/soldiers/${soldier.id}`, {
+            const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/soldiers/${soldier.id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",

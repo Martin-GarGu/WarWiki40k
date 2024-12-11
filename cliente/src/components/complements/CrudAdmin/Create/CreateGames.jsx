@@ -36,7 +36,7 @@ export default function CreateGame() {
             }
 
             const response = await fetch(
-                `http://${import.meta.env.VITE_APP_PETICION_IP}/api/userUsername/${user2Name}`
+                `${import.meta.env.VITE_APP_PETICION_IP}/api/userUsername/${user2Name}`
             );
 
             const textResponse = await response.text(); // Leer el texto de la respuesta

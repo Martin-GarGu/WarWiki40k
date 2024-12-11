@@ -43,7 +43,7 @@ const CreateSquad = () => {
         };
 
         try {
-            const response = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/squads/create`, {
+            const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/squads/create`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

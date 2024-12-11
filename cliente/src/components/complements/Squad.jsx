@@ -25,7 +25,7 @@ export default function Squad() {
         const squadId = squad.id; // ID del escuadrón
 
         try {
-            const response = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/create`, {
+            const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/create`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -55,7 +55,7 @@ export default function Squad() {
         if (!user) return; // Si no hay usuario logueado, no comprobamos favoritos
 
         try {
-            const response = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/check`, {
+            const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/check`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -85,7 +85,7 @@ export default function Squad() {
 
             try {
                 // Obtener los datos del escuadrón
-                const squadResponse = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/squads/${slug}`);
+                const squadResponse = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/squads/${slug}`);
                 if (!squadResponse.ok) {
                     throw new Error(`Error HTTP al obtener datos del escuadrón: ${squadResponse.status}`);
                 }
@@ -94,7 +94,7 @@ export default function Squad() {
 
                 // Obtener los soldados del escuadrón
                 const soldiersResponse = await fetch(
-                    `http://${import.meta.env.VITE_APP_PETICION_IP}/api/soldiersSquadron/${slug}`
+                    `${import.meta.env.VITE_APP_PETICION_IP}/api/soldiersSquadron/${slug}`
                 );
                 if (!soldiersResponse.ok) {
                     throw new Error(`Error HTTP al obtener soldados: ${soldiersResponse.status}`);

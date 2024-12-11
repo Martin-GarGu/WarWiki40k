@@ -24,7 +24,7 @@ export default function UpdateSoldierMenu() {
     const fetchSoldiers = async () => {
         let isMounted = true; // Para verificar si el componente sigue montado
         try {
-            const respuesta = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/soldiers`, {
+            const respuesta = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/soldiers`, {
                 method: "GET",
             });
 

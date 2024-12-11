@@ -40,7 +40,7 @@ const Registro = () => {
   async function emailBD() {
     try {
       const response = await fetch(
-        `http://${import.meta.env.VITE_APP_PETICION_IP}/api/buscarEmail/${email}`,
+        `${import.meta.env.VITE_APP_PETICION_IP}/api/buscarEmail/${email}`,
         { method: "GET" }
       );
 
@@ -72,7 +72,7 @@ const Registro = () => {
 
     try {
       const response = await fetch(
-        `http://${import.meta.env.VITE_APP_PETICION_IP}/api/register`,
+        `${import.meta.env.VITE_APP_PETICION_IP}/api/register`,
         {
           method: "POST",
           headers: {

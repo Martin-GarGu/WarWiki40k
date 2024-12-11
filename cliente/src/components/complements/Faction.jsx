@@ -17,7 +17,7 @@ export default function Faction() {
     // Función para agregar la facción a favoritos
     const addToFavorites = async () => {
         try {
-            const response = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/create`, {
+            const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/create`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -44,7 +44,7 @@ export default function Faction() {
     // Función para verificar si la facción ya está en favoritos
     const checkFavorite = async () => {
         try {
-            const response = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/check`, {
+            const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/check`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -67,7 +67,7 @@ export default function Faction() {
         // Obtenemos los datos de la facción usando el slug de la URL
         const fetchFactionData = async () => {
             try {
-                const response = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/factions/${slug}`);
+                const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/factions/${slug}`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -76,7 +76,7 @@ export default function Faction() {
 
                 // Obtenemos los ejércitos relacionados con la facción
                 const armiesResponse = await fetch(
-                    `http://${import.meta.env.VITE_APP_PETICION_IP}/api/armies/${jsonData.data.id}`
+                    `${import.meta.env.VITE_APP_PETICION_IP}/api/armies/${jsonData.data.id}`
                 );
                 if (!armiesResponse.ok) {
                     throw new Error(`HTTP error! status: ${armiesResponse.status}`);

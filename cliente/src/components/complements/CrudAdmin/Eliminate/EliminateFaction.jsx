@@ -26,7 +26,7 @@ const EliminateFaction = () => {
     const fetchFactions = async () => {
         let isMounted = true; // Para verificar si el componente sigue montado
         try {
-            const respuesta = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/factions`, {
+            const respuesta = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/factions`, {
                 method: "GET",
             });
 
@@ -61,7 +61,7 @@ const EliminateFaction = () => {
         try {
             // Realiza la solicitud DELETE al backend
             const response = await fetch(
-                `http://${import.meta.env.VITE_APP_PETICION_IP}/api/factions/delete/${id}`,
+                `${import.meta.env.VITE_APP_PETICION_IP}/api/factions/delete/${id}`,
                 {
                     method: "DELETE",
                 }

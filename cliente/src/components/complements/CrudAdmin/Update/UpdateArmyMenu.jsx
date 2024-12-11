@@ -26,7 +26,7 @@ const UpdateArmyMenu = () => {
     const fetchArmies = async () => {
         let isMounted = true; // Para verificar si el componente sigue montado
         try {
-            const respuesta = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/armies`, {
+            const respuesta = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/armies`, {
                 method: "GET",
             });
 

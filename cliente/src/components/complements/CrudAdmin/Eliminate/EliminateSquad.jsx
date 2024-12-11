@@ -28,7 +28,7 @@ const EliminateSquad = () => {
     const fetchSquads = async () => {
         let isMounted = true; // Para verificar si el componente sigue montado
         try {
-            const respuesta = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/squads`, {
+            const respuesta = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/squads`, {
                 method: "GET",
             });
 
@@ -63,7 +63,7 @@ const EliminateSquad = () => {
         try {
             // Realiza la solicitud DELETE al backend
             const response = await fetch(
-                `http://${import.meta.env.VITE_APP_PETICION_IP}/api/squads/delete/${id}`,
+                `${import.meta.env.VITE_APP_PETICION_IP}/api/squads/delete/${id}`,
                 {
                     method: "DELETE",
                 }

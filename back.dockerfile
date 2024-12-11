@@ -32,4 +32,4 @@ COPY sitio_laravel.conf /etc/apache2/sites-available
 RUN a2ensite sitio_laravel.conf
 
 RUN a2enmod rewrite
-EXPOSE 8000
+EXPOSE 80

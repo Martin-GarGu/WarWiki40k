@@ -53,7 +53,7 @@ function Login() {
         setLoading(true);
 
         try {
-            const response = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/login`, {
+            const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/login`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email, password }),

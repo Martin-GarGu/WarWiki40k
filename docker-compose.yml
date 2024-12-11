@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: back.dockerfile
     ports:
-      - "8000:8000"
+      - "8000:80"
     restart: always
     depends_on:
       - db

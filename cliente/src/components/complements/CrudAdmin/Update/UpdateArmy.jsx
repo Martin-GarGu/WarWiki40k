@@ -46,7 +46,7 @@ export default function UpdateArmy() {
         };
 
         try {
-            const response = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/armies/${army.id}`, {
+            const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/armies/${army.id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",

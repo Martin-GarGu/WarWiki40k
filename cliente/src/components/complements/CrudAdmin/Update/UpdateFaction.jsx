@@ -45,7 +45,7 @@ export default function UpdateFaction() {
         };
 
         try {
-            const response = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/factions/${faction.id}`, {
+            const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/factions/${faction.id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",

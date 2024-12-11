@@ -70,7 +70,7 @@ function Collapsible() {
                   Reglas
                 </Nav.Link>
                 <Nav.Link href="/specialRules" className="fs-5 text-center">
-                  Reglas Especiales Armas
+                  Reglas especiales
                 </Nav.Link>
               </>
             )}

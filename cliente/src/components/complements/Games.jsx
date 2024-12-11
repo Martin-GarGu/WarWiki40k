@@ -23,7 +23,7 @@ export default function Games() {
 
     const fetchGames = async (userId) => {
         try {
-            const response = await fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/games/${userId}`);
+            const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/games/${userId}`);
             if (!response.ok) {
                 throw new Error("Error al obtener las partidas");
             }
@@ -51,7 +51,7 @@ export default function Games() {
     const fetchUsernames = async (userIds) => {
         try {
             const requests = userIds.map((id) =>
-                fetch(`http://${import.meta.env.VITE_APP_PETICION_IP}/api/userId/${id}`)
+                fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/userId/${id}`)
             );
             const responses = await Promise.all(requests);
 
@@ -72,7 +72,7 @@ export default function Games() {
     const handleEliminate = async (id) => {
         try {
             const response = await fetch(
-                `http://${import.meta.env.VITE_APP_PETICION_IP}/api/games/delete/${id}`,
+                `${import.meta.env.VITE_APP_PETICION_IP}/api/games/delete/${id}`,
                 { method: "DELETE" }
             );
 

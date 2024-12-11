@@ -11,49 +11,63 @@
   background-color: #54763c;
 }
 
-/* src/Carousel.css */
 .carousel {
+  background: #1a1a1a;
+  color: #d4af37;
+  padding: 20px;
+  border: 2px solid #444;
+  border-radius: 10px;
   position: relative;
-  max-width: 100%;
-  overflow: hidden;
-  text-align: center;
 }
-
-.carousel__btn {
+.carousel .carousel__btn--prev,
+.carousel .carousel__btn--next {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
   font-size: 1.5rem;
-  border: none;
-  padding: 1rem;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #333;
+  border: 2px solid #666;
+  color: #d4af37;
   cursor: pointer;
-  z-index: 1;
-  transition: background-color 0.3s;
+  z-index: 10;
 }
-
-.carousel__btn:hover {
-  background-color: rgba(0, 0, 0, 0.8);
+.carousel .carousel__btn--prev:hover,
+.carousel .carousel__btn--next:hover {
+  background: #444;
+  color: #fff;
+  border-color: #d4af37;
 }
-
-.carousel__btn--prev {
-  left: 0;
+.carousel .carousel__btn--prev i,
+.carousel .carousel__btn--next i {
+  font-size: 1.5rem;
 }
-
-.carousel__btn--next {
-  right: 0;
+.carousel .carousel__btn--prev {
+  left: 10px;
 }
-
-.carousel__img {
+.carousel .carousel__btn--next {
+  right: 10px;
+}
+.carousel img {
+  border: 3px solid #d4af37;
+  min-height: 200px;
+  max-height: 300px;
+  -o-object-fit: cover;
+     object-fit: cover;
   width: 100%;
-  height: auto;
-  display: block;
-  transition: transform 0.3s ease-in-out;
+}
+.carousel h5 {
+  font-family: "Cinzel", serif;
+  font-weight: bold;
+  text-align: center;
 }
 
-.carousel__img:hover {
-  transform: scale(1.05);
+.alert {
+  font-family: "Cinzel", serif;
 }
 
 /* Contenedor general de cada card */
@@ -108,92 +122,2526 @@
   justify-content: center; /* Centra las cards en el contenedor */
 }
 
-.container {
-  margin: 0 auto; /* Centrar el contenedor horizontalmente */
-  padding: 1rem; /* Espacio interior para el contenedor */
-  justify-content: center;
-}
-
-.squadsDivDatos {
-  width: 100%;
-}
-
-.squad-card {
-  margin-bottom: 1rem; /* Espacio entre las tarjetas */
-  border: 2px solid #ccc; /* Borde exterior de la tarjeta */
-  border-radius: 8px; /* Bordes redondeados para la tarjeta */
-  background-color: #fff; /* Fondo blanco para la tarjeta */
-  overflow: hidden; /* Evitar que los elementos internos sobresalgan */
-  box-shadow: none; /* Eliminar sombras de Bootstrap */
-  width: 100vh;
-}
-
-.custom-card {
-  border: none; /* Eliminar el borde de Bootstrap */
-  border-radius: 0; /* Ajustar bordes redondeados si es necesario */
-  background-color: transparent; /* Asegurarte de que no haya un fondo por defecto */
-}
-
-.squad-card-content {
-  padding: 1rem; /* Espacio interior para el contenido de la tarjeta */
-  background-color: #f9f9f9; /* Fondo gris claro para el contenido */
-  border-radius: 8px; /* Bordes redondeados para el contenido (opcional) */
-  width: -moz-max-content;
-  width: max-content;
-}
-
-.squad-card-image {
-  width: 150px; /* Ancho de la imagen */
-  height: auto; /* Mantener la proporción de la imagen */
-  border-radius: 8px; /* Bordes redondeados para la imagen */
-}
-
-.squad-card-title {
-  font-size: 1.5rem; /* Tamaño de fuente para el título */
-  margin-bottom: 0.5rem; /* Espacio debajo del título */
-}
-
-.squad-card-weapons {
-  margin-top: 1rem; /* Espacio entre el contenido y la tabla de armas */
-}
-
-.squad-card-table {
-  width: 100%; /* Ancho completo de la tabla */
-  border-collapse: collapse; /* Colapsar bordes de la tabla */
-}
-
-.squad-card-table th, .squad-card-table td {
-  border: 1px solid #ddd; /* Bordes de las celdas */
-  padding: 8px; /* Espacio interior en las celdas */
-  text-align: left; /* Alinear texto a la izquierda */
-}
-
-.squad-card-footer {
-  margin-top: 1rem; /* Espacio entre la tabla de armas y el pie de la tarjeta */
-  font-size: 0.9rem; /* Tamaño de fuente más pequeño para el footer */
-  color: #777; /* Color de texto gris */
-}
-
-.squad-keywords {
-  display: inline; /* Asegura que las keywords se alineen en una línea */
-  margin: 0; /* Sin márgenes para las palabras clave */
-}
-
+/* src/styles/scss/footer.scss */
 .footer {
-  display: flex;
-  width: 100%;
-  background-color: #54763c;
-  color: #fff;
-  text-align: center;
-  grid-row-start: 3;
-  grid-row-end: 4;
+  background-color: #1a1a1a;
+  color: #d4af37;
+  padding: 20px 0;
+  border-top: 2px solid #444;
 }
-
-a {
+.footer .footer-link {
+  font-family: "Cinzel", serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #d4af37;
+  text-transform: uppercase;
   text-decoration: none;
-  color: inherit;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+.footer .footer-link:hover {
+  color: #fff;
+  transform: scale(1.1);
+}
+@media (max-width: 768px) {
+  .footer .footer-link {
+    font-size: 1rem;
+  }
 }
 
+.inicio-container {
+  padding: 20px;
+  background-color: #1a1a1a;
+  color: #d4af37;
+  min-height: 100vh;
+}
+
+.inicio-header {
+  margin-bottom: 30px;
+}
+.inicio-header .inicio-title {
+  font-family: "Cinzel", serif;
+  font-size: 2.5rem;
+  color: #d4af37;
+  text-shadow: 2px 2px #444;
+}
+
+.text-center {
+  font-size: 1.2rem;
+}
+.text-center.text-danger {
+  color: #ff4d4d;
+}
+
+.btn-primary {
+  background-color: #d4af37;
+  border-color: #444;
+  color: #1a1a1a;
+}
+.btn-primary:hover {
+  background-color: #ffc857;
+  border-color: #555;
+  color: #000;
+}
+
+#headerNavbar {
+  background-color: #1a1a1a;
+  border-bottom: 2px solid #d4af37;
+  padding: 10px 20px;
+}
+#headerNavbar .navbar-brand {
+  font-family: "Cinzel", serif;
+  color: #d4af37;
+  font-size: 1.5rem;
+  text-shadow: 1px 1px #000;
+}
+#headerNavbar .navbar-brand #logo {
+  background-image: url("../../../assets/images/logo.png");
+  background-size: cover;
+  height: 50px;
+  width: 50px;
+  display: inline-block;
+}
+#headerNavbar .nav-link {
+  color: #d4af37;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-shadow: 1px 1px #444;
+}
+#headerNavbar .nav-link:hover {
+  color: #ffc857;
+  text-decoration: underline;
+}
+#headerNavbar .nav-link.active {
+  border-bottom: 2px solid #ffc857;
+}
+#headerNavbar .navbar-toggler {
+  background-color: #d4af37;
+  border: none;
+}
+#headerNavbar .navbar-toggler:focus {
+  outline: none;
+  box-shadow: 0 0 5px #ffc857;
+}
+
+#account .nav-link {
+  margin-right: 15px;
+}
+
+/* src/styles/scss/perfil.scss */
+.perfil-container {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  color: #d4af37;
+}
+.perfil-container .perfil-header {
+  font-family: "Cinzel", serif;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #fff;
+}
+.perfil-container .perfil-details {
+  margin-bottom: 20px;
+}
+.perfil-container .perfil-details h3 {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+  color: #d4af37;
+}
+.perfil-container .perfil-details p {
+  font-size: 1rem;
+  margin: 0;
+  color: #eee;
+}
+.perfil-container .perfil-actions {
+  display: flex;
+  justify-content: space-between;
+}
+.perfil-container .perfil-actions button {
+  width: 48%;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.perfil-container .perfil-actions button:hover {
+  background-color: #d4af37;
+  color: #1a1a1a;
+  transform: scale(1.05);
+}
+
+.loading-text {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+/* src/styles/scss/specialRules.scss */
+.special-rules-container {
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  margin-bottom: 50px;
+}
+.special-rules-container .loading-text,
+.special-rules-container .error-text {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #d4af37;
+}
+.special-rules-container .special-rules-table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+.special-rules-container .special-rules-table th, .special-rules-container .special-rules-table td {
+  padding: 15px;
+  text-align: left;
+}
+.special-rules-container .special-rules-table th {
+  background-color: #d4af37;
+  color: #1a1a1a;
+  font-family: "Cinzel", serif;
+}
+.special-rules-container .special-rules-table td {
+  background-color: #333;
+  color: #eee;
+}
+.special-rules-container .special-rules-table tr:nth-child(even) td {
+  background-color: #444;
+}
+.special-rules-container .special-rules-table tr:hover td {
+  background-color: #d4af37;
+  color: #1a1a1a;
+}
+
+/* src/styles/scss/games.scss */
+.games-container {
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+.games-container h2 {
+  font-family: "Cinzel", serif;
+  color: #d4af37;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.games-container .loading-text,
+.games-container .error-text,
+.games-container .no-games-text {
+  text-align: center;
+  color: #d4af37;
+  font-size: 1.2rem;
+  margin-top: 20px;
+}
+.games-container .games-table {
+  width: 100%;
+  margin-top: 20px;
+}
+.games-container .games-table th {
+  background-color: #d4af37;
+  color: #1a1a1a;
+  text-align: center;
+}
+.games-container .games-table td {
+  color: #eee;
+  text-align: center;
+}
+.games-container .games-table tr:hover td {
+  background-color: #333;
+}
+.games-container .btn {
+  margin: 5px;
+  font-family: "Cinzel", serif;
+}
+.games-container .btn.btn-danger {
+  background-color: #ff4d4d;
+  border-color: #ff0000;
+}
+.games-container .btn.btn-danger:hover {
+  background-color: #ff0000;
+  border-color: #cc0000;
+}
+.games-container .btn.btn-primary {
+  background-color: #d4af37;
+  border-color: #b5862e;
+}
+.games-container .btn.btn-primary:hover {
+  background-color: #b5862e;
+  border-color: #8c6924;
+}
+
+.favorites-container {
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+.favorites-container h2 {
+  font-family: "Cinzel", serif;
+  color: #d4af37;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.favorites-container .loading-text,
+.favorites-container .error-text,
+.favorites-container .no-favorites-text {
+  text-align: center;
+  color: #d4af37;
+  font-size: 1.2rem;
+  margin-top: 20px;
+}
+.favorites-container .favorites-table {
+  width: 100%;
+  margin-top: 20px;
+}
+.favorites-container .favorites-table th {
+  background-color: #d4af37;
+  color: #1a1a1a;
+  text-align: center;
+}
+.favorites-container .favorites-table td {
+  color: #eee;
+  text-align: center;
+}
+.favorites-container .favorites-table tr:hover td {
+  background-color: #333;
+}
+.favorites-container .btn {
+  font-family: "Cinzel", serif;
+}
+.favorites-container .btn.btn-primary {
+  background-color: #d4af37;
+  border-color: #b5862e;
+}
+.favorites-container .btn.btn-primary:hover {
+  background-color: #b5862e;
+  border-color: #8c6924;
+}
+.favorites-container .btn.btn-danger {
+  background-color: #ff4d4d;
+  border-color: #ff0000;
+}
+.favorites-container .btn.btn-danger:hover {
+  background-color: #ff0000;
+  border-color: #cc0000;
+}
+
+.access-denied-container {
+  text-align: center;
+  padding: 50px;
+  background-color: #1a1a1a;
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.access-denied-container h1 {
+  font-family: "Cinzel", serif;
+  font-size: 3rem;
+  color: #ff4d4d;
+  margin-bottom: 20px;
+}
+.access-denied-container p {
+  font-size: 1.5rem;
+  color: #d4af37;
+  margin-bottom: 30px;
+}
+.access-denied-container .btn {
+  font-family: "Cinzel", serif;
+  background-color: #d4af37;
+  color: #1a1a1a;
+  border: 2px solid #b5862e;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.access-denied-container .btn:hover {
+  background-color: #b5862e;
+  border-color: #8c6924;
+  color: #fff;
+}
+
+.login-page {
+  background: #1c1c1c;
+  margin-top: 20px;
+  color: #d4af37;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+  border: black;
+  border-radius: 10px;
+}
+.login-page .form-container {
+  background: #2e2e2e;
+  border: 1px solid #3a3a3a;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+  padding: 30px;
+  width: 100%;
+  max-width: 400px;
+}
+.login-page .form-container h2 {
+  color: #d4af37;
+  text-align: center;
+}
+.login-page .form-container .btn-primary {
+  background-color: #d4af37;
+  border-color: #d4af37;
+  color: #1c1c1c;
+}
+.login-page .form-container .btn-primary:hover {
+  background-color: #c39c31;
+  border-color: #c39c31;
+}
+.login-page .form-container .form-control {
+  background: #2e2e2e;
+  border: 1px solid #555;
+  color: #fff;
+}
+.login-page .form-container .form-control:focus {
+  border-color: #d4af37;
+  box-shadow: 0 0 5px #d4af37;
+}
+.login-page .form-container .btn-outline-secondary {
+  color: #d4af37;
+  border-color: #555;
+}
+.login-page .form-container .btn-outline-secondary:hover {
+  color: #c39c31;
+  border-color: #777;
+}
+.login-page .form-container .input-group {
+  display: flex;
+  align-items: center;
+}
+.login-page .form-container .input-group .form-control {
+  flex: 1;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  margin-top: 0.6rem;
+}
+.login-page .form-container .input-group .input-group-text {
+  background: #2e2e2e;
+  border: 1px solid #555;
+  color: #d4af37;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.login-page .form-container .input-group .input-group-text i {
+  font-size: 1.2rem;
+}
+.login-page .form-container .invalid-feedback {
+  color: #ff6363;
+}
+.login-page .form-container .btn-primary {
+  height: 38px;
+  width: 100%;
+  border-radius: 4px;
+}
+
+footer {
+  background-color: #2e2e2e;
+  color: #d4af37;
+  padding: 20px;
+  text-align: center;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+.container {
+  padding-bottom: 80px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.crud-admin {
+  background-color: #1e1e1e;
+  color: #d4af37;
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Centra verticalmente */
+  padding: 20px;
+}
+.crud-admin .crud-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 800px; /* Limita el ancho */
+  width: 100%;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro para resaltar el contenido */
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.8);
+}
+.crud-admin h1 {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+}
+.crud-admin .crud-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.crud-admin .crud-buttons .btn {
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding: 15px 30px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+}
+.crud-admin .crud-buttons .btn.btn-primary {
+  background-color: #d4af37;
+  color: #1e1e1e;
+}
+.crud-admin .crud-buttons .btn.btn-warning {
+  background-color: #f39c12;
+  color: #1e1e1e;
+}
+.crud-admin .crud-buttons .btn.btn-danger {
+  background-color: #e74c3c;
+  color: white;
+}
+.crud-admin .crud-buttons .btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7);
+}
+.crud-admin .crud-buttons .btn.btn-primary:hover {
+  background-color: #b29126;
+}
+.crud-admin .crud-buttons .btn.btn-warning:hover {
+  background-color: #c87f0a;
+}
+.crud-admin .crud-buttons .btn.btn-danger:hover {
+  background-color: #d62c1a;
+}
+
+@media (max-width: 768px) {
+  .crud-admin {
+    padding: 15px;
+  }
+  .crud-buttons {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .btn {
+    width: 100%;
+  }
+}
+/* General */
+body {
+  background-color: #121212;
+  font-family: "Arial", sans-serif;
+  color: #e0e0e0;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+/* Contenedor principal */
+.create-menu-container {
+  max-width: 600px;
+  margin: 30px auto;
+  background-color: #1e1e1e;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5);
+  overflow: hidden; /* Para no mostrar el contenido fuera del contenedor */
+}
+
+/* Título */
+.create-menu-container h1 {
+  font-size: 28px;
+  font-weight: bold;
+  color: #ffcc00;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+/* Estilo de los botones */
+.create-menu-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Estilo de los botones */
+button {
+  background-color: #8b0000;
+  color: #fff;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background-color 0.3s;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+button:hover {
+  background-color: #ff3333;
+}
+
+/* Añadir el enfoque y estilo de las barras de desplazamiento si hay muchas opciones en el formulario o contenedor */
+.create-menu-buttons {
+  overflow-y: auto; /* Permite el scroll si el contenido es muy largo */
+  padding-right: 10px; /* Espacio para la barra de scroll */
+  max-height: 300px; /* Limita la altura para agregar el scroll */
+}
+
+.create-form {
+  background-color: #1e1e1e;
+  color: #d4af37;
+  font-family: "Roboto", sans-serif;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.8);
+  max-width: 600px;
+  margin: 50px auto;
+  height: auto;
+  overflow-y: auto;
+  max-height: 80vh;
+}
+.create-form .form-group {
+  margin-bottom: 20px;
+}
+.create-form label {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+.create-form input, .create-form select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #d4af37;
+  background-color: #333;
+  color: #d4af37;
+  font-size: 1rem;
+}
+.create-form input:focus, .create-form select:focus {
+  border-color: #f39c12;
+  outline: none;
+}
+.create-form .btn-submit {
+  background-color: #d4af37;
+  color: #1e1e1e;
+  padding: 15px 30px;
+  border-radius: 5px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s;
+}
+.create-form .btn-submit:hover {
+  background-color: #b29126;
+}
+.create-form .error-message, .create-form .success-message {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 10px;
+}
+.create-form .error-message {
+  color: #e74c3c;
+}
+.create-form .success-message {
+  color: green;
+}
+@media (max-width: 768px) {
+  .create-form {
+    padding: 20px;
+    max-width: 100%;
+  }
+}
+
+.create-game-form {
+  background-color: #1e1e1e;
+  color: #d4af37;
+  font-family: "Roboto", sans-serif;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.8);
+  max-width: 600px;
+  margin: 50px auto;
+  height: auto;
+  overflow-y: auto;
+  max-height: 80vh;
+  margin-bottom: 30px;
+}
+.create-game-form .form-group {
+  margin-bottom: 20px;
+}
+.create-game-form label {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+.create-game-form input, .create-game-form select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #d4af37;
+  background-color: #333;
+  color: #d4af37;
+  font-size: 1rem;
+}
+.create-game-form input:focus, .create-game-form select:focus {
+  border-color: #f39c12;
+  outline: none;
+}
+.create-game-form .btn-submit {
+  background-color: #d4af37;
+  color: #1e1e1e;
+  padding: 15px 30px;
+  border-radius: 5px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s;
+}
+.create-game-form .btn-submit:hover {
+  background-color: #b29126;
+}
+.create-game-form .error-message, .create-game-form .success-message {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 10px;
+}
+.create-game-form .error-message {
+  color: #e74c3c;
+}
+.create-game-form .success-message {
+  color: green;
+}
+@media (max-width: 768px) {
+  .create-game-form {
+    padding: 20px;
+    max-width: 100%;
+  }
+}
+
+.update-menu-container {
+  background-color: #1e1e1e;
+  color: #d4af37;
+  padding: 30px;
+  border-radius: 8px;
+  max-width: 800px;
+  margin: 40px auto;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+}
+.update-menu-container h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+.update-menu-container .crud-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.update-menu-container .crud-buttons .btn {
+  padding: 12px 25px;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s, transform 0.2s ease-in-out;
+}
+.update-menu-container .crud-buttons .btn:hover {
+  transform: scale(1.05);
+}
+.update-menu-container .crud-buttons .btn.btn-warning {
+  background-color: #e74c3c;
+  color: #1e1e1e;
+}
+.update-menu-container .crud-buttons .btn.btn-warning:hover {
+  background-color: #d62c1a;
+}
+
+@media (max-width: 768px) {
+  .update-menu-container {
+    padding: 20px;
+    margin: 20px;
+  }
+  .crud-buttons {
+    gap: 15px;
+  }
+}
+/* Estilos generales */
+body {
+  background-color: #121212; /* Fondo oscuro */
+  font-family: "Arial", sans-serif;
+  color: #e0e0e0; /* Texto claro */
+  margin: 0;
+  padding: 0;
+  text-align: center; /* Centrado global */
+}
+
+/* Contenedor principal del UpdateFactionMenu */
+.update-faction-menu-container {
+  width: 90%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #1e1e1e; /* Fondo oscuro con algo de diferencia */
+  border-radius: 10px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Título principal del UpdateFactionMenu */
+.update-faction-menu-title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #ffcc00; /* Dorado */
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+/* Botones del UpdateFactionMenu */
+.update-faction-menu-button {
+  background-color: #8b0000; /* Rojo metálico */
+  color: #f2f2f2;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px;
+  cursor: pointer;
+  text-transform: uppercase;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+.update-faction-menu-button:hover {
+  background-color: #ff3333; /* Rojo brillante */
+  box-shadow: 0px 6px 15px rgba(255, 0, 0, 0.7);
+}
+
+/* Estilo de la tabla de UpdateFactionMenu */
+.update-faction-menu-table {
+  width: 100%;
+  margin-top: 30px;
+  border-collapse: collapse;
+  border: 2px solid #333;
+  background-color: #222;
+}
+
+.update-faction-menu-table th, .update-faction-menu-table td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #444;
+}
+
+.update-faction-menu-table th {
+  background-color: #333;
+  color: #ffcc00;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.update-faction-menu-table tr:nth-child(even) {
+  background-color: #2a2a2a;
+}
+
+.update-faction-menu-table td {
+  color: #f2f2f2;
+}
+
+/* Mensajes de error y éxito para UpdateFactionMenu */
+.update-faction-menu-message {
+  margin-top: 20px;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.update-faction-menu-message.error {
+  background-color: #b30000; /* Rojo oscuro */
+}
+
+.update-faction-menu-message.success {
+  background-color: #2d6a4f; /* Verde */
+}
+
+/* Estilo de formulario de actualización de facciones */
+.update-faction-menu-form {
+  background-color: #333;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.6);
+  margin-top: 20px;
+}
+
+.update-faction-menu-form input,
+.update-faction-menu-form select {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 2px solid #444;
+  background-color: #2c2c2c;
+  color: #f2f2f2;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.update-faction-menu-form input:focus,
+.update-faction-menu-form select:focus {
+  border-color: #ffcc00; /* Borde dorado en focus */
+  outline: none;
+}
+
+/* Estilos generales */
+body {
+  background-color: #121212; /* Fondo oscuro */
+  font-family: "Arial", sans-serif;
+  color: #e0e0e0; /* Texto claro */
+  margin: 0;
+  padding: 0;
+  text-align: center; /* Centrado global */
+}
+
+/* Contenedor principal del UpdateArmyMenu */
+.update-army-menu-container {
+  width: 90%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #1e1e1e; /* Fondo oscuro */
+  border-radius: 10px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Título principal del UpdateArmyMenu */
+.update-army-menu-title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #ffcc00; /* Dorado */
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+/* Estilo de la tabla de UpdateArmyMenu */
+.update-army-menu-table {
+  width: 100%;
+  margin-top: 30px;
+  border-collapse: collapse;
+  border: 2px solid #333;
+  background-color: #222;
+}
+
+.update-army-menu-table th, .update-army-menu-table td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #444;
+}
+
+.update-army-menu-table th {
+  background-color: #333;
+  color: #ffcc00;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.update-army-menu-table tr:nth-child(even) {
+  background-color: #2a2a2a;
+}
+
+.update-army-menu-table td {
+  color: #f2f2f2;
+}
+
+/* Botones de acción de UpdateArmyMenu */
+.update-army-menu-button {
+  background-color: #8b0000; /* Rojo metálico */
+  color: #f2f2f2;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px;
+  cursor: pointer;
+  text-transform: uppercase;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+.update-army-menu-button:hover {
+  background-color: #ff3333; /* Rojo brillante */
+  box-shadow: 0px 6px 15px rgba(255, 0, 0, 0.7);
+}
+
+/* Mensajes de error y éxito para UpdateArmyMenu */
+.update-army-menu-message {
+  margin-top: 20px;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.update-army-menu-message.error {
+  background-color: #b30000; /* Rojo oscuro */
+}
+
+.update-army-menu-message.success {
+  background-color: #2d6a4f; /* Verde */
+}
+
+/* Estilos generales */
+body {
+  background-color: #121212; /* Fondo oscuro */
+  font-family: "Arial", sans-serif;
+  color: #e0e0e0; /* Texto claro */
+  margin: 0;
+  padding: 0;
+  text-align: center; /* Centrado global */
+}
+
+/* Contenedor principal del UpdateSoldierMenu */
+.update-soldier-menu-container {
+  width: 90%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #1e1e1e; /* Fondo oscuro */
+  border-radius: 10px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5);
+  overflow: hidden; /* Evitar overflow visual */
+}
+
+/* Título principal del UpdateSoldierMenu */
+.update-soldier-menu-title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #ffcc00; /* Dorado */
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+/* Contenedor para la tabla con scrollbar */
+.update-soldier-menu-table-container {
+  max-height: 400px; /* Altura máxima visible */
+  overflow-y: auto; /* Habilitar el scroll vertical */
+  overflow-x: hidden; /* Evitar scroll horizontal */
+  border: 2px solid #333; /* Borde alrededor del área de scroll */
+  border-radius: 8px;
+}
+
+/* Personalización de la scrollbar */
+.update-soldier-menu-table-container::-webkit-scrollbar {
+  width: 10px;
+}
+
+.update-soldier-menu-table-container::-webkit-scrollbar-thumb {
+  background-color: #8b0000; /* Rojo metálico */
+  border-radius: 5px;
+  border: 2px solid #1e1e1e; /* Espaciado para que parezca flotante */
+}
+
+.update-soldier-menu-table-container::-webkit-scrollbar-thumb:hover {
+  background-color: #ff3333; /* Rojo brillante */
+}
+
+.update-soldier-menu-table-container::-webkit-scrollbar-track {
+  background-color: #222; /* Fondo del track */
+}
+
+/* Estilo de la tabla */
+.update-soldier-menu-table {
+  width: 100%;
+  margin: 0;
+  border-collapse: collapse;
+  background-color: #222; /* Fondo de la tabla */
+}
+
+.update-soldier-menu-table th, .update-soldier-menu-table td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #444;
+}
+
+.update-soldier-menu-table th {
+  background-color: #333;
+  color: #ffcc00; /* Dorado */
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.update-soldier-menu-table tr:nth-child(even) {
+  background-color: #2a2a2a;
+}
+
+.update-soldier-menu-table td {
+  color: #f2f2f2;
+}
+
+/* Botones de acción */
+.update-soldier-menu-button {
+  background-color: #8b0000; /* Rojo metálico */
+  color: #f2f2f2;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px;
+  cursor: pointer;
+  text-transform: uppercase;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+.update-soldier-menu-button:hover {
+  background-color: #ff3333; /* Rojo brillante */
+  box-shadow: 0px 6px 15px rgba(255, 0, 0, 0.7);
+}
+
+/* Mensajes de error y éxito */
+.update-soldier-menu-message {
+  margin-top: 20px;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.update-soldier-menu-message.error {
+  background-color: #b30000; /* Rojo oscuro */
+}
+
+.update-soldier-menu-message.success {
+  background-color: #2d6a4f; /* Verde */
+}
+
+/* Estilos generales */
+body {
+  background-color: #121212; /* Fondo oscuro */
+  font-family: "Arial", sans-serif;
+  color: #e0e0e0; /* Texto claro */
+  margin: 0;
+  padding: 0;
+  text-align: center; /* Centrado global */
+}
+
+/* Contenedor principal */
+.update-squad-menu-container {
+  width: 90%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #1e1e1e; /* Fondo oscuro */
+  border-radius: 10px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5);
+  overflow: hidden; /* Evitar overflow visual */
+}
+
+/* Título principal */
+.update-squad-menu-title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #ffcc00; /* Dorado */
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+/* Contenedor para la tabla con scrollbar */
+.update-squad-menu-table-container {
+  max-height: 400px; /* Altura máxima visible */
+  overflow-y: auto; /* Habilitar el scroll vertical */
+  overflow-x: hidden; /* Evitar scroll horizontal */
+  border: 2px solid #333; /* Borde alrededor del área de scroll */
+  border-radius: 8px;
+}
+
+/* Personalización de la scrollbar */
+.update-squad-menu-table-container::-webkit-scrollbar {
+  width: 10px;
+}
+
+.update-squad-menu-table-container::-webkit-scrollbar-thumb {
+  background-color: #8b0000; /* Rojo metálico */
+  border-radius: 5px;
+  border: 2px solid #1e1e1e; /* Espaciado para que parezca flotante */
+}
+
+.update-squad-menu-table-container::-webkit-scrollbar-thumb:hover {
+  background-color: #ff3333; /* Rojo brillante */
+}
+
+.update-squad-menu-table-container::-webkit-scrollbar-track {
+  background-color: #222; /* Fondo del track */
+}
+
+/* Estilo de la tabla */
+.update-squad-menu-table {
+  width: 100%;
+  margin: 0;
+  border-collapse: collapse;
+  background-color: #222; /* Fondo de la tabla */
+}
+
+.update-squad-menu-table th, .update-squad-menu-table td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #444;
+}
+
+.update-squad-menu-table th {
+  background-color: #333;
+  color: #ffcc00; /* Dorado */
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.update-squad-menu-table tr:nth-child(even) {
+  background-color: #2a2a2a;
+}
+
+.update-squad-menu-table td {
+  color: #f2f2f2;
+}
+
+/* Botones de acción */
+.update-squad-menu-button {
+  background-color: #8b0000; /* Rojo metálico */
+  color: #f2f2f2;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px;
+  cursor: pointer;
+  text-transform: uppercase;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+.update-squad-menu-button:hover {
+  background-color: #ff3333; /* Rojo brillante */
+  box-shadow: 0px 6px 15px rgba(255, 0, 0, 0.7);
+}
+
+/* Mensajes de error y éxito */
+.update-squad-menu-message {
+  margin-top: 20px;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.update-squad-menu-message.error {
+  background-color: #b30000; /* Rojo oscuro */
+}
+
+.update-squad-menu-message.success {
+  background-color: #2d6a4f; /* Verde */
+}
+
+/* General */
+body {
+  background-color: #121212;
+  font-family: "Arial", sans-serif;
+  color: #e0e0e0;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+/* Contenedor principal */
+.update-army-container {
+  max-width: 600px;
+  margin: 30px auto;
+  background-color: #1e1e1e;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Título */
+.update-army-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #ffcc00;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+/* Formulario */
+.update-army-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input, textarea {
+  background-color: #2a2a2a;
+  border: 2px solid #444;
+  color: #e0e0e0;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+textarea {
+  resize: none;
+  height: 80px;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #ffcc00;
+}
+
+/* Mensajes */
+.error-message {
+  background-color: #b30000;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.success-message {
+  background-color: #2d6a4f;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Botón */
+.update-army-button {
+  background-color: #8b0000;
+  color: #fff;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background-color 0.3s;
+}
+
+.update-army-button:hover {
+  background-color: #ff3333;
+}
+
+/* General */
+body {
+  background-color: #121212;
+  font-family: "Arial", sans-serif;
+  color: #e0e0e0;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+/* Contenedor principal */
+.update-faction-container {
+  max-width: 600px;
+  margin: 30px auto;
+  background-color: #1e1e1e;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Título */
+.update-faction-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #ffcc00;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+/* Formulario */
+.update-faction-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input, textarea {
+  background-color: #2a2a2a;
+  border: 2px solid #444;
+  color: #e0e0e0;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+textarea {
+  resize: none;
+  height: 80px;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #ffcc00;
+}
+
+/* Mensajes */
+.error-message {
+  background-color: #b30000;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.success-message {
+  background-color: #2d6a4f;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Botón */
+.update-faction-button {
+  background-color: #8b0000;
+  color: #fff;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background-color 0.3s;
+}
+
+.update-faction-button:hover {
+  background-color: #ff3333;
+}
+
+/* General */
+body {
+  background-color: #121212;
+  font-family: "Arial", sans-serif;
+  color: #e0e0e0;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+/* Contenedor principal */
+.update-squad-container {
+  max-width: 600px;
+  margin: 30px auto;
+  background-color: #1e1e1e;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Título */
+.update-squad-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #ffcc00;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+/* Formulario */
+.update-squad-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input, textarea {
+  background-color: #2a2a2a;
+  border: 2px solid #444;
+  color: #e0e0e0;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+textarea {
+  resize: none;
+  height: 80px;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #ffcc00;
+}
+
+/* Mensajes */
+.error-message {
+  background-color: #b30000;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.success-message {
+  background-color: #2d6a4f;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Botón */
+.update-squad-button {
+  background-color: #8b0000;
+  color: #fff;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background-color 0.3s;
+}
+
+.update-squad-button:hover {
+  background-color: #ff3333;
+}
+
+/* General */
+body {
+  background-color: #121212;
+  font-family: "Arial", sans-serif;
+  color: #e0e0e0;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+/* Contenedor principal */
+.update-soldier-container {
+  max-width: 600px;
+  margin: 30px auto;
+  background-color: #1e1e1e;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5);
+  overflow: hidden; /* Para no mostrar el contenido fuera del contenedor */
+}
+
+/* Título */
+.update-soldier-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #ffcc00;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+/* Estilo del formulario */
+.update-soldier-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-height: 400px; /* Ajustar el alto máximo según el contenido */
+  overflow-y: auto; /* Permite el scroll vertical */
+  padding-right: 10px; /* Espacio extra para la barra de scroll */
+}
+
+/* Estilos de los campos del formulario */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input, select {
+  background-color: #2a2a2a;
+  border: 2px solid #444;
+  color: #e0e0e0;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+select {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none; /* Elimina la flecha predeterminada del select en algunos navegadores */
+}
+
+textarea {
+  resize: none;
+  height: 80px;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #ffcc00;
+}
+
+/* Mensajes */
+.error-message {
+  background-color: #b30000;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.success-message {
+  background-color: #2d6a4f;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Botón */
+.update-soldier-button {
+  background-color: #8b0000;
+  color: #fff;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background-color 0.3s;
+}
+
+.update-soldier-button:hover {
+  background-color: #ff3333;
+}
+
+/* General */
+body {
+  background-color: #121212;
+  font-family: "Arial", sans-serif;
+  color: #e0e0e0;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+/* Contenedor principal */
+.eliminate-menu-container {
+  max-width: 600px;
+  margin: 30px auto;
+  background-color: #1e1e1e;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Título */
+.eliminate-menu-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #ff3333; /* Rojo para eliminar */
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+/* Botones */
+.crud-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+button {
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background-color 0.3s;
+}
+
+button.btn-danger {
+  background-color: #d9534f; /* Rojo */
+  color: #fff;
+}
+
+button.btn-danger:hover {
+  background-color: #c9302c; /* Rojo más oscuro al pasar el ratón */
+}
+
+/* Mensajes */
+.error-message {
+  background-color: #b30000;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.success-message {
+  background-color: #2d6a4f;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Contenedor principal */
+.eliminate-army-container {
+  width: 80%; /* Ajusta el ancho al 80% de la pantalla */
+  max-width: 1000px; /* Ancho máximo para que no se estire demasiado */
+  min-width: 600px; /* Ancho mínimo para que no sea muy pequeña */
+  margin: 50px auto; /* Centra el contenedor horizontalmente */
+  background-color: #1e1e1e;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Mensajes de carga y error */
+.loading-message,
+.error-message {
+  font-size: 16px;
+  color: #ff3333;
+  margin: 10px 0;
+}
+
+/* Contenedor de la tabla con scroll */
+.table-container {
+  max-height: 400px; /* Altura máxima para el contenedor */
+  overflow-y: auto; /* Habilita el scroll vertical cuando el contenido exceda */
+  margin-top: 20px;
+}
+
+/* Tabla */
+table {
+  width: 100%; /* La tabla ocupa el 100% del contenedor, pero no de la pantalla */
+  border-collapse: collapse;
+  text-align: center;
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.6);
+  table-layout: fixed; /* Asegura que las celdas no se estiren excesivamente */
+}
+
+/* Cabezera de la tabla */
+th, td {
+  padding: 12px;
+  border-bottom: 1px solid #444;
+}
+
+th {
+  background-color: #333;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+td {
+  color: #e0e0e0;
+}
+
+/* Botones */
+button {
+  background-color: #d32f2f;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #ff3333;
+}
+
+/* Centrado de los elementos dentro del contenedor */
+.eliminate-army-container h1 {
+  text-align: center;
+  font-size: 24px;
+  color: #ffcc00;
+  margin-bottom: 20px;
+}
+
+/* Centrado de las filas de la tabla */
+table tr {
+  text-align: center;
+}
+
+/* Contenedor principal */
+.eliminate-faction-container {
+  width: 80%; /* Ajusta el ancho al 80% de la pantalla */
+  max-width: 1000px; /* Ancho máximo para que no se estire demasiado */
+  min-width: 600px; /* Ancho mínimo para que no sea muy pequeña */
+  margin: 50px auto; /* Centra el contenedor horizontalmente */
+  background-color: #1e1e1e;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Mensajes de carga y error */
+.loading-message,
+.error-message {
+  font-size: 16px;
+  color: #ff3333;
+  margin: 10px 0;
+}
+
+/* Contenedor de la tabla con scroll */
+.table-container {
+  max-height: 400px; /* Altura máxima para el contenedor */
+  overflow-y: auto; /* Habilita el scroll vertical cuando el contenido exceda */
+  margin-top: 20px;
+  border-radius: 8px;
+  background-color: #2a2a2a;
+  padding: 10px;
+  box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+/* Tabla */
+table {
+  width: 100%; /* La tabla ocupa el 100% del contenedor, pero no de la pantalla */
+  border-collapse: collapse;
+  text-align: center;
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.6);
+  table-layout: fixed; /* Asegura que las celdas no se estiren excesivamente */
+}
+
+/* Cabezera de la tabla */
+th, td {
+  padding: 12px;
+  border-bottom: 1px solid #444;
+}
+
+th {
+  background-color: #333;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+td {
+  color: #e0e0e0;
+}
+
+/* Botones */
+button {
+  background-color: #d32f2f;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #ff3333;
+}
+
+/* Centrado de los elementos dentro del contenedor */
+.eliminate-faction-container h1 {
+  text-align: center;
+  font-size: 24px;
+  color: #ffcc00;
+  margin-bottom: 20px;
+}
+
+/* Centrado de las filas de la tabla */
+table tr {
+  text-align: center;
+}
+
+/* Contenedor principal */
+.eliminate-squad-container {
+  width: 80%; /* Ancho ajustado */
+  max-width: 1000px; /* Limita el ancho máximo */
+  min-width: 600px; /* Define un ancho mínimo */
+  margin: 50px auto; /* Centrado horizontal */
+  background-color: #1e1e1e;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Título */
+.eliminate-squad-container h2 {
+  text-align: center;
+  color: #ffcc00;
+  margin-bottom: 20px;
+}
+
+/* Mensaje de error */
+.error-message {
+  color: #ff3333;
+  font-size: 16px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Contenedor de la tabla */
+.table-container {
+  max-height: 400px; /* Limita la altura máxima */
+  overflow-y: auto; /* Habilita scroll vertical si es necesario */
+  border-radius: 8px;
+  background-color: #2a2a2a;
+  padding: 10px;
+  box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+/* Tabla */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.6);
+  table-layout: fixed; /* Asegura que las celdas no se deformen */
+}
+
+/* Estilo de celdas */
+th, td {
+  padding: 12px;
+  border-bottom: 1px solid #444;
+}
+
+th {
+  background-color: #333;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+td {
+  color: #e0e0e0;
+}
+
+/* Botones */
+button {
+  background-color: #d32f2f;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #ff3333;
+}
+
+/* Contenedor principal */
+.eliminate-soldier-container {
+  width: 80%; /* Ancho ajustado */
+  max-width: 1000px; /* Ancho máximo */
+  min-width: 600px; /* Ancho mínimo */
+  margin: 50px auto; /* Centrado horizontal */
+  background-color: #1e1e1e;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Título */
+.eliminate-soldier-container h2 {
+  text-align: center;
+  color: #ffcc00;
+  margin-bottom: 20px;
+}
+
+/* Mensaje de error */
+.error-message {
+  color: #ff3333;
+  font-size: 16px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Contenedor de la tabla */
+.table-container {
+  max-height: 400px; /* Limita la altura máxima */
+  overflow-y: auto; /* Habilita scroll vertical */
+  border-radius: 8px;
+  background-color: #2a2a2a;
+  padding: 10px;
+  box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+/* Tabla */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.6);
+  table-layout: fixed; /* Asegura que las celdas no se deformen */
+}
+
+/* Estilo de celdas */
+th, td {
+  padding: 12px;
+  border-bottom: 1px solid #444;
+}
+
+th {
+  background-color: #333;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+td {
+  color: #e0e0e0;
+}
+
+/* Botones */
+button {
+  background-color: #d32f2f;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #ff3333;
+}
+
+.registro-page {
+  background: #1c1c1c;
+  color: #d4af37;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border-radius: 10px;
+}
+.registro-page .formulario {
+  background: #2e2e2e;
+  border: 1px solid #3a3a3a;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+  padding: 30px;
+  width: 100%;
+  max-width: 600px;
+}
+.registro-page .formulario h3 {
+  color: #d4af37;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.registro-page .formulario .form-group {
+  margin-bottom: 20px;
+}
+.registro-page .formulario .form-group .form-control {
+  background: #2e2e2e;
+  border: 1px solid #555;
+  color: #fff;
+}
+.registro-page .formulario .form-group .form-control ::-moz-placeholder {
+  color: #d4af37;
+}
+.registro-page .formulario .form-group .form-control ::placeholder {
+  color: #d4af37;
+}
+.registro-page .formulario .form-group .form-control:focus {
+  border-color: #d4af37;
+  box-shadow: 0 0 5px #d4af37;
+}
+.registro-page .formulario .form-group .form-control.is-invalid {
+  border-color: #ff6363;
+}
+.registro-page .formulario .form-group .form-control.is-invalid:focus {
+  box-shadow: 0 0 5px #ff6363;
+}
+.registro-page .formulario .form-group .form-text {
+  color: #ff6363;
+}
+.registro-page .formulario .input-group .input-group-text {
+  background: #2e2e2e;
+  border: 1px solid #555;
+  color: #d4af37;
+}
+.registro-page .formulario .input-group .input-group-text i {
+  color: #d4af37;
+  cursor: pointer;
+}
+.registro-page .formulario .btn-primary {
+  background-color: #d4af37;
+  border-color: #d4af37;
+  color: #1c1c1c;
+  height: calc(1.5em + 0.75rem + 2px);
+  /* Igualar la altura de los inputs */
+  padding: 0.375rem 0.75rem;
+  /* Ajusta el padding para alinear bien el texto */
+  font-size: 1rem;
+  display: block;
+  /* Asegura que ocupe toda la altura */
+  width: 100%;
+  /* Hazlo del mismo ancho que los inputs */
+}
+.registro-page .formulario .btn-primary:hover {
+  background-color: #c39c31;
+  border-color: #c39c31;
+}
+.registro-page .formulario .btn-primary:disabled {
+  background-color: #555;
+  color: #ccc;
+}
+.registro-page .formulario .alert {
+  margin-bottom: 20px;
+}
+.registro-page .formulario .alert.alert-success {
+  background-color: #2e7d32;
+  color: #d4af37;
+}
+.registro-page .formulario .alert.alert-danger {
+  background-color: #c62828;
+  color: #fff;
+}
+.registro-page footer {
+  background-color: #2e2e2e;
+  color: #d4af37;
+  padding: 20px;
+  text-align: center;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+.registro-page i {
+  color: #d4af37;
+}
+
+.faction-page {
+  min-height: 100vh;
+  overflow-y: auto;
+  padding: 20px;
+  background-color: #1c1c1c;
+  color: #d4af37;
+  font-family: Arial, sans-serif;
+  margin-bottom: 50px;
+}
+.faction-page img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+}
+.faction-page h1, .faction-page h2 {
+  text-align: center;
+  color: #d4af37;
+  margin-bottom: 20px;
+}
+.faction-page p {
+  line-height: 1.6;
+  font-size: 1rem;
+  margin: 10px auto;
+  text-align: justify;
+  max-width: 800px;
+}
+.faction-page .btn-primary {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #d4af37;
+  border: none;
+  color: #1c1c1c;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+.faction-page .btn-primary:hover {
+  background-color: #c39c31;
+}
+.faction-page .armies-container {
+  margin-top: 30px;
+}
+.faction-page .armies-container .card {
+  margin: 10px 0;
+  border: none;
+  background-color: #2e2e2e;
+  color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.faction-page .armies-container .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+}
+.faction-page .armies-container .card .card-image {
+  max-height: 200px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 8px 0 0 8px;
+}
+.faction-page .armies-container .card .card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
+}
+.faction-page .armies-container .card .card-content .card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0;
+  color: #d4af37;
+}
+
+.army-page {
+  min-height: 100vh;
+  overflow-y: auto;
+  padding: 20px;
+  background-color: #1c1c1c;
+  color: #d4af37;
+  font-family: Arial, sans-serif;
+  margin-bottom: 50px;
+}
+.army-page img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+}
+.army-page h1,
+.army-page h2 {
+  text-align: center;
+  color: #d4af37;
+  margin-bottom: 20px;
+}
+.army-page p {
+  line-height: 1.6;
+  font-size: 1rem;
+  margin: 10px auto;
+  text-align: justify;
+  max-width: 800px;
+}
+.army-page .btn-primary {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #d4af37;
+  border: none;
+  color: #1c1c1c;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+.army-page .btn-primary:hover {
+  background-color: #c39c31;
+}
+.army-page .armies-container {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+.army-page .armies-container .card-army {
+  margin: 10px 0;
+  border: none;
+  background-color: #2e2e2e;
+  color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.army-page .armies-container .card-army:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+}
+.army-page .armies-container .card-army .card-image {
+  max-height: 200px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 8px 0 0 8px;
+}
+.army-page .armies-container .card-army .card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
+}
+.army-page .armies-container .card-army .card-content .card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0;
+  color: #d4af37;
+}
+
+.squad-page {
+  min-height: 100vh;
+  overflow-y: auto;
+  padding: 20px;
+  background-color: #1c1c1c;
+  color: #d4af37;
+  font-family: Arial, sans-serif;
+  margin-bottom: 100px;
+}
+.squad-page img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+}
+.squad-page h1,
+.squad-page h2 {
+  text-align: center;
+  color: #d4af37;
+  margin-bottom: 20px;
+}
+.squad-page p {
+  line-height: 1.6;
+  font-size: 1rem;
+  margin: 10px auto;
+  text-align: justify;
+  max-width: 800px;
+}
+.squad-page .btn-primary {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #d4af37;
+  border: none;
+  color: #1c1c1c;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+.squad-page .btn-primary:hover {
+  background-color: #c39c31;
+}
+.squad-page .soldiers-container {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+.squad-page .soldiers-container .squad-card {
+  margin: 10px 0;
+  border: none;
+  background-color: #2e2e2e;
+  color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  width: calc(33% - 20px);
+}
+.squad-page .soldiers-container .squad-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+}
+.squad-page .soldiers-container .squad-card .squad-card-image {
+  width: 100%;
+  height: auto;
+  max-height: 200px;
+  /* Limita la altura máxima */
+  -o-object-fit: contain;
+     object-fit: contain;
+  /* Mantiene la relación de aspecto */
+}
+.squad-page .soldiers-container .squad-card .squad-card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
+}
+.squad-page .soldiers-container .squad-card .squad-card-content .squad-card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0;
+  color: #d4af37;
+}
+.squad-page .soldiers-container .squad-card .squad-card-body {
+  padding: 15px;
+}
+.squad-page .soldiers-container .squad-card .squad-card-footer {
+  padding: 10px;
+  background-color: #333;
+  border-radius: 0 0 8px 8px;
+  font-size: 0.9rem;
+}
+.squad-page .squad-card-table {
+  width: 100%;
+  margin-top: 10px;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  background-color: #333;
+}
+.squad-page .squad-card-table th,
+.squad-page .squad-card-table td {
+  padding: 8px;
+  text-align: left;
+  border: 1px solid #444;
+}
+.squad-page .squad-card-table th {
+  background-color: #444;
+  color: #d4af37;
+}
+.squad-page .squad-card-table td {
+  background-color: #2e2e2e;
+  color: #fff;
+}
+.squad-page .squad-keywords {
+  color: #d4af37;
+  font-size: 0.9rem;
+}
+
+.rules-container {
+  padding: 20px;
+  background-color: #f4f4f4;
+  color: #333;
+  font-family: Arial, sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.rules-container .rules-image {
+  display: block;
+  max-width: 80%;
+  height: auto;
+  margin: 30px auto;
+  border-radius: 8px;
+}
+.rules-container .rules-title {
+  font-size: 1.8rem;
+  color: #d4af37;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 30px;
+}
+.rules-container .rules-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #555;
+  text-align: justify;
+  margin: 0 20px 20px 20px;
+}
+.rules-container ul.rules-list {
+  list-style-type: disc;
+  padding-left: 40px;
+  margin: 0 auto;
+}
+.rules-container ul.rules-list li {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 768px) {
+  .rules-container {
+    padding: 10px;
+  }
+  .rules-title {
+    font-size: 1.5rem;
+  }
+  .rules-text {
+    font-size: 0.9rem;
+    margin: 0 10px 15px 10px;
+  }
+  .rules-image {
+    max-width: 90%;
+  }
+  ul.rules-list {
+    padding-left: 30px;
+  }
+}
 #logo {
   width: 60px;
   height: 60px;
@@ -207,6 +2655,19 @@ body {
   grid-template-rows: auto 1fr auto;
   min-height: 100vh;
   width: 100%;
+  margin-bottom: 20px;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+}
+
+#root {
+  height: 100%;
 }
 
 .root {
