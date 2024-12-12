@@ -16,7 +16,6 @@ function Login() {
     const navigate = useNavigate();
 
     const emailRegEx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const enieRegEx = /ñ|Ñ/;
 
     const handleRedirection = () => {
         navigate("/");
@@ -32,14 +31,11 @@ function Login() {
         } else if (!emailRegEx.test(email)) {
             setErrorEmail({ color: true, text: "Formato de correo no válido" });
             isValid = false;
-        } else if (enieRegEx.test(email)) {
-            setErrorEmail({ color: true, text: "El carácter 'ñ' no está permitido" });
-            isValid = false;
         } else {
             setErrorEmail({ color: false, text: "" });
         }
 
-        if (!password) {
+        if (!password.trim()) {
             setErrorPassword({ color: true, text: "La contraseña es obligatoria" });
             isValid = false;
         } else {
@@ -59,9 +55,13 @@ function Login() {
                 body: JSON.stringify({ email, password }),
             });
 
+            if (!response.ok) {
+                throw new Error("Correo o contraseña incorrectos");
+            }
+
             const data = await response.json();
 
-            if (response.ok && data.token && data.user) {
+            if (data.token && data.user) {
                 localStorage.setItem("token", data.token);
                 localStorage.setItem("user", JSON.stringify(data.user));
 
@@ -71,11 +71,11 @@ function Login() {
 
                 setTimeout(handleRedirection, 3000);
             } else {
-                throw new Error(data.message || "Credenciales incorrectas");
+                throw new Error("Correo o contraseña incorrectos");
             }
         } catch (error) {
             setAlertVariant("danger");
-            setAlertMessage(error.message || "Error al iniciar sesión");
+            setAlertMessage("Correo o contraseña incorrectos");
             setShowAlert(true);
         } finally {
             setLoading(false);
@@ -114,9 +114,7 @@ function Login() {
                                     <input
                                         type="email"
                                         id="email"
-                                        className={`form-control ${
-                                            errorEmail.color ? "is-invalid" : ""
-                                        }`}
+                                        className={`form-control ${errorEmail.color ? "is-invalid" : ""}`}
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value.toLowerCase())}
                                     />
@@ -132,9 +130,7 @@ function Login() {
                                         <input
                                             type={showPassword ? "text" : "password"}
                                             id="password"
-                                            className={`form-control ${
-                                                errorPassword.color ? "is-invalid" : ""
-                                            }`}
+                                            className={`form-control ${errorPassword.color ? "is-invalid" : ""}`}
                                             value={password}
                                             onChange={(e) => setPassword(e.target.value)}
                                         />
@@ -143,16 +139,12 @@ function Login() {
                                             className="btn btn-outline-secondary"
                                             onClick={() => setShowPassword(!showPassword)}
                                         >
-                                            <i
-                                                className={`fa-solid fa-eye${
-                                                    showPassword ? "-slash" : ""
-                                                }`}
-                                            ></i>
+                                            <i className={`fa-solid fa-eye${showPassword ? "-slash" : ""}`}></i>
                                         </button>
+                                        {errorPassword.text && (
+                                            <div className="invalid-feedback">{errorPassword.text}</div>
+                                        )}
                                     </div>
-                                    {errorPassword.text && (
-                                        <div className="invalid-feedback">{errorPassword.text}</div>
-                                    )}
                                 </div>
                                 <div className="d-grid">
                                     <button type="submit" className="btn btn-primary">

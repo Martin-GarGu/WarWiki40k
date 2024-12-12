@@ -56,6 +56,7 @@ Route::post("/squads/create", [SquadronController::class, 'store']);
 
 Route::put('/factions/{id}',[FactionController::class,'updateById']);
 Route::put('/armies/{id}',[ArmyController::class,'updateById']);
+Route::put('/gamesUpdate/{id}',[GameController::class,'updateById']);
 Route::put('/soldiers/{id}',[SoldierController::class,'updateById']);
 Route::put('/weapons/{weapon}',[WeaponController::class,'update']);
 Route::put('/specialrules/{specialrule}',[SpecialruleController::class,'update']);

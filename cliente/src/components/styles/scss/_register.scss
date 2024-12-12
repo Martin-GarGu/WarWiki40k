@@ -27,13 +27,13 @@
             margin-bottom: 20px;
 
             .form-control {
-                background: #2e2e2e;
+                // background: #2e2e2e;
                 border: 1px solid #555;
                 color: #fff;
-
-                ::placeholder {
-                    color: #d4af37;
-                }
+                
+                // ::placeholder {
+                //     color: #d4af37;
+                // }
 
                 &:focus {
                     border-color: #d4af37;

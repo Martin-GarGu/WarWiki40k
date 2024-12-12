@@ -39,6 +39,7 @@ import UpdateSoldier from './components/complements/CrudAdmin/Update/UpdateSoldi
 import Rules from './components/complements/Rules.jsx';
 import SpecialRules from './components/complements/SpecialRules.jsx';
 import AccessDenied from './components/complements/AccessDenied.jsx';
+import UpdateGame from './components/complements/UpdateGame.jsx';
 
 function App() {
   const headerRef = useRef(null);
@@ -57,7 +58,7 @@ function App() {
     <>
       <BrowserRouter>
         <Header ref={headerRef} className="w-100"></Header>
-        <div className="routes-container" style={{ minHeight: routeHeight }}>
+        <div id="scroll-container" className="routes-container" style={{ minHeight: routeHeight, overflowY: "auto" }}>
           <Routes>
             <Route path="/" element={<Inicio />} />
             <Route
@@ -189,6 +190,10 @@ function App() {
             <Route
               path='/update/armyMenu'
               element={<UpdateArmyMenu />}
+            />
+            <Route
+              path='/update/game'
+              element={<UpdateGame/>}
             />
             <Route
               path='/update/squadMenu'

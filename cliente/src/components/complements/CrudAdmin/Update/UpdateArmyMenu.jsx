@@ -58,7 +58,7 @@ const UpdateArmyMenu = () => {
     };
 
     const handleUpdate = async (army) => {
-        navigate("/update/army", {state:{army}});
+        navigate("/update/army", { state: { army } });
     };
 
     return (
@@ -70,26 +70,28 @@ const UpdateArmyMenu = () => {
                 <p className="update-army-menu-message error">{error}</p>
             ) : (
                 <>
-                    <table className="update-army-menu-table">
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {armies.map((army, index) => (
-                                <tr key={index}>
-                                    <td>{army.name}</td>
-                                    <td>
-                                        <button onClick={() => handleUpdate(army)} className="update-army-menu-button">
-                                            Editar
-                                        </button>
-                                    </td>
+                    <div className="update-army-menu-table-container">
+                        <table className="update-army-menu-table">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Acciones</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {armies.map((army, index) => (
+                                    <tr key={index}>
+                                        <td>{army.name}</td>
+                                        <td>
+                                            <button onClick={() => handleUpdate(army)} className="update-army-menu-button">
+                                                Editar
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </>
             )}
         </div>

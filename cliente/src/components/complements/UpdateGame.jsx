@@ -1,64 +1,49 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
-export default function CreateGame() {
-    const [user2Name, setUser2Name] = useState(""); // Nombre del usuario2
-    const [user2Id, setUser2Id] = useState(0); // ID del usuario2
-    const [winner, setWinner] = useState(""); // ID del ganador
-    const [user1Points, setUser1Points] = useState(""); // Puntos de usuario1
-    const [user2Points, setUser2Points] = useState(""); // Puntos de usuario2
+export default function EditGame() {
+    const location = useLocation();
+    const game = location.state?.game || {}; // Obtener el juego desde el state o un objeto vacío
+
+    const [user2Name, setUser2Name] = useState(game.user2_name || "");
+    const [user2Id, setUser2Id] = useState(game.user2_id || 0);
+    const [winner, setWinner] = useState(game.winner === 1 ? "user1" : "user2" || "");
+    const [user1Points, setUser1Points] = useState(game.points_user1 || "");
+    const [user2Points, setUser2Points] = useState(game.points_user2 || "");
     const [errorMessage, setErrorMessage] = useState(""); // Mensaje de error
     const [successMessage, setSuccessMessage] = useState(""); // Mensaje de éxito
-    const [user1, setUser1] = useState(null); // Datos del usuario1
+    const navigate = useNavigate();
 
-    const navigate = useNavigate(); // Hook para la redirección
-
-    // Verificar si el usuario está autenticado y cargar datos al montar el componente
     useEffect(() => {
-        try {
-            const userFromStorage = localStorage.getItem("user");
-            if (userFromStorage) {
-                setUser1(JSON.parse(userFromStorage));
-            } else {
-                navigate("/login"); // Redirige a /login si no hay usuario logueado
-            }
-        } catch (error) {
-            setErrorMessage("Error al leer los datos del usuario logueado.");
+        const userFromStorage = localStorage.getItem("user");
+        if (!userFromStorage) {
+            navigate("/login"); // Redirige al login si no hay usuario logueado
         }
-    }, [navigate]); // navigate como dependencia para evitar advertencias
+    }, [navigate]);
 
-    // Función para buscar el ID del usuario 2
-    const searchUser2ByName = async () => {
+    const fetchUser2ByName = async () => {
         try {
             if (!user2Name) {
                 setErrorMessage("Por favor, introduce un nombre de usuario para buscar.");
                 return;
             }
 
-            const response = await fetch(
-                `${import.meta.env.VITE_APP_PETICION_IP}/api/userUsername/${user2Name}`
-            );
-
-            const textResponse = await response.text(); // Leer el texto de la respuesta
-
-            const data = JSON.parse(textResponse); // Convertirlo a JSON
+            const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/userUsername/${user2Name}`);
+            const data = await response.json();
 
             if (response.ok && data.data && data.data.id) {
-                const newUserId = data.data.id;
-                setUser2Id(newUserId); // Actualiza el estado
-                console.log(newUserId);
-                setErrorMessage(""); // Limpiar errores
+                setUser2Id(data.data.id);
+                setErrorMessage("");
             } else {
                 throw new Error(data.message || "No se encontró el usuario.");
             }
         } catch (error) {
             console.error("Error:", error.message);
             setErrorMessage(error.message || "Error al buscar el usuario.");
-            setUser2Id(null); // Limpiar el ID del usuario 2
+            setUser2Id(null); // Limpiar el ID del usuario 2 si no se encuentra
         }
     };
 
-    // Manejo del envío del formulario
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -66,58 +51,52 @@ export default function CreateGame() {
         setSuccessMessage("");
 
         // Verificar que todos los campos estén completos
-        if (!user1 || !user2Id || !user1Points || !user2Points || !winner) {
+        if (!user2Id || !user1Points || !user2Points || !winner) {
             setErrorMessage("Por favor, completa todos los campos correctamente.");
             return;
         }
 
         // Validación de puntos
-        if ((winner === "user1" && parseInt(user1Points, 10) <= parseInt(user2Points, 10)) ||
-            (winner === "user2" && parseInt(user2Points, 10) <= parseInt(user1Points, 10))) {
+        if (
+            (winner === "user1" && parseInt(user1Points, 10) <= parseInt(user2Points, 10)) ||
+            (winner === "user2" && parseInt(user2Points, 10) <= parseInt(user1Points, 10))
+        ) {
             setErrorMessage("El ganador debe tener más puntos que el otro jugador.");
             return;
         }
 
-        // Determinamos el ID del ganador (1 o 2)
         const winnerId = winner === "user1" ? 1 : 2;
 
-        const newGameData = {
-            user1_id: user1.id,
+        const updatedGameData = {
+            user1_id: game.user1_id,
             user2_id: user2Id,
-            winner: winnerId,  // Aquí usamos 1 o 2 en vez de 'user1' o 'user2'
+            winner: winnerId,
             points_user1: parseInt(user1Points, 10),
             points_user2: parseInt(user2Points, 10),
         };
 
         try {
-            const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/games/create`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(newGameData),
-            });
+            const response = await fetch(
+                `${import.meta.env.VITE_APP_PETICION_IP}/api/gamesUpdate/${game.id}`,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(updatedGameData),
+                }
+            );
 
             const responseText = await response.text();
-            
-            // Manejo adecuado del formato de la respuesta
-            let data = null;
-            try {
-                data = JSON.parse(responseText);
-            } catch (parseError) {
-                console.error("Error al parsear JSON:", parseError.message);
-                throw new Error("El servidor devolvió un formato inesperado.");
-            }
+            const data = JSON.parse(responseText);
 
             if (response.ok) {
-                setSuccessMessage("Partida creada exitosamente.");
-                setErrorMessage("");
-                // Esperar un poco antes de redirigir para que el usuario vea el mensaje de éxito
+                setSuccessMessage("Partida actualizada exitosamente.");
                 setTimeout(() => {
-                    navigate("/games"); // Redirigir a la lista de juegos
-                }, 2000); // Retraso de 2 segundos
+                    navigate("/games"); // Redirigir a la lista de juegos después de éxito
+                }, 2000);
             } else {
-                throw new Error(data?.message || "Hubo un error al crear la partida.");
+                throw new Error(data?.message || "Hubo un error al actualizar la partida.");
             }
         } catch (error) {
             console.error("Error en handleSubmit:", error.message);
@@ -126,8 +105,8 @@ export default function CreateGame() {
     };
 
     return (
-        <div className="create-game-form">
-            <h2>Crea una nueva partida</h2>
+        <div className="edit-game-form">
+            <h2>Editar Partida</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="user2Name">Nombre del Jugador 2:</label>
@@ -138,7 +117,7 @@ export default function CreateGame() {
                         onChange={(e) => setUser2Name(e.target.value)}
                         required
                     />
-                    <button type="button" onClick={searchUser2ByName}>
+                    <button type="button" onClick={fetchUser2ByName}>
                         Buscar Jugador 2
                     </button>
                 </div>
@@ -153,7 +132,7 @@ export default function CreateGame() {
                         <option value="" disabled>
                             Selecciona un ganador
                         </option>
-                        {user1 && <option value="user1">Jugador 1 (tú)</option>}
+                        <option value="user1">Jugador 1 (tú)</option>
                         {user2Id && <option value="user2">Jugador 2</option>}
                     </select>
                 </div>
@@ -183,7 +162,7 @@ export default function CreateGame() {
                 {successMessage && <div className="success-message">{successMessage}</div>}
 
                 <div>
-                    <button type="submit">Crear Partida</button>
+                    <button type="submit">Actualizar Partida</button>
                 </div>
             </form>
         </div>

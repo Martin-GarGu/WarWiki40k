@@ -66,7 +66,26 @@ const Registro = () => {
       return false;
     }
   }
-
+  async function validarUsername() {
+    try {
+      const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/buscarUsername/${username}`, { method: "GET" });
+      if (!response.ok) {
+        throw new Error("Error al verificar el nombre de usuario");
+      }
+      const data = await response.json();
+      if (data.repuesta === "si") {
+        setErrorUsername({ color: true, text: "Nombre de usuario ya en uso" });
+        return false;
+      } else {
+        setErrorUsername({ color: false, text: "" });
+        return true;
+      }
+    } catch (error) {
+      console.error("Error al verificar el nombre de usuario:", error.message);
+      setErrorUsername({ color: true, text: "Error al verificar el nombre de usuario." });
+      return false;
+    }
+  }
   async function fetchPost() {
     setLoading(true);
 
@@ -168,6 +187,8 @@ const Registro = () => {
     } else if (enieRegEx.test(username)) {
       setErrorUsername({ color: true, text: "El carácter 'ñ' no es válido" });
       return false;
+    }else{
+      validarUsername();
     }
 
     return valid;
@@ -234,9 +255,8 @@ const Registro = () => {
                   endAdornment: (
                     <InputAdornment position="end">
                       <i
-                        className={`fa-solid fa-eye${
-                          showPassword.showPassword ? "-slash" : ""
-                        }`}
+                        className={`fa-solid fa-eye${showPassword.showPassword ? "-slash" : ""
+                          }`}
                         onClick={() =>
                           setShowPassword({
                             ...showPassword,
@@ -263,9 +283,8 @@ const Registro = () => {
                   endAdornment: (
                     <InputAdornment position="end">
                       <i
-                        className={`fa-solid fa-eye${
-                          showPassword.showConfPassword ? "-slash" : ""
-                        }`}
+                        className={`fa-solid fa-eye${showPassword.showConfPassword ? "-slash" : ""
+                          }`}
                         onClick={() =>
                           setShowPassword({
                             ...showPassword,

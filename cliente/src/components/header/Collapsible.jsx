@@ -10,7 +10,7 @@ function Collapsible() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     const user = JSON.parse(localStorage.getItem("user")); // Cargar el objeto user completo
-    
+
     if (token) {
       setLogeado(true);
     } else {
@@ -33,27 +33,24 @@ function Collapsible() {
     <Navbar
       collapseOnSelect
       expand="lg"
-      className="p-3 d-flex justify-content-center align-items-center"
+      className="p-3 d-flex justify-content-between align-items-center"
       id="headerNavbar"
       data-bs-theme="dark"
     >
-      <Container fluid className="d-flex justify-content-center align-items-center">
+      <Container fluid>
         <Navbar.Brand href="/" className="nav-link fs-5 text-center">
           <div id="logo" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav" className="d-flex justify-content-center">
+        <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="d-flex justify-content-center align-items-center">
-            {!logeado ? (
-              <>
-                <Nav.Link href="/login" className="fs-5 text-center">
-                  Login
-                </Nav.Link>
-                <Nav.Link eventKey={2} href="/register" className="fs-5 text-center">
-                  Register
-                </Nav.Link>
-              </>
-            ) : (
+            <Nav.Link href="/rules" className="fs-5 text-center">
+              Reglas
+            </Nav.Link>
+            <Nav.Link href="/specialRules" className="fs-5 text-center">
+              Reglas especiales
+            </Nav.Link>
+            {logeado ? (
               <>
                 {role === "admin" && (
                   <Nav.Link href="/crud" className="fs-5 text-center">
@@ -63,20 +60,39 @@ function Collapsible() {
                 <Nav.Link href="/profile" className="fs-5 text-center">
                   Perfil
                 </Nav.Link>
-                <Nav.Link href="/" className="fs-5 text-center" onClick={logout}>
+                {/* <Nav.Link href="/" className="fs-5 text-center" onClick={logout}>
                   Logout
+                </Nav.Link> */}
+              </>
+            ) : (
+              <>
+                {/* <Nav.Link href="/login" className="fs-5 text-center">
+                  Login
                 </Nav.Link>
-                <Nav.Link href="/rules" className="fs-5 text-center">
-                  Reglas
-                </Nav.Link>
-                <Nav.Link href="/specialRules" className="fs-5 text-center">
-                  Reglas especiales
-                </Nav.Link>
+                <Nav.Link href="/register" className="fs-5 text-center">
+                  Register
+                </Nav.Link> */}
               </>
             )}
           </Nav>
         </Navbar.Collapse>
       </Container>
+      <Nav className="d-flex justify-content-end">
+        {logeado ? (
+          <Nav.Link href="/" className="fs-5 text-center" onClick={logout}>
+            Logout
+          </Nav.Link>
+        ) : (
+          <>
+            <Nav.Link href="/login" className="fs-5 text-center">
+              Login
+            </Nav.Link>
+            <Nav.Link href="/register" className="fs-5 text-center">
+              Register
+            </Nav.Link>
+          </>
+        )}
+      </Nav>
     </Navbar>
   );
 }

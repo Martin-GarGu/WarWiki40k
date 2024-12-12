@@ -113,7 +113,7 @@ export default function Faction() {
             ) : faction ? (
                 <>
                     <img src={`${routeApi()}${faction.image}`} alt={faction.name} />
-                    <h1>{faction.name}</h1>
+                    <h1 className="text-center">{faction.name}</h1>
                     <p>{faction.description}</p>
 
                     {user && (
@@ -134,9 +134,9 @@ export default function Faction() {
                             {armies.map((army) => (
                                 <Col lg={4} md={6} sm={12} key={army.id}>
                                     <Card className="normalCard" onClick={() => handleArmyClick(army)}>
-                                        <Card.Img variant="top" src={`${routeApi()}${army.image}`} alt="image" className="card-image" />
                                         <Card.Body>
-                                            <Card.Title className="card-title">
+                                        <Card.Img variant="top" src={`${routeApi()}${army.image}`} alt={army.name} className="card-image" />
+                                            <Card.Title className="card-title text-center mt-2">
                                                 <strong>{army.name}</strong>
                                             </Card.Title>
                                         </Card.Body>

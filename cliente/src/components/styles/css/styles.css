@@ -8,7 +8,7 @@
 }
 
 #headerNavbar {
-  background-color: #54763c;
+  background-color: #808080;
 }
 
 .carousel {
@@ -124,7 +124,7 @@
 
 /* src/styles/scss/footer.scss */
 .footer {
-  background-color: #1a1a1a;
+  background-color: #808080;
   color: #d4af37;
   padding: 20px 0;
   border-top: 2px solid #444;
@@ -184,7 +184,7 @@
 }
 
 #headerNavbar {
-  background-color: #1a1a1a;
+  background-color: #808080;
   border-bottom: 2px solid #d4af37;
   padding: 10px 20px;
 }
@@ -320,7 +320,6 @@
   color: #1a1a1a;
 }
 
-/* src/styles/scss/games.scss */
 .games-container {
   padding: 20px;
   max-width: 1000px;
@@ -355,6 +354,7 @@
 .games-container .games-table td {
   color: #eee;
   text-align: center;
+  vertical-align: middle;
 }
 .games-container .games-table tr:hover td {
   background-color: #333;
@@ -1041,7 +1041,6 @@ body {
   text-align: center; /* Centrado global */
 }
 
-/* Contenedor principal del UpdateArmyMenu */
 .update-army-menu-container {
   width: 90%;
   max-width: 1000px;
@@ -1050,9 +1049,9 @@ body {
   background-color: #1e1e1e; /* Fondo oscuro */
   border-radius: 10px;
   box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5);
+  overflow: hidden; /* Evitar overflow visual */
 }
 
-/* Título principal del UpdateArmyMenu */
 .update-army-menu-title {
   font-size: 32px;
   font-weight: bold;
@@ -1061,16 +1060,43 @@ body {
   margin-bottom: 20px;
 }
 
-/* Estilo de la tabla de UpdateArmyMenu */
-.update-army-menu-table {
-  width: 100%;
-  margin-top: 30px;
-  border-collapse: collapse;
-  border: 2px solid #333;
-  background-color: #222;
+.update-army-menu-table-container {
+  max-height: 400px; /* Altura máxima visible */
+  overflow-y: auto; /* Habilitar el scroll vertical */
+  overflow-x: hidden; /* Evitar scroll horizontal */
+  border: 2px solid #333; /* Borde alrededor del área de scroll */
+  border-radius: 8px;
 }
 
-.update-army-menu-table th, .update-army-menu-table td {
+/* Personalización de la scrollbar */
+.update-army-menu-table-container::-webkit-scrollbar {
+  width: 10px;
+}
+
+.update-army-menu-table-container::-webkit-scrollbar-thumb {
+  background-color: #8b0000; /* Rojo metálico */
+  border-radius: 5px;
+  border: 2px solid #1e1e1e; /* Espaciado para que parezca flotante */
+}
+
+.update-army-menu-table-container::-webkit-scrollbar-thumb:hover {
+  background-color: #ff3333; /* Rojo brillante */
+}
+
+.update-army-menu-table-container::-webkit-scrollbar-track {
+  background-color: #222; /* Fondo del track */
+}
+
+/* Estilo de la tabla */
+.update-army-menu-table {
+  width: 100%;
+  margin: 0;
+  border-collapse: collapse;
+  background-color: #222; /* Fondo de la tabla */
+}
+
+.update-army-menu-table th,
+.update-army-menu-table td {
   padding: 10px;
   text-align: left;
   border: 1px solid #444;
@@ -1078,7 +1104,7 @@ body {
 
 .update-army-menu-table th {
   background-color: #333;
-  color: #ffcc00;
+  color: #ffcc00; /* Dorado */
   font-weight: bold;
   text-transform: uppercase;
 }
@@ -1091,7 +1117,7 @@ body {
   color: #f2f2f2;
 }
 
-/* Botones de acción de UpdateArmyMenu */
+/* Botones de acción */
 .update-army-menu-button {
   background-color: #8b0000; /* Rojo metálico */
   color: #f2f2f2;
@@ -1112,7 +1138,7 @@ body {
   box-shadow: 0px 6px 15px rgba(255, 0, 0, 0.7);
 }
 
-/* Mensajes de error y éxito para UpdateArmyMenu */
+/* Mensajes de error y éxito */
 .update-army-menu-message {
   margin-top: 20px;
   padding: 12px;
@@ -2218,15 +2244,8 @@ button:hover {
   margin-bottom: 20px;
 }
 .registro-page .formulario .form-group .form-control {
-  background: #2e2e2e;
   border: 1px solid #555;
   color: #fff;
-}
-.registro-page .formulario .form-group .form-control ::-moz-placeholder {
-  color: #d4af37;
-}
-.registro-page .formulario .form-group .form-control ::placeholder {
-  color: #d4af37;
 }
 .registro-page .formulario .form-group .form-control:focus {
   border-color: #d4af37;
@@ -2589,6 +2608,7 @@ button:hover {
   font-family: Arial, sans-serif;
   max-width: 1200px;
   margin: 0 auto;
+  margin-bottom: 50px;
 }
 .rules-container .rules-image {
   display: block;
@@ -2642,6 +2662,111 @@ button:hover {
     padding-left: 30px;
   }
 }
+/* General */
+body {
+  background-color: #121212;
+  font-family: "Arial", sans-serif;
+  color: #e0e0e0;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+/* Contenedor principal */
+.edit-game-form {
+  max-width: 600px;
+  margin: 30px auto;
+  background-color: #1e1e1e;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Título */
+.edit-game-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #ffcc00;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+/* Formulario */
+.edit-game-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input, select {
+  background-color: #2a2a2a;
+  border: 2px solid #444;
+  color: #e0e0e0;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+textarea {
+  background-color: #2a2a2a;
+  border: 2px solid #444;
+  color: #e0e0e0;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  resize: none;
+  height: 80px;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: #ffcc00;
+}
+
+/* Mensajes */
+.error-message {
+  background-color: #b30000;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.success-message {
+  background-color: #2d6a4f;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Botón */
+.edit-game-button {
+  background-color: #8b0000;
+  color: #fff;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background-color 0.3s;
+}
+
+.edit-game-button:hover {
+  background-color: #ff3333;
+}
+
 #logo {
   width: 60px;
   height: 60px;

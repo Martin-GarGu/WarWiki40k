@@ -148,7 +148,7 @@ export default function Squad() {
 
                     {isFavorite && <p>Este escuadrón ya está en tus favoritos.</p>}
                 </>
-            )}
+            )} 
             <button onClick={handleSpecialRules} className="btn btn-primary">
                 Ver reglas especiales
             </button>
@@ -238,8 +238,8 @@ export default function Squad() {
                                                     </table>
                                                 </div>
                                                 <div className="squad-card-footer">
-                                                    <strong>Keywords: </strong>
                                                     <p className="squad-keywords">
+                                                        <strong>Keywords: </strong>
                                                         {soldier.keywords.map((keyword, index) => (
                                                             <span key={`${soldier.id}-${keyword.name}`}>
                                                                 {keyword.name}

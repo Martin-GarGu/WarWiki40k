@@ -1,4 +1,5 @@
-/* src/styles/scss/games.scss */
+// Importaciones necesarias
+// @import "~@mui/material/styles"; // Importa las variables y mixins de Material-UI
 
 .games-container {
     padding: 20px;
@@ -37,6 +38,7 @@
         td {
             color: #eee; // Texto claro
             text-align: center;
+            vertical-align: middle; // Alineación vertical centrada
         }
 
         tr:hover td {

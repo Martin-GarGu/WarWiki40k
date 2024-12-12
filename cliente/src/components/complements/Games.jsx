@@ -1,4 +1,3 @@
-// src/components/Games.jsx
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -86,6 +85,10 @@ export default function Games() {
         }
     };
 
+    const handleUpdate = async (game) => {
+        navigate("/update/game", { state: { game } });
+    };
+
     const handleCreateGame = () => {
         navigate("/games/create");
     };
@@ -106,7 +109,7 @@ export default function Games() {
                             <th>Ganador</th>
                             <th>Puntos Jugador 1</th>
                             <th>Puntos Jugador 2</th>
-                            <th>Acciones</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -122,15 +125,26 @@ export default function Games() {
                                         ? user.username
                                         : usernames[game.user2_id] || "Cargando..."}
                                 </td>
-                                <td>{game.winner}</td>
+                                <td>
+                                    {usernames[game.winner]} ({" "}
+                                    {game.user1_id === game.winner ? "1" : "2"} )
+                                </td>
                                 <td>{game.points_user1}</td>
                                 <td>{game.points_user2}</td>
                                 <td>
                                     <button
+                                        className="btn btn-info btn-sm"
+                                        onClick={() => handleUpdate(game)}
+                                        title="Editar"
+                                    >
+                                        <i className="fa fa-edit"></i>
+                                    </button>
+                                    <button
                                         className="btn btn-danger btn-sm"
                                         onClick={() => handleEliminate(game.id)}
+                                        title="Eliminar"
                                     >
-                                        Eliminar
+                                        <i className="fa fa-trash-alt"></i>
                                     </button>
                                 </td>
                             </tr>

@@ -353,7 +353,6 @@ const Rules = () => {
                     Es una buena idea marcar las heridas perdidas para que ambos jugadores puedan llevar un control del daño infligido.
                     Algunos jugadores colocan dados o tokens junto a la miniatura o en su tarjeta de datos, mientras que otros prefieren escribirlo en un papel.
                 </p>
-                <hr />
             </div>
         </div>
     );

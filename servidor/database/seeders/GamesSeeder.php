@@ -23,7 +23,7 @@ class GamesSeeder extends Seeder
         [
             'user1_id'=>'2',
             'user2_id'=>'1',
-            'winner'=>'2',
+            'winner'=>'1',
             'points_user1'=>'35',
             'points_user2'=>'30',
         ],

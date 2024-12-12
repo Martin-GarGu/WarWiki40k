@@ -76,6 +76,25 @@ class GameController extends Controller
         }
     }
 
+    public function updateById(Request $request, $id)
+    {
+        // Busca el juego por su ID y lanza un error si no se encuentra
+        $game = Game::findOrFail($id);
+
+        // Actualiza los campos del juego con los datos proporcionados
+        $game->user1_id = $request->input('user1_id', $game->user1_id); // ID del jugador 1
+        $game->user2_id = $request->input('user2_id', $game->user2_id); // ID del jugador 2
+        $game->winner = $request->input('winner', $game->winner); // ID del ganador (1 o 2)
+        $game->points_user1 = $request->input('points_user1', $game->points_user1); // Puntos jugador 1
+        $game->points_user2 = $request->input('points_user2', $game->points_user2); // Puntos jugador 2
+
+        // Guardar los cambios
+        $game->save();
+
+        // Retorna el juego actualizado como respuesta
+        return new GameResource($game);
+    }
+
 
     public function update(Request $request, string $id)
     {
@@ -86,7 +105,7 @@ class GameController extends Controller
     public function destroy(string $id)
     {
         $game = Game::find($id);
-        if($game){
+        if ($game) {
 
             $game->delete();
             return response()->json([

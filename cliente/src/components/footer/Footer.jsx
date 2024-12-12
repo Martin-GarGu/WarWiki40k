@@ -4,7 +4,7 @@ const Footer = React.forwardRef((props, ref) => {
     return (
         <footer ref={ref} className="footer row m-0">
             <div className="col-12 text-center">
-                <a href="#" className="footer-link">Back to top</a>
+                <a href="#scroll-container" className="footer-link">Back to top</a>
             </div>
         </footer>
     );
@@ -12,3 +12,4 @@ const Footer = React.forwardRef((props, ref) => {
 Footer.displayName = "Footer";
 
 export default Footer;
+
