@@ -118,16 +118,17 @@ export default function Games() {
                                 <td>
                                     {game.user1_id === user?.id
                                         ? user.username
-                                        : usernames[game.user1_id] || "Cargando..."}
+                                        : usernames[game.user1_id] || "Desconocido"}
                                 </td>
                                 <td>
                                     {game.user2_id === user?.id
                                         ? user.username
-                                        : usernames[game.user2_id] || "Cargando..."}
+                                        : usernames[game.user2_id] || "Desconocido"}
                                 </td>
                                 <td>
-                                    {usernames[game.winner]} ({" "}
-                                    {game.user1_id === game.winner ? "1" : "2"} )
+                                    {game.winner === 1
+                                        ? `${usernames[game.user1_id] || "Desconocido"} (Jugador 1)`
+                                        : `${usernames[game.user2_id] || "Desconocido"} (Jugador 2)`}
                                 </td>
                                 <td>{game.points_user1}</td>
                                 <td>{game.points_user2}</td>
