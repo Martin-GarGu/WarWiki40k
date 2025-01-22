@@ -2,37 +2,45 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Favoritos() {
-    const [user, setUser] = useState(null);
-    const [favorites, setFavorites] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [user, setUser] = useState(null); // Usuario autenticado
+    const [favorites, setFavorites] = useState([]); // Lista de favoritos
+    const [loading, setLoading] = useState(true); // Estado de carga
+    const [error, setError] = useState(null); // Mensajes de error
     const navigate = useNavigate();
 
     useEffect(() => {
-        const userData = localStorage.getItem("user");
+        const userData = localStorage.getItem("user"); // Obtener datos del usuario del localStorage
         if (userData) {
             const parsedUser = JSON.parse(userData);
-            setUser(parsedUser);
-            fetchFavorites(parsedUser.id);
+            setUser(parsedUser); // Guardar el usuario en el estado
+            fetchFavorites(parsedUser.id); // Obtener los favoritos del usuario
         } else {
-            navigate('/login');
+            navigate('/login'); // Redirigir al login si no hay usuario
         }
     }, [navigate]);
 
     const fetchFavorites = async (userId) => {
+        console.log(userId);
         try {
-            const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/user/${userId}`);
+            const token = localStorage.getItem("token"); // Obtener el token
+            console.log(token);
+            const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/user/${userId}`, {
+                method: "GET", // Método explícito
+                headers: {
+                    Authorization: `Bearer ${token}`, // Incluir token en los headers
+                },
+            });
 
             if (!response.ok) {
-                throw new Error("Error al obtener los favoritos");
+                throw new Error("Error al obtener los favoritos"); // Manejar errores
             }
 
             const data = await response.json();
-            setFavorites(data.data);
+            setFavorites(data.data); // Actualizar favoritos
         } catch (err) {
-            setError(err.message);
+            setError(err.message); // Guardar mensaje de error
         } finally {
-            setLoading(false);
+            setLoading(false); // Finalizar carga
         }
     };
 
@@ -50,35 +58,41 @@ export default function Favoritos() {
                 navigate(`/squads/${slug}`);
                 break;
             default:
-                console.warn("Tipo de favorito desconocido:", favorites_type);
+                console.warn("Tipo de favorito desconocido:", favorites_type); // Advertencia en caso de tipo no reconocido
         }
     };
 
     const handleEliminate = async (id) => {
         try {
+            const token = localStorage.getItem("authToken"); // Obtener token
             const response = await fetch(
                 `${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/delete/${id}`,
-                { method: "DELETE" }
+                {
+                    method: "DELETE", // Método explícito
+                    headers: {
+                        Authorization: `Bearer ${token}`, // Incluir token en los headers
+                    },
+                }
             );
 
             if (!response.ok) {
-                throw new Error("Error al eliminar el favorito");
+                throw new Error("Error al eliminar el favorito"); // Manejar errores
             }
 
             setFavorites((prevFavorites) =>
-                prevFavorites.filter((favorite) => favorite.id !== id)
+                prevFavorites.filter((favorite) => favorite.id !== id) // Actualizar lista
             );
         } catch (err) {
-            setError(err.message);
+            setError(err.message); // Guardar mensaje de error
         }
     };
 
     if (loading) {
-        return <div className="loading-text">Cargando favoritos...</div>;
+        return <div className="loading-text">Cargando favoritos...</div>; // Mostrar mensaje de carga
     }
 
     if (error) {
-        return <div className="error-text">Error: {error}</div>;
+        return <div className="error-text">Error: {error}</div>; // Mostrar mensaje de error
     }
 
     return (

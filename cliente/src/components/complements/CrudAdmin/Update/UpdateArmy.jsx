@@ -46,10 +46,13 @@ export default function UpdateArmy() {
         };
 
         try {
+            const token = localStorage.getItem("token"); // Obtener token de localStorage
+
             const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/armies/${army.id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`, // Incluir token en el header
                 },
                 body: JSON.stringify(updatedArmy),
             });

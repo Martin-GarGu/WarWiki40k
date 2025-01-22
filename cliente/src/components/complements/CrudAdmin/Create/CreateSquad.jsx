@@ -6,22 +6,35 @@ const CreateSquad = () => {
     const [description, setDescription] = useState("");
     const [image, setImage] = useState("");
     const [armyId, setArmyId] = useState(0);
-    const [errorMessage, setErrorMessage] = useState(""); // Mensaje de error
-    const [successMessage, setSuccessMessage] = useState(""); // Mensaje de éxito
-    const navigate = useNavigate(); // Hook para la redirección
+    const [errorMessage, setErrorMessage] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
+    const navigate = useNavigate();
 
     // Verificar autenticación y rol de administrador
-    useEffect(() => {
+    const verifyAuth = () => {
         const userFromStorage = localStorage.getItem("user");
-        if (userFromStorage) {
+        if (!userFromStorage) {
+            navigate('/login');
+        } else {
             const parsedUser = JSON.parse(userFromStorage);
             if (parsedUser.role !== "admin") {
-                navigate('/access-denied'); // Redirige a access-denied si no es administrador
+                navigate('/access-denied');
             }
-        } else {
-            navigate('/login'); // Redirige al login si no hay usuario logueado
         }
+    };
+
+    useEffect(() => {
+        verifyAuth();
     }, [navigate]);
+
+    // Validación de campos
+    const validateForm = () => {
+        if (!name || !description || !armyId) {
+            setErrorMessage("Por favor, completa todos los campos obligatorios(*) correctamente.");
+            return false;
+        }
+        return true;
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -29,16 +42,12 @@ const CreateSquad = () => {
         setErrorMessage("");
         setSuccessMessage("");
 
-        // Verificar que todos los campos estén completos
-        if (!name || !description || !armyId) {
-            setErrorMessage("Por favor, completa todos los campos obligatorios(*) correctamente.");
-            return;
-        }
+        if (!validateForm()) return;
 
         const newSquad = {
-            name: name,
-            description: description,
-            image: image,
+            name,
+            description,
+            image,
             army_id: armyId,
         };
 
@@ -57,7 +66,6 @@ const CreateSquad = () => {
             let data = null;
             try {
                 data = JSON.parse(responseText);
-                console.log(data);
             } catch (parseError) {
                 console.error("Error al parsear JSON:", parseError.message);
                 throw new Error("El servidor devolvió un formato inesperado.");
@@ -66,10 +74,9 @@ const CreateSquad = () => {
             if (response.ok) {
                 setSuccessMessage("Escuadrón creado exitosamente.");
                 setErrorMessage("");
-                // Esperar un poco antes de redirigir para que el usuario vea el mensaje de éxito
                 setTimeout(() => {
                     navigate("/");
-                }, 2000); // Retraso de 2 segundos
+                }, 2000);
             } else {
                 throw new Error(data?.message || "Hubo un error al crear el escuadrón.");
             }
@@ -84,26 +91,54 @@ const CreateSquad = () => {
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="name">Nombre del Escuadrón *</label>
-                    <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} required />
+                    <input 
+                        type="text" 
+                        id="name" 
+                        value={name} 
+                        onChange={(e) => setName(e.target.value)} 
+                        required 
+                        className="form-control" 
+                    />
                 </div>
                 <div className="form-group">
                     <label htmlFor="description">Descripción del Escuadrón *</label>
-                    <input type="text" id="description" value={description} onChange={(e) => setDescription(e.target.value)} required />
+                    <input 
+                        type="text" 
+                        id="description" 
+                        value={description} 
+                        onChange={(e) => setDescription(e.target.value)} 
+                        required 
+                        className="form-control" 
+                    />
                 </div>
                 <div className="form-group">
                     <label htmlFor="image">Url de la imagen del Escuadrón</label>
-                    <input type="text" id="image" value={image} onChange={(e) => setImage(e.target.value)} />
+                    <input 
+                        type="text" 
+                        id="image" 
+                        value={image} 
+                        onChange={(e) => setImage(e.target.value)} 
+                        className="form-control" 
+                    />
                 </div>
                 <div className="form-group">
                     <label htmlFor="armyId">Id del ejército al que pertenece el Escuadrón *</label>
-                    <input type="number" id="armyId" value={armyId} onChange={(e) => setArmyId(e.target.value)} required />
+                    <input 
+                        type="number" 
+                        id="armyId" 
+                        value={armyId} 
+                        onChange={(e) => setArmyId(e.target.value)} 
+                        required 
+                        className="form-control" 
+                    />
                 </div>
+
                 {/* Mostrar mensajes */}
                 {errorMessage && <div className="error-message">{errorMessage}</div>}
                 {successMessage && <div className="success-message">{successMessage}</div>}
 
-                <div>
-                    <button className="btn-submit" type="submit">Crear Escuadrón</button>
+                <div className="form-group">
+                    <button type="submit" className="btn-submit">Crear Escuadrón</button>
                 </div>
             </form>
         </div>

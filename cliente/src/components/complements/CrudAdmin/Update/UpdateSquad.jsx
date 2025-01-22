@@ -45,10 +45,12 @@ export default function UpdateSquad() {
         };
 
         try {
+            const token = localStorage.getItem("token"); // Obtiene el token del almacenamiento local
             const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/squads/${squad.id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`, // Añade el token al encabezado
                 },
                 body: JSON.stringify(updatedUnit),
             });

@@ -28,8 +28,12 @@ const EliminateSoldier = () => {
     const fetchSoldiers = async () => {
         let isMounted = true; // Para verificar si el componente sigue montado
         try {
+            const token = localStorage.getItem("token"); // Obtener el token del localStorage
             const respuesta = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/soldiers`, {
                 method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${token}`, // Incluir el token en las cabeceras
+                },
             });
 
             if (!respuesta.ok) {
@@ -61,11 +65,14 @@ const EliminateSoldier = () => {
 
     const handleEliminate = async (id) => {
         try {
-            // Realiza la solicitud DELETE al backend
+            const token = localStorage.getItem("token"); // Obtener el token del localStorage
             const response = await fetch(
                 `${import.meta.env.VITE_APP_PETICION_IP}/api/soldiers/delete/${id}`,
                 {
                     method: "DELETE",
+                    headers: {
+                        "Authorization": `Bearer ${token}`, // Incluir el token en las cabeceras
+                    },
                 }
             );
 

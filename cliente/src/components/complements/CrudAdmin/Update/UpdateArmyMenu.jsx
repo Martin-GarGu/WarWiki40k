@@ -26,8 +26,13 @@ const UpdateArmyMenu = () => {
     const fetchArmies = async () => {
         let isMounted = true; // Para verificar si el componente sigue montado
         try {
+            const token = localStorage.getItem("token"); // Obtener el token desde localStorage
+
             const respuesta = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/armies`, {
                 method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`, // Agregar token en el encabezado
+                },
             });
 
             if (!respuesta.ok) {

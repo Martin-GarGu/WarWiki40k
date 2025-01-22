@@ -22,9 +22,13 @@ export default function Army() {
         if (!user) return; // Si no hay usuario logueado, no hacemos nada
 
         try {
+            const token = localStorage.getItem("token"); // Obtenemos el token desde el localStorage
             const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/create`, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`, // Añadimos el token al encabezado
+                },
                 body: JSON.stringify({
                     user_id: user.id,
                     favorites_id: army.id,
@@ -47,9 +51,13 @@ export default function Army() {
         if (!user) return; // Si no hay usuario logueado, no comprobamos favoritos
 
         try {
+            const token = localStorage.getItem("token"); // Obtenemos el token desde el localStorage
             const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/check`, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`, // Añadimos el token al encabezado
+                },
                 body: JSON.stringify({
                     user_id: user.id,
                     favorites_id: army.id,

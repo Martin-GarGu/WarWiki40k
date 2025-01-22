@@ -7,41 +7,41 @@ import Col from "react-bootstrap/Col";
 import routeApi from "../../routeApi";
 
 export default function Squad() {
-    const { slug } = useParams(); // Obtener el slug directamente desde la URL
+    const { slug } = useParams();
     const [squad, setSquad] = useState(null);
     const [soldiers, setSoldiers] = useState([]);
     const [errorMessage, setErrorMessage] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
-    const [isFavorite, setIsFavorite] = useState(false); // Nuevo estado para verificar favoritos
+    const [isFavorite, setIsFavorite] = useState(false);
     const navigate = useNavigate();
 
-    // Verificar si hay un usuario logueado
     const user = JSON.parse(localStorage.getItem("user"));
+    const authToken = localStorage.getItem("authToken");
 
-    // Función para agregar el escuadrón a favoritos
     const createFavoriteSquad = async () => {
-        if (!user) return; // Si no hay usuario logueado, no hacemos nada
+        if (!user || !authToken) return;
 
-        const squadId = squad.id; // ID del escuadrón
+        const squadId = squad.id;
 
         try {
             const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/create`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    Authorization: `Bearer ${authToken}`,
                 },
                 body: JSON.stringify({
-                    user_id: user.id, // ID del usuario
-                    favorites_id: squadId, // ID del escuadrón
-                    favorites_type: "Squadron", // Tipo de favorito
+                    user_id: user.id,
+                    favorites_id: squadId,
+                    favorites_type: "Squadron",
                 }),
             });
 
             const data = await response.json();
 
             if (response.ok) {
-                console.log("Escuadrón añadido a favoritos"); // Muestra un mensaje en la consola
-                setIsFavorite(true); // Actualiza el estado
+                console.log("Escuadrón añadido a favoritos");
+                setIsFavorite(true);
             } else {
                 console.error("Error al crear el favorito:", data.message);
             }
@@ -50,26 +50,25 @@ export default function Squad() {
         }
     };
 
-    // Función para verificar si el escuadrón ya está en favoritos
     const checkFavorite = async () => {
-        if (!user) return; // Si no hay usuario logueado, no comprobamos favoritos
+        if (!user || !authToken) return;
 
         try {
             const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/check`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${localStorage.getItem("authToken")}`, // Token de autenticación si usas autenticación basada en token
+                    Authorization: `Bearer ${authToken}`,
                 },
                 body: JSON.stringify({
-                    user_id: user.id, // ID del usuario
-                    favorites_id: squad.id, // ID del escuadrón
-                    favorites_type: "Squadron", // Tipo de favorito
+                    user_id: user.id,
+                    favorites_id: squad.id,
+                    favorites_type: "Squadron",
                 }),
             });
 
             const data = await response.json();
-            setIsFavorite(data.isFavorite); // Actualiza el estado según la respuesta
+            setIsFavorite(data.isFavorite);
         } catch (error) {
             console.error("Error al comprobar favorito:", error);
         }
@@ -84,15 +83,13 @@ export default function Squad() {
             }
 
             try {
-                // Obtener los datos del escuadrón
                 const squadResponse = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/squads/${slug}`);
                 if (!squadResponse.ok) {
                     throw new Error(`Error HTTP al obtener datos del escuadrón: ${squadResponse.status}`);
                 }
                 const squadData = await squadResponse.json();
-                setSquad(squadData); // Datos del escuadrón
+                setSquad(squadData);
 
-                // Obtener los soldados del escuadrón
                 const soldiersResponse = await fetch(
                     `${import.meta.env.VITE_APP_PETICION_IP}/api/soldiersSquadron/${slug}`
                 );
@@ -100,7 +97,7 @@ export default function Squad() {
                     throw new Error(`Error HTTP al obtener soldados: ${soldiersResponse.status}`);
                 }
                 const soldiersData = await soldiersResponse.json();
-                setSoldiers(soldiersData.data || []); // Datos de los soldados
+                setSoldiers(soldiersData.data || []);
 
                 setErrorMessage(null);
             } catch (error) {
@@ -114,17 +111,13 @@ export default function Squad() {
         fetchSquadData();
     }, [slug]);
 
-    // Verificar si está en favoritos después de cargar el escuadrón
     useEffect(() => {
         if (squad && user) {
             checkFavorite();
         }
     }, [squad, user]);
 
-    // Mostrar un mensaje de carga mientras se obtienen los datos
     if (isLoading) return <p>Cargando...</p>;
-
-    // Mostrar mensaje de error si ocurre algún problema
     if (errorMessage) return <p>{errorMessage}</p>;
 
     const handleSpecialRules = () => {
@@ -139,7 +132,6 @@ export default function Squad() {
                     <h1>{squad.name}</h1>
                     <p>{squad.description}</p>
 
-                    {/* Solo mostrar el botón de favoritos si hay un usuario logueado */}
                     {user && !isFavorite && (
                         <button onClick={createFavoriteSquad} className="btn btn-primary">
                             Agregar a favoritos
@@ -148,7 +140,7 @@ export default function Squad() {
 
                     {isFavorite && <p>Este escuadrón ya está en tus favoritos.</p>}
                 </>
-            )} 
+            )}
             <button onClick={handleSpecialRules} className="btn btn-primary">
                 Ver reglas especiales
             </button>
@@ -172,7 +164,6 @@ export default function Squad() {
                                                     style={{ width: '100%', height: 'auto', maxHeight: '200px', objectFit: 'contain' }}
                                                 />
                                             </Col>
-
                                             <Col lg={8} md={12}>
                                                 <Card.Body>
                                                     <Card.Title className="squad-card-title">

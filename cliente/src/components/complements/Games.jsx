@@ -22,7 +22,13 @@ export default function Games() {
 
     const fetchGames = async (userId) => {
         try {
-            const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/games/${userId}`);
+            const token = localStorage.getItem("token"); // Obtener token de localStorage
+            const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/games/${userId}`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`, // Incluir token en el header
+                },
+            });
             if (!response.ok) {
                 throw new Error("Error al obtener las partidas");
             }
@@ -49,8 +55,14 @@ export default function Games() {
 
     const fetchUsernames = async (userIds) => {
         try {
+            const token = localStorage.getItem("token"); // Obtener token de localStorage
             const requests = userIds.map((id) =>
-                fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/userId/${id}`)
+                fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/userId/${id}`, {
+                    method: "GET",
+                    headers: {
+                        Authorization: `Bearer ${token}`, // Incluir token en el header
+                    },
+                })
             );
             const responses = await Promise.all(requests);
 
@@ -70,9 +82,15 @@ export default function Games() {
 
     const handleEliminate = async (id) => {
         try {
+            const token = localStorage.getItem("token"); // Obtener token de localStorage
             const response = await fetch(
                 `${import.meta.env.VITE_APP_PETICION_IP}/api/games/delete/${id}`,
-                { method: "DELETE" }
+                {
+                    method: "DELETE",
+                    headers: {
+                        Authorization: `Bearer ${token}`, // Incluir token en el header
+                    },
+                }
             );
 
             if (!response.ok) {

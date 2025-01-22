@@ -13,22 +13,35 @@ const CreateSoldier = () => {
     const [sv, setSv] = useState(0);
     const [w, setW] = useState(0);
     const [base, setBase] = useState("");
-    const [errorMessage, setErrorMessage] = useState(""); // Mensaje de error
-    const [successMessage, setSuccessMessage] = useState(""); // Mensaje de éxito
-    const navigate = useNavigate(); // Hook para la redirección
+    const [errorMessage, setErrorMessage] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
+    const navigate = useNavigate();
 
-    // Verificación de autenticación y rol de administrador
-    useEffect(() => {
+    // Verificación de autenticación y rol
+    const verifyAuth = () => {
         const userFromStorage = localStorage.getItem("user");
-        if (userFromStorage) {
+        if (!userFromStorage) {
+            navigate('/login');
+        } else {
             const parsedUser = JSON.parse(userFromStorage);
             if (parsedUser.role !== "admin") {
-                navigate('/access-denied'); // Redirige si no es administrador
+                navigate('/access-denied');
             }
-        } else {
-            navigate('/login'); // Redirige si no hay usuario logueado
         }
+    };
+
+    useEffect(() => {
+        verifyAuth();
     }, [navigate]);
+
+    // Validación de campos del formulario
+    const validateForm = () => {
+        if (!name || !description || !squadId || !m || !apl || !ga || !df || !sv || !w || !base) {
+            setErrorMessage("Por favor, completa todos los campos obligatorios correctamente.");
+            return false;
+        }
+        return true;
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -36,24 +49,20 @@ const CreateSoldier = () => {
         setErrorMessage("");
         setSuccessMessage("");
 
-        // Verificar que todos los campos estén completos
-        if (!name || !description || !squadId || !m || !apl || !ga || !df || !sv || !w || !base) {
-            setErrorMessage("Por favor, completa todos los campos obligatorios(*) correctamente.");
-            return;
-        }
+        if (!validateForm()) return;
 
         const newSoldier = {
-            name: name,
-            description: description,
-            image: image,
+            name,
+            description,
+            image,
             squadron_id: squadId,
-            m: m,
-            apl: apl,
-            ga: ga,
-            df: df,
-            sv: sv,
-            w: w,
-            base: base
+            m,
+            apl,
+            ga,
+            df,
+            sv,
+            w,
+            base
         };
 
         try {
@@ -82,7 +91,7 @@ const CreateSoldier = () => {
                 // Esperar un poco antes de redirigir para que el usuario vea el mensaje de éxito
                 setTimeout(() => {
                     navigate("/");
-                }, 2000); // Retraso de 2 segundos
+                }, 2000);
             } else {
                 throw new Error(data?.message || "Hubo un error al crear el soldado.");
             }
@@ -128,7 +137,7 @@ const CreateSoldier = () => {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="squadId">Id del escuadrón al que pertenece el Soldado *</label>
+                    <label htmlFor="squadId">Id del escuadrón*</label>
                     <input 
                         type="number" 
                         id="squadId" 
@@ -139,7 +148,7 @@ const CreateSoldier = () => {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="m">Movimiento del Soldado *</label>
+                    <label htmlFor="m">Movimiento*</label>
                     <select 
                         id="m" 
                         value={m || ""} 
@@ -154,7 +163,7 @@ const CreateSoldier = () => {
                     </select>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="apl">Acciones por turno del Soldado *</label>
+                    <label htmlFor="apl">Acciones por turno*</label>
                     <input 
                         type="number" 
                         id="apl" 
@@ -165,7 +174,7 @@ const CreateSoldier = () => {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="ga">Acciones de grupo del Soldado *</label>
+                    <label htmlFor="ga">Acciones de grupo*</label>
                     <input 
                         type="number" 
                         id="ga" 
@@ -176,7 +185,7 @@ const CreateSoldier = () => {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="df">Defensa del Soldado *</label>
+                    <label htmlFor="df">Defensa*</label>
                     <input 
                         type="number" 
                         id="df" 
@@ -187,7 +196,7 @@ const CreateSoldier = () => {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="sv">Tirada de salvación del Soldado *</label>
+                    <label htmlFor="sv">Tirada de salvación*</label>
                     <input 
                         type="text" 
                         id="sv" 
@@ -198,7 +207,7 @@ const CreateSoldier = () => {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="w">Heridas del Soldado *</label>
+                    <label htmlFor="w">Heridas*</label>
                     <input 
                         type="number" 
                         id="w" 
@@ -209,7 +218,7 @@ const CreateSoldier = () => {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="base">Base del Soldado *</label>
+                    <label htmlFor="base">Base*</label>
                     <input 
                         type="text" 
                         id="base" 

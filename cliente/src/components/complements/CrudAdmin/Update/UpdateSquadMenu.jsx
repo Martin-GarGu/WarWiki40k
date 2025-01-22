@@ -24,8 +24,12 @@ const UpdateSquadMenu = () => {
     const fetchSquads = async () => {
         let isMounted = true; // Para verificar si el componente sigue montado
         try {
+            const token = localStorage.getItem("token"); // Obtiene el token del almacenamiento local
             const respuesta = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/squads`, {
                 method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`, // Añade el token al encabezado
+                },
             });
 
             if (!respuesta.ok) {

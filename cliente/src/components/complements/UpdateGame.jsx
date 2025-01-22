@@ -28,7 +28,17 @@ export default function EditGame() {
                 return;
             }
 
-            const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/userUsername/${user2Name}`);
+            const token = localStorage.getItem("token"); // Obtener token de localStorage
+
+            const response = await fetch(
+                `${import.meta.env.VITE_APP_PETICION_IP}/api/userUsername/${user2Name}`,
+                {
+                    method: "GET",
+                    headers: {
+                        Authorization: `Bearer ${token}`, // Incluir token en el header
+                    },
+                }
+            );
             const data = await response.json();
 
             if (response.ok && data.data && data.data.id) {
@@ -76,12 +86,15 @@ export default function EditGame() {
         };
 
         try {
+            const token = localStorage.getItem("token"); // Obtener token de localStorage
+
             const response = await fetch(
                 `${import.meta.env.VITE_APP_PETICION_IP}/api/gamesUpdate/${game.id}`,
                 {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`, // Incluir token en el header
                     },
                     body: JSON.stringify(updatedGameData),
                 }

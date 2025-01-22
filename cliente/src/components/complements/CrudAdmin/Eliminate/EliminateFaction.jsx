@@ -26,8 +26,12 @@ const EliminateFaction = () => {
     const fetchFactions = async () => {
         let isMounted = true; // Para verificar si el componente sigue montado
         try {
+            const token = localStorage.getItem("token"); // Obtener el token del almacenamiento local
             const respuesta = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/factions`, {
                 method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`, // Añadir el token en el encabezado
+                },
             });
 
             if (!respuesta.ok) {
@@ -59,11 +63,14 @@ const EliminateFaction = () => {
 
     const handleEliminate = async (id) => {
         try {
-            // Realiza la solicitud DELETE al backend
+            const token = localStorage.getItem("token"); // Obtener el token del almacenamiento local
             const response = await fetch(
                 `${import.meta.env.VITE_APP_PETICION_IP}/api/factions/delete/${id}`,
                 {
                     method: "DELETE",
+                    headers: {
+                        Authorization: `Bearer ${token}`, // Añadir el token en el encabezado
+                    },
                 }
             );
 

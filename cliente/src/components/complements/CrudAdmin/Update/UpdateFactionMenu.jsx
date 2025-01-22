@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 export default function UpdateFactionMenu() {
-
   const [factions, setFactions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -10,34 +9,39 @@ export default function UpdateFactionMenu() {
 
   useEffect(() => {
     const userData = localStorage.getItem("user");
-    if (userData) {
+    const token = localStorage.getItem("token");
+
+    if (userData && token) {
       const parsedUser = JSON.parse(userData);
 
       // Verificar si el usuario tiene el rol de "admin"
       if (parsedUser.role !== "admin") {
         navigate("/access-denied"); // Redirige a la página de acceso denegado si no es admin
       } else {
-        fetchFactions(); // Cargar las facciones solo si el usuario es admin
+        fetchFactions(token); // Cargar las facciones solo si el usuario es admin
       }
     } else {
-      navigate("/login"); // Redirige al login si no hay usuario autenticado
+      navigate("/login"); // Redirige al login si no hay usuario autenticado o no hay token
     }
   }, [navigate]);
 
-  const fetchFactions = async () => {
+  const fetchFactions = async (token) => {
     let isMounted = true; // Para verificar si el componente sigue montado
     try {
-      const respuesta = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/factions`, {
+      const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/factions`, {
         method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`, // Agregar el token en el encabezado
+        },
       });
 
-      if (!respuesta.ok) {
-        throw new Error(`Error en la solicitud: ${respuesta.statusText}`);
+      if (!response.ok) {
+        throw new Error(`Error en la solicitud: ${response.statusText}`);
       }
 
-      const contentType = respuesta.headers.get("content-type");
+      const contentType = response.headers.get("content-type");
       if (contentType && contentType.includes("application/json")) {
-        const jsonData = await respuesta.json();
+        const jsonData = await response.json();
         if (isMounted) {
           setFactions(jsonData.data);
           setLoading(false);

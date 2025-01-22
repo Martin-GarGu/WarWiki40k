@@ -45,10 +45,13 @@ export default function UpdateFaction() {
         };
 
         try {
+            const token = localStorage.getItem("token"); // Obtener el token desde localStorage
+
             const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/factions/${faction.id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`, // Agregar token en el encabezado
                 },
                 body: JSON.stringify(updatedFaction),
             });

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 export default function UpdateSoldier() {
@@ -20,6 +20,20 @@ export default function UpdateSoldier() {
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const userData = localStorage.getItem("user");
+        const token = localStorage.getItem("token");
+
+        if (!userData || !token) {
+            navigate("/login"); // Redirige al login si no hay usuario o token
+        } else {
+            const parsedUser = JSON.parse(userData);
+            if (parsedUser.role !== "admin") {
+                navigate("/access-denied"); // Redirige si no es admin
+            }
+        }
+    }, [navigate]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -46,20 +60,25 @@ export default function UpdateSoldier() {
         };
 
         try {
-            const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/soldiers/${soldier.id}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(updatedSoldier),
-            });
+            const response = await fetch(
+                `${import.meta.env.VITE_APP_PETICION_IP}/api/soldiers/${soldier.id}`,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                    body: JSON.stringify(updatedSoldier),
+                }
+            );
+
+            const data = await response.json();
 
             if (response.ok) {
                 setSuccessMessage("Soldado actualizado exitosamente.");
                 setTimeout(() => navigate("/"), 2000);
             } else {
-                const errorData = await response.json();
-                setErrorMessage(errorData.message || "Hubo un error al actualizar el soldado.");
+                setErrorMessage(data.message || "Hubo un error al actualizar el soldado.");
             }
         } catch (error) {
             setErrorMessage("Hubo un error al procesar los datos.");
@@ -116,7 +135,6 @@ export default function UpdateSoldier() {
                         value={m || ""}
                         onChange={(e) => setM(e.target.value)}
                         required
-                        className="form-control"
                     >
                         <option value="" disabled>
                             Selecciona el movimiento del soldado
@@ -188,7 +206,9 @@ export default function UpdateSoldier() {
                 </div>
                 {errorMessage && <div className="error-message">{errorMessage}</div>}
                 {successMessage && <div className="success-message">{successMessage}</div>}
-                <button type="submit" className="update-soldier-button">Actualizar Soldado</button>
+                <button type="submit" className="update-soldier-button">
+                    Actualizar Soldado
+                </button>
             </form>
         </div>
     );

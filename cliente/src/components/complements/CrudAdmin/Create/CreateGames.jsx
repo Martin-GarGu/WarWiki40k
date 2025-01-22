@@ -90,10 +90,12 @@ export default function CreateGame() {
         };
 
         try {
+            const token = localStorage.getItem("token"); // Obtener el token de localStorage
             const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/games/create`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`, // Incluir el token en las cabeceras
                 },
                 body: JSON.stringify(newGameData),
             });

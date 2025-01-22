@@ -17,10 +17,12 @@ export default function Faction() {
     // Función para agregar la facción a favoritos
     const addToFavorites = async () => {
         try {
+            const token = localStorage.getItem("token"); // Obtenemos el token desde el localStorage
             const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/create`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`, // Añadimos el token al encabezado
                 },
                 body: JSON.stringify({
                     user_id: user.id, // ID del usuario
@@ -44,10 +46,12 @@ export default function Faction() {
     // Función para verificar si la facción ya está en favoritos
     const checkFavorite = async () => {
         try {
+            const token = localStorage.getItem("token"); // Obtenemos el token desde el localStorage
             const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/check`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`, // Añadimos el token al encabezado
                 },
                 body: JSON.stringify({
                     user_id: user.id, // ID del usuario
@@ -135,7 +139,7 @@ export default function Faction() {
                                 <Col lg={4} md={6} sm={12} key={army.id}>
                                     <Card className="normalCard" onClick={() => handleArmyClick(army)}>
                                         <Card.Body>
-                                        <Card.Img variant="top" src={`${routeApi()}${army.image}`} alt={army.name} className="card-image" />
+                                            <Card.Img variant="top" src={`${routeApi()}${army.image}`} alt={army.name} className="card-image" />
                                             <Card.Title className="card-title text-center mt-2">
                                                 <strong>{army.name}</strong>
                                             </Card.Title>
