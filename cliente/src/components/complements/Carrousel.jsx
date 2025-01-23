@@ -29,9 +29,20 @@ export default function Carrousel({ factions, handleClickFactions }) {
             <button onClick={prevSlide} className="carousel__btn carousel__btn--prev">
                 &lt;
             </button>
-            <div onClick={() => { handleClickFactions(currentFaction) }}>
-                <img src={`${routeApi()}${currentFaction.image}`} alt={currentFaction.name} />
-                <p>{currentFaction.name}</p>
+            <div className="carousel__content">
+                <img 
+                    src={`${routeApi()}${currentFaction.image}`} 
+                    alt={currentFaction.name} 
+                    className="carousel__image" 
+                />
+                <p className="carousel__name">{currentFaction.name}</p>
+                {/* Botón adicional que llama a handleClickFactions */}
+                <button 
+                    onClick={() => handleClickFactions(currentFaction)} 
+                    className="carousel__btn carousel__btn--action"
+                >
+                    Ir
+                </button>
             </div>
             <button onClick={nextSlide} className="carousel__btn carousel__btn--next">
                 &gt;
