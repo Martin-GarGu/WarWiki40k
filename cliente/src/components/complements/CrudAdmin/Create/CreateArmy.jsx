@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const CreateArmy = () => {
-
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [image, setImage] = useState("");
-    const [factionId, setFactionId] = useState(0);
+    const [factionId, setFactionId] = useState("");
+    const [factions, setFactions] = useState([]); // Inicializa como array vacío
     const [errorMessage, setErrorMessage] = useState(""); // Mensaje de error
     const [successMessage, setSuccessMessage] = useState(""); // Mensaje de éxito
     const navigate = useNavigate(); // Hook para la redirección
@@ -24,6 +24,61 @@ const CreateArmy = () => {
         }
     }, [navigate]);
 
+    // Cargar facciones desde la API
+    useEffect(() => {
+        // const fetchFactions = async () => {
+        //     try {
+        //         const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/factions`);
+        //         const data = await response.json(); // Directamente parseamos como JSON
+    
+        //         console.log("Respuesta de la API:", data); // Para ver qué llega realmente
+    
+        //         if (data && data.length > 0) {
+        //             setFactions(data);
+        //         } else {
+        //             console.warn("No se encontraron facciones en la respuesta.");
+        //             setFactions([]); // Deja factions como un array vacío para evitar errores
+        //         }
+        //     } catch (error) {
+        //         console.error("Error al cargar facciones:", error);
+        //         setFactions([]); // Evita que factions sea undefined
+        //         setErrorMessage("No se pudieron cargar las facciones.");
+        //     }
+        // };
+        const fetchFactions = async () => {
+            let isMounted = true; // Para verificar si el componente sigue montado
+            try {
+              const respuesta = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/factions`, {
+                method: "GET",
+              });
+      
+              if (!respuesta.ok) {
+                throw new Error(`Error en la solicitud: ${respuesta.statusText}`);
+              }
+      
+              const contentType = respuesta.headers.get("content-type");
+              if (contentType && contentType.includes("application/json")) {
+                const jsonData = await respuesta.json();
+                if (isMounted) {
+                  setFactions(jsonData.data);
+                }
+              } else {
+                throw new Error("La respuesta no es JSON.");
+              }
+            } catch (error) {
+              if (isMounted) {
+                console.error("Error en la solicitud:", error);
+              }
+            }
+      
+            return () => {
+              isMounted = false; // Limpiar el flag cuando el componente se desmonte
+            };
+          };
+        fetchFactions();
+    }, []);
+    
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -37,9 +92,9 @@ const CreateArmy = () => {
         }
 
         const newArmy = {
-            name: name,
-            description: description,
-            image: image,
+            name,
+            description,
+            image,
             faction_id: factionId
         };
 
@@ -55,8 +110,6 @@ const CreateArmy = () => {
             });
 
             const responseText = await response.text();
-
-            // Manejo adecuado del formato de la respuesta
             let data = null;
             try {
                 data = JSON.parse(responseText);
@@ -69,7 +122,6 @@ const CreateArmy = () => {
             if (response.ok) {
                 setSuccessMessage("Ejército creado exitosamente.");
                 setErrorMessage("");
-                // Esperar un poco antes de redirigir para que el usuario vea el mensaje de éxito
                 setTimeout(() => {
                     navigate("/");
                 }, 2000); // Retraso de 2 segundos
@@ -118,15 +170,25 @@ const CreateArmy = () => {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="factionId">Id de la facción a la que pertenece el Ejército *</label>
-                    <input 
-                        type="number" 
+                    <label htmlFor="factionId">Facción a la que pertenece el Ejército *</label>
+                    <select 
                         id="factionId" 
                         value={factionId} 
                         onChange={(e) => setFactionId(e.target.value)} 
                         required 
-                        className="form-control" 
-                    />
+                        className="form-control"
+                    >
+                        <option value="">Selecciona una facción</option>
+                        {Array.isArray(factions) && factions.length > 0 ? (
+                            factions.map((faction) => (
+                                <option key={faction.id} value={faction.id}>
+                                    {faction.name}
+                                </option>
+                            ))
+                        ) : (
+                            <option disabled>Cargando facciones...</option>
+                        )}
+                    </select>
                 </div>
 
                 {/* Mostrar mensajes */}
