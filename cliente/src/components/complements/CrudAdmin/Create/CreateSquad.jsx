@@ -6,6 +6,7 @@ const CreateSquad = () => {
     const [description, setDescription] = useState("");
     const [image, setImage] = useState("");
     const [armyId, setArmyId] = useState(0);
+    const [armies, setArmies] = useState([]); // Estado para almacenar los ejércitos
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
     const navigate = useNavigate();
@@ -25,7 +26,40 @@ const CreateSquad = () => {
 
     useEffect(() => {
         verifyAuth();
+        fetchArmies(); // Llamar a la función para obtener los ejércitos
     }, [navigate]);
+
+    // Función para obtener los ejércitos de la API
+    const fetchArmies = async () => {
+        let isMounted = true;
+        try {
+            const respuesta = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/armies`, {
+                method: "GET",
+            });
+
+            if (!respuesta.ok) {
+                throw new Error(`Error en la solicitud: ${respuesta.statusText}`);
+            }
+
+            const contentType = respuesta.headers.get("content-type");
+            if (contentType && contentType.includes("application/json")) {
+                const jsonData = await respuesta.json();
+                if (isMounted) {
+                    setArmies(jsonData.data);
+                }
+            } else {
+                throw new Error("La respuesta no es JSON.");
+            }
+        } catch (error) {
+            if (isMounted) {
+                console.error("Error en la solicitud de ejércitos:", error);
+            }
+        }
+
+        return () => {
+            isMounted = false;
+        };
+    };
 
     // Validación de campos
     const validateForm = () => {
@@ -62,7 +96,6 @@ const CreateSquad = () => {
 
             const responseText = await response.text();
 
-            // Manejo adecuado del formato de la respuesta
             let data = null;
             try {
                 data = JSON.parse(responseText);
@@ -122,15 +155,21 @@ const CreateSquad = () => {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="armyId">Id del ejército al que pertenece el Escuadrón *</label>
-                    <input 
-                        type="number" 
+                    <label htmlFor="armyId">Ejército al que pertenece *</label>
+                    <select 
                         id="armyId" 
                         value={armyId} 
                         onChange={(e) => setArmyId(e.target.value)} 
                         required 
-                        className="form-control" 
-                    />
+                        className="form-control"
+                    >
+                        <option value="" disabled>Selecciona un ejército</option>
+                        {armies.map((army) => (
+                            <option key={army.id} value={army.id}>
+                                {army.name}
+                            </option>
+                        ))}
+                    </select>
                 </div>
 
                 {/* Mostrar mensajes */}
