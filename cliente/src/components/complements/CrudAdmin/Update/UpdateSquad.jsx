@@ -9,20 +9,38 @@ export default function UpdateSquad() {
     const [description, setDescription] = useState(squad.description || "");
     const [image, setImage] = useState(squad.image || "");
     const [armyId, setArmyId] = useState(squad.army_id || ""); // Campo army_id
+    const [armies, setArmies] = useState([]); // Estado para almacenar los ejércitos
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
     const navigate = useNavigate();
 
     useEffect(() => {
         const userData = localStorage.getItem("user");
-        if (!userData) {
-            navigate("/login"); // Si no hay usuario en localStorage, redirige al login
+        const token = localStorage.getItem("token");
+
+        if (!userData || !token) {
+            navigate("/login"); // Si no hay usuario o token, redirige al login
         } else {
             const parsedUser = JSON.parse(userData);
             if (parsedUser.role !== 'admin') {
                 navigate("/access-denied"); // Si el usuario no es admin, redirige a acceso denegado
             }
         }
+
+        // Obtener los ejércitos desde la API
+        const fetchArmies = async () => {
+            try {
+                const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/armies`, {
+                    method: "GET",
+                });
+                const data = await response.json();
+                setArmies(data.data); // Guardar ejércitos en el estado
+            } catch (error) {
+                console.error("Error al obtener ejércitos:", error);
+            }
+        };
+
+        fetchArmies();
     }, [navigate]);
 
     const handleSubmit = async (e) => {
@@ -55,28 +73,17 @@ export default function UpdateSquad() {
                 body: JSON.stringify(updatedUnit),
             });
 
-            const responseText = await response.text();
-
-            let data = null;
-            try {
-                data = JSON.parse(responseText);
-            } catch (parseError) {
-                console.error("Error al parsear JSON:", parseError.message);
-                throw new Error("El servidor devolvió un formato inesperado.");
-            }
+            const data = await response.json();
 
             if (response.ok) {
-                setSuccessMessage("Unidad actualizada exitosamente.");
-                setErrorMessage("");
-                setTimeout(() => {
-                    navigate("/"); // Redirigir a la página principal o a otra ruta después de la actualización
-                }, 2000);
+                setSuccessMessage("Escuadrón actualizado exitosamente.");
+                setTimeout(() => navigate("/"), 2000);
             } else {
-                throw new Error(data?.message || "Hubo un error al actualizar la unidad.");
+                setErrorMessage(data?.message || "Hubo un error al actualizar el escuadrón.");
             }
         } catch (error) {
-            console.error("Error en handleSubmit:", error.message);
-            setErrorMessage(error.message || "Hubo un error al procesar los datos.");
+            console.error("Error en handleSubmit:", error);
+            setErrorMessage("Hubo un error al procesar los datos.");
         }
     };
 
@@ -113,14 +120,22 @@ export default function UpdateSquad() {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="armyId">ID del Ejército *</label>
-                    <input
-                        type="text"
+                    <label htmlFor="armyId">Ejército *</label>
+                    <select
                         id="armyId"
                         value={armyId}
                         onChange={(e) => setArmyId(e.target.value)}
                         required
-                    />
+                    >
+                        <option value="" disabled>
+                            Selecciona un ejército
+                        </option>
+                        {armies.map((army) => (
+                            <option key={army.id} value={army.id}>
+                                {army.name}
+                            </option>
+                        ))}
+                    </select>
                 </div>
                 {/* Mostrar mensajes */}
                 {errorMessage && <div className="error-message">{errorMessage}</div>}

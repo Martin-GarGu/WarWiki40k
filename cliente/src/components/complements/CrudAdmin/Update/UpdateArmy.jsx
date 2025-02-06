@@ -8,6 +8,7 @@ export default function UpdateArmy() {
     const [description, setDescription] = useState(army.description || "");
     const [image, setImage] = useState(army.image || "");
     const [factionId, setFactionId] = useState(army.faction_id || ""); // Campo faction_id
+    const [factions, setFactions] = useState([]); // Estado para guardar las facciones
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
     const navigate = useNavigate();
@@ -24,7 +25,41 @@ export default function UpdateArmy() {
         } else {
             navigate("/login"); // Redirige al login si no hay usuario autenticado
         }
+
+        fetchFactions(); // Cargar las facciones al montar el componente
     }, [navigate]);
+
+    // Función para obtener las facciones desde la API
+    const fetchFactions = async () => {
+        let isMounted = true;
+        try {
+            const respuesta = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/factions`, {
+                method: "GET",
+            });
+
+            if (!respuesta.ok) {
+                throw new Error(`Error en la solicitud: ${respuesta.statusText}`);
+            }
+
+            const contentType = respuesta.headers.get("content-type");
+            if (contentType && contentType.includes("application/json")) {
+                const jsonData = await respuesta.json();
+                if (isMounted) {
+                    setFactions(jsonData.data);
+                }
+            } else {
+                throw new Error("La respuesta no es JSON.");
+            }
+        } catch (error) {
+            if (isMounted) {
+                console.error("Error en la solicitud de facciones:", error);
+            }
+        }
+
+        return () => {
+            isMounted = false;
+        };
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -115,15 +150,22 @@ export default function UpdateArmy() {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="factionId">ID de la Facción *</label>
-                    <input
-                        type="text"
+                    <label htmlFor="factionId">Facción *</label>
+                    <select
                         id="factionId"
                         value={factionId}
                         onChange={(e) => setFactionId(e.target.value)}
                         required
-                    />
+                    >
+                        <option value="" disabled>Selecciona una facción</option>
+                        {factions.map((faction) => (
+                            <option key={faction.id} value={faction.id}>
+                                {faction.name}
+                            </option>
+                        ))}
+                    </select>
                 </div>
+
                 {/* Mostrar mensajes */}
                 {errorMessage && <div className="error-message">{errorMessage}</div>}
                 {successMessage && <div className="success-message">{successMessage}</div>}
