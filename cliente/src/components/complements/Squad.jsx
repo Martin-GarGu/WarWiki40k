@@ -105,7 +105,7 @@ export default function Squad() {
                     <div className="row">
                         {filteredSoldiers.map((soldier) => (
                             <div key={soldier.id} className="col-12 mb-4" id={`soldier-${soldier.id}`}>
-                                <Card className="squad-card" style={{ backgroundColor: "#1e1e1e", color: "#d4af37", border: "1px solid #d4af37" }}>
+                                <Card className="squad-card" style={{ backgroundColor: "#1e1e1e", color: "#d4af37", border: "1px solid #d4af37" }} onClick={() => toggleExpand(soldier.id)}>
                                     <Row className="g-2">
                                         <Col lg={4} md={12} className="d-flex justify-content-center">
                                             <img
@@ -117,7 +117,7 @@ export default function Squad() {
                                         </Col>
                                         <Col lg={8} md={12}>
                                             <Card.Body>
-                                                <Card.Title style={{ borderBottom: "1px solid #d4af37", paddingBottom: "10px", cursor: "pointer" }} onClick={() => toggleExpand(soldier.id)} className="text-center">
+                                                <Card.Title style={{ borderBottom: "1px solid #d4af37", paddingBottom: "10px", cursor: "pointer" }} className="text-center">
                                                     <strong style={{ color: "#d4af37" }}>{soldier.name}</strong>
                                                 </Card.Title>
                                                 {expanded[soldier.id] && (

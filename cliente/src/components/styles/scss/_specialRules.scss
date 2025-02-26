@@ -40,9 +40,55 @@
             background-color: #444; // Fondo alternativo para filas pares
         }
 
+        /* Hover para las filas de la tabla */
         tr:hover td {
             background-color: #d4af37; // Fondo dorado al pasar el cursor
             color: #1a1a1a; // Texto oscuro
+        }
+    }
+}
+
+.sidebar {
+    position: fixed;
+    top: 110px;
+    left: 20px;
+    width: 150px; // Índice más pequeño
+    max-height: 70vh; // Limitar altura
+    overflow-y: auto;
+    background-color: #2e2e2e;
+    padding: 10px;
+    color: #d4af37;
+    border: 2px solid #d4af37;
+    z-index: 10; // Para asegurarse de que quede por encima del contenido
+    border-radius: 10px;
+
+    h5 {
+        border-bottom: 1px solid #d4af37;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        font-size: 1.2rem;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    li {
+        margin-bottom: 10px;
+    }
+
+    a {
+        text-decoration: none;
+        color: #d4af37;
+        cursor: pointer;
+        display: block;
+
+        /* Hover para el índice en el sidebar */
+        &:hover {
+            color: #f0c500; // Cambiar color de texto al hacer hover (amarillo)
+            background-color: #333; // Fondo oscuro al hacer hover
         }
     }
 }
