@@ -1,4 +1,9 @@
 import distances from "../../assets/images/distances.jpg"
+import toolsOfWar from "../../assets/images/toolsOfWar.jpg"
+import initiativeToken from "../../assets/images/initiativeToken.jpg"
+import orderToken from "../../assets/images/orderToken.jpg"
+import actionPointsToken from "../../assets/images/actionPointsToken.jpg"
+import injuredToken from "../../assets/images/injuredToken.jpg"
 
 const Rules = () => {
 
@@ -12,25 +17,31 @@ const Rules = () => {
                     que le serviran para encontrar las diversas publicaciones de Warhammer 40.000:Kill team.
                 </p>
             </div>
-            <div className="rule-section">
-                <h4 className="rules-title">Operativos y Kill Teams</h4>
-                <p className="rules-text">
-                    Las miniaturas Citadel que el jugador use son conocidas como agentes.
-                    Tus agentes son conocidos como agentes 'amigables' y los de tu oponente son conocidos como agentes 'enemigos'.
-                </p>
-                <p className="rules-text">
-                    Cuando selecciones tus agentes de batalla, no estas seleccionando individuos, más bien un escuadron especialista que trabajaran juntos.
-                    Esto es conocido como tu Kill Team. Una lista de Kill Teams disponibles para ti la puedes encontrar en la lista del ejercitos de faccion.
-                    En batalla, todos tus operativos amigables son referidos como tu Kill Team.
-                </p>
-                <p className="rules-text">
-                    Una vez seleccionada tu forma de jugar, su secuencia de mision te dira cuando debes seleccionar un Kill Team para la batalla.
-                    Cuando lo hagas, debes seleccionar uno de los Kill Teams de tu lista de del ejercito de faccion,
-                    tras ello selecciona los agentes como especifica el Kill Team. Algunos Kill Teams especifican el número de agentes en los que consiste.
-                    Otros te permiten seleccionar tu propia configuracion de agentes (con restricciones). En cualquier caso,
-                    la configuracion final de agentes debe conformar los requerimientos puestos por tu Kill Team.
-                </p>
+            <div className="rule-section" style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+                <div style={{ flex: 1 }}>
+                    <h4 className="rules-title">Operativos y Kill Teams</h4>
+                    <p className="rules-text">
+                        Las miniaturas Citadel que el jugador use son conocidas como agentes.
+                        Tus agentes son conocidos como agentes 'amigables' y los de tu oponente son conocidos como agentes 'enemigos'.
+                    </p>
+                    <p className="rules-text">
+                        Cuando selecciones tus agentes de batalla, no estás seleccionando individuos, más bien un escuadrón especialista que trabajarán juntos.
+                        Esto es conocido como tu Kill Team. Una lista de Kill Teams disponibles para ti la puedes encontrar en la lista del ejército de facción.
+                        En batalla, todos tus operativos amigables son referidos como tu Kill Team.
+                    </p>
+                    <p className="rules-text">
+                        Una vez seleccionada tu forma de jugar, su secuencia de misión te dirá cuándo debes seleccionar un Kill Team para la batalla.
+                        Cuando lo hagas, debes seleccionar uno de los Kill Teams de tu lista del ejército de facción,
+                        tras ello selecciona los agentes como especifica el Kill Team. Algunos Kill Teams especifican el número de agentes en los que consiste.
+                        Otros te permiten seleccionar tu propia configuración de agentes (con restricciones). En cualquier caso,
+                        la configuración final de agentes debe conformar los requerimientos puestos por tu Kill Team.
+                    </p>
+                </div>
+                <div style={{ flexShrink: 0 }}>
+                    <img src={toolsOfWar} alt="toolsOfWarImage" style={{ maxWidth: "300px", height: "auto", borderRadius: "10px" }} />
+                </div>
             </div>
+
             <div className="rule-section">
                 <h4 className="rules-title">Distancias</h4>
                 <p className="rules-text">
@@ -158,7 +169,7 @@ const Rules = () => {
                 </p>
                 <h6 className="rules-title">Fase de iniciación</h6>
                 <p className="rules-text">
-                    En esta fase el jugador coloca su kill team y determina quien iene la iniciativa para los puntos de turno.
+                    En esta fase el jugador coloca su kill team y determina quién tiene la iniciativa para los puntos de turno.
                 </p>
                 <h6 className="rules-title">Fase de estrategia</h6>
                 <p className="rules-text">
@@ -173,20 +184,27 @@ const Rules = () => {
             </div>
             <div className="rule-section">
                 <h4 className="rules-title">Fase de iniciación</h4>
-                <h6 className="rules-title">Agentes preparados</h6>
-                <p className="rules-text">
-                    Cada jugador prepara todos los sus agentes de la killzone dandole la vuelta al token para asi mostrar que agentes estan listos.
-                </p>
-                <h6 className="rules-title">Determinar iniciativa</h6>
-                <p className="rules-text">
-                    El jugador determina quien tiene la inciativa para el turno. Durante el primer turno, la iniciativa es determinada en secuancia de misiones de su tipo de juego.
-                    En los sucesivos turnos, los jugadores tiraran un dado y el ganador decidira quien tiene la inciativa, pero si el resultado de la tirada resulta en un empate,
-                    el jugador que no tuvo la iniciatiba en el anterior turno empieza en este con la inciativa. Para saber quien tiene la iniciativa se usa el token de iniciativa.
-                </p>
-                <p className="rules-text">
-                    Tener la iniciativa le permita al jugador tener la influencia sobre ciertos aspectos de la batalla, como decidir que operativo activar primero durate el turno.
-                    Si mas de una regla ocurren a la vez, el jugador con iniciativa determina el orden en el que afectan.
-                </p>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "20px" }}>
+                    <div style={{ flex: 1 }}>
+                        <h6 className="rules-title">Agentes preparados</h6>
+                        <p className="rules-text">
+                            Cada jugador prepara todos sus agentes de la killzone dándole la vuelta al token para así mostrar qué agentes están listos.
+                        </p>
+                        <h6 className="rules-title">Determinar iniciativa</h6>
+                        <p className="rules-text">
+                            El jugador determina quién tiene la iniciativa para el turno. Durante el primer turno, la iniciativa es determinada en secuencia de misiones de su tipo de juego.
+                            En los sucesivos turnos, los jugadores tirarán un dado y el ganador decidirá quién tiene la iniciativa, pero si el resultado de la tirada resulta en un empate,
+                            el jugador que no tuvo la iniciativa en el turno anterior empieza en este con la iniciativa. Para saber quién tiene la iniciativa, se usa el token de iniciativa.
+                        </p>
+                        <p className="rules-text">
+                            Tener la iniciativa le permite al jugador tener influencia sobre ciertos aspectos de la batalla, como decidir qué operativo activar primero durante el turno.
+                            Si más de una regla ocurre a la vez, el jugador con iniciativa determina el orden en el que afectan.
+                        </p>
+                    </div>
+                    <div style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                        <img src={initiativeToken} alt="Initiative Token" style={{ maxWidth: "auto", height: "auto", borderRadius: "10px", marginLeft: "20px" }} />
+                    </div>
+                </div>
             </div>
             <div className="rule-section">
                 <h4 className="rules-title">Fase de estrategia</h4>
@@ -227,43 +245,51 @@ const Rules = () => {
                 </p>
             </div>
             <div className="rule-section">
-                <h6 className="rules-title">Realizar Acciones</h6>
-                <p className="rules-text">
-                    El jugador que tiene la iniciativa activa primero. Selecciona una de sus miniaturas amigas listas y la activa.
-                    Una vez que haya completado la activación de esa miniatura, su oponente selecciona una de sus miniaturas listas y hace lo mismo.
-                    Los jugadores repiten este proceso hasta que todas las miniaturas en la zona de combate hayan sido activadas.
-                </p>
-                <hr />
-                <p className="rules-text">
-                    Si una miniatura tiene una Activación en Grupo de más de 1, debe ser activada en grupo, en lugar de individualmente.
-                    En tales casos, el jugador selecciona una miniatura amiga lista y la activa. Cuando finalice la activación de esa miniatura,
-                    selecciona otra miniatura amiga lista del mismo tipo para ser activada.
-                    Repiten este proceso hasta que hayan activado el número de miniaturas especificado por la característica de Activación en Grupo de esa miniatura,
-                    o no haya más miniaturas amigas de ese tipo para activar. Luego, su oponente activa una de sus miniaturas como de costumbre.
-                </p>
-                <hr />
-                <p className="rules-text">
-                    Cada vez que un jugador activa una de sus miniaturas listas, debe determinar si tiene la orden de Enfrentarse o de Ocultar.
-                    Si es el primer Punto de Giro, tiene la orden que se le dio cuando se desplegó antes de la batalla.
-                    En todos los Puntos de Giro posteriores, puede elegir qué orden darle.
-                </p>
-                <hr />
-                <p className="rules-text">
-                    En las circunstancias adecuadas, una miniatura con la orden de Ocultar
-                    no es un objetivo válido para los ataques a distancia de una miniatura enemiga (como se explica aquí),
-                    pero no puede realizar diversas acciones. Una miniatura con la orden de Enfrentarse puede realizar más acciones,
-                    pero es más vulnerable a los ataques a distancia de las miniaturas enemigas. Cada vez que le des una orden a una miniatura,
-                    coloca el token de orden relevante junto a ella.
-                </p>
-                <hr />
-                <p className="rules-text">
-                    La miniatura luego genera una cantidad de puntos de acción igual a su Límite de Puntos de Acción (LPA),
-                    que se utilizan para realizar acciones. Una vez que todos sus puntos de acción hayan sido usados y no tenga otras acciones que realizar,
-                    su activación termina y ya no está lista.
-                </p>
-                <hr />
-                <p>Cuando la activación de una miniatura termina, voltea su token de orden al lado activado para señalar que ya no está lista.</p>
-                <hr />
+                <h4 className="rules-title">Fase de tiroteo</h4>
+                <div className="rule-section" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "20px" }}>
+                    <div style={{ flex: 1 }}>
+                        <h6 className="rules-title">Realizar Acciones</h6>
+                        <p className="rules-text">
+                            El jugador que tiene la iniciativa activa primero. Selecciona una de sus miniaturas amigas listas y la activa.
+                            Una vez que haya completado la activación de esa miniatura, su oponente selecciona una de sus miniaturas listas y hace lo mismo.
+                            Los jugadores repiten este proceso hasta que todas las miniaturas en la zona de combate hayan sido activadas.
+                        </p>
+                        <hr />
+                        <p className="rules-text">
+                            Si una miniatura tiene una Activación en Grupo de más de 1, debe ser activada en grupo, en lugar de individualmente.
+                            En tales casos, el jugador selecciona una miniatura amiga lista y la activa. Cuando finalice la activación de esa miniatura,
+                            selecciona otra miniatura amiga lista del mismo tipo para ser activada.
+                            Repiten este proceso hasta que hayan activado el número de miniaturas especificado por la característica de Activación en Grupo de esa miniatura,
+                            o no haya más miniaturas amigas de ese tipo para activar. Luego, su oponente activa una de sus miniaturas como de costumbre.
+                        </p>
+                        <hr />
+                        <p className="rules-text">
+                            Cada vez que un jugador activa una de sus miniaturas listas, debe determinar si tiene la orden de Enfrentarse o de Ocultar.
+                            Si es el primer Punto de Giro, tiene la orden que se le dio cuando se desplegó antes de la batalla.
+                            En todos los Puntos de Giro posteriores, puede elegir qué orden darle.
+                        </p>
+                        <hr />
+                        <p className="rules-text">
+                            En las circunstancias adecuadas, una miniatura con la orden de Ocultar
+                            no es un objetivo válido para los ataques a distancia de una miniatura enemiga (como se explica aquí),
+                            pero no puede realizar diversas acciones. Una miniatura con la orden de Enfrentarse puede realizar más acciones,
+                            pero es más vulnerable a los ataques a distancia de las miniaturas enemigas. Cada vez que le des una orden a una miniatura,
+                            coloca el token de orden relevante junto a ella.
+                        </p>
+                        <hr />
+                        <p className="rules-text">
+                            La miniatura luego genera una cantidad de puntos de acción igual a su Límite de Puntos de Acción (LPA),
+                            que se utilizan para realizar acciones. Una vez que todos sus puntos de acción hayan sido usados y no tenga otras acciones que realizar,
+                            su activación termina y ya no está lista.
+                        </p>
+                        <hr />
+                        <p>Cuando la activación de una miniatura termina, voltea su token de orden al lado activado para señalar que ya no está lista.</p>
+                        <hr />
+                    </div>
+                    <div style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: "100%" }}>
+                        <img src={orderToken} alt="Order Token" style={{ maxWidth: "auto", height: "auto", borderRadius: "10px", alignSelf: "center" }} />
+                    </div>
+                </div>
                 <p className="rules-text">
                     Cada acción tiene un costo asociado en puntos de acción, por ejemplo, 1PA.
                     Cada vez que un jugador desee realizar una acción con una miniatura,
@@ -276,6 +302,7 @@ const Rules = () => {
                     En su lugar, puede realizar una acción y luego decidir la siguiente acción después de ver sus efectos.
                     A menos que se especifique lo contrario, una miniatura no puede realizar la misma acción más de una vez durante su activación.
                 </p>
+                <img src={actionPointsToken} style={{ maxWidth: "auto", height: "auto", borderRadius: "10px", alignSelf: "center" }} />
                 <h6 className="rules-title">Fuego Preventivo (Overwatch)</h6>
                 <p className="rules-text">
                     Cuando te toque activar una miniatura, si no tienes ninguna miniatura lista para activar,
@@ -353,6 +380,7 @@ const Rules = () => {
                     Es una buena idea marcar las heridas perdidas para que ambos jugadores puedan llevar un control del daño infligido.
                     Algunos jugadores colocan dados o tokens junto a la miniatura o en su tarjeta de datos, mientras que otros prefieren escribirlo en un papel.
                 </p>
+                <img src={injuredToken} style={{ maxWidth: "auto", height: "auto", borderRadius: "10px", alignSelf: "center", marginBottom: "10px"}} />
             </div>
         </div>
     );
