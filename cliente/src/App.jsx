@@ -57,8 +57,8 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Header ref={headerRef} className="w-100"></Header>
         <div id="scroll-container" className="routes-container" style={{ minHeight: routeHeight, overflowY: "auto" }}>
+          <Header ref={headerRef} className="w-100"></Header>
           <Routes>
             <Route path="/" element={<Inicio />} />
             <Route
@@ -92,16 +92,16 @@ function App() {
               }
             />
             <Route
-            path='/rules'
-            element={<Rules/>}
-            />
-            <Route 
-            path="/access-denied" 
-            element={<AccessDenied />} 
+              path='/rules'
+              element={<Rules />}
             />
             <Route
-            path='/specialRules'
-            element={<SpecialRules/>}
+              path="/access-denied"
+              element={<AccessDenied />}
+            />
+            <Route
+              path='/specialRules'
+              element={<SpecialRules />}
             />
             <Route
               path='/createMenu'
@@ -193,7 +193,7 @@ function App() {
             />
             <Route
               path='/update/game'
-              element={<UpdateGame/>}
+              element={<UpdateGame />}
             />
             <Route
               path='/update/squadMenu'
@@ -222,7 +222,7 @@ function App() {
           </Routes>
 
         </div>
-        <Footer ref={footerRef} />
+        {/* <Footer ref={footerRef} /> */}
       </BrowserRouter>
     </>
   );

@@ -28,48 +28,113 @@ export default function SpecialRules() {
     }, []);
 
     return (
-        <div className="container-fluid d-flex">
-            {/* Índice a la izquierda */}
-            <div className="col-12 col-md-3 p-3 sidebar" style={{ backgroundColor: "#2e2e2e", color: "#d4af37", border: "2px solid #d4af37" }}>
+        <div className="container-fluid d-flex" style={{ position: "relative", marginTop:"20px" }} >
+            {/* Índice */}
+            <div
+                className="sidebar"
+                style={{
+                    backgroundColor: "#2e2e2e",
+                    color: "#d4af37",
+                    border: "2px solid #d4af37",
+                    width: "20%",
+                    padding: "20px",
+                    marginTop: "120px",
+                    height: "fit-content",
+                    position: "fixed",
+                    top: "20px",
+                }}
+            >
                 <h5 style={{ borderBottom: "1px solid #d4af37", paddingBottom: "10px" }}>Índice</h5>
-                <div style={{ overflowY: "auto", height: "200px" }}>
-                    <ul style={{ listStyle: "none", padding: 0 }}>
-                        {specialRules.map((rule, index) => (
-                            <li key={index} style={{ marginBottom: "10px" }}>
-                                <a href={`#rule-${index}`} style={{ textDecoration: "none", color: "#d4af37", cursor: "pointer" }}>
-                                    {rule.name}
-                                </a>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+                <ul style={{ listStyle: "none", padding: 0 }}>
+                    {specialRules.map((rule, index) => (
+                        <li key={index} style={{ marginBottom: "10px" }}>
+                            <a
+                                href={`#rule-${index}`}
+                                style={{ textDecoration: "none", color: "#d4af37", cursor: "pointer" }}
+                            >
+                                {rule.name}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
             </div>
 
             {/* Contenido principal */}
-            <div className="col-12 col-md-9 special-rules-container p-3">
+            <div
+                className="special-rules-container"
+                style={{
+                    flexGrow: 1,
+                    padding: "40px",
+                    marginLeft: "25%",
+                    maxWidth: "70%",
+                    marginRight: "10%"
+                }}
+            >
                 {isLoading ? (
                     <p className="loading-text">Cargando...</p>
                 ) : errorMessage ? (
                     <p className="error-text">{errorMessage}</p>
                 ) : (
-                    <table className="special-rules-table table table-dark">
+                    <table
+                        className="table table-dark table-striped"
+                        style={{
+                            tableLayout: "fixed",
+                            width: "100%",
+                            borderCollapse: "separate",
+                            borderSpacing: "0 8px",
+                            marginBottom: "100px"
+                        }}
+                    >
                         <thead>
                             <tr>
-                                <th>Nombre</th>
+                                <th style={{ width: "25%", whiteSpace: "nowrap" }}>Nombre</th>
                                 <th>Descripción</th>
                             </tr>
                         </thead>
                         <tbody>
                             {specialRules.map((specialRule, index) => (
                                 <tr key={index} id={`rule-${index}`}>
-                                    <td>{specialRule.name}</td>
-                                    <td>{specialRule.description}</td>
+                                    <td
+                                        style={{
+                                            whiteSpace: "nowrap",
+                                            overflow: "hidden",
+                                            textOverflow: "ellipsis",
+                                            verticalAlign: "middle"
+                                        }}
+                                    >
+                                        {specialRule.name}
+                                    </td>
+                                    <td style={{ textAlign: "justify", verticalAlign: "middle", paddingRight: "40px", }}>
+                                        {specialRule.description}
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
                 )}
             </div>
+
+            {/* Botón Back to Top */}
+            <a href="#scroll-container">
+                <button
+                    style={{
+                        position: "fixed",
+                        bottom: "20px",
+                        right: "20px",
+                        backgroundColor: "#d4af37",
+                        color: "#2e2e2e",
+                        border: "none",
+                        borderRadius: "8px",
+                        padding: "10px 16px",
+                        cursor: "pointer",
+                        fontWeight: "bold",
+                        boxShadow: "0 0 10px rgba(0,0,0,0.3)",
+                        zIndex: 1000
+                    }}
+                >
+                    ↑ Back to top
+                </button>
+            </a>
         </div>
     );
 }
