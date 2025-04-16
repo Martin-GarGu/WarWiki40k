@@ -28,7 +28,7 @@ export default function SpecialRules() {
     }, []);
 
     return (
-        <div className="container-fluid d-flex" style={{ position: "relative", marginTop:"20px" }} >
+        <div className="container-fluid d-flex" style={{ position: "relative", marginTop: "20px" }} >
             {/* Índice */}
             <div
                 className="sidebar"
@@ -104,7 +104,7 @@ export default function SpecialRules() {
                                     >
                                         {specialRule.name}
                                     </td>
-                                    <td style={{ textAlign: "justify", verticalAlign: "middle", paddingRight: "40px", }}>
+                                    <td style={{ textAlign: "justify", verticalAlign: "middle", paddingRight: "40px" }}>
                                         {specialRule.description}
                                     </td>
                                 </tr>
@@ -114,25 +114,30 @@ export default function SpecialRules() {
                 )}
             </div>
 
-            {/* Botón Back to Top */}
+            {/* Botón Back to Top con imagen de fondo */}
             <a href="#scroll-container">
                 <button
                     style={{
                         position: "fixed",
                         bottom: "20px",
                         right: "20px",
-                        backgroundColor: "#d4af37",
-                        color: "#2e2e2e",
+                        width: "60px",
+                        height: "60px",
+                        backgroundColor: "#d4af37", // Mantengo el color de fondo original
+                        backgroundImage: "url(/src/assets/images/backToTop.png)", // Ruta de la imagen
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
                         border: "none",
-                        borderRadius: "8px",
-                        padding: "10px 16px",
+                        borderRadius: "50%",
                         cursor: "pointer",
-                        fontWeight: "bold",
                         boxShadow: "0 0 10px rgba(0,0,0,0.3)",
-                        zIndex: 1000
+                        zIndex: 1000,
+                        transition: "transform 0.3s ease"
                     }}
+                    onMouseOver={(e) => e.target.style.transform = "scale(1.1)"} // Efecto hover
+                    onMouseOut={(e) => e.target.style.transform = "scale(1)"}
+                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 >
-                    ↑ Back to top
                 </button>
             </a>
         </div>
