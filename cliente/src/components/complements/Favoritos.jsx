@@ -6,6 +6,8 @@ export default function Favoritos() {
     const [favorites, setFavorites] = useState([]); // Lista de favoritos
     const [loading, setLoading] = useState(true); // Estado de carga
     const [error, setError] = useState(null); // Mensajes de error
+    const [currentPage, setCurrentPage] = useState(1); // Página actual
+    const favoritesPerPage = 5; // Número de favoritos por página
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -20,10 +22,8 @@ export default function Favoritos() {
     }, [navigate]);
 
     const fetchFavorites = async (userId) => {
-        console.log(userId);
         try {
             const token = localStorage.getItem("token"); // Obtener el token
-            console.log(token);
             const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/user/${userId}`, {
                 method: "GET", // Método explícito
                 headers: {
@@ -64,7 +64,7 @@ export default function Favoritos() {
 
     const handleEliminate = async (id) => {
         try {
-            const token = localStorage.getItem("authToken"); // Obtener token
+            const token = localStorage.getItem("token"); // Obtener token
             const response = await fetch(
                 `${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/delete/${id}`,
                 {
@@ -87,6 +87,12 @@ export default function Favoritos() {
         }
     };
 
+    // Paginación
+    const indexOfLast = currentPage * favoritesPerPage;
+    const indexOfFirst = indexOfLast - favoritesPerPage;
+    const currentFavorites = favorites.slice(indexOfFirst, indexOfLast);
+    const totalPages = Math.ceil(favorites.length / favoritesPerPage);
+
     if (loading) {
         return <div className="loading-text">Cargando favoritos...</div>; // Mostrar mensaje de carga
     }
@@ -99,40 +105,61 @@ export default function Favoritos() {
         <div className="favorites-container">
             <h2>Mis Favoritos</h2>
             {favorites.length > 0 ? (
-                <table className="favorites-table table table-dark table-striped">
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Tipo</th>
-                            <th>Ir</th>
-                            <th>Eliminar</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {favorites.map((favorite) => (
-                            <tr key={favorite.id}>
-                                <td>{favorite.name || "No disponible"}</td>
-                                <td>{favorite.favorites_type}</td>
-                                <td>
-                                    <button
-                                        className="btn btn-primary btn-sm"
-                                        onClick={() => handleNavigate(favorite)}
-                                    >
-                                        Ir
-                                    </button>
-                                </td>
-                                <td>
-                                    <button
-                                        className="btn btn-danger btn-sm"
-                                        onClick={() => handleEliminate(favorite.id)}
-                                    >
-                                        Eliminar
-                                    </button>
-                                </td>
+                <>
+                    <table className="favorites-table table table-dark table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Tipo</th>
+                                <th>Ir</th>
+                                <th>Eliminar</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {currentFavorites.map((favorite) => (
+                                <tr key={favorite.id}>
+                                    <td>{favorite.name || "No disponible"}</td>
+                                    <td>{favorite.favorites_type}</td>
+                                    <td>
+                                        <button
+                                            className="btn btn-primary btn-sm"
+                                            onClick={() => handleNavigate(favorite)}
+                                        >
+                                            Ir
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button
+                                            className="btn btn-danger btn-sm"
+                                            onClick={() => handleEliminate(favorite.id)}
+                                        >
+                                            Eliminar
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+
+                    {/* Controles de Paginación */}
+                    <div className="pagination-controls mt-3">
+                        <button
+                            className="btn btn-secondary btn-sm me-2"
+                            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                            disabled={currentPage === 1}
+                        >
+                            Anterior
+                        </button>
+                        <span className="text-white">Página {currentPage} de {totalPages}</span>
+                        <button
+                            className="btn btn-secondary btn-sm ms-2"
+                            onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                            disabled={currentPage === totalPages}
+                        >
+                            Siguiente
+                        </button>
+                    </div>
+                </>
             ) : (
                 <p className="no-favorites-text">No tienes favoritos todavía.</p>
             )}

@@ -7,6 +7,8 @@ export default function Games() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [usernames, setUsernames] = useState({});
+    const [currentPage, setCurrentPage] = useState(1);
+    const gamesPerPage = 5;
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -22,11 +24,11 @@ export default function Games() {
 
     const fetchGames = async (userId) => {
         try {
-            const token = localStorage.getItem("token"); // Obtener token de localStorage
+            const token = localStorage.getItem("token");
             const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/games/${userId}`, {
                 method: "GET",
                 headers: {
-                    Authorization: `Bearer ${token}`, // Incluir token en el header
+                    Authorization: `Bearer ${token}`,
                 },
             });
             if (!response.ok) {
@@ -55,12 +57,12 @@ export default function Games() {
 
     const fetchUsernames = async (userIds) => {
         try {
-            const token = localStorage.getItem("token"); // Obtener token de localStorage
+            const token = localStorage.getItem("token");
             const requests = userIds.map((id) =>
                 fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/userId/${id}`, {
                     method: "GET",
                     headers: {
-                        Authorization: `Bearer ${token}`, // Incluir token en el header
+                        Authorization: `Bearer ${token}`,
                     },
                 })
             );
@@ -82,13 +84,13 @@ export default function Games() {
 
     const handleEliminate = async (id) => {
         try {
-            const token = localStorage.getItem("token"); // Obtener token de localStorage
+            const token = localStorage.getItem("token");
             const response = await fetch(
                 `${import.meta.env.VITE_APP_PETICION_IP}/api/games/delete/${id}`,
                 {
                     method: "DELETE",
                     headers: {
-                        Authorization: `Bearer ${token}`, // Incluir token en el header
+                        Authorization: `Bearer ${token}`,
                     },
                 }
             );
@@ -111,6 +113,11 @@ export default function Games() {
         navigate("/games/create");
     };
 
+    const indexOfLast = currentPage * gamesPerPage;
+    const indexOfFirst = indexOfLast - gamesPerPage;
+    const currentGames = games.slice(indexOfFirst, indexOfLast);
+    const totalPages = Math.ceil(games.length / gamesPerPage);
+
     return (
         <div className="games-container">
             <h2 className="text-center">Mis Partidas</h2>
@@ -119,57 +126,78 @@ export default function Games() {
             ) : error ? (
                 <p className="error-text">{error}</p>
             ) : games.length > 0 ? (
-                <table className="games-table table table-dark table-striped">
-                    <thead>
-                        <tr>
-                            <th>Jugador 1</th>
-                            <th>Jugador 2</th>
-                            <th>Ganador</th>
-                            <th>Puntos Jugador 1</th>
-                            <th>Puntos Jugador 2</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {games.map((game) => (
-                            <tr key={game.id}>
-                                <td>
-                                    {game.user1_id === user?.id
-                                        ? user.username
-                                        : usernames[game.user1_id] || "Desconocido"}
-                                </td>
-                                <td>
-                                    {game.user2_id === user?.id
-                                        ? user.username
-                                        : usernames[game.user2_id] || "Desconocido"}
-                                </td>
-                                <td>
-                                    {game.winner === 1
-                                        ? `${usernames[game.user1_id] || "Desconocido"} (Jugador 1)`
-                                        : `${usernames[game.user2_id] || "Desconocido"} (Jugador 2)`}
-                                </td>
-                                <td>{game.points_user1}</td>
-                                <td>{game.points_user2}</td>
-                                <td>
-                                    <button
-                                        className="btn btn-info btn-sm"
-                                        onClick={() => handleUpdate(game)}
-                                        title="Editar"
-                                    >
-                                        <i className="fa fa-edit"></i>
-                                    </button>
-                                    <button
-                                        className="btn btn-danger btn-sm"
-                                        onClick={() => handleEliminate(game.id)}
-                                        title="Eliminar"
-                                    >
-                                        <i className="fa fa-trash-alt"></i>
-                                    </button>
-                                </td>
+                <>
+                    <table className="games-table table table-dark table-striped">
+                        <thead>
+                            <tr>
+                                <th>Jugador 1</th>
+                                <th>Jugador 2</th>
+                                <th>Ganador</th>
+                                <th>Puntos Jugador 1</th>
+                                <th>Puntos Jugador 2</th>
+                                <th></th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {currentGames.map((game) => (
+                                <tr key={game.id}>
+                                    <td>
+                                        {game.user1_id === user?.id
+                                            ? user.username
+                                            : usernames[game.user1_id] || "Desconocido"}
+                                    </td>
+                                    <td>
+                                        {game.user2_id === user?.id
+                                            ? user.username
+                                            : usernames[game.user2_id] || "Desconocido"}
+                                    </td>
+                                    <td>
+                                        {game.winner === 1
+                                            ? `${usernames[game.user1_id] || "Desconocido"} (Jugador 1)`
+                                            : `${usernames[game.user2_id] || "Desconocido"} (Jugador 2)`}
+                                    </td>
+                                    <td>{game.points_user1}</td>
+                                    <td>{game.points_user2}</td>
+                                    <td>
+                                        <button
+                                            className="btn btn-info btn-sm"
+                                            onClick={() => handleUpdate(game)}
+                                            title="Editar"
+                                        >
+                                            <i className="fa fa-edit"></i>
+                                        </button>
+                                        <button
+                                            className="btn btn-danger btn-sm"
+                                            onClick={() => handleEliminate(game.id)}
+                                            title="Eliminar"
+                                        >
+                                            <i className="fa fa-trash-alt"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+
+                    {/* Paginación */}
+                    <div className="pagination-controls text-center mt-3">
+                        <button
+                            className="btn btn-secondary btn-sm me-2"
+                            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                            disabled={currentPage === 1}
+                        >
+                            Anterior
+                        </button>
+                        <span className="text-white">Página {currentPage} de {totalPages}</span>
+                        <button
+                            className="btn btn-secondary btn-sm ms-2"
+                            onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                            disabled={currentPage === totalPages}
+                        >
+                            Siguiente
+                        </button>
+                    </div>
+                </>
             ) : (
                 <p className="no-games-text">No tienes partidas todavía.</p>
             )}

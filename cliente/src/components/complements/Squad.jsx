@@ -16,6 +16,10 @@ export default function Squad() {
     const [searchTerm, setSearchTerm] = useState("");
     const [expanded, setExpanded] = useState({});
     const navigate = useNavigate();
+    const [isFavorite, setIsFavorite] = useState(false);
+    const user = JSON.parse(localStorage.getItem("user"));
+
+
 
     useEffect(() => {
         const fetchSquadData = async () => {
@@ -46,6 +50,63 @@ export default function Squad() {
         };
         fetchSquadData();
     }, [slug]);
+
+    useEffect(() => {
+        if (user && squad) checkFavorite();
+    }, [squad]);
+
+    const checkFavorite = async () => {
+        try {
+            const token = localStorage.getItem("token");
+            const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/check`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                },
+                body: JSON.stringify({
+                    user_id: user.id,
+                    favorites_id: squad.id,
+                    favorites_type: "Squadron",
+                }),
+            });
+
+            const data = await response.json();
+            setIsFavorite(data.isFavorite);
+        } catch (error) {
+            console.error("Error al comprobar favoritos:", error);
+        }
+    };
+
+    const addToFavorites = async () => {
+        if (!user || !squad) return; // Verifica si hay un usuario y escuadrón
+
+        try {
+            const token = localStorage.getItem("token"); // Obtén el token del almacenamiento local
+            const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/create`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`, // Usa el token para la autenticación
+                },
+                body: JSON.stringify({
+                    user_id: user.id,        // ID del usuario
+                    favorites_id: squad.id,  // ID del escuadrón
+                    favorites_type: "Squadron", // Tipo de favorito
+                }),
+            });
+
+            if (!response.ok) {
+                const { message } = await response.json();
+                throw new Error(message || "Error al agregar a favoritos");
+            }
+
+            setIsFavorite(true); // Marca como favorito si la respuesta es exitosa
+        } catch (error) {
+            console.error("Error al añadir a favoritos:", error); // Si ocurre un error
+        }
+    };
+
 
     const filteredSoldiers = soldiers.filter(s => s.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
@@ -98,6 +159,15 @@ export default function Squad() {
                         />
                         <h1 className="text-gold" style={{ color: "#d4af37" }}>{squad.name}</h1>
                         <p style={{ color: "#ccc" }}>{squad.description}</p>
+                        {user && (
+                            isFavorite ? (
+                                <p>Esta facción ya está en tus favoritos.</p>
+                            ) : (
+                                <button onClick={addToFavorites} className="btn btn-primary">
+                                    Agregar a favoritos
+                                </button>
+                            )
+                        )}
                     </>
                 )}
 

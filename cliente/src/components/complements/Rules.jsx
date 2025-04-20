@@ -380,8 +380,34 @@ const Rules = () => {
                     Es una buena idea marcar las heridas perdidas para que ambos jugadores puedan llevar un control del daño infligido.
                     Algunos jugadores colocan dados o tokens junto a la miniatura o en su tarjeta de datos, mientras que otros prefieren escribirlo en un papel.
                 </p>
-                <img src={injuredToken} style={{ maxWidth: "auto", height: "auto", borderRadius: "10px", alignSelf: "center", marginBottom: "10px"}} />
+                <img src={injuredToken} style={{ maxWidth: "auto", height: "auto", borderRadius: "10px", alignSelf: "center", marginBottom: "10px" }} />
             </div>
+            {/* Botón Back to Top con imagen de fondo */}
+            <a href="#scroll-container">
+                <button
+                    style={{
+                        position: "fixed",
+                        bottom: "20px",
+                        right: "20px",
+                        width: "60px",
+                        height: "60px",
+                        backgroundColor: "#d4af37", // Mantengo el color de fondo original
+                        backgroundImage: "url(/src/assets/images/backToTop.png)", // Ruta de la imagen
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                        border: "none",
+                        borderRadius: "50%",
+                        cursor: "pointer",
+                        boxShadow: "0 0 10px rgba(0,0,0,0.3)",
+                        zIndex: 1000,
+                        transition: "transform 0.3s ease"
+                    }}
+                    onMouseOver={(e) => e.target.style.transform = "scale(1.1)"} // Efecto hover
+                    onMouseOut={(e) => e.target.style.transform = "scale(1)"}
+                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                >
+                </button>
+            </a>
         </div>
     );
 
