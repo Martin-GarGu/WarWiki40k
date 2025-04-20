@@ -24,7 +24,7 @@ RUN npm run build
 RUN ls -l /app/cliente/dist || echo "La carpeta dist no existe"
 
 # Instala nginx
-RUN apt-get install -y nginx
+RUN apt-get update && apt-get install -y nginx
 
 # Copia la configuración de nginx desde el contexto de construcción al contenedor
 COPY nginx.conf /etc/nginx/nginx.conf
