@@ -57,7 +57,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <div id="scroll-container" className="routes-container" style={{ minHeight: routeHeight, overflowY: "auto" }}>
+        <div id="scroll-container" className="routes-container" style={{ minHeight: routeHeight, overflowY: "auto"}}>
           <Header ref={headerRef} className="w-100"></Header>
           <Routes>
             <Route path="/" element={<Inicio />} />

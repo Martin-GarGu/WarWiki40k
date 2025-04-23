@@ -1,15 +1,85 @@
-
-#nav{
+// Mantenemos los estilos existentes
+#nav {
     justify-content: space-evenly;
     // font-family: 'fuenteGeneralBlack';
-}
-#account{
+  }
+  
+  #account {
     justify-content: right;
     // font-family: 'fuenteGeneralBlack';
-}
-
-#headerNavbar{
-    // background-color: #808080;
-    background-color: #8B0000;
+  }
+  
+  #headerNavbar {
+    background-color: #8B0000; // Rojo oscuro base
     // font-family: 'fuenteGeneralBlack';
-}
+    min-height: 0; // Elimina altura mínima para que se ajuste al contenido
+  }
+  
+  // Nuevos estilos para ajustar el tamaño del navbar a los botones
+  .navbar-container {
+    margin: 0;
+  }
+  
+  // Estilo para los items del nav
+  .nav-item-custom {
+    padding: 0.75rem 1.25rem;
+    font-size: 1.1rem;
+    color: #fff;
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    &:hover {
+      background-color: #600000; // Rojo más oscuro para el hover
+      color: #fff;
+    }
+    
+    &:active, &:focus {
+      background-color: #4B0000; // Rojo aún más oscuro para cuando está activo
+      color: #fff;
+    }
+  }
+  
+  // Estilo especial para el logo/brand
+  .nav-brand-custom {
+    padding: 0.5rem 1rem;
+    
+    &:hover {
+      background-color: transparent;
+    }
+  }
+  
+  // Estilo para el dropdown
+  #factions-dropdown {
+    position: relative;
+    
+    &.show {
+      background-color: #600000; // Rojo más oscuro cuando el dropdown está abierto
+    }
+  }
+  
+  // Estilo para los items del dropdown
+  .dropdown-item-custom {
+    padding: 0.5rem 1rem;
+    transition: background-color 0.2s ease;
+    
+    &:hover {
+      background-color: #FFECEC; // Un rojo muy claro para los items del dropdown
+      color: #8B0000; // Color de texto rojo oscuro al hacer hover
+    }
+  }
+  
+  // Ajustes responsivos
+  @media (max-width: 991.98px) {
+    .nav-item-custom {
+      text-align: left;
+      justify-content: flex-start;
+    }
+    
+    #account {
+      justify-content: flex-start;
+    }
+  }

@@ -9,8 +9,65 @@
 
 #headerNavbar {
   background-color: #8B0000;
+  min-height: 0;
 }
 
+.navbar-container {
+  margin: 0;
+}
+
+.nav-item-custom {
+  padding: 0.75rem 1.25rem;
+  font-size: 1.1rem;
+  color: #fff;
+  text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nav-item-custom:hover {
+  background-color: #600000;
+  color: #fff;
+}
+.nav-item-custom:active, .nav-item-custom:focus {
+  background-color: #4B0000;
+  color: #fff;
+}
+
+.nav-brand-custom {
+  padding: 0.5rem 1rem;
+}
+.nav-brand-custom:hover {
+  background-color: transparent;
+}
+
+#factions-dropdown {
+  position: relative;
+}
+#factions-dropdown.show {
+  background-color: #600000;
+}
+
+.dropdown-item-custom {
+  padding: 0.5rem 1rem;
+  transition: background-color 0.2s ease;
+}
+.dropdown-item-custom:hover {
+  background-color: #FFECEC;
+  color: #8B0000;
+}
+
+@media (max-width: 991.98px) {
+  .nav-item-custom {
+    text-align: left;
+    justify-content: flex-start;
+  }
+  #account {
+    justify-content: flex-start;
+  }
+}
 .carousel {
   background: #1a1a1a;
   color: #d4af37;
@@ -2835,7 +2892,7 @@ input:focus, textarea:focus, select:focus {
 #logo {
   width: 60px;
   height: 60px;
-  background-image: url("../../../assets/images/logo.png");
+  background-image: url("../../../assets/images/asd.png");
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -2863,4 +2920,8 @@ body {
 
 .root {
   width: 100%;
+}
+
+#scroll-container {
+  font-family: "Droid Serif", serif;
 }

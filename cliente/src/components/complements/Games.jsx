@@ -8,8 +8,18 @@ export default function Games() {
     const [error, setError] = useState(null);
     const [usernames, setUsernames] = useState({});
     const [currentPage, setCurrentPage] = useState(1);
+    const [showModal, setShowModal] = useState(false);
     const gamesPerPage = 5;
     const navigate = useNavigate();
+
+    // Estados para el modal de crear partida
+    const [user2Name, setUser2Name] = useState("");
+    const [user2Id, setUser2Id] = useState(null);
+    const [winner, setWinner] = useState("");
+    const [user1Points, setUser1Points] = useState("");
+    const [user2Points, setUser2Points] = useState("");
+    const [searchStatus, setSearchStatus] = useState(null); // null, "success", "error"
+    const [modalError, setModalError] = useState("");
 
     useEffect(() => {
         const userData = localStorage.getItem("user");
@@ -21,6 +31,41 @@ export default function Games() {
             navigate("/login");
         }
     }, [navigate]);
+
+    // Validar puntos cuando cambian el ganador o los valores de puntos
+    useEffect(() => {
+        if (winner && user1Points && user2Points) {
+            validatePoints();
+        }
+    }, [winner, user1Points, user2Points]);
+
+    const validatePoints = () => {
+        const points1 = parseInt(user1Points, 10);
+        const points2 = parseInt(user2Points, 10);
+        
+        if (isNaN(points1) || isNaN(points2)) {
+            setModalError("Los puntos deben ser valores numéricos");
+            return false;
+        }
+        
+        if (points1 < 0 || points2 < 0) {
+            setModalError("Los puntos no pueden ser negativos");
+            return false;
+        }
+        
+        if (winner === "1" && points1 <= points2) {
+            setModalError("El Jugador 1 debe tener más puntos si es el ganador");
+            return false;
+        }
+        
+        if (winner === "2" && points2 <= points1) {
+            setModalError("El Jugador 2 debe tener más puntos si es el ganador");
+            return false;
+        }
+        
+        setModalError("");
+        return true;
+    };
 
     const fetchGames = async (userId) => {
         try {
@@ -109,8 +154,135 @@ export default function Games() {
         navigate("/update/game", { state: { game } });
     };
 
-    const handleCreateGame = () => {
-        navigate("/games/create");
+    const handleCreateGameClick = () => {
+        // Abrir el modal de crear partida
+        resetModalFields();
+        setShowModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+        resetModalFields();
+    };
+
+    // Función para buscar el jugador 2 por nombre
+    const searchUser2ByName = async () => {
+        try {
+            if (!user2Name) {
+                setSearchStatus("error");
+                setModalError("Por favor, introduce un nombre de usuario para buscar");
+                return;
+            }
+
+            const response = await fetch(
+                `${import.meta.env.VITE_APP_PETICION_IP}/api/userUsername/${user2Name}`
+            );
+
+            const textResponse = await response.text();
+            const data = JSON.parse(textResponse);
+
+            if (response.ok && data.data && data.data.id) {
+                setUser2Id(data.data.id);
+                setSearchStatus("success");
+                setModalError("");
+            } else {
+                setUser2Id(null);
+                setSearchStatus("error");
+                setModalError("Usuario no encontrado");
+            }
+        } catch (error) {
+            console.error("Error:", error.message);
+            setUser2Id(null);
+            setSearchStatus("error");
+            setModalError("Error al buscar el usuario");
+        }
+    };
+
+    // Manejadores para las entradas numéricas
+    const handlePointsChange = (e, playerType) => {
+        const value = e.target.value;
+        // Solo permitir números positivos
+        if (value === "" || (parseInt(value, 10) >= 0 && !isNaN(parseInt(value, 10)))) {
+            if (playerType === "user1") {
+                setUser1Points(value);
+            } else {
+                setUser2Points(value);
+            }
+        }
+    };
+
+    // Función para manejar la creación de una nueva partida
+    const handleSaveGame = async () => {
+        try {
+            // Validaciones básicas
+            if (!user2Id) {
+                setModalError("Debes buscar y seleccionar un jugador 2 válido");
+                return;
+            }
+            
+            if (!winner) {
+                setModalError("Por favor selecciona un ganador");
+                return;
+            }
+            
+            if (!user1Points || !user2Points) {
+                setModalError("Ambos jugadores deben tener puntos asignados");
+                return;
+            }
+            
+            // Validar puntos
+            if (!validatePoints()) {
+                return;
+            }
+
+            const newGameData = {
+                user1_id: user.id,
+                user2_id: user2Id,
+                winner: parseInt(winner, 10),
+                points_user1: parseInt(user1Points, 10),
+                points_user2: parseInt(user2Points, 10),
+            };
+
+            const token = localStorage.getItem("token");
+            const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/games/create`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify(newGameData),
+            });
+
+            const responseText = await response.text();
+            let data;
+            
+            try {
+                data = JSON.parse(responseText);
+            } catch (parseError) {
+                throw new Error("El servidor devolvió un formato inesperado.");
+            }
+
+            if (response.ok) {
+                // Actualizar la lista de partidas
+                fetchGames(user.id);
+                // Cerrar el modal
+                handleCloseModal();
+            } else {
+                throw new Error(data?.message || "Hubo un error al crear la partida.");
+            }
+        } catch (err) {
+            setModalError(err.message);
+        }
+    };
+
+    const resetModalFields = () => {
+        setUser2Name("");
+        setUser2Id(null);
+        setWinner("");
+        setUser1Points("");
+        setUser2Points("");
+        setSearchStatus(null);
+        setModalError("");
     };
 
     const indexOfLast = currentPage * gamesPerPage;
@@ -202,10 +374,236 @@ export default function Games() {
                 <p className="no-games-text">No tienes partidas todavía.</p>
             )}
             <div className="text-center mt-4">
-                <button className="btn btn-primary" onClick={handleCreateGame}>
+                <button className="btn btn-primary" onClick={handleCreateGameClick}>
                     Crear nueva partida
                 </button>
             </div>
+
+            {/* Modal para crear nueva partida */}
+            {showModal && (
+                <div className="modal-backdrop">
+                    <div className="game-modal">
+                        <div className="modal-header">
+                            <h3>Crear Nueva Partida</h3>
+                        </div>
+                        <div className="modal-body">
+                            {modalError && (
+                                <div className="alert alert-danger mb-3">{modalError}</div>
+                            )}
+                            
+                            <div className="form-group mb-3">
+                                <label className="form-label">Jugador 2:</label>
+                                <div className="search-container">
+                                    <div className="input-wrapper">
+                                        <input
+                                            type="text"
+                                            className="form-control search-input"
+                                            value={user2Name}
+                                            onChange={(e) => {
+                                                setUser2Name(e.target.value);
+                                                setSearchStatus(null);
+                                            }}
+                                            placeholder="Nombre del jugador 2"
+                                        />
+                                        {searchStatus === "success" && (
+                                            <span className="status-icon success">
+                                                <i className="fa fa-check"></i>
+                                            </span>
+                                        )}
+                                        {searchStatus === "error" && (
+                                            <span className="status-icon error">
+                                                <i className="fa fa-times"></i>
+                                            </span>
+                                        )}
+                                    </div>
+                                    <button 
+                                        className="search-button" 
+                                        type="button" 
+                                        onClick={searchUser2ByName}
+                                    >
+                                        <i className="fa fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div className="form-group mb-3">
+                                <label className="form-label">Ganador:</label>
+                                <select
+                                    className="form-select"
+                                    value={winner}
+                                    onChange={(e) => setWinner(e.target.value)}
+                                >
+                                    <option value="" disabled>Selecciona ganador</option>
+                                    <option value="1">Jugador 1</option>
+                                    {user2Id && <option value="2">Jugador 2</option>}
+                                </select>
+                            </div>
+                            
+                            <div className="form-group mb-3">
+                                <label className="form-label">Puntos Jugador 1:</label>
+                                <input
+                                    type="number"
+                                    className="form-control"
+                                    value={user1Points}
+                                    onChange={(e) => handlePointsChange(e, "user1")}
+                                    min="0"
+                                />
+                            </div>
+                            
+                            <div className="form-group mb-3">
+                                <label className="form-label">Puntos Jugador 2:</label>
+                                <input
+                                    type="number"
+                                    className="form-control"
+                                    value={user2Points}
+                                    onChange={(e) => handlePointsChange(e, "user2")}
+                                    min="0"
+                                />
+                            </div>
+                        </div>
+                        <div className="modal-footer">
+                            <button 
+                                className="btn btn-danger me-2" 
+                                onClick={handleCloseModal}
+                            >
+                                Cancelar
+                            </button>
+                            <button 
+                                className="btn btn-success" 
+                                onClick={handleSaveGame}
+                                disabled={!user2Id || !winner || !user1Points || !user2Points || modalError}
+                            >
+                                Guardar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Estilos CSS para el modal */}
+            <style>{`
+                .modal-backdrop {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0, 0, 0, 0.5);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    z-index: 1050;
+                }
+                
+                .game-modal {
+                    background-color: #2c2c2c;
+                    border-radius: 8px;
+                    width: 90%;
+                    max-width: 500px;
+                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+                    color: #e0e0e0;
+                }
+                
+                .modal-header {
+                    padding: 15px;
+                    border-bottom: 1px solid #444;
+                }
+                
+                .modal-header h3 {
+                    margin: 0;
+                    color: #ffd700;  /* Color dorado para el título */
+                }
+                
+                .modal-body {
+                    padding: 20px;
+                }
+                
+                .modal-footer {
+                    padding: 15px;
+                    border-top: 1px solid #444;
+                    display: flex;
+                    justify-content: flex-end;
+                }
+                
+                .form-label {
+                    color: #ffd700;  /* Color dorado para las etiquetas */
+                    margin-bottom: 5px;
+                    font-weight: 500;
+                }
+                
+                .form-control, .form-select {
+                    background-color: #333;
+                    border: 1px solid #555;
+                    color: #fff;
+                }
+                
+                .form-control:focus, .form-select:focus {
+                    background-color: #444;
+                    border-color: #ffd700;
+                    box-shadow: 0 0 0 0.25rem rgba(255, 215, 0, 0.25);
+                    color: #fff;
+                }
+                
+                .alert-danger {
+                    background-color: rgba(220, 53, 69, 0.8);
+                    color: white;
+                    border: none;
+                }
+                
+                /* Estilos para el input de búsqueda */
+                .search-container {
+                    display: flex;
+                    align-items: stretch;
+                }
+                
+                .input-wrapper {
+                    position: relative;
+                    flex-grow: 1;
+                }
+                
+                .search-input {
+                    width: 100%;
+                    padding-right: 30px; /* Espacio para el icono de estado */
+                }
+                
+                .search-input::placeholder {
+                    color: #bbb;
+                    opacity: 1;
+                }
+                
+                .status-icon {
+                    position: absolute;
+                    right: 10px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    z-index: 5;
+                }
+                
+                .status-icon.success {
+                    color: #28a745;
+                }
+                
+                .status-icon.error {
+                    color: #dc3545;
+                }
+                
+                .search-button {
+                    height: 20px;
+                    padding: 6px 12px;
+                    background-color: #555;
+                    border: 1px solid #666;
+                    color: white;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    transition: background-color 0.3s;
+                }
+                
+                .search-button:hover {
+                    background-color: #666;
+                }
+            `}</style>
         </div>
     );
 }
