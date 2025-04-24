@@ -67,6 +67,7 @@ Route::middleware(['auth:sanctum', RoleMiddleware::class . ':user,admin'])->grou
     
     Route::delete('/games/delete/{id}', [GameController::class, 'destroy']);
     Route::delete('/favorites/delete/{id}', [FavoriteController::class, 'destroy']);
+    Route::delete('/favorites/remove-by-type',[FavoriteController::class, 'removeByUserAndType']);
 });
 Route::post('/login', [UserController::class, 'login']);
 Route::post('/register', [UserController::class, 'registro']);

@@ -17,10 +17,11 @@ export default function Squad() {
     const [expanded, setExpanded] = useState({});
     const navigate = useNavigate();
     const [isFavorite, setIsFavorite] = useState(false);
+    const [isHovering, setIsHovering] = useState(false);
+    
     const user = JSON.parse(localStorage.getItem("user"));
 
-
-
+    // Optimizado para cargar escuadrón, soldados y verificar favoritos
     useEffect(() => {
         const fetchSquadData = async () => {
             if (!slug) {
@@ -40,6 +41,32 @@ export default function Squad() {
                 const soldiersData = await soldiersResponse.json();
                 setSoldiers(soldiersData.data || []);
 
+                // Si hay un usuario, verificamos si es favorito
+                if (user && squadData.id) {
+                    try {
+                        const token = localStorage.getItem("token");
+                        const favoriteResponse = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/check`, {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "Authorization": `Bearer ${token}`,
+                            },
+                            body: JSON.stringify({
+                                user_id: user.id,
+                                favorites_id: squadData.id,
+                                favorites_type: "Squadron",
+                            }),
+                        });
+
+                        if (favoriteResponse.ok) {
+                            const data = await favoriteResponse.json();
+                            setIsFavorite(data.isFavorite);
+                        }
+                    } catch (error) {
+                        console.error("Error al comprobar favoritos:", error);
+                    }
+                }
+
                 setErrorMessage(null);
             } catch (error) {
                 console.error("Error:", error);
@@ -48,70 +75,86 @@ export default function Squad() {
                 setIsLoading(false);
             }
         };
+        
         fetchSquadData();
-    }, [slug]);
+    }, [slug, user]);
 
-    useEffect(() => {
-        if (user && squad) checkFavorite();
-    }, [squad]);
-
-    const checkFavorite = async () => {
+    // Función para alternar favoritos (añadir/eliminar)
+    const toggleFavorite = async () => {
+        if (!user || !squad) return;
+        
         try {
             const token = localStorage.getItem("token");
-            const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/check`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`,
-                },
-                body: JSON.stringify({
-                    user_id: user.id,
-                    favorites_id: squad.id,
-                    favorites_type: "Squadron",
-                }),
-            });
+            
+            if (isFavorite) {
+                // Eliminar de favoritos
+                const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/remove-by-type`, {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`,
+                    },
+                    body: JSON.stringify({
+                        user_id: user.id,
+                        favorites_id: squad.id,
+                        favorites_type: "Squadron",
+                    }),
+                });
+                
+                if (response.ok) {
+                    setIsFavorite(false);
+                } else {
+                    console.error("Error al eliminar de favoritos");
+                }
+            } else {
+                // Añadir a favoritos
+                const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/create`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`,
+                    },
+                    body: JSON.stringify({
+                        user_id: user.id,
+                        favorites_id: squad.id,
+                        favorites_type: "Squadron",
+                    }),
+                });
 
-            const data = await response.json();
-            setIsFavorite(data.isFavorite);
-        } catch (error) {
-            console.error("Error al comprobar favoritos:", error);
-        }
-    };
-
-    const addToFavorites = async () => {
-        if (!user || !squad) return; // Verifica si hay un usuario y escuadrón
-
-        try {
-            const token = localStorage.getItem("token"); // Obtén el token del almacenamiento local
-            const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/create`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`, // Usa el token para la autenticación
-                },
-                body: JSON.stringify({
-                    user_id: user.id,        // ID del usuario
-                    favorites_id: squad.id,  // ID del escuadrón
-                    favorites_type: "Squadron", // Tipo de favorito
-                }),
-            });
-
-            if (!response.ok) {
-                const { message } = await response.json();
-                throw new Error(message || "Error al agregar a favoritos");
+                if (response.ok) {
+                    setIsFavorite(true);
+                } else {
+                    console.error("Error al añadir a favoritos");
+                }
             }
-
-            setIsFavorite(true); // Marca como favorito si la respuesta es exitosa
         } catch (error) {
-            console.error("Error al añadir a favoritos:", error); // Si ocurre un error
+            console.error("Error al gestionar favoritos:", error);
         }
     };
-
 
     const filteredSoldiers = soldiers.filter(s => s.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
     const toggleExpand = id => {
         setExpanded(prev => ({ ...prev, [id]: !prev[id] }));
+    };
+
+    // Estilos para el botón de corazón
+    const heartStyles = {
+        button: {
+            background: "transparent",
+            border: "none",
+            cursor: "pointer",
+            fontSize: "2rem",
+            color: "#dc3545",
+            transition: "transform 0.2s, color 0.2s",
+            padding: "10px",
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+        },
+        hoverEffect: {
+            transform: "scale(1.1)",
+        }
     };
 
     if (isLoading) return <p>Cargando...</p>;
@@ -159,14 +202,28 @@ export default function Squad() {
                         />
                         <h1 className="text-gold" style={{ color: "#d4af37" }}>{squad.name}</h1>
                         <p style={{ color: "#ccc" }}>{squad.description}</p>
+                        
                         {user && (
-                            isFavorite ? (
-                                <p>Esta facción ya está en tus favoritos.</p>
-                            ) : (
-                                <button onClick={addToFavorites} className="btn btn-primary">
-                                    Agregar a favoritos
-                                </button>
-                            )
+                            <button 
+                                onClick={toggleFavorite} 
+                                onMouseEnter={() => setIsHovering(true)}
+                                onMouseLeave={() => setIsHovering(false)}
+                                style={{
+                                    ...heartStyles.button,
+                                    ...(isHovering ? heartStyles.hoverEffect : {})
+                                }}
+                                title={isFavorite ? "Eliminar de favoritos" : "Añadir a favoritos"}
+                            >
+                                {isFavorite ? (
+                                    isHovering ? (
+                                        <i className="bi bi-heart-break"></i>
+                                    ) : (
+                                        <i className="bi bi-heart-fill"></i>
+                                    )
+                                ) : (
+                                    <i className="bi bi-heart"></i>
+                                )}
+                            </button>
                         )}
                     </>
                 )}
@@ -361,8 +418,8 @@ export default function Squad() {
                         right: "20px",
                         width: "60px",
                         height: "60px",
-                        backgroundColor: "#d4af37", // Mantengo el color de fondo original
-                        backgroundImage: "url(/src/assets/images/backToTop.png)", // Ruta de la imagen
+                        backgroundColor: "#d4af37",
+                        backgroundImage: "url(/src/assets/images/backToTop.png)",
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                         border: "none",
@@ -372,7 +429,7 @@ export default function Squad() {
                         zIndex: 1000,
                         transition: "transform 0.3s ease"
                     }}
-                    onMouseOver={(e) => e.target.style.transform = "scale(1.1)"} // Efecto hover
+                    onMouseOver={(e) => e.target.style.transform = "scale(1.1)"}
                     onMouseOut={(e) => e.target.style.transform = "scale(1)"}
                     onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 >

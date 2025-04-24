@@ -14,86 +14,146 @@ export default function Army() {
     const [errorMessage, setErrorMessage] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [isFavorite, setIsFavorite] = useState(false);
+    const [isHovering, setIsHovering] = useState(false);
 
     const user = JSON.parse(localStorage.getItem("user"));
 
-    const addToFavorites = async () => {
-        if (!user) return;
+    // Función simplificada para cambiar favoritos
+    const toggleFavorite = async () => {
+        if (!user || !army) return;
+        
         try {
             const token = localStorage.getItem("token");
-            const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/create`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`,
-                },
-                body: JSON.stringify({
-                    user_id: user.id,
-                    favorites_id: army.id,
-                    favorites_type: "Army",
-                }),
-            });
-            if (!response.ok) {
-                const { message } = await response.json();
-                throw new Error(message || "Error al agregar a favoritos");
+            
+            if (isFavorite) {
+                // Eliminar de favoritos 
+                await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/remove-by-type`, {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`,
+                    },
+                    body: JSON.stringify({
+                        user_id: user.id,
+                        favorites_id: army.id,
+                        favorites_type: "Army",
+                    }),
+                });
+                
+                setIsFavorite(false);
+            } else {
+                // Añadir a favoritos
+                await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/create`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`,
+                    },
+                    body: JSON.stringify({
+                        user_id: user.id,
+                        favorites_id: army.id,
+                        favorites_type: "Army",
+                    }),
+                });
+
+                setIsFavorite(true);
             }
-            setIsFavorite(true);
         } catch (error) {
-            console.error("Error al añadir a favoritos:", error);
+            console.error("Error al gestionar favoritos:", error);
         }
     };
 
-    const checkFavorite = async () => {
-        if (!user) return;
-        try {
-            const token = localStorage.getItem("token");
-            const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/check`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`,
-                },
-                body: JSON.stringify({
-                    user_id: user.id,
-                    favorites_id: army.id,
-                    favorites_type: "Army",
-                }),
-            });
-            const data = await response.json();
-            setIsFavorite(data.isFavorite);
-        } catch (error) {
-            console.error("Error al comprobar favoritos:", error);
-        }
-    };
-
+    // Cargar datos del ejército
     useEffect(() => {
-        const fetchArmyData = async () => {
+        const fetchArmy = async () => {
             try {
                 const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/armiesSlug/${slug}`);
-                if (!response.ok) throw new Error(`Error al obtener el ejército: ${response.status}`);
+                if (!response.ok) throw new Error(`Error: ${response.status}`);
+                
                 const armyData = await response.json();
                 setArmy(armyData.data);
-
-                const squadsResponse = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/squadronsArmy/${armyData.data.slug}`);
-                if (!squadsResponse.ok) throw new Error(`Error al obtener los escuadrones: ${squadsResponse.status}`);
-                const squadsData = await squadsResponse.json();
-                setSquads(squadsData.data || []);
+                setIsLoading(false);
             } catch (error) {
-                console.error("Error al cargar datos del ejército:", error);
-                setErrorMessage("Error al cargar los datos. Inténtalo nuevamente.");
-            } finally {
+                console.error("Error al cargar el ejército:", error);
+                setErrorMessage("Error al cargar los datos del ejército.");
                 setIsLoading(false);
             }
         };
 
-        fetchArmyData();
+        fetchArmy();
     }, [slug]);
 
+    // Cargar escuadrones una vez que tengamos el ejército
     useEffect(() => {
-        if (army && user) checkFavorite();
+        if (!army) return;
+        
+        const fetchSquads = async () => {
+            try {
+                const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/squadronsArmy/${army.slug}`);
+                if (!response.ok) throw new Error(`Error: ${response.status}`);
+                
+                const squadsData = await response.json();
+                setSquads(squadsData.data || []);
+            } catch (error) {
+                console.error("Error al cargar escuadrones:", error);
+            }
+        };
+
+        fetchSquads();
+    }, [army]);
+
+    // Comprobar si es favorito
+    useEffect(() => {
+        if (!army || !user) return;
+        
+        const checkIsFavorite = async () => {
+            try {
+                const token = localStorage.getItem("token");
+                const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/check`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`,
+                    },
+                    body: JSON.stringify({
+                        user_id: user.id,
+                        favorites_id: army.id,
+                        favorites_type: "Army",
+                    }),
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    setIsFavorite(data.isFavorite);
+                }
+            } catch (error) {
+                console.error("Error al comprobar favoritos:", error);
+            }
+        };
+
+        checkIsFavorite();
     }, [army, user]);
 
     const handleSquadClick = (squad) => navigate(`/squads/${squad.slug}`);
+
+    // Estilos CSS para el botón de corazón
+    const heartStyles = {
+        button: {
+            background: "transparent",
+            border: "none",
+            cursor: "pointer",
+            fontSize: "2rem",
+            color: "#dc3545",
+            transition: "transform 0.2s, color 0.2s",
+            padding: "10px",
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+        },
+        hoverEffect: {
+            transform: "scale(1.1)",
+        }
+    };
 
     if (isLoading) return <p>Cargando...</p>;
     if (errorMessage) return <p>{errorMessage}</p>;
@@ -116,12 +176,28 @@ export default function Army() {
                     <h1 className="mt-3">{army.name}</h1>
                     <p className="text-center">{army.description}</p>
 
-                    {user && !isFavorite && (
-                        <button onClick={addToFavorites} className="btn btn-primary">
-                            Agregar a favoritos
+                    {user && (
+                        <button 
+                            onClick={toggleFavorite} 
+                            onMouseEnter={() => setIsHovering(true)}
+                            onMouseLeave={() => setIsHovering(false)}
+                            style={{
+                                ...heartStyles.button,
+                                ...(isHovering ? heartStyles.hoverEffect : {})
+                            }}
+                            title={isFavorite ? "Eliminar de favoritos" : "Añadir a favoritos"}
+                        >
+                            {isFavorite ? (
+                                isHovering ? (
+                                    <i className="bi bi-heart-break"></i>
+                                ) : (
+                                    <i className="bi bi-heart-fill"></i>
+                                )
+                            ) : (
+                                <i className="bi bi-heart"></i>
+                            )}
                         </button>
                     )}
-                    {isFavorite && <p className="mt-2">Este ejército ya está en tus favoritos.</p>}
                 </Col>
 
                 <Col md={6}>
@@ -132,7 +208,7 @@ export default function Army() {
                                 maxHeight: "400px",
                                 overflowY: "auto",
                                 marginRight: "15px",
-                                backgroundColor: "#3a3a3a", // fondo amarillo tipo warhammer
+                                backgroundColor: "#3a3a3a",
                                 padding: "10px",
                                 borderRadius: "8px"
                             }}
@@ -151,8 +227,8 @@ export default function Army() {
                                             onClick={() => handleSquadClick(squad)}
                                             style={{
                                                 cursor: "pointer",
-                                                backgroundColor: "#3A3A3A",  // gris oscuro estilo Warhammer 40k
-                                                color: "#EEE"  // texto claro para contraste
+                                                backgroundColor: "#3A3A3A",
+                                                color: "#EEE"
                                             }}
                                         >
                                             <td className="text-center">

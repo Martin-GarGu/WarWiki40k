@@ -12,33 +12,62 @@ export default function Faction() {
     const [armies, setArmies] = useState([]);
     const [isFavorite, setIsFavorite] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const [isHovering, setIsHovering] = useState(false);
     const navigate = useNavigate();
     const user = JSON.parse(localStorage.getItem("user"));
 
-    const addToFavorites = async () => {
+    const toggleFavorite = async () => {
+        if (!user || !faction) return;
+        
         try {
             const token = localStorage.getItem("token");
-            const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/create`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`,
-                },
-                body: JSON.stringify({
-                    user_id: user.id,
-                    favorites_id: faction.id,
-                    favorites_type: "Faction",
-                }),
-            });
-
-            const data = await response.json();
-            if (response.ok) {
-                setIsFavorite(true);
+            
+            if (isFavorite) {
+                // Eliminar de favoritos usando el método removeByUserAndType
+                const response = await fetch(
+                    `${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/remove-by-type`,
+                    {
+                        method: "DELETE",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`,
+                        },
+                        body: JSON.stringify({
+                            user_id: user.id,
+                            favorites_id: faction.id,
+                            favorites_type: "Faction",
+                        }),
+                    }
+                );
+                
+                if (response.ok) {
+                    setIsFavorite(false);
+                } else {
+                    console.error("Error al eliminar de favoritos");
+                }
             } else {
-                console.error("Error al añadir a favoritos:", data.message);
+                // Añadir a favoritos
+                const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/create`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`,
+                    },
+                    body: JSON.stringify({
+                        user_id: user.id,
+                        favorites_id: faction.id,
+                        favorites_type: "Faction",
+                    }),
+                });
+
+                if (response.ok) {
+                    setIsFavorite(true);
+                } else {
+                    console.error("Error al añadir a favoritos");
+                }
             }
         } catch (error) {
-            console.error("Error al añadir a favoritos:", error);
+            console.error("Error al gestionar favoritos:", error);
         }
     };
 
@@ -97,6 +126,25 @@ export default function Faction() {
         navigate(`/armies/${army.slug}`);
     };
 
+    // Estilos CSS para el botón de corazón
+    const heartStyles = {
+        button: {
+            background: "transparent",
+            border: "none",
+            cursor: "pointer",
+            fontSize: "2rem",
+            color: "#dc3545",
+            transition: "transform 0.2s, color 0.2s",
+            padding: "10px",
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+        },
+        hoverEffect: {
+            transform: "scale(1.1)",
+        }
+    };
+
     return (
         <div className="faction-page">
             {isLoading ? (
@@ -125,13 +173,26 @@ export default function Faction() {
                         <h1>{faction.name}</h1>
                         <p>{faction.description}</p>
                         {user && (
-                            isFavorite ? (
-                                <p>Esta facción ya está en tus favoritos.</p>
-                            ) : (
-                                <button onClick={addToFavorites} className="btn btn-primary">
-                                    Agregar a favoritos
-                                </button>
-                            )
+                            <button 
+                                onClick={toggleFavorite} 
+                                onMouseEnter={() => setIsHovering(true)}
+                                onMouseLeave={() => setIsHovering(false)}
+                                style={{
+                                    ...heartStyles.button,
+                                    ...(isHovering ? heartStyles.hoverEffect : {})
+                                }}
+                                title={isFavorite ? "Eliminar de favoritos" : "Añadir a favoritos"}
+                            >
+                                {isFavorite ? (
+                                    isHovering ? (
+                                        <i className="bi bi-heart-break"></i>
+                                    ) : (
+                                        <i className="bi bi-heart-fill"></i>
+                                    )
+                                ) : (
+                                    <i className="bi bi-heart"></i>
+                                )}
+                            </button>
                         )}
                     </Col>
 
