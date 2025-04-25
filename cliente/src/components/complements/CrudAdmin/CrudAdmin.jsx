@@ -1,51 +1,29 @@
-import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 
-const CrudAdmin = () => {
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        const userFromStorage = localStorage.getItem("user");
-        if (userFromStorage) {
-            const parsedUser = JSON.parse(userFromStorage);
-            if (parsedUser.role !== "admin") {
-                navigate('/access-denied'); // Redirige si no es administrador
-            }
-        } else {
-            navigate('/login'); // Redirige si no hay usuario logueado
-        }
-    }, [navigate]);
-
-    const handleCreate = () => {
-        navigate('/createMenu'); // Redirige a la página de crear
-    };
-
-    const handleEdit = () => {
-        navigate('/updateMenu'); // Redirige a la página de editar
-    };
-
-    const handleDelete = () => {
-        navigate('/eliminateMenu'); // Redirige a la página de eliminar
-    };
-
-    return (
-        <div className="crud-admin">
-            <div className="crud-container">
-                <h1>Gestión de Elementos</h1>
-                <div className="crud-buttons">
-                    <button onClick={handleCreate} className="btn btn-primary">
-                        Crear
-                    </button>
-                    <button onClick={handleEdit} className="btn btn-warning">
-                        Editar
-                    </button>
-                    <button onClick={handleDelete} className="btn btn-danger">
-                        Eliminar
-                    </button>
-                </div>
-            </div>
+const AdminPanel = () => {
+  return (
+    <div className="admin-panel">
+      <h1 className="admin-title">Admin Panel</h1>
+      <div className="button-grid">
+        <div className="admin-button">
+          <img src="/src/assets/images/faction.png" alt="Faccion" className="admin-icon" />
+          <button className="admin-btn">Facciones</button>
         </div>
-    );
+        <div className="admin-button">
+          <img src="/src/assets/images/army.png" alt="Ejercito" className="admin-icon" />
+          <button className="admin-btn">Ejercitos</button>
+        </div>
+        <div className="admin-button">
+          <img src="/src/assets/images/squadron.png" alt="Escuadrones" className="admin-icon" />
+          <button className="admin-btn">Escuadrones</button>
+        </div>
+        <div className="admin-button">
+          <img src="/src/assets/images/soldier.png" alt="Soldados" className="admin-icon" />
+          <button className="admin-btn">Soldados</button>
+        </div>
+      </div>
+    </div>
+  );
 };
 
-export default CrudAdmin;
+export default AdminPanel;
