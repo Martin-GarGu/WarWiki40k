@@ -464,12 +464,14 @@ export default function Games() {
                         <div className="modal-footer">
                             <button 
                                 className="btn btn-danger me-2" 
+                                id="btnCancelar"
                                 onClick={handleCloseModal}
                             >
                                 Cancelar
                             </button>
                             <button 
-                                className="btn btn-success" 
+                                className="btn btn-success"
+                                id="btnGuardar"
                                 onClick={handleSaveGame}
                                 disabled={!user2Id || !winner || !user1Points || !user2Points || modalError}
                             >
@@ -529,6 +531,7 @@ export default function Games() {
                     color: #ffd700;  /* Color dorado para las etiquetas */
                     margin-bottom: 5px;
                     font-weight: 500;
+                    font-family: 'Roboto Condensed', sans-serif;
                 }
                 
                 .form-control, .form-select {
@@ -549,7 +552,12 @@ export default function Games() {
                     color: white;
                     border: none;
                 }
-                
+                #btnCancelar{
+                    font-family: 'Playfair Display', serif;
+                }
+                #btnGuardar{
+                    font-family: 'Playfair Display', serif;
+                }
                 /* Estilos para el input de búsqueda */
                 .search-container {
                     display: flex;
