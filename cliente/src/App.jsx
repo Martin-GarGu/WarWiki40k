@@ -40,6 +40,8 @@ import Rules from './components/complements/Rules.jsx';
 import SpecialRules from './components/complements/SpecialRules.jsx';
 import AccessDenied from './components/complements/AccessDenied.jsx';
 import UpdateGame from './components/complements/UpdateGame.jsx';
+import FactionAdmin from './components/complements/CrudAdmin/FactionAdmin.jsx';
+import ArmyAdmin from './components/complements/CrudAdmin/ArmyAdmin.jsx';
 
 function App() {
   const headerRef = useRef(null);
@@ -218,6 +220,14 @@ function App() {
             <Route
               path='/update/soldier'
               element={<UpdateSoldier />}
+            />
+            <Route
+              path='/crud/factionAdmin'
+              element={<FactionAdmin/>}
+            />
+            <Route
+              path='/crud/armiesAdmin'
+              element={<ArmyAdmin/>}
             />
           </Routes>
 
