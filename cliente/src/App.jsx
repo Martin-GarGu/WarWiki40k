@@ -42,6 +42,8 @@ import AccessDenied from './components/complements/AccessDenied.jsx';
 import UpdateGame from './components/complements/UpdateGame.jsx';
 import FactionAdmin from './components/complements/CrudAdmin/FactionAdmin.jsx';
 import ArmyAdmin from './components/complements/CrudAdmin/ArmyAdmin.jsx';
+import SquadAdmin from './components/complements/CrudAdmin/SquadAdmin.jsx';
+import SoldierAdmin from './components/complements/CrudAdmin/SoldierAdmin.jsx';
 
 function App() {
   const headerRef = useRef(null);
@@ -228,6 +230,14 @@ function App() {
             <Route
               path='/crud/armiesAdmin'
               element={<ArmyAdmin/>}
+            />
+            <Route
+              path='/crud/squadAdmin'
+              element={<SquadAdmin/>}
+            />
+            <Route
+              path='/crud/soldierAdmin'
+              element={<SoldierAdmin/>}
             />
           </Routes>
 

@@ -23,6 +23,12 @@ const AdminPanel = () => {
   const handleArmies = async()=>{
     navigate("/crud/armiesAdmin");
   };
+  const handleSquads = async()=>{
+    navigate("/crud/squadAdmin");
+  };
+  const handleSoldiers = async()=>{
+    navigate('/crud/soldierAdmin');
+  };
 
   return (
     <div className="admin-panel">
@@ -38,11 +44,11 @@ const AdminPanel = () => {
         </div>
         <div className="admin-button">
           <img src="/src/assets/images/squadron.png" alt="Escuadrones" className="admin-icon" />
-          <button className="admin-btn">Escuadrones</button>
+          <button className="admin-btn" onClick={()=>handleSquads()}>Escuadrones</button>
         </div>
         <div className="admin-button">
           <img src="/src/assets/images/soldier.png" alt="Soldados" className="admin-icon" />
-          <button className="admin-btn">Soldados</button>
+          <button className="admin-btn" onClick={()=>handleSoldiers()}>Soldados</button>
         </div>
       </div>
     </div>
