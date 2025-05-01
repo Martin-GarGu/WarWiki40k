@@ -10,6 +10,7 @@ const SoldierAdmin = () => {
     const [createModalOpen, setCreateModalOpen] = useState(false);
     const [editModalOpen, setEditModalOpen] = useState(false);
     const [currentSoldier, setCurrentSoldier] = useState(null);
+    const [selectedSquad, setSelectedSquad] = useState(""); // Estado para el filtro de escuadrón
 
     const [formData, setFormData] = useState({
         name: "",
@@ -109,11 +110,27 @@ const SoldierAdmin = () => {
         }
     };
 
+    // Filtrar soldados por escuadrón
+    const filteredSoldiers = selectedSquad 
+        ? soldiers.filter(soldier => String(soldier.squadron_id) === String(selectedSquad))
+        : soldiers;
+
     // Paginación
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentSoldiers = soldiers.slice(indexOfFirstItem, indexOfLastItem);
-    const totalPages = Math.ceil(soldiers.length / itemsPerPage);
+    const currentSoldiers = filteredSoldiers.slice(indexOfFirstItem, indexOfLastItem);
+    const totalPages = Math.ceil(filteredSoldiers.length / itemsPerPage);
+
+    // Manejo del cambio de filtro por escuadrón
+    const handleSquadFilterChange = (e) => {
+        setSelectedSquad(e.target.value);
+        setCurrentPage(1); // Reiniciar a la primera página cuando se cambia el filtro
+    };
+
+    // Ir a la última página
+    const goToLastPage = () => {
+        setCurrentPage(totalPages || 1);
+    };
 
     // Funciones para los modales
     const openCreateModal = () => {
@@ -494,7 +511,26 @@ const SoldierAdmin = () => {
                 <p className="error-text">{error}</p>
             ) : (
                 <>
-                    <div className="text-end mb-3">
+                    <div className="d-flex justify-content-between mb-3">
+                        {/* Filtro por escuadrón */}
+                        <div className="filter-container">
+                            <label htmlFor="squad-filter" className="form-label me-2">Filtrar por escuadrón:</label>
+                            <select 
+                                id="squad-filter"
+                                className="form-select" 
+                                value={selectedSquad} 
+                                onChange={handleSquadFilterChange}
+                                style={{ width: "auto", display: "inline-block" }}
+                            >
+                                <option value="">Todos los escuadrones</option>
+                                {squads.map((squad) => (
+                                    <option key={squad.id} value={squad.id}>
+                                        {squad.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                        
                         <button
                             onClick={openCreateModal}
                             className="btn btn-primary"
@@ -539,28 +575,48 @@ const SoldierAdmin = () => {
                                 ))
                             ) : (
                                 <tr>
-                                    <td colSpan="3" className="text-center">No hay soldados disponibles</td>
+                                    <td colSpan="3" className="text-center">
+                                        {selectedSquad ? "No hay soldados disponibles para este escuadrón" : "No hay soldados disponibles"}
+                                    </td>
                                 </tr>
                             )}
                         </tbody>
                     </table>
 
-                    {/* Paginación */}
+                    {/* Paginación mejorada */}
                     <div className="pagination-controls text-center mt-3">
+                        <button
+                            className="btn btn-secondary btn-sm me-2"
+                            onClick={() => setCurrentPage(1)}
+                            disabled={currentPage === 1}
+                            title="Primera página"
+                        >
+                            <i className="fa fa-angle-double-left"></i>
+                        </button>
                         <button
                             className="btn btn-secondary btn-sm me-2"
                             onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                             disabled={currentPage === 1}
+                            title="Página anterior"
                         >
-                            <i className="fa fa-chevron-left me-1"></i>Anterior
+                            <i className="fa fa-chevron-left"></i>
                         </button>
                         <span className="text-white">Página {currentPage} de {totalPages || 1}</span>
                         <button
                             className="btn btn-secondary btn-sm ms-2"
                             onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages || 1))}
                             disabled={currentPage === (totalPages || 1)}
+                            title="Página siguiente"
                         >
-                            Siguiente<i className="fa fa-chevron-right ms-1"></i>
+                            <i className="fa fa-chevron-right"></i>
+                        </button>
+                        <button
+                            className="btn btn-secondary btn-sm ms-2"
+                            onClick={goToLastPage}
+                            disabled={currentPage === (totalPages || 1)}
+                            title="Última página"
+                        >
+                            <i className="fa fa-angle-double-right"></i>
                         </button>
                     </div>
                 </>

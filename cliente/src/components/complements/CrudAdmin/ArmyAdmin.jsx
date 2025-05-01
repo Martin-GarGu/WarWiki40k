@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const ArmyAdmin = () => {
-    const [armies, setArmies] = useState([]); // Corregido nombre de la función setState
+    const [armies, setArmies] = useState([]);
     const [factions, setFactions] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -10,6 +10,7 @@ const ArmyAdmin = () => {
     const [createModalOpen, setCreateModalOpen] = useState(false);
     const [editModalOpen, setEditModalOpen] = useState(false);
     const [currentArmy, setCurrentArmy] = useState(null);
+    const [selectedFaction, setSelectedFaction] = useState(""); // Estado para el filtro de facción
 
     const [formData, setFormData] = useState({
         name: "",
@@ -62,7 +63,7 @@ const ArmyAdmin = () => {
             const contentType = response.headers.get("content-type");
             if (contentType && contentType.includes("application/json")) {
                 const jsonData = await response.json();
-                setArmies(jsonData.data); // Corregido función
+                setArmies(jsonData.data);
                 setLoading(false);
             } else {
                 throw new Error("La respuesta no es JSON.");
@@ -102,11 +103,32 @@ const ArmyAdmin = () => {
         }
     };
 
+    // Filtrar ejércitos por facción
+    const filteredArmies = selectedFaction 
+        ? armies.filter(army => String(army.faction_id) === String(selectedFaction))
+        : armies;
+
     // Paginación
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentArmies = armies.slice(indexOfFirstItem, indexOfLastItem);
-    const totalPages = Math.ceil(armies.length / itemsPerPage);
+    const currentArmies = filteredArmies.slice(indexOfFirstItem, indexOfLastItem);
+    const totalPages = Math.ceil(filteredArmies.length / itemsPerPage);
+
+    // Manejo del cambio de filtro por facción
+    const handleFactionFilterChange = (e) => {
+        setSelectedFaction(e.target.value);
+        setCurrentPage(1); // Reiniciar a la primera página cuando se cambia el filtro
+    };
+
+    // Ir a la primera página
+    const goToFirstPage = () => {
+        setCurrentPage(1);
+    };
+
+    // Ir a la última página
+    const goToLastPage = () => {
+        setCurrentPage(totalPages || 1);
+    };
 
     // Funciones para los modales
     const openCreateModal = () => {
@@ -164,7 +186,7 @@ const ArmyAdmin = () => {
             return;
         }
 
-        const newArmy = { name, description, image, faction_id }; // Corregido para incluir faction_id
+        const newArmy = { name, description, image, faction_id };
 
         try {
             const token = localStorage.getItem("token");
@@ -278,9 +300,10 @@ const ArmyAdmin = () => {
             }
         }
     };
+
     return (
         <div className="army-admin-container">
-            <h1 className="text-center">Ejércitos</h1>
+            <h1 className="text-center">Administración de Ejércitos</h1>
 
             {loading ? (
                 <p className="loading-text">Cargando...</p>
@@ -288,11 +311,40 @@ const ArmyAdmin = () => {
                 <p className="error-text">{error}</p>
             ) : (
                 <>
+                    <div className="d-flex justify-content-between mb-3">
+                        {/* Filtro por facción */}
+                        <div className="filter-container">
+                            <label htmlFor="faction-filter" className="form-label me-2">Filtrar por facción:</label>
+                            <select 
+                                id="faction-filter"
+                                className="form-select" 
+                                value={selectedFaction} 
+                                onChange={handleFactionFilterChange}
+                                style={{ width: "auto", display: "inline-block" }}
+                            >
+                                <option value="">Todas las facciones</option>
+                                {factions.map((faction) => (
+                                    <option key={faction.id} value={faction.id}>
+                                        {faction.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                        
+                        <button
+                            onClick={openCreateModal}
+                            className="btn btn-primary"
+                        >
+                            <i className="fa fa-plus me-2"></i>Crear nuevo ejército
+                        </button>
+                    </div>
+
                     <table className="table table-dark table-striped">
                         <thead>
                             <tr>
                                 <th>NOMBRE</th>
-                                <th>ACCION</th>
+                                <th>FACCIÓN</th>
+                                <th>ACCIONES</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -300,6 +352,9 @@ const ArmyAdmin = () => {
                                 currentArmies.map((army) => (
                                     <tr key={army.id}>
                                         <td>{army.name}</td>
+                                        <td>
+                                            {factions.find(faction => faction.id === army.faction_id)?.name || 'N/A'}
+                                        </td>
                                         <td>
                                             <button
                                                 onClick={() => openEditModal(army)}
@@ -320,45 +375,54 @@ const ArmyAdmin = () => {
                                 ))
                             ) : (
                                 <tr>
-                                    <td colSpan="2" className="text-center">No hay ejércitos disponibles</td>
+                                    <td colSpan="3" className="text-center">
+                                        {selectedFaction ? "No hay ejércitos disponibles para esta facción" : "No hay ejércitos disponibles"}
+                                    </td>
                                 </tr>
                             )}
                         </tbody>
                     </table>
 
-                    {/* Paginación siempre visible */}
+                    {/* Paginación mejorada */}
                     <div className="pagination-controls text-center mt-3">
+                        <button
+                            className="btn btn-secondary btn-sm me-2"
+                            onClick={goToFirstPage}
+                            disabled={currentPage === 1}
+                            title="Primera página"
+                        >
+                            <i className="fa fa-angle-double-left"></i>
+                        </button>
                         <button
                             className="btn btn-secondary btn-sm me-2"
                             onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                             disabled={currentPage === 1}
+                            title="Página anterior"
                         >
-                            Anterior
+                            <i className="fa fa-chevron-left"></i>
                         </button>
                         <span className="text-white">Página {currentPage} de {totalPages || 1}</span>
                         <button
                             className="btn btn-secondary btn-sm ms-2"
                             onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages || 1))}
                             disabled={currentPage === (totalPages || 1)}
+                            title="Página siguiente"
                         >
-                            Siguiente
+                            <i className="fa fa-chevron-right"></i>
                         </button>
-                    </div>
-
-                    {/* Botón para crear nuevo ejército */}
-                    <div className="text-center mt-4">
                         <button
-                            onClick={openCreateModal}
-                            className="btn btn-primary"
+                            className="btn btn-secondary btn-sm ms-2"
+                            onClick={goToLastPage}
+                            disabled={currentPage === (totalPages || 1)}
+                            title="Última página"
                         >
-                            Crear nuevo ejército
+                            <i className="fa fa-angle-double-right"></i>
                         </button>
                     </div>
                 </>
             )}
 
-            {/* Modales */}
-
+            {/* Modal para crear ejército */}
             {createModalOpen && (
                 <div className="modal-backdrop">
                     <div className="game-modal">
@@ -369,151 +433,167 @@ const ArmyAdmin = () => {
                             {errorMessage && <div className="alert alert-danger mb-3">{errorMessage}</div>}
                             {successMessage && <div className="alert alert-success mb-3">{successMessage}</div>}
 
-                            <div className="form-group mb-3">
-                                <label htmlFor="name" className="form-label">Nombre del Ejército *</label>
-                                <input
-                                    type="text"
-                                    id="name"
-                                    name="name"
-                                    value={formData.name}
-                                    onChange={handleInputChange}
-                                    className="form-control"
-                                />
-                            </div>
-                            <div className="form-group mb-3">
-                                <label htmlFor="description" className="form-label">Descripción del Ejército *</label>
-                                <textarea
-                                    id="description"
-                                    name="description"
-                                    value={formData.description}
-                                    onChange={handleInputChange}
-                                    className="form-control"
-                                    rows="6"
-                                />
-                            </div>
-                            <div className="form-group mb-3">
-                                <label htmlFor="image" className="form-label">URL de la imagen del Ejército</label>
-                                <input
-                                    type="text"
-                                    id="image"
-                                    name="image"
-                                    value={formData.image}
-                                    onChange={handleInputChange}
-                                    className="form-control"
-                                />
-                            </div>
-                            <div className="form-group mb-3">
-                                <label htmlFor="faction_id" className="form-label">Facción a la que pertenece *</label>
-                                <select 
-                                    name="faction_id" 
-                                    id="faction_id"
-                                    className="form-select"
-                                    value={formData.faction_id}
-                                    onChange={handleInputChange}
-                                >
-                                    <option value="" disabled>Selecciona una facción</option>
-                                    {factions.map((faction) => (
-                                        <option key={faction.id} value={faction.id}>
-                                            {faction.name}
-                                        </option>
-                                    ))}
-                                </select>
+                            <div className="form-row">
+                                <div className="form-col">
+                                    <div className="form-group">
+                                        <label htmlFor="name" className="form-label required-field">Nombre del Ejército</label>
+                                        <input
+                                            type="text"
+                                            id="name"
+                                            name="name"
+                                            value={formData.name}
+                                            onChange={handleInputChange}
+                                            className="form-control"
+                                        />
+                                    </div>
+                                    
+                                    <div className="form-group">
+                                        <label htmlFor="faction_id" className="form-label required-field">Facción a la que pertenece</label>
+                                        <select 
+                                            name="faction_id" 
+                                            id="faction_id"
+                                            className="form-select"
+                                            value={formData.faction_id}
+                                            onChange={handleInputChange}
+                                        >
+                                            <option value="" disabled>Selecciona una facción</option>
+                                            {factions.map((faction) => (
+                                                <option key={faction.id} value={faction.id}>
+                                                    {faction.name}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                    
+                                    <div className="form-group">
+                                        <label htmlFor="image" className="form-label">URL de la imagen del Ejército</label>
+                                        <input
+                                            type="text"
+                                            id="image"
+                                            name="image"
+                                            value={formData.image}
+                                            onChange={handleInputChange}
+                                            className="form-control"
+                                        />
+                                    </div>
+                                </div>
+                                
+                                <div className="form-col">
+                                    <div className="form-group">
+                                        <label htmlFor="description" className="form-label required-field">Descripción del Ejército</label>
+                                        <textarea
+                                            id="description"
+                                            name="description"
+                                            value={formData.description}
+                                            onChange={handleInputChange}
+                                            className="form-control"
+                                            rows="10"
+                                        />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div className="modal-footer">
                             <button
                                 onClick={closeModal}
                                 className="btn btn-danger me-2"
-                                id="btnCancelar"
                             >
-                                Cancelar
+                                <i className="fa fa-times me-1"></i>Cancelar
                             </button>
                             <button
                                 onClick={handleCreate}
                                 className="btn btn-success"
-                                id="btnGuardar"
                             >
-                                Guardar
+                                <i className="fa fa-save me-1"></i>Guardar
                             </button>
                         </div>
                     </div>
                 </div>
             )}
+
+            {/* Modal para editar ejército */}
             {editModalOpen && (
                 <div className="modal-backdrop">
                     <div className="game-modal">
                         <div className="modal-header">
-                            <h3>Editar ejército</h3>
+                            <h3>Editar ejército: {currentArmy?.name}</h3>
                         </div>
                         <div className="modal-body">
                             {errorMessage && <div className="alert alert-danger mb-3">{errorMessage}</div>}
                             {successMessage && <div className="alert alert-success mb-3">{successMessage}</div>}
 
-                            <div className="form-group mb-3">
-                                <label htmlFor="edit-name" className="form-label">Nombre del Ejército *</label>
-                                <input
-                                    type="text"
-                                    id="edit-name"
-                                    name="name"
-                                    value={formData.name}
-                                    onChange={handleInputChange}
-                                    className="form-control"
-                                />
-                            </div>
-                            <div className="form-group mb-3">
-                                <label htmlFor="edit-description" className="form-label">Descripción del Ejército *</label>
-                                <textarea
-                                    id="edit-description"
-                                    name="description"
-                                    value={formData.description}
-                                    onChange={handleInputChange}
-                                    className="form-control"
-                                    rows="6"
-                                />
-                            </div>
-                            <div className="form-group mb-3">
-                                <label htmlFor="edit-image" className="form-label">URL de la imagen del Ejército</label>
-                                <input
-                                    type="text"
-                                    id="edit-image"
-                                    name="image"
-                                    value={formData.image}
-                                    onChange={handleInputChange}
-                                    className="form-control"
-                                />
-                            </div>
-                            <div className="form-group mb-3">
-                                <label htmlFor="edit-faction_id" className="form-label">Facción a la que pertenece *</label>
-                                <select 
-                                    name="faction_id" 
-                                    id="edit-faction_id"
-                                    className="form-select"
-                                    value={formData.faction_id}
-                                    onChange={handleInputChange}
-                                >
-                                    <option value="" disabled>Selecciona una facción</option>
-                                    {factions.map((faction) => (
-                                        <option key={faction.id} value={faction.id}>
-                                            {faction.name}
-                                        </option>
-                                    ))}
-                                </select>
+                            <div className="form-row">
+                                <div className="form-col">
+                                    <div className="form-group">
+                                        <label htmlFor="edit-name" className="form-label required-field">Nombre del Ejército</label>
+                                        <input
+                                            type="text"
+                                            id="edit-name"
+                                            name="name"
+                                            value={formData.name}
+                                            onChange={handleInputChange}
+                                            className="form-control"
+                                        />
+                                    </div>
+                                    
+                                    <div className="form-group">
+                                        <label htmlFor="edit-faction_id" className="form-label required-field">Facción a la que pertenece</label>
+                                        <select 
+                                            name="faction_id" 
+                                            id="edit-faction_id"
+                                            className="form-select"
+                                            value={formData.faction_id}
+                                            onChange={handleInputChange}
+                                        >
+                                            <option value="" disabled>Selecciona una facción</option>
+                                            {factions.map((faction) => (
+                                                <option key={faction.id} value={faction.id}>
+                                                    {faction.name}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                    
+                                    <div className="form-group">
+                                        <label htmlFor="edit-image" className="form-label">URL de la imagen del Ejército</label>
+                                        <input
+                                            type="text"
+                                            id="edit-image"
+                                            name="image"
+                                            value={formData.image}
+                                            onChange={handleInputChange}
+                                            className="form-control"
+                                        />
+                                    </div>
+                                </div>
+                                
+                                <div className="form-col">
+                                    <div className="form-group">
+                                        <label htmlFor="edit-description" className="form-label required-field">Descripción del Ejército</label>
+                                        <textarea
+                                            id="edit-description"
+                                            name="description"
+                                            value={formData.description}
+                                            onChange={handleInputChange}
+                                            className="form-control"
+                                            rows="10"
+                                        />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div className="modal-footer">
                             <button
                                 onClick={closeModal}
                                 className="btn btn-danger me-2"
-                                id="btnCancelar"
                             >
-                                Cancelar
+                                <i className="fa fa-times me-1"></i>Cancelar
                             </button>
                             <button
                                 onClick={handleUpdate}
                                 className="btn btn-success"
-                                id="btnGuardar"
                             >
-                                Actualizar
+                                <i className="fa fa-save me-1"></i>Actualizar
                             </button>
                         </div>
                     </div>
@@ -522,4 +602,5 @@ const ArmyAdmin = () => {
         </div>
     );
 }
+
 export default ArmyAdmin;
