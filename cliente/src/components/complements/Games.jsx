@@ -9,6 +9,7 @@ export default function Games() {
     const [usernames, setUsernames] = useState({});
     const [currentPage, setCurrentPage] = useState(1);
     const [showModal, setShowModal] = useState(false);
+    const [showEditModal, setShowEditModal] = useState(false);
     const gamesPerPage = 5;
     const navigate = useNavigate();
 
@@ -20,6 +21,17 @@ export default function Games() {
     const [user2Points, setUser2Points] = useState("");
     const [searchStatus, setSearchStatus] = useState(null); // null, "success", "error"
     const [modalError, setModalError] = useState("");
+    
+    // Estado para el modal de editar
+    const [currentGame, setCurrentGame] = useState(null);
+    const [editUser2Name, setEditUser2Name] = useState("");
+    const [editUser2Id, setEditUser2Id] = useState(null); 
+    const [editWinner, setEditWinner] = useState("");
+    const [editUser1Points, setEditUser1Points] = useState("");
+    const [editUser2Points, setEditUser2Points] = useState("");
+    const [editSearchStatus, setEditSearchStatus] = useState(null);
+    const [editError, setEditError] = useState("");
+    const [editSuccess, setEditSuccess] = useState("");
 
     useEffect(() => {
         const userData = localStorage.getItem("user");
@@ -38,6 +50,13 @@ export default function Games() {
             validatePoints();
         }
     }, [winner, user1Points, user2Points]);
+
+    // Validar puntos de edición
+    useEffect(() => {
+        if (editWinner && editUser1Points && editUser2Points) {
+            validateEditPoints();
+        }
+    }, [editWinner, editUser1Points, editUser2Points]);
 
     const validatePoints = () => {
         const points1 = parseInt(user1Points, 10);
@@ -64,6 +83,34 @@ export default function Games() {
         }
         
         setModalError("");
+        return true;
+    };
+
+    const validateEditPoints = () => {
+        const points1 = parseInt(editUser1Points, 10);
+        const points2 = parseInt(editUser2Points, 10);
+        
+        if (isNaN(points1) || isNaN(points2)) {
+            setEditError("Los puntos deben ser valores numéricos");
+            return false;
+        }
+        
+        if (points1 < 0 || points2 < 0) {
+            setEditError("Los puntos no pueden ser negativos");
+            return false;
+        }
+        
+        if (editWinner === "1" && points1 <= points2) {
+            setEditError("El Jugador 1 debe tener más puntos si es el ganador");
+            return false;
+        }
+        
+        if (editWinner === "2" && points2 <= points1) {
+            setEditError("El Jugador 2 debe tener más puntos si es el ganador");
+            return false;
+        }
+        
+        setEditError("");
         return true;
     };
 
@@ -150,10 +197,6 @@ export default function Games() {
         }
     };
 
-    const handleUpdate = async (game) => {
-        navigate("/update/game", { state: { game } });
-    };
-
     const handleCreateGameClick = () => {
         // Abrir el modal de crear partida
         resetModalFields();
@@ -163,6 +206,36 @@ export default function Games() {
     const handleCloseModal = () => {
         setShowModal(false);
         resetModalFields();
+    };
+
+    const handleOpenEditModal = (game) => {
+        setCurrentGame(game);
+        setEditWinner(game.winner.toString());
+        setEditUser1Points(game.points_user1.toString());
+        setEditUser2Points(game.points_user2.toString());
+        
+        // Si el usuario actual es user1, entonces user2 es el otro usuario
+        const otherUserId = user.id === game.user1_id ? game.user2_id : game.user1_id;
+        setEditUser2Id(otherUserId);
+        setEditUser2Name(usernames[otherUserId] || "");
+        setEditSearchStatus("success"); // Ya tenemos el usuario, así que marcamos como éxito
+        
+        setEditError("");
+        setEditSuccess("");
+        setShowEditModal(true);
+    };
+
+    const handleCloseEditModal = () => {
+        setShowEditModal(false);
+        setCurrentGame(null);
+        setEditWinner("");
+        setEditUser1Points("");
+        setEditUser2Points("");
+        setEditUser2Name("");
+        setEditUser2Id(null);
+        setEditSearchStatus(null);
+        setEditError("");
+        setEditSuccess("");
     };
 
     // Función para buscar el jugador 2 por nombre
@@ -198,6 +271,39 @@ export default function Games() {
         }
     };
 
+    // Función para buscar el jugador 2 por nombre en el modal de edición
+    const searchEditUser2ByName = async () => {
+        try {
+            if (!editUser2Name) {
+                setEditSearchStatus("error");
+                setEditError("Por favor, introduce un nombre de usuario para buscar");
+                return;
+            }
+
+            const response = await fetch(
+                `${import.meta.env.VITE_APP_PETICION_IP}/api/userUsername/${editUser2Name}`
+            );
+
+            const textResponse = await response.text();
+            const data = JSON.parse(textResponse);
+
+            if (response.ok && data.data && data.data.id) {
+                setEditUser2Id(data.data.id);
+                setEditSearchStatus("success");
+                setEditError("");
+            } else {
+                setEditUser2Id(null);
+                setEditSearchStatus("error");
+                setEditError("Usuario no encontrado");
+            }
+        } catch (error) {
+            console.error("Error:", error.message);
+            setEditUser2Id(null);
+            setEditSearchStatus("error");
+            setEditError("Error al buscar el usuario");
+        }
+    };
+
     // Manejadores para las entradas numéricas
     const handlePointsChange = (e, playerType) => {
         const value = e.target.value;
@@ -207,6 +313,19 @@ export default function Games() {
                 setUser1Points(value);
             } else {
                 setUser2Points(value);
+            }
+        }
+    };
+
+    // Manejador para los puntos en el modal de edición
+    const handleEditPointsChange = (e, playerType) => {
+        const value = e.target.value;
+        // Solo permitir números positivos
+        if (value === "" || (parseInt(value, 10) >= 0 && !isNaN(parseInt(value, 10)))) {
+            if (playerType === "user1") {
+                setEditUser1Points(value);
+            } else {
+                setEditUser2Points(value);
             }
         }
     };
@@ -275,6 +394,73 @@ export default function Games() {
         }
     };
 
+    // Función para manejar la actualización de una partida
+    const handleUpdateGame = async () => {
+        try {
+            // Validaciones básicas
+            if (!editUser2Id) {
+                setEditError("Debes buscar y seleccionar un jugador 2 válido");
+                return;
+            }
+            
+            if (!editWinner) {
+                setEditError("Por favor selecciona un ganador");
+                return;
+            }
+            
+            if (!editUser1Points || !editUser2Points) {
+                setEditError("Ambos jugadores deben tener puntos asignados");
+                return;
+            }
+            
+            // Validar puntos
+            if (!validateEditPoints()) {
+                return;
+            }
+
+            const updatedGameData = {
+                user1_id: user.id,
+                user2_id: editUser2Id,
+                winner: parseInt(editWinner, 10),
+                points_user1: parseInt(editUser1Points, 10),
+                points_user2: parseInt(editUser2Points, 10),
+            };
+
+            const token = localStorage.getItem("token");
+            const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/games/${currentGame.id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify(updatedGameData),
+            });
+
+            const responseText = await response.text();
+            let data;
+            
+            try {
+                data = JSON.parse(responseText);
+            } catch (parseError) {
+                throw new Error("El servidor devolvió un formato inesperado.");
+            }
+
+            if (response.ok) {
+                setEditSuccess("Partida actualizada exitosamente.");
+                // Actualizar la lista de partidas
+                fetchGames(user.id);
+                // Cerrar el modal después de 2 segundos
+                setTimeout(() => {
+                    handleCloseEditModal();
+                }, 2000);
+            } else {
+                throw new Error(data?.message || "Hubo un error al actualizar la partida.");
+            }
+        } catch (err) {
+            setEditError(err.message);
+        }
+    };
+
     const resetModalFields = () => {
         setUser2Name("");
         setUser2Id(null);
@@ -333,7 +519,7 @@ export default function Games() {
                                     <td>
                                         <button
                                             className="btn btn-info btn-sm"
-                                            onClick={() => handleUpdate(game)}
+                                            onClick={() => handleOpenEditModal(game)}
                                             title="Editar"
                                         >
                                             <i className="fa fa-edit"></i>
@@ -351,24 +537,26 @@ export default function Games() {
                         </tbody>
                     </table>
 
-                    {/* Paginación */}
-                    <div className="pagination-controls text-center mt-3">
-                        <button
-                            className="btn btn-secondary btn-sm me-2"
-                            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-                            disabled={currentPage === 1}
-                        >
-                            Anterior
-                        </button>
-                        <span className="text-white">Página {currentPage} de {totalPages}</span>
-                        <button
-                            className="btn btn-secondary btn-sm ms-2"
-                            onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-                            disabled={currentPage === totalPages}
-                        >
-                            Siguiente
-                        </button>
-                    </div>
+                    {/* Paginación - solo mostrar si hay más de una página */}
+                    {totalPages > 1 && (
+                        <div className="pagination-controls text-center mt-3">
+                            <button
+                                className="btn btn-secondary btn-sm me-2"
+                                onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                                disabled={currentPage === 1}
+                            >
+                                Anterior
+                            </button>
+                            <span className="text-white">Página {currentPage} de {totalPages}</span>
+                            <button
+                                className="btn btn-secondary btn-sm ms-2"
+                                onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                                disabled={currentPage === totalPages}
+                            >
+                                Siguiente
+                            </button>
+                        </div>
+                    )}
                 </>
             ) : (
                 <p className="no-games-text">No tienes partidas todavía.</p>
@@ -476,6 +664,112 @@ export default function Games() {
                                 disabled={!user2Id || !winner || !user1Points || !user2Points || modalError}
                             >
                                 Guardar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Modal para editar partida - ahora con la misma estructura que el de crear */}
+            {showEditModal && currentGame && (
+                <div className="modal-backdrop">
+                    <div className="game-modal">
+                        <div className="modal-header">
+                            <h3>Editar Partida</h3>
+                        </div>
+                        <div className="modal-body">
+                            {editError && (
+                                <div className="alert alert-danger mb-3">{editError}</div>
+                            )}
+                            {editSuccess && (
+                                <div className="alert alert-success mb-3">{editSuccess}</div>
+                            )}
+                            
+                            <div className="form-group mb-3">
+                                <label className="form-label">Jugador 2:</label>
+                                <div className="search-container">
+                                    <div className="input-wrapper">
+                                        <input
+                                            type="text"
+                                            className="form-control search-input"
+                                            value={editUser2Name}
+                                            onChange={(e) => {
+                                                setEditUser2Name(e.target.value);
+                                                setEditSearchStatus(null);
+                                            }}
+                                            placeholder="Nombre del jugador 2"
+                                        />
+                                        {editSearchStatus === "success" && (
+                                            <span className="status-icon success">
+                                                <i className="fa fa-check"></i>
+                                            </span>
+                                        )}
+                                        {editSearchStatus === "error" && (
+                                            <span className="status-icon error">
+                                                <i className="fa fa-times"></i>
+                                            </span>
+                                        )}
+                                    </div>
+                                    <button 
+                                        className="search-button" 
+                                        type="button" 
+                                        onClick={searchEditUser2ByName}
+                                    >
+                                        <i className="fa fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div className="form-group mb-3">
+                                <label className="form-label">Ganador:</label>
+                                <select
+                                    className="form-select"
+                                    value={editWinner}
+                                    onChange={(e) => setEditWinner(e.target.value)}
+                                >
+                                    <option value="" disabled>Selecciona ganador</option>
+                                    <option value="1">Jugador 1</option>
+                                    {editUser2Id && <option value="2">Jugador 2</option>}
+                                </select>
+                            </div>
+                            
+                            <div className="form-group mb-3">
+                                <label className="form-label">Puntos Jugador 1:</label>
+                                <input
+                                    type="number"
+                                    className="form-control"
+                                    value={editUser1Points}
+                                    onChange={(e) => handleEditPointsChange(e, "user1")}
+                                    min="0"
+                                />
+                            </div>
+                            
+                            <div className="form-group mb-3">
+                                <label className="form-label">Puntos Jugador 2:</label>
+                                <input
+                                    type="number"
+                                    className="form-control"
+                                    value={editUser2Points}
+                                    onChange={(e) => handleEditPointsChange(e, "user2")}
+                                    min="0"
+                                />
+                            </div>
+                        </div>
+                        <div className="modal-footer">
+                            <button 
+                                className="btn btn-danger me-2" 
+                                id="btnCancelar"
+                                onClick={handleCloseEditModal}
+                            >
+                                Cancelar
+                            </button>
+                            <button 
+                                className="btn btn-success"
+                                id="btnActualizar"
+                                onClick={handleUpdateGame}
+                                disabled={!editUser2Id || !editWinner || !editUser1Points || !editUser2Points || editError}
+                            >
+                                Actualizar
                             </button>
                         </div>
                     </div>

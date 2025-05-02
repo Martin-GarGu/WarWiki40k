@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const SquadAdmin = () => {
     const [squads, setSquads] = useState([]);
+    const [filteredSquads, setFilteredSquads] = useState([]);
     const [armies, setArmies] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -10,6 +11,8 @@ const SquadAdmin = () => {
     const [createModalOpen, setCreateModalOpen] = useState(false);
     const [editModalOpen, setEditModalOpen] = useState(false);
     const [currentSquad, setCurrentSquad] = useState(null);
+    // Iniciamos con "all" para mostrar todos los ejércitos
+    const [selectedArmy, setSelectedArmy] = useState("all");
 
     const [formData, setFormData] = useState({
         name: "",
@@ -46,6 +49,19 @@ const SquadAdmin = () => {
         }
     }, [navigate]);
 
+    // Filtrar escuadrones por ejército cuando cambia la selección o los datos
+    useEffect(() => {
+        if (selectedArmy === "all") {
+            setFilteredSquads(squads);
+        } else {
+            // Aseguramos que la comparación sea con strings para evitar problemas de tipo
+            const filtered = squads.filter(squad => String(squad.army_id) === String(selectedArmy));
+            setFilteredSquads(filtered);
+        }
+        // Resetear a la primera página cuando cambia el filtro
+        setCurrentPage(1);
+    }, [selectedArmy, squads]);
+
     const fetchSquads = async (token) => {
         try {
             const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/squads`, {
@@ -63,6 +79,7 @@ const SquadAdmin = () => {
             if (contentType && contentType.includes("application/json")) {
                 const jsonData = await response.json();
                 setSquads(jsonData.data);
+                setFilteredSquads(jsonData.data); // Inicializar los filtrados con todos
                 setLoading(false);
             } else {
                 throw new Error("La respuesta no es JSON.");
@@ -102,11 +119,21 @@ const SquadAdmin = () => {
         }
     };
 
+    // Función para manejar el cambio en el filtro de ejércitos
+    const handleArmyFilterChange = (e) => {
+        // Guardamos el valor seleccionado (puede ser 'all' o el ID del ejército)
+        setSelectedArmy(e.target.value);
+        console.log("Filtro cambiado a:", e.target.value); // Para depuración
+    };
+
     // Paginación
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentSquads = squads.slice(indexOfFirstItem, indexOfLastItem);
-    const totalPages = Math.ceil(squads.length / itemsPerPage);
+    const currentSquads = filteredSquads.slice(indexOfFirstItem, indexOfLastItem);
+    const totalPages = Math.ceil(filteredSquads.length / itemsPerPage);
+
+    // Función para determinar si mostrar paginación
+    const shouldShowPagination = filteredSquads.length > itemsPerPage;
 
     // Funciones para los modales
     const openCreateModal = () => {
@@ -279,6 +306,16 @@ const SquadAdmin = () => {
         }
     };
 
+    // Función para ir a la primera página
+    const goToFirstPage = () => {
+        setCurrentPage(1);
+    };
+
+    // Función para ir a la última página
+    const goToLastPage = () => {
+        setCurrentPage(totalPages);
+    };
+
     return (
         <div className="squad-admin-container">
             <h1 className="text-center">Escuadrones</h1>
@@ -289,11 +326,34 @@ const SquadAdmin = () => {
                 <p className="error-text">{error}</p>
             ) : (
                 <>
+                    {/* Filtro por ejércitos */}
+                    <div className="d-flex justify-content-between mb-3">
+                        <div className="filter-container ">
+                            {/* <div className="col-md-6 offset-md-3"> */}
+                                <label htmlFor="army-filter" className="form-label">Filtrar por ejército:</label>
+                                <select 
+                                    id="army-filter" 
+                                    className="form-select" 
+                                    value={selectedArmy} 
+                                    onChange={handleArmyFilterChange}
+                                >
+                                    <option value="all">Todos los ejércitos</option>
+                                    {armies.map((army) => (
+                                        <option key={army.id} value={army.id}>
+                                            {army.name}
+                                        </option>
+                                    ))}
+                                </select>
+                            {/* </div> */}
+                        </div>
+                    </div>
+
                     <table className="table table-dark table-striped">
                         <thead>
                             <tr>
                                 <th>NOMBRE</th>
-                                <th>ACCION</th>
+                                <th>EJÉRCITO</th>
+                                <th>ACCIÓN</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -301,6 +361,9 @@ const SquadAdmin = () => {
                                 currentSquads.map((squad) => (
                                     <tr key={squad.id}>
                                         <td>{squad.name}</td>
+                                        <td>
+                                            {armies.find(army => String(army.id) === String(squad.army_id))?.name || "Desconocido"}
+                                        </td>
                                         <td>
                                             <button
                                                 onClick={() => openEditModal(squad)}
@@ -321,30 +384,57 @@ const SquadAdmin = () => {
                                 ))
                             ) : (
                                 <tr>
-                                    <td colSpan="2" className="text-center">No hay escuadrones disponibles</td>
+                                    <td colSpan="3" className="text-center">No hay escuadrones disponibles</td>
                                 </tr>
                             )}
                         </tbody>
                     </table>
 
-                    {/* Paginación siempre visible */}
-                    <div className="pagination-controls text-center mt-3">
-                        <button
-                            className="btn btn-secondary btn-sm me-2"
-                            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-                            disabled={currentPage === 1}
-                        >
-                            Anterior
-                        </button>
-                        <span className="text-white">Página {currentPage} de {totalPages || 1}</span>
-                        <button
-                            className="btn btn-secondary btn-sm ms-2"
-                            onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages || 1))}
-                            disabled={currentPage === (totalPages || 1)}
-                        >
-                            Siguiente
-                        </button>
-                    </div>
+                    {/* Paginación solo si hay suficientes datos */}
+                    {shouldShowPagination && (
+                        <div className="pagination-controls text-center mt-3">
+                            <button
+                                className="btn btn-secondary btn-sm me-2"
+                                onClick={goToFirstPage}
+                                disabled={currentPage === 1}
+                                title="Primera página"
+                            >
+                                <i className="fa fa-angle-double-left"></i>
+                            </button>
+                            <button
+                                className="btn btn-secondary btn-sm me-2"
+                                onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                                disabled={currentPage === 1}
+                                title="Página anterior"
+                            >
+                                <i className="fa fa-angle-left"></i>
+                            </button>
+                            <span className="text-white">Página {currentPage} de {totalPages}</span>
+                            <button
+                                className="btn btn-secondary btn-sm ms-2"
+                                onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                                disabled={currentPage === totalPages}
+                                title="Página siguiente"
+                            >
+                                <i className="fa fa-angle-right"></i>
+                            </button>
+                            <button
+                                className="btn btn-secondary btn-sm ms-2"
+                                onClick={goToLastPage}
+                                disabled={currentPage === totalPages}
+                                title="Última página"
+                            >
+                                <i className="fa fa-angle-double-right"></i>
+                            </button>
+                        </div>
+                    )}
+
+                    {/* Mostrar cantidad de registros cuando no hay paginación */}
+                    {!shouldShowPagination && filteredSquads.length > 0 && (
+                        <div className="text-center mt-3">
+                            <span className="text-white">Mostrando {filteredSquads.length} escuadrones</span>
+                        </div>
+                    )}
 
                     {/* Botón para crear nuevo escuadrón */}
                     <div className="text-center mt-4">
