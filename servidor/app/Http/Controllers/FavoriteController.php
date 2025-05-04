@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Faction;
 use App\Models\Army;
 use App\Models\Squadron;
+use Illuminate\Support\Facades\DB;
 
 class FavoriteController extends Controller
 {
@@ -40,18 +41,35 @@ class FavoriteController extends Controller
             'favorites_type' => 'required|string|in:Faction,Army,Squadron',
         ]);
 
-        // Crear un nuevo favorito con los datos proporcionados
-        $favorite = Favorite::create([
-            'user_id' => $request->user_id,  // ID del usuario que está guardando el favorito
-            'favorites_id' => $request->favorites_id,  // ID del favorito (puede ser Faction, Army o Squadron)
-            'favorites_type' => $request->favorites_type,  // Tipo del favorito (Faction, Army o Squadron)
-        ]);
+        // Usar una transacción de base de datos para garantizar la integridad
+        return DB::transaction(function () use ($request) {
+            // Primero verificar si el favorito ya existe
+            $existingFavorite = Favorite::where('user_id', $request->user_id)
+                ->where('favorites_id', $request->favorites_id)
+                ->where('favorites_type', $request->favorites_type)
+                ->first();
+            
+            // Si ya existe, simplemente retornar ese registro
+            if ($existingFavorite) {
+                return response()->json([
+                    'message' => 'Favorite already exists',
+                    'data' => $existingFavorite
+                ], 200); // 200 OK en lugar de 201 Created porque no se creó nada nuevo
+            }
+            
+            // Si no existe, crear un nuevo favorito
+            $favorite = Favorite::create([
+                'user_id' => $request->user_id,
+                'favorites_id' => $request->favorites_id,
+                'favorites_type' => $request->favorites_type,
+            ]);
 
-        // Retornar la respuesta con el nuevo favorito creado
-        return response()->json([
-            'message' => 'Favorite created successfully',
-            'data' => $favorite
-        ], 201);
+            // Retornar la respuesta con el nuevo favorito creado
+            return response()->json([
+                'message' => 'Favorite created successfully',
+                'data' => $favorite
+            ], 201);
+        });
     }
 
     public function checkFavorite(Request $request)
@@ -141,6 +159,7 @@ class FavoriteController extends Controller
             ], 500);
         }
     }
+
     public function removeByUserAndType(Request $request)
     {
         // Validar los parámetros requeridos
@@ -150,25 +169,28 @@ class FavoriteController extends Controller
             'favorites_type' => 'required|string|in:Faction,Army,Squadron',
         ]);
 
-        // Buscar el favorito
-        $favorite = Favorite::where('user_id', $validated['user_id'])
-            ->where('favorites_id', $validated['favorites_id'])
-            ->where('favorites_type', $validated['favorites_type'])
-            ->first();
+        // Usar transacción para garantizar la integridad y evitar eliminaciones parciales
+        return DB::transaction(function () use ($validated) {
+            // Eliminar todos los favoritos que coincidan con los criterios
+            // Esto es más seguro que first()->delete() porque elimina todos los posibles duplicados
+            $deleted = Favorite::where('user_id', $validated['user_id'])
+                ->where('favorites_id', $validated['favorites_id'])
+                ->where('favorites_type', $validated['favorites_type'])
+                ->delete();
 
-        if ($favorite) {
-            // Eliminar el favorito
-            $favorite->delete();
-
-            return response()->json([
-                'message' => 'Favorite removed successfully'
-            ], 200);
-        } else {
-            return response()->json([
-                'message' => 'Favorite not found'
-            ], 404);
-        }
+            if ($deleted > 0) {
+                return response()->json([
+                    'message' => 'Favorite removed successfully',
+                    'count' => $deleted // Opcional: informar cuántos registros fueron eliminados
+                ], 200);
+            } else {
+                return response()->json([
+                    'message' => 'Favorite not found'
+                ], 404);
+            }
+        });
     }
+
     /**
      * Eliminar un favorito.
      *

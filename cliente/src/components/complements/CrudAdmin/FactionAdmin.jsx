@@ -22,8 +22,6 @@ const FactionAdmin = () => {
     const navigate = useNavigate();
     const itemsPerPage = 5;
 
-
-
     // Verificación de usuario autenticado y carga de facciones
     useEffect(() => {
         const userFromStorage = localStorage.getItem("user");
@@ -72,8 +70,11 @@ const FactionAdmin = () => {
     // Paginación
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentFactions = factions.slice(indexOfFirstItem, indexOfLastItem);
+    const currentFactions = factions.length <= itemsPerPage 
+        ? factions 
+        : factions.slice(indexOfFirstItem, indexOfLastItem);
     const totalPages = Math.ceil(factions.length / itemsPerPage);
+    const showPagination = factions.length > itemsPerPage;
 
     // Funciones para los modales
     const openCreateModal = () => {
@@ -292,24 +293,26 @@ const FactionAdmin = () => {
                         </tbody>
                     </table>
 
-                    {/* Paginación siempre visible */}
-                    <div className="pagination-controls text-center mt-3">
-                        <button
-                            className="btn btn-secondary btn-sm me-2"
-                            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-                            disabled={currentPage === 1}
-                        >
-                            Anterior
-                        </button>
-                        <span className="text-white">Página {currentPage} de {totalPages || 1}</span>
-                        <button
-                            className="btn btn-secondary btn-sm ms-2"
-                            onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages || 1))}
-                            disabled={currentPage === (totalPages || 1)}
-                        >
-                            Siguiente
-                        </button>
-                    </div>
+                    {/* Paginación solo visible cuando hay suficientes elementos */}
+                    {showPagination && (
+                        <div className="pagination-controls text-center mt-3">
+                            <button
+                                className="btn btn-secondary btn-sm me-2"
+                                onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                                disabled={currentPage === 1}
+                            >
+                                Anterior
+                            </button>
+                            <span className="text-white">Página {currentPage} de {totalPages}</span>
+                            <button
+                                className="btn btn-secondary btn-sm ms-2"
+                                onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                                disabled={currentPage === totalPages}
+                            >
+                                Siguiente
+                            </button>
+                        </div>
+                    )}
 
                     {/* Botón para crear nueva facción */}
                     <div className="text-center mt-4">
