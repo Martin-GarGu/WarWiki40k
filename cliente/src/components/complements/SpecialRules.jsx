@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import backToTop from "../../assets/images/backToTop.png"
 
 export default function SpecialRules() {
     const [specialRules, setSpecialRules] = useState([]);
@@ -124,7 +125,7 @@ export default function SpecialRules() {
                         width: "60px",
                         height: "60px",
                         backgroundColor: "#d4af37", // Mantengo el color de fondo original
-                        backgroundImage: "url(/src/assets/images/backToTop.png)", // Ruta de la imagen
+                        backgroundImage: `url(${backToTop})`, // Ruta de la imagen
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                         border: "none",

@@ -67,7 +67,7 @@ function Inicio() {
         <FactionCarousel factions={factions} handleClickFactions={handleClickFactions} />
       )}
       <div className="text-center mt-4">
-        <button onClick={handleRules} className="btn btn-primary btn-lg">
+        <button onClick={handleRules} className="btn btn1 btn-lg">
           Reglas
         </button>
       </div>

@@ -1,5 +1,10 @@
 import { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
+import faction from "../../../assets/images/faction.png";
+import army from "../../../assets/images/army.png";
+import squadron from "../../../assets/images/squadron.png";
+import soldier from "../../../assets/images/soldier.png";
+
 
 const AdminPanel = () => {
 
@@ -35,19 +40,19 @@ const AdminPanel = () => {
       <h1 className="admin-title">Admin Panel</h1>
       <div className="button-grid">
         <div className="admin-button">
-          <img src="/src/assets/images/faction.png" alt="Faccion" className="admin-icon" />
+          <img src={faction} alt="Faccion" className="admin-icon" />
           <button className="admin-btn" onClick={() => handleFaction()}>Facciones</button>
         </div>
         <div className="admin-button">
-          <img src="/src/assets/images/army.png" alt="Ejercito" className="admin-icon" />
+          <img src={army} alt="Ejercito" className="admin-icon" />
           <button className="admin-btn" onClick={()=>handleArmies()}>Ejercitos</button>
         </div>
         <div className="admin-button">
-          <img src="/src/assets/images/squadron.png" alt="Escuadrones" className="admin-icon" />
+          <img src={squadron} alt="Escuadrones" className="admin-icon" />
           <button className="admin-btn" onClick={()=>handleSquads()}>Escuadrones</button>
         </div>
         <div className="admin-button">
-          <img src="/src/assets/images/soldier.png" alt="Soldados" className="admin-icon" />
+          <img src={soldier} alt="Soldados" className="admin-icon" />
           <button className="admin-btn" onClick={()=>handleSoldiers()}>Soldados</button>
         </div>
       </div>

@@ -4,6 +4,7 @@ import initiativeToken from "../../assets/images/initiativeToken.jpg"
 import orderToken from "../../assets/images/orderToken.jpg"
 import actionPointsToken from "../../assets/images/actionPointsToken.jpg"
 import injuredToken from "../../assets/images/injuredToken.jpg"
+import backToTop from "../../assets/images/backToTop.png"
 import { useNavigate } from "react-router-dom"
 
 const Rules = () => {
@@ -499,7 +500,7 @@ const Rules = () => {
                                 width: "60px",
                                 height: "60px",
                                 backgroundColor: "#d4af37",
-                                backgroundImage: "url(/src/assets/images/backToTop.png)",
+                                backgroundImage: `url(${backToTop})`,
                                 backgroundSize: "cover",
                                 backgroundPosition: "center",
                                 border: "none",

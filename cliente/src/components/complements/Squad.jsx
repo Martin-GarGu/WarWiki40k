@@ -6,6 +6,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Carousel from 'react-bootstrap/Carousel';
 import routeApi from "../../routeApi";
+import backToTop from "../../assets/images/backToTop.png"
 
 export default function Squad() {
     const { slug } = useParams();
@@ -534,7 +535,7 @@ export default function Squad() {
                         width: "60px",
                         height: "60px",
                         backgroundColor: "#d4af37",
-                        backgroundImage: "url(/src/assets/images/backToTop.png)",
+                        backgroundImage: `url(${backToTop})`,
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                         border: "none",
