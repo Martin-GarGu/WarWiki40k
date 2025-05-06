@@ -326,26 +326,32 @@ const SquadAdmin = () => {
                 <p className="error-text">{error}</p>
             ) : (
                 <>
-                    {/* Filtro por ejércitos */}
+                    {/* Barra superior con filtro y botón de crear */}
                     <div className="d-flex justify-content-between mb-3">
-                        <div className="filter-container ">
-                            {/* <div className="col-md-6 offset-md-3"> */}
-                                <label htmlFor="army-filter" className="form-label">Filtrar por ejército:</label>
-                                <select 
-                                    id="army-filter" 
-                                    className="form-select" 
-                                    value={selectedArmy} 
-                                    onChange={handleArmyFilterChange}
-                                >
-                                    <option value="all">Todos los ejércitos</option>
-                                    {armies.map((army) => (
-                                        <option key={army.id} value={army.id}>
-                                            {army.name}
-                                        </option>
-                                    ))}
-                                </select>
-                            {/* </div> */}
+                        <div className="filter-container">
+                            <label htmlFor="army-filter" className="form-label">Filtrar por ejército:</label>
+                            <select 
+                                id="army-filter" 
+                                className="form-select" 
+                                value={selectedArmy} 
+                                onChange={handleArmyFilterChange}
+                            >
+                                <option value="all">Todos los ejércitos</option>
+                                {armies.map((army) => (
+                                    <option key={army.id} value={army.id}>
+                                        {army.name}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
+
+                        {/* Botón para crear nuevo escuadrón (reposicionado aquí) */}
+                        <button
+                            onClick={openCreateModal}
+                            className="btn btn-primary"
+                        >
+                            <i className="fa fa-plus me-2"></i>Crear nuevo escuadrón
+                        </button>
                     </div>
 
                     <table className="table table-dark table-striped">
@@ -435,16 +441,6 @@ const SquadAdmin = () => {
                             <span className="text-white">Mostrando {filteredSquads.length} escuadrones</span>
                         </div>
                     )}
-
-                    {/* Botón para crear nuevo escuadrón */}
-                    <div className="text-center mt-4">
-                        <button
-                            onClick={openCreateModal}
-                            className="btn btn-primary"
-                        >
-                            Crear nuevo escuadrón
-                        </button>
-                    </div>
                 </>
             )}
 

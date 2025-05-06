@@ -255,6 +255,16 @@ const FactionAdmin = () => {
                 <p className="error-text">{error}</p>
             ) : (
                 <>
+                    <div className="d-flex justify-content-between mb-3">
+                        <div></div> {/* Espacio vacío para mantener el botón a la derecha */}
+                        <button
+                            onClick={openCreateModal}
+                            className="btn btn-primary"
+                        >
+                            <i className="fa fa-plus me-2"></i>Crear nueva facción
+                        </button>
+                    </div>
+                    
                     <table className="table table-dark table-striped">
                         <thead>
                             <tr>
@@ -313,16 +323,6 @@ const FactionAdmin = () => {
                             </button>
                         </div>
                     )}
-
-                    {/* Botón para crear nueva facción */}
-                    <div className="text-center mt-4">
-                        <button
-                            onClick={openCreateModal}
-                            className="btn btn-primary"
-                        >
-                            Crear nueva facción
-                        </button>
-                    </div>
                 </>
             )}
 
