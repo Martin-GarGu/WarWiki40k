@@ -283,7 +283,7 @@ export default function Squad() {
             <div className="sidebar rounded-2"
                 style={{
                     position: "fixed", top: "110px", left: "20px",
-                    width: "200px", height: "auto", overflowY: "auto",
+                    width: "200px", height: "400px", overflowY: "auto",
                     backgroundColor: "#2e2e2e", padding: "10px",
                     color: "#d4af37", border: "2px solid #d4af37"
                 }}>

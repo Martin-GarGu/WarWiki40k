@@ -40,7 +40,7 @@ export default function SpecialRules() {
                     width: "20%",
                     padding: "20px",
                     marginTop: "120px",
-                    height: "fit-content",
+                    height: "400px",
                     position: "fixed",
                     top: "20px",
                 }}

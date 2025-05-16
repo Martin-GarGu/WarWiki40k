@@ -90,7 +90,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="app-container d-flex flex-column min-vh-100" >
+      <div className="app-container d-flex flex-column min-vh-100" id='scroll-container'>
         <Header ref={headerRef} className="header w-100" />
         
         <main className="main-content flex-grow-1" style={{ minHeight: 'calc(100vh - 56px)' }}>
