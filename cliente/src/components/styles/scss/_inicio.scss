@@ -1,38 +1,227 @@
 .inicio-container {
-    padding: 20px;
-    background-color: #1a1a1a; // Fondo oscuro
-    color: #d4af37; // Dorado estilo Warhammer
-    min-height: 100vh; // Asegura que ocupe toda la pantalla
+  padding: 20px;
+  background-color: #1a1a1a; /* Fondo oscuro */
+  color: #d4af37; /* Dorado estilo Warhammer */
+  min-height: 100vh; /* Asegura que ocupe toda la pantalla */
+}
+
+.inicio-header {
+  margin-bottom: 30px;
+}
+
+.inicio-title {
+  font-family: 'Cinzel', serif; /* Tipografía temática */
+  font-size: 2.5rem;
+  color: #d4af37;
+  text-shadow: 2px 2px #444; /* Sombra para mayor impacto */
+}
+
+.text-center {
+  font-size: 1.2rem;
+}
+
+.text-center.text-danger {
+  color: #ff4d4d; /* Rojo para errores */
+}
+
+.btn1 {
+  background-color: #d4af37; /* Dorado */
+  border-color: #444;
+  color: #1a1a1a;
+}
+
+.btn1:hover {
+  background-color: #ffc857; /* Dorado más claro */
+  border-color: #555;
+  color: #000;
+}
+
+/* Nuevos estilos para la página de inicio */
+.hero-banner {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url('/images/killteam-header.jpg');
+  background-size: cover;
+  background-position: center;
+  min-height: 450px;
+  position: relative;
+  color: #fff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  border-radius: 5px;
+  overflow: hidden;
+  border: 1px solid #d4af37;
+  margin-bottom: 2rem;
+}
+
+.hero-banner .overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  width: 100%;
+}
+
+/* Adaptar texto del banner al estilo existente */
+.hero-banner h1 {
+  font-family: 'Cinzel', serif;
+  color: #d4af37;
+  text-shadow: 2px 2px #444;
+}
+
+.hero-banner h2, .hero-banner p {
+  color: #e0e0e0;
+}
+
+/* Estilos para el carrusel */
+.carousel {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #d4af37;
+}
+
+.carousel__image {
+  max-height: 400px;
+  object-fit: contain;
+  margin: 0 auto;
+  display: block;
+}
+
+.carousel__name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #d4af37;
+  text-align: center;
+  margin-top: 15px;
+  font-family: 'Cinzel', serif;
+}
+
+.carousel__btn {
+  background-color: #d4af37;
+  border: none;
+  color: #000;
+  font-weight: bold;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel__btn:hover {
+  background-color: #ffc857;
+  transform: scale(1.1);
+}
+
+.carousel__btn--action {
+  background-color: #d4af37;
+  color: #1a1a1a;
+  padding: 8px 24px;
+  border-radius: 5px;
+  margin: 15px auto;
+  display: block;
+  width: auto;
+  height: auto;
+}
+
+.carousel__btn--action:hover {
+  background-color: #ffc857;
+}
+
+/* Secciones de la página */
+.factions-section, .featured-killteams, .updates-section, .quickstart, .cta-section {
+  padding: 40px 0;
+}
+
+/* Título de secciones */
+.section-title {
+  font-family: 'Cinzel', serif;
+  color: #d4af37;
+  text-shadow: 1px 1px #333;
+  margin-bottom: 1.5rem;
+}
+
+/* Estilos para las tarjetas */
+.card {
+  background-color: #222222;
+  border: 1px solid #d4af37;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-title {
+  font-family: 'Cinzel', serif;
+  color: #d4af37;
+}
+
+.card-text {
+  color: #e0e0e0;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+}
+
+/* Botones con estilo consistente */
+.btn-warning, .btn-primary {
+  background-color: #d4af37;
+  border-color: #d4af37;
+  color: #1a1a1a;
+  font-weight: bold;
+}
+
+.btn-warning:hover, .btn-primary:hover {
+  background-color: #ffc857;
+  border-color: #ffc857;
+  color: #000;
+}
+
+.btn-outline-light {
+  border-color: #d4af37;
+  color: #d4af37;
+}
+
+.btn-outline-light:hover {
+  background-color: #d4af37;
+  color: #1a1a1a;
+}
+
+/* Lista para Guía Rápida */
+.quickstart .list-group-item {
+  background-color: transparent;
+  border-color: #d4af37;
+  color: #e0e0e0;
+}
+
+.quickstart .list-group-item i {
+  color: #d4af37;
+}
+
+/* Spinner para carga */
+.spinner-border {
+  color: #d4af37;
+}
+
+/* Animación de entrada para elementos */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn 1s ease-in;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .hero-banner {
+    min-height: 350px;
   }
   
-  .inicio-header {
-    margin-bottom: 30px;
-  
-    .inicio-title {
-      font-family: 'Cinzel', serif; // Tipografía temática
-      font-size: 2.5rem;
-      color: #d4af37;
-      text-shadow: 2px 2px #444; // Sombra para mayor impacto
-    }
+  .carousel__image {
+    max-height: 300px;
   }
   
-  .text-center {
-    font-size: 1.2rem;
-  
-    &.text-danger {
-      color: #ff4d4d; // Rojo para errores
-    }
+  .inicio-title {
+    font-size: 2rem;
   }
-  
-  .btn1 {
-    background-color: #d4af37; // Dorado
-    border-color: #444;
-    color: #1a1a1a;
-  
-    &:hover {
-      background-color: #ffc857; // Dorado más claro
-      border-color: #555;
-      color: #000;
-    }
-  }
-  
+}

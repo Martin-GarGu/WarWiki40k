@@ -34,9 +34,9 @@ const Footer = React.forwardRef((props, ref) => {
           </div>
 
           {/* Columna 3: Redes sociales */}
-          <div className="col-md-4 mb-3">
+          <div className="col-md-4 mb-3 text-center">
             <h5 className="mb-3">Síguenos</h5>
-            <div className="d-flex gap-3 fs-5">
+            <div className="d-flex justify-content-center gap-4 fs-4">
               <a href="#" className="text-white">
                 <i className="bi bi-facebook"></i>
               </a>
@@ -60,7 +60,7 @@ const Footer = React.forwardRef((props, ref) => {
         <div className="row">
           <div className="col-12 text-center">
             <p className="small mb-0">
-              © {new Date().getFullYear()} Wargame App. Todos los derechos reservados.
+              © {new Date().getFullYear()} WarWiki40k. Todos los derechos reservados.
             </p>
           </div>
         </div>
