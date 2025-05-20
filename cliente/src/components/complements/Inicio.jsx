@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import FactionCarousel from "./Carrousel";
 import routeApi from "../../routeApi";
+import backToTop from "../../assets/images/backToTop.png";
 
 function Inicio() {
   const [factions, setFactions] = useState([]);
@@ -9,7 +10,16 @@ function Inicio() {
   const [error, setError] = useState(null);
   const [featuredKillTeams, setFeaturedKillTeams] = useState([]);
   const [killTeamsLoading, setKillTeamsLoading] = useState(true);
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
+
+  // Verificar si el usuario está logueado
+  useEffect(() => {
+    const userData = localStorage.getItem("user");
+    if (userData) {
+      setUser(JSON.parse(userData));
+    }
+  }, []);
 
   useEffect(() => {
     const fetchFactions = async () => {
@@ -107,6 +117,19 @@ function Inicio() {
   const handleKillTeamGuide = () => {
     // Como no tienes una página de guía, podrías redirigir a la página principal o a otra página existente
     navigate('/rules'); // O cualquier otra página que tengas disponible
+  };
+
+  const handleRegister = () => {
+    navigate('/register');
+  };
+
+  const handleLogin = () => {
+    navigate('/login');
+  };
+
+  const handleVisitGamesWorkshop = () => {
+    // Abrir la página de Games Workshop en una nueva pestaña
+    window.open('https://www.games-workshop.com/es-ES/Warhammer-40-000-Kill-Team-2023-spa', '_blank');
   };
 
   return (
@@ -277,24 +300,77 @@ function Inicio() {
                   className="rounded border">
                 </iframe>
               </div>
+              {/* Texto de crédito del canal de YouTube */}
+              <p className="mt-2 text-muted small">
+                Video cortesía del canal oficial Warhammer en YouTube. © Games Workshop Ltd.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA final */}
-      <section className="cta-section text-center py-5">
+      {/* NUEVA SECCIÓN: Obtener tu primer Kill Team */}
+      <section className="get-killteam py-5" style={{ backgroundColor: "#0d0d0d" }}>
         <div className="container">
-          <h2 className="section-title mb-4">¡Únete a la comunidad!</h2>
-          <p className="text-light mb-4">
-            Comparte estrategias, encuentra jugadores cercanos y mantente actualizado con las últimas novedades.
-          </p>
-          <div className="d-flex justify-content-center gap-3">
-            <button className="btn btn1">Registrarse</button>
-            <button className="btn btn-outline-light">Iniciar sesión</button>
+          <div className="row align-items-center">
+            <div className="col-12 text-center mb-4">
+              <h2 className="section-title">Consigue tu primer Kill Team</h2>
+              <p className="text-light mb-4">
+                ¿Listo para dar el salto y comenzar tu propia aventura en Kill Team? 
+                Visita la tienda oficial de Games Workshop para adquirir todo lo necesario y comenzar a jugar.
+              </p>
+              <button 
+                onClick={handleVisitGamesWorkshop} 
+                className="btn btn1 btn-lg"
+              >
+                Visitar Games Workshop
+              </button>
+            </div>
           </div>
         </div>
       </section>
+
+      {/* CTA final - SOLO SE MUESTRA SI NO HAY USUARIO LOGUEADO */}
+      {!user && (
+        <section className="cta-section text-center py-5">
+          <div className="container">
+            <h2 className="section-title mb-4">¡Únete a la comunidad!</h2>
+            <p className="text-light mb-4">
+              Comparte estrategias, encuentra jugadores cercanos y mantente actualizado con las últimas novedades.
+            </p>
+            <div className="d-flex justify-content-center gap-3">
+              <button onClick={handleRegister} className="btn btn1">Registrarse</button>
+              <button onClick={handleLogin} className="btn btn-outline-light">Iniciar sesión</button>
+            </div>
+          </div>
+        </section>
+      )}
+      {/* Botón Back to Top con imagen de fondo */}
+      <a href="#scroll-container">
+        <button
+          style={{
+            position: "fixed",
+            bottom: "20px",
+            right: "20px",
+            width: "60px",
+            height: "60px",
+            backgroundColor: "#d4af37", 
+            backgroundImage: `url(${backToTop})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            border: "none",
+            borderRadius: "50%",
+            cursor: "pointer",
+            boxShadow: "0 0 10px rgba(0,0,0,0.3)",
+            zIndex: 1000,
+            transition: "transform 0.3s ease"
+          }}
+          onMouseOver={(e) => e.target.style.transform = "scale(1.1)"} 
+          onMouseOut={(e) => e.target.style.transform = "scale(1)"}
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        >
+        </button>
+      </a>
     </div>
   );
 }

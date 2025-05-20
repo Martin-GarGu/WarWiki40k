@@ -5,54 +5,139 @@
     margin: 30px auto;
     padding: 20px;
     background-color: #1a1a1a; // Fondo oscuro temático
-    border-radius: 10px;
+    border-radius: 5px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     color: #d4af37; // Texto dorado temático
+    position: relative;
+    border: 1px solid #333; // Borde sutil gris oscuro
+
 
     .perfil-header {
         font-family: 'Cinzel', serif; // Fuente temática
         font-size: 1.8rem;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
         text-align: center;
         color: #fff;
+        border-bottom: 1px solid #d4af37;
+        padding-bottom: 10px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+    
+    .perfil-avatar {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 30px;
+        
+        .avatar-placeholder {
+            width: 90px;
+            height: 90px;
+            background-color: #d4af37;
+            color: #1a1a1a;
+            font-size: 48px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+        }
     }
 
     .perfil-details {
-        margin-bottom: 20px;
+        margin-bottom: 30px;
+        background-color: #111; // Fondo más oscuro
+        padding: 15px;
+        border-radius: 0;
+        border-left: 3px solid #d4af37;
 
         h3 {
             font-size: 1.2rem;
             margin-bottom: 5px;
             color: #d4af37;
+            text-align: center; // Centrado
         }
 
         p {
             font-size: 1rem;
-            margin: 0;
+            margin: 0 0 15px 0;
             color: #eee;
+            text-align: center; // Centrado
+            border-bottom: 1px dotted rgba(212, 175, 55, 0.3);
+            padding-bottom: 8px;
+            
+            &:last-child {
+                margin-bottom: 0;
+                border-bottom: none;
+            }
         }
     }
 
     .perfil-actions {
         display: flex;
         justify-content: space-between;
+        margin-top: 30px;
 
         button {
             width: 48%;
             font-size: 1rem;
             transition: background-color 0.3s ease, transform 0.3s ease;
+            padding: 12px;
+            background-color: #1a1a1a; // Fondo oscuro, casi negro
+            border: 1px solid #333; // Borde gris oscuro
+            color: #999; // Texto gris
+            border-radius: 4px;
+            
+            i {
+                margin-right: 8px;
+            }
 
             &:hover {
                 background-color: #d4af37; // Efecto dorado
                 color: #1a1a1a;
                 transform: scale(1.05);
+                border-color: #d4af37;
             }
         }
     }
+
+    &:before {
+        content: none; // Eliminamos el borde adicional
+    }
 }
 
-.loading-text {
+.loading-text, .error-text {
     text-align: center;
     font-size: 1.2rem;
     color: #fff;
+    padding: 40px;
+    background-color: #1a1a1a;
+    border-radius: 10px;
+    margin: 30px auto;
+    max-width: 600px;
+}
+
+.error-text {
+    color: #ff4500;
+    border: 1px solid #ff4500;
+}
+
+@media (max-width: 768px) {
+    .perfil-container {
+        margin: 20px 10px;
+        padding: 15px;
+    }
+    
+    .perfil-actions {
+        flex-direction: column;
+        
+        button {
+            width: 100%;
+            margin-bottom: 10px;
+            
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
 }
