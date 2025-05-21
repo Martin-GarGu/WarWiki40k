@@ -54,20 +54,26 @@ Route::middleware(['auth:sanctum', RoleMiddleware::class . ':admin'])->group(fun
 Route::middleware(['auth:sanctum', RoleMiddleware::class . ':user,admin'])->group(function () {
     Route::post('/games/create', [GameController::class, 'store']);
     Route::post('/favorites/create', [FavoriteController::class, 'store']);
-    
+
     Route::get('/favorites/user/{userId}', [FavoriteController::class, 'getByUser']);
     Route::post('/favorites/check', [FavoriteController::class, 'checkFavorite']);
-    
+
     Route::put('/gamesUpdate/{id}', [GameController::class, 'updateById']);
     Route::put('/games/{game}', [GameController::class, 'update']);
     Route::patch('/games/{game}', [GameController::class, 'update']);
     Route::get(('/games/{id}'), [GameController::class, 'searchById']);
     Route::get('/games', [GameController::class, 'index']);
     Route::get('/favorites', [FavoriteController::class, 'index']);
-    
+
     Route::delete('/games/delete/{id}', [GameController::class, 'destroy']);
     Route::delete('/favorites/delete/{id}', [FavoriteController::class, 'destroy']);
     Route::delete('/favorites/remove-by-type',[FavoriteController::class, 'removeByUserAndType']);
+});
+// Grupo para rutas que solo permiten al usuario modificar su propio perfil
+Route::middleware(['auth:sanctum'])->group(function () {
+    // Rutas para actualización de perfil
+    Route::post('/profile/update-username', [UserController::class, 'updateUsername']);
+    Route::post('/profile/update-password', [UserController::class, 'updatePassword']);
 });
 Route::post('/login', [UserController::class, 'login']);
 Route::post('/register', [UserController::class, 'registro']);

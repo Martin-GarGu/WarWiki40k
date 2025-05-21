@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -106,6 +107,86 @@ class UserController extends Controller
             // Manejo de errores
             return response()->json([
                 'error' => 'Error al obtener el usuario',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+    public function updateUsername(Request $request)
+    {
+        // Validar la solicitud
+        $validator = Validator::make($request->all(), [
+            'username' => ['required', 'string', 'max:255', 'unique:users,username,' . Auth::id()],
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 422);
+        }
+
+        try {
+            // Obtener el usuario autenticado - solo puede modificar su propio perfil
+            $user = User::find(Auth::id());
+
+            if (!$user) {
+                return response()->json([
+                    'error' => 'Usuario no encontrado'
+                ], 404);
+            }
+
+            // Actualizar el username
+            $user->username = $request->username;
+            $user->save();
+
+            return response()->json([
+                'message' => 'Username actualizado correctamente',
+                'user' => $user
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Error al actualizar el username',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function updatePassword(Request $request)
+    {
+        // Validar la solicitud
+        $validator = Validator::make($request->all(), [
+            'current_password' => ['required', 'string'],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 422);
+        }
+
+        try {
+            // Obtener el usuario autenticado - solo puede modificar su propia contraseña
+            $user = User::find(Auth::id());
+
+            if (!$user) {
+                return response()->json([
+                    'error' => 'Usuario no encontrado'
+                ], 404);
+            }
+
+            // Verificar que la contraseña actual sea correcta
+            if (!Hash::check($request->current_password, $user->password)) {
+                return response()->json([
+                    'error' => 'La contraseña actual es incorrecta'
+                ], 401);
+            }
+
+            // Actualizar la contraseña
+            $user->password = Hash::make($request->password);
+            $user->save();
+
+            return response()->json([
+                'message' => 'Contraseña actualizada correctamente'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Error al actualizar la contraseña',
                 'message' => $e->getMessage(),
             ], 500);
         }
