@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Container, TextField, Button, Typography, InputAdornment, Link } from "@mui/material";
 import Alert from "react-bootstrap/Alert";
 import { useNavigate } from "react-router-dom";
 
@@ -89,82 +90,126 @@ function Login() {
         }
     };
 
+    const handleGoToRegister = () => {
+        navigate("/register");
+    };
+
     return (
-        <main className="login-page">
+        <div className="login-container">
             {showAlert && (
                 <Alert
                     variant={alertVariant}
                     dismissible
-                    className="mt-2"
+                    className="login-alert"
                     onClose={() => setShowAlert(false)}
                 >
                     {alertMessage}
                 </Alert>
             )}
-            <div className="container py-5">
-                <div className="row justify-content-center">
-                    <div className="col-lg-6 col-md-8 col-sm-12">
-                        <div className="form-container p-4">
-                            <h2 className="text-center mb-4">Iniciar Sesión</h2>
-                            <form onSubmit={handleSubmit} noValidate>
-                                <div className="mb-3">
-                                    <label htmlFor="email" className="form-label">
-                                        Correo Electrónico
-                                    </label>
-                                    <input
-                                        type="email"
-                                        id="email"
-                                        className={`form-control ${errorEmail.color ? "is-invalid" : ""}`}
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value.toLowerCase())}
+            
+            <Container className="login-form-container rounded-4 p-4" maxWidth="sm">
+                <Typography variant="h4" component="div" className="login-title">
+                    Iniciar Sesión
+                </Typography>
+                <Typography variant="body1" className="login-subtitle">
+                    Ingresa tus credenciales para acceder
+                </Typography>
+                
+                <form onSubmit={handleSubmit} className="login-form" noValidate>
+                    {/* Email */}
+                    <TextField
+                        fullWidth
+                        type="email"
+                        placeholder="Correo Electrónico *"
+                        variant="outlined"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value.toLowerCase())}
+                        error={errorEmail.color}
+                        helperText={errorEmail.text}
+                        className="login-input"
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <i className="fa-solid fa-envelope login-input-icon"></i>
+                                </InputAdornment>
+                            ),
+                        }}
+                        sx={{ mb: 3 }}
+                    />
+
+                    {/* Password */}
+                    <TextField
+                        fullWidth
+                        type={showPassword ? "text" : "password"}
+                        placeholder="Contraseña *"
+                        variant="outlined"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        error={errorPassword.color}
+                        helperText={errorPassword.text}
+                        className="login-input"
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <i className="fa-solid fa-lock login-input-icon"></i>
+                                </InputAdornment>
+                            ),
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <i
+                                        className={`fa-solid fa-eye${showPassword ? "-slash" : ""} login-password-toggle`}
+                                        onClick={() => setShowPassword(!showPassword)}
                                     />
-                                    {errorEmail.text && (
-                                        <div className="invalid-feedback">{errorEmail.text}</div>
-                                    )}
-                                </div>
-                                <div className="mb-3">
-                                    <label htmlFor="password" className="form-label">
-                                        Contraseña
-                                    </label>
-                                    <div className="input-group">
-                                        <input
-                                            type={showPassword ? "text" : "password"}
-                                            id="password"
-                                            className={`form-control ${errorPassword.color ? "is-invalid" : ""}`}
-                                            value={password}
-                                            onChange={(e) => setPassword(e.target.value)}
-                                        />
-                                        <button
-                                            type="button"
-                                            className="btn btn-outline-secondary"
-                                            onClick={() => setShowPassword(!showPassword)}
-                                        >
-                                            <i className={`fa-solid fa-eye${showPassword ? "-slash" : ""}`}></i>
-                                        </button>
-                                        {errorPassword.text && (
-                                            <div className="invalid-feedback">{errorPassword.text}</div>
-                                        )}
-                                    </div>
-                                </div>
-                                <div className="d-grid">
-                                    <button type="submit" className="btn btn-primary">
-                                        {loading ? (
-                                            <span
-                                                className="spinner-border spinner-border-sm"
-                                                role="status"
-                                                aria-hidden="true"
-                                            ></span>
-                                        ) : (
-                                            "Iniciar Sesión"
-                                        )}
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
+                                </InputAdornment>
+                            ),
+                        }}
+                        sx={{ mb: 3 }}
+                    />
+
+                    {/* Login Button */}
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        fullWidth
+                        size="large"
+                        disabled={loading}
+                        className="login-submit-btn"
+                        sx={{ mb: 3 }}
+                    >
+                        {loading ? (
+                            <span
+                                className="spinner-border spinner-border-sm"
+                                role="status"
+                                aria-hidden="true"
+                            />
+                        ) : (
+                            "Iniciar Sesión"
+                        )}
+                    </Button>
+
+                    {/* Divider */}
+                    <div className="login-divider">
+                        <span>o</span>
                     </div>
-                </div>
-            </div>
-        </main>
+
+                    {/* Register Link */}
+                    <div className="login-register-section">
+                        <Typography variant="body2" className="login-register-text">
+                            ¿No tienes una cuenta?
+                        </Typography>
+                        <Button
+                            variant="outlined"
+                            fullWidth
+                            size="large"
+                            onClick={handleGoToRegister}
+                            className="login-register-btn"
+                        >
+                            Crear Nueva Cuenta
+                        </Button>
+                    </div>
+                </form>
+            </Container>
+        </div>
     );
 }
 

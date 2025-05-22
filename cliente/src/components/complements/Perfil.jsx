@@ -10,9 +10,8 @@ export default function Perfil() {
         totalFavorites: 0
     });
     
-    // Estados para edición
-    const [isEditingUsername, setIsEditingUsername] = useState(false);
-    const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
+    // Estados para modal de editar perfil
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [newUsername, setNewUsername] = useState("");
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
@@ -27,15 +26,14 @@ export default function Perfil() {
             setNewUsername(parsedUser.username);
             fetchUserStats(parsedUser.id);
         } else {
-            navigate("/login"); // Redirige a /login si no hay usuario logueado
+            navigate("/login");
         }
-    }, [navigate]); // Agregar navigate como dependencia para evitar advertencias
+    }, [navigate]);
 
     const fetchUserStats = async (userId) => {
         try {
             const token = localStorage.getItem("token");
             
-            // Obtener conteo de favoritos
             const favResponse = await fetch(
                 `${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/user/${userId}`,
                 {
@@ -68,99 +66,93 @@ export default function Perfil() {
         navigate("/games");
     };
 
-    // Función para actualizar el nombre de usuario
-    const handleUpdateUsername = async (e) => {
+    // Función para manejar el envío del formulario
+    const handleSubmitProfile = async (e) => {
         e.preventDefault();
         setMessage(null);
         
+        const token = localStorage.getItem("token");
+        let hasErrors = false;
+
         try {
-            const token = localStorage.getItem("token");
-            const response = await fetch(
-                `${import.meta.env.VITE_APP_PETICION_IP}/api/profile/update-username`,
-                {
-                    method: "POST",
-                    headers: { 
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}`
-                    },
-                    body: JSON.stringify({ username: newUsername })
+            // Actualizar nombre de usuario si ha cambiado
+            if (newUsername !== user.username) {
+                const usernameResponse = await fetch(
+                    `${import.meta.env.VITE_APP_PETICION_IP}/api/profile/update-username`,
+                    {
+                        method: "POST",
+                        headers: { 
+                            "Content-Type": "application/json",
+                            Authorization: `Bearer ${token}`
+                        },
+                        body: JSON.stringify({ username: newUsername })
+                    }
+                );
+                
+                const usernameData = await usernameResponse.json();
+                
+                if (!usernameResponse.ok) {
+                    throw new Error(usernameData.error?.username?.[0] || usernameData.error || "Error al actualizar el nombre de usuario");
                 }
-            );
-            
-            const data = await response.json();
-            
-            if (!response.ok) {
-                throw new Error(data.error?.username?.[0] || data.error || "Error al actualizar el nombre de usuario");
+                
+                // Actualizar el usuario en localStorage y en el estado
+                const updatedUser = { ...user, username: newUsername };
+                localStorage.setItem("user", JSON.stringify(updatedUser));
+                setUser(updatedUser);
             }
-            
-            // Actualizar el usuario en localStorage y en el estado
-            const updatedUser = { ...user, username: newUsername };
-            localStorage.setItem("user", JSON.stringify(updatedUser));
-            setUser(updatedUser);
-            setIsEditingUsername(false);
-            setMessage({ type: "success", text: "Nombre de usuario actualizado correctamente" });
+
+            // Actualizar contraseña si se proporcionó
+            if (newPassword) {
+                if (newPassword !== confirmPassword) {
+                    throw new Error("Las contraseñas no coinciden");
+                }
+
+                const passwordResponse = await fetch(
+                    `${import.meta.env.VITE_APP_PETICION_IP}/api/profile/update-password`,
+                    {
+                        method: "POST",
+                        headers: { 
+                            "Content-Type": "application/json",
+                            Authorization: `Bearer ${token}`
+                        },
+                        body: JSON.stringify({
+                            current_password: currentPassword,
+                            password: newPassword,
+                            password_confirmation: confirmPassword
+                        })
+                    }
+                );
+                
+                const passwordData = await passwordResponse.json();
+                
+                if (!passwordResponse.ok) {
+                    throw new Error(passwordData.error?.password?.[0] || passwordData.error || "Error al actualizar la contraseña");
+                }
+            }
+
+            // Si llegamos aquí, todo salió bien
+            closeEditModal();
+            setMessage({ type: "success", text: "Perfil actualizado correctamente" });
             
         } catch (err) {
             setMessage({ type: "error", text: err.message });
         }
     };
 
-    // Función para cambiar la contraseña
-    const handleChangePassword = async (e) => {
-        e.preventDefault();
-        setMessage(null);
-        
-        if (newPassword !== confirmPassword) {
-            setMessage({ type: "error", text: "Las contraseñas no coinciden" });
-            return;
-        }
-        
-        try {
-            const token = localStorage.getItem("token");
-            const response = await fetch(
-                `${import.meta.env.VITE_APP_PETICION_IP}/api/profile/update-password`,
-                {
-                    method: "POST",
-                    headers: { 
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}`
-                    },
-                    body: JSON.stringify({
-                        current_password: currentPassword,
-                        password: newPassword,
-                        password_confirmation: confirmPassword
-                    })
-                }
-            );
-            
-            const data = await response.json();
-            
-            if (!response.ok) {
-                throw new Error(data.error?.password?.[0] || data.error || "Error al actualizar la contraseña");
-            }
-            
-            // Limpiar campos y mostrar mensaje de éxito
-            setCurrentPassword("");
-            setNewPassword("");
-            setConfirmPassword("");
-            setIsPasswordModalOpen(false);
-            setMessage({ type: "success", text: "Contraseña actualizada correctamente" });
-            
-        } catch (err) {
-            setMessage({ type: "error", text: err.message });
-        }
-    };
-
-    // Función para cancelar la edición de nombre de usuario
-    const handleCancelEdit = () => {
-        setIsEditingUsername(false);
+    // Función para abrir modal de editar perfil
+    const openEditModal = () => {
         setNewUsername(user?.username || "");
+        setCurrentPassword("");
+        setNewPassword("");
+        setConfirmPassword("");
+        setIsEditModalOpen(true);
         setMessage(null);
     };
 
-    // Función para cerrar el modal de contraseña
-    const closePasswordModal = () => {
-        setIsPasswordModalOpen(false);
+    // Función para cerrar el modal de editar perfil
+    const closeEditModal = () => {
+        setIsEditModalOpen(false);
+        setNewUsername(user?.username || "");
         setCurrentPassword("");
         setNewPassword("");
         setConfirmPassword("");
@@ -197,33 +189,7 @@ export default function Perfil() {
             
             <div className="perfil-details">
                 <h3>Nombre de Usuario:</h3>
-                {isEditingUsername ? (
-                    <form onSubmit={handleUpdateUsername} className="edit-form">
-                        <input
-                            type="text"
-                            value={newUsername}
-                            onChange={(e) => setNewUsername(e.target.value)}
-                            required
-                            minLength="3"
-                            maxLength="30"
-                        />
-                        <div className="form-buttons">
-                            <button type="submit" className="btn btn-save">Guardar</button>
-                            <button type="button" className="btn btn-cancel" onClick={handleCancelEdit}>Cancelar</button>
-                        </div>
-                    </form>
-                ) : (
-                    <div className="detail-with-edit">
-                        <p>{user.username}</p>
-                        <button 
-                            onClick={() => setIsEditingUsername(true)} 
-                            className="btn-edit"
-                            title="Editar nombre de usuario"
-                        >
-                            <i className="fa fa-pencil"></i>
-                        </button>
-                    </div>
-                )}
+                <p>{user.username}</p>
                 
                 <h3>Email:</h3>
                 <p>{user.email}</p>
@@ -233,18 +199,6 @@ export default function Perfil() {
                 
                 <h3>Favoritos guardados:</h3>
                 <p>{stats.totalFavorites}</p>
-                
-                <h3>Contraseña:</h3>
-                <div className="detail-with-edit">
-                    <p>••••••••</p>
-                    <button 
-                        onClick={() => setIsPasswordModalOpen(true)} 
-                        className="btn-edit"
-                        title="Cambiar contraseña"
-                    >
-                        <i className="fa fa-key"></i>
-                    </button>
-                </div>
             </div>
             
             <div className="perfil-actions">
@@ -254,47 +208,68 @@ export default function Perfil() {
                 <button onClick={handlePartidas} className="btn">
                     <i className="fa fa-gamepad"></i> PARTIDAS
                 </button>
+                <button onClick={openEditModal} className="btn">
+                    <i className="fa fa-edit"></i> EDITAR PERFIL
+                </button>
             </div>
 
-            {/* Modal para cambiar contraseña */}
-            {isPasswordModalOpen && (
+            {/* Modal para editar perfil */}
+            {isEditModalOpen && (
                 <div className="modal-overlay">
                     <div className="modal-content">
-                        <h3>Cambiar Contraseña</h3>
-                        <form onSubmit={handleChangePassword}>
+                        <h3>Editar Perfil</h3>
+                        {message && (
+                            <div className={`message ${message.type}`}>
+                                {message.text}
+                            </div>
+                        )}
+                        <form onSubmit={handleSubmitProfile}>
                             <div className="form-group">
-                                <label>Contraseña actual:</label>
+                                <label>Nombre de usuario:</label>
                                 <input
-                                    type="password"
-                                    value={currentPassword}
-                                    onChange={(e) => setCurrentPassword(e.target.value)}
+                                    type="text"
+                                    value={newUsername}
+                                    onChange={(e) => setNewUsername(e.target.value)}
                                     required
-                                    minLength="6"
+                                    minLength="3"
+                                    maxLength="30"
                                 />
                             </div>
-                            <div className="form-group">
-                                <label>Nueva contraseña:</label>
-                                <input
-                                    type="password"
-                                    value={newPassword}
-                                    onChange={(e) => setNewPassword(e.target.value)}
-                                    required
-                                    minLength="6"
-                                />
+                            
+                            <div className="password-section">
+                                <h4>Cambiar Contraseña (opcional)</h4>
+                                <div className="form-group">
+                                    <label>Contraseña actual:</label>
+                                    <input
+                                        type="password"
+                                        value={currentPassword}
+                                        onChange={(e) => setCurrentPassword(e.target.value)}
+                                        minLength="6"
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label>Nueva contraseña:</label>
+                                    <input
+                                        type="password"
+                                        value={newPassword}
+                                        onChange={(e) => setNewPassword(e.target.value)}
+                                        minLength="6"
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label>Confirmar nueva contraseña:</label>
+                                    <input
+                                        type="password"
+                                        value={confirmPassword}
+                                        onChange={(e) => setConfirmPassword(e.target.value)}
+                                        minLength="6"
+                                    />
+                                </div>
                             </div>
-                            <div className="form-group">
-                                <label>Confirmar nueva contraseña:</label>
-                                <input
-                                    type="password"
-                                    value={confirmPassword}
-                                    onChange={(e) => setConfirmPassword(e.target.value)}
-                                    required
-                                    minLength="6"
-                                />
-                            </div>
+                            
                             <div className="modal-buttons">
-                                <button type="submit" className="btn btn-save">Guardar</button>
-                                <button type="button" className="btn btn-cancel" onClick={closePasswordModal}>Cancelar</button>
+                                <button type="submit" className="btn btn-save">Guardar Cambios</button>
+                                <button type="button" className="btn btn-cancel" onClick={closeEditModal}>Cancelar</button>
                             </div>
                         </form>
                     </div>

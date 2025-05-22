@@ -66,6 +66,7 @@ const Registro = () => {
       return false;
     }
   }
+
   async function validarUsername() {
     try {
       const response = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/buscarUsername/${username}`, { method: "GET" });
@@ -86,6 +87,7 @@ const Registro = () => {
       return false;
     }
   }
+
   async function fetchPost() {
     setLoading(true);
 
@@ -142,6 +144,33 @@ const Registro = () => {
 
   function validar() {
     let valid = true;
+    
+    // Validar email primero (ya que es más importante)
+    if (email === "") {
+      setErrorEmail({ color: true, text: "Completa este campo" });
+      valid = false;
+    } else if (!emailRegEx.test(email)) {
+      setErrorEmail({ color: true, text: "Introduce un email válido" });
+      valid = false;
+    } else if (enieRegEx.test(email)) {
+      setErrorEmail({ color: true, text: "El carácter 'ñ' no es válido" });
+      return false;
+    } else {
+      emailBD();
+    }
+
+    // Validar username
+    if (username === "") {
+      setErrorUsername({ color: true, text: "Completa este campo" });
+      valid = false;
+    } else if (enieRegEx.test(username)) {
+      setErrorUsername({ color: true, text: "El carácter 'ñ' no es válido" });
+      return false;
+    } else {
+      validarUsername();
+    }
+
+    // Validar contraseña
     if (pass === "") {
       setErrorPass({ color: true, text: "Completa este campo" });
       valid = false;
@@ -158,6 +187,7 @@ const Registro = () => {
       setErrorPass({ color: false, text: "" });
     }
 
+    // Validar confirmación de contraseña
     if (confpass === "") {
       setErrorConfpass({ color: true, text: "Completa este campo" });
       valid = false;
@@ -166,29 +196,6 @@ const Registro = () => {
       valid = false;
     } else {
       setErrorConfpass({ color: false, text: "" });
-    }
-
-    if (email === "") {
-      setErrorEmail({ color: true, text: "Completa este campo" });
-      valid = false;
-    } else if (!emailRegEx.test(email)) {
-      setErrorEmail({ color: true, text: "Introduce un email válido" });
-      valid = false;
-    } else if (enieRegEx.test(email)) {
-      setErrorEmail({ color: true, text: "El carácter 'ñ' no es válido" });
-      return false;
-    } else {
-      emailBD();
-    }
-
-    if (username === "") {
-      setErrorUsername({ color: true, text: "Completa este campo" });
-      valid = false;
-    } else if (enieRegEx.test(username)) {
-      setErrorUsername({ color: true, text: "El carácter 'ñ' no es válido" });
-      return false;
-    }else{
-      validarUsername();
     }
 
     return valid;
@@ -213,23 +220,50 @@ const Registro = () => {
   }
 
   return (
-    <div className="registro-page">
+    <div className="registro-container">
       {showAlert && (
         <Alert
           variant={alertVariant}
           onClose={() => setShowAlert(false)}
           dismissible
-          className="mt-2 alert"
+          className="registro-alert"
         >
           {alertMessage}
         </Alert>
       )}
-      <Container className="formulario rounded-4 p-4" maxWidth="md">
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          <h3>Datos del nuevo usuario</h3>
+      <Container className="registro-form-container rounded-4 p-4" maxWidth="md">
+        <Typography variant="h4" component="div" className="registro-title">
+          Crear Nueva Cuenta
         </Typography>
-        <form onSubmit={handleRegistro}>
-          <Grid container spacing={2} className="form-group">
+        <Typography variant="body1" className="registro-subtitle">
+          Completa los siguientes datos para registrarte
+        </Typography>
+        
+        <form onSubmit={handleRegistro} className="registro-form">
+          <Grid container spacing={3}>
+            {/* Email - Campo principal */}
+            <Grid item xs={12}>
+              <TextField
+                placeholder="Email *"
+                fullWidth
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                helperText={erroremail.text}
+                error={erroremail.color}
+                className="registro-input"
+                variant="outlined"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <i className="fa-solid fa-envelope registro-input-icon"></i>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </Grid>
+
+            {/* Username */}
             <Grid item xs={12}>
               <TextField
                 placeholder="Nombre de usuario *"
@@ -238,10 +272,20 @@ const Registro = () => {
                 onChange={(e) => setUsername(e.target.value)}
                 helperText={errorusername.text}
                 error={errorusername.color}
-                className="form-control"
+                className="registro-input"
+                variant="outlined"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <i className="fa-solid fa-user registro-input-icon"></i>
+                    </InputAdornment>
+                  ),
+                }}
               />
             </Grid>
-            <Grid item xs={6}>
+
+            {/* Contraseñas */}
+            <Grid item xs={12} md={6}>
               <TextField
                 placeholder="Contraseña *"
                 fullWidth
@@ -250,13 +294,18 @@ const Registro = () => {
                 onChange={(e) => setPass(e.target.value)}
                 helperText={errorpass.text}
                 error={errorpass.color}
-                className="form-control"
+                className="registro-input"
+                variant="outlined"
                 InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <i className="fa-solid fa-lock registro-input-icon"></i>
+                    </InputAdornment>
+                  ),
                   endAdornment: (
                     <InputAdornment position="end">
                       <i
-                        className={`fa-solid fa-eye${showPassword.showPassword ? "-slash" : ""
-                          }`}
+                        className={`fa-solid fa-eye${showPassword.showPassword ? "-slash" : ""} registro-password-toggle`}
                         onClick={() =>
                           setShowPassword({
                             ...showPassword,
@@ -269,7 +318,8 @@ const Registro = () => {
                 }}
               />
             </Grid>
-            <Grid item xs={6}>
+
+            <Grid item xs={12} md={6}>
               <TextField
                 placeholder="Confirmar contraseña *"
                 fullWidth
@@ -278,13 +328,18 @@ const Registro = () => {
                 onChange={(e) => setConfpass(e.target.value)}
                 helperText={errorconfpass.text}
                 error={errorconfpass.color}
-                className="form-control"
+                className="registro-input"
+                variant="outlined"
                 InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <i className="fa-solid fa-lock registro-input-icon"></i>
+                    </InputAdornment>
+                  ),
                   endAdornment: (
                     <InputAdornment position="end">
                       <i
-                        className={`fa-solid fa-eye${showPassword.showConfPassword ? "-slash" : ""
-                          }`}
+                        className={`fa-solid fa-eye${showPassword.showConfPassword ? "-slash" : ""} registro-password-toggle`}
                         onClick={() =>
                           setShowPassword({
                             ...showPassword,
@@ -297,27 +352,18 @@ const Registro = () => {
                 }}
               />
             </Grid>
-            <Grid item xs={8}>
-              <TextField
-                placeholder="Email *"
-                fullWidth
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                helperText={erroremail.text}
-                error={erroremail.color}
-                className="form-control"
-              />
-            </Grid>
-            <Grid item xs={4} className="d-flex align-items-center">
+
+            {/* Botón de registro */}
+            <Grid item xs={12}>
               <Button
                 variant="contained"
                 type="submit"
                 fullWidth
                 disabled={loading}
-                className="btn-primary"
+                className="registro-submit-btn"
+                size="large"
               >
-                {loading ? <SpinnerFormulario /> : "Registrar"}
+                {loading ? <SpinnerFormulario /> : "Crear Cuenta"}
               </Button>
             </Grid>
           </Grid>
