@@ -343,3 +343,69 @@
         }
     }
 }
+
+
+.modal-content {
+    .form-group {
+        position: relative;
+
+        .password-input-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+
+            input {
+                padding-right: 45px; // Espacio para el icono
+            }
+
+            .password-toggle {
+                position: absolute;
+                right: 12px;
+                color: #d4af37;
+                cursor: pointer;
+                font-size: 1rem;
+                transition: all 0.3s ease;
+                z-index: 10;
+
+                &:hover {
+                    color: lighten(#d4af37, 15%);
+                    transform: scale(1.1);
+                }
+            }
+        }
+
+        .input-error {
+            border-color: #e74c3c !important;
+            box-shadow: 0 0 8px rgba(231, 76, 60, 0.4) !important;
+        }
+
+        .error-message {
+            display: block;
+            color: #ff6b6b; // Color más claro y visible
+            background-color: rgba(255, 107, 107, 0.1); // Fondo muy sutil
+            font-size: 0.8rem;
+            margin-top: 5px;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-style: italic;
+            border-left: 3px solid #ff6b6b;
+        }
+    }
+}
+
+// También actualizar los mensajes principales
+.perfil-container .message {
+    &.error {
+        background-color: rgba(255, 107, 107, 0.15); // Fondo más claro
+        color: #ff6b6b; // Texto más claro y legible
+        border: 1px solid rgba(255, 107, 107, 0.4);
+    }
+}
+
+.modal-content .message {
+    &.error {
+        background-color: rgba(255, 107, 107, 0.15); // Fondo más claro
+        color: #ff6b6b; // Texto más claro y legible  
+        border: 1px solid rgba(255, 107, 107, 0.4);
+    }
+}
