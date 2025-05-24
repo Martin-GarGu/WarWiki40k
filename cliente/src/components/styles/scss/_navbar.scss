@@ -14,6 +14,15 @@
     background-color: #8B0000; // Rojo oscuro base
     // font-family: 'fuenteGeneralBlack';
     min-height: 0; // Elimina altura mínima para que se ajuste al contenido
+    
+    // QUITAR SUBRAYADO A TODO
+    a, .nav-link, .dropdown-toggle, .navbar-brand {
+      text-decoration: none !important;
+      
+      &:hover, &:focus, &:active, &:visited {
+        text-decoration: none !important;
+      }
+    }
   }
   
   // Nuevos estilos para ajustar el tamaño del navbar a los botones
@@ -32,33 +41,62 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    text-decoration: none !important;
     
     &:hover {
       background-color: #600000; // Rojo más oscuro para el hover
       color: #fff;
+      text-decoration: none !important;
     }
     
     &:active, &:focus {
       background-color: #4B0000; // Rojo aún más oscuro para cuando está activo
       color: #fff;
+      text-decoration: none !important;
     }
   }
   
   // Estilo especial para el logo/brand
   .nav-brand-custom {
     padding: 0.5rem 1rem;
+    text-decoration: none !important;
     
     &:hover {
       background-color: transparent;
+      text-decoration: none !important;
     }
   }
   
-  // Estilo para el dropdown
+  // Estilo para el dropdown - SIN SUBRAYADO
   #factions-dropdown {
     position: relative;
     
     &.show {
       background-color: #600000; // Rojo más oscuro cuando el dropdown está abierto
+    }
+    
+    .dropdown-toggle {
+      text-decoration: none !important;
+      
+      &:hover, &:focus, &:active, &:visited {
+        text-decoration: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+      }
+    }
+  }
+  
+  // Forzar sin subrayado en el NavDropdown completo
+  .dropdown-toggle::after {
+    text-decoration: none !important;
+  }
+  
+  // Asegurar que Bootstrap no añada subrayado
+  .nav-link.dropdown-toggle {
+    text-decoration: none !important;
+    
+    &:hover, &:focus, &:active {
+      text-decoration: none !important;
     }
   }
   
@@ -66,10 +104,16 @@
   .dropdown-item-custom {
     padding: 0.5rem 1rem;
     transition: background-color 0.2s ease;
+    text-decoration: none !important;
     
     &:hover {
       background-color: #FFECEC; // Un rojo muy claro para los items del dropdown
       color: #8B0000; // Color de texto rojo oscuro al hacer hover
+      text-decoration: none !important;
+    }
+    
+    &:active, &:focus {
+      text-decoration: none !important;
     }
   }
   

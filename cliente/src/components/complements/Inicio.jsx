@@ -115,7 +115,7 @@ function Inicio() {
   };
 
   const handleKillTeamGuide = () => {
-    // Como no tienes una página de guía, podrías redirigir a la página principal o a otra página existente
+    // Como no tienes una página de guía, podrías redirigir a la página principal or a otra página existente
     navigate('/rules'); // O cualquier otra página que tengas disponible
   };
 
@@ -260,7 +260,7 @@ function Inicio() {
         <div className="container">
           <div className="row align-items-center">
             <div className="col-md-6">
-              <h2 className="section-title mb-3">¿Nuevo en Kill Team?</h2>
+              <h2 className="section-title-normal mb-3">¿Nuevo en Kill Team?</h2>
               <p className="text-light mb-4">
                 Kill Team es un juego de escaramuzas tácticas ambientado en el universo de Warhammer 40,000. 
                 A diferencia del juego principal, aquí comandas un pequeño equipo de especialistas en misiones 

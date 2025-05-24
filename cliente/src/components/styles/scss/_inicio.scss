@@ -132,12 +132,26 @@
   padding: 40px 0;
 }
 
-/* Título de secciones */
+/* Título de secciones principales - ENORME */
 .section-title {
   font-family: 'Cinzel', serif;
   color: #d4af37;
-  text-shadow: 1px 1px #333;
+  text-shadow: 3px 3px #333;
+  margin-bottom: 3rem;
+  font-size: 5rem; /* MUCHO MÁS GRANDE */
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* Título de sección normal - para secciones como "¿Nuevo en Kill Team?" */
+.section-title-normal {
+  font-family: 'Cinzel', serif;
+  color: #d4af37;
+  text-shadow: 2px 2px #333;
   margin-bottom: 1.5rem;
+  font-size: 2rem; /* Tamaño normal */
+  font-weight: 600;
 }
 
 /* Estilos para las tarjetas */
@@ -223,5 +237,23 @@
   
   .inicio-title {
     font-size: 2rem;
+  }
+  
+  /* Títulos principales enormes en móvil */
+  .section-title {
+    font-size: 3.5rem;
+  }
+  
+  /* Títulos normales en móvil */
+  .section-title-normal {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Para móviles muy pequeños */
+  .section-title {
+    font-size: 2.8rem;
+    letter-spacing: 1px;
   }
 }
