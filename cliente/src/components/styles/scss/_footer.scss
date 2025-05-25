@@ -1,13 +1,33 @@
-/* Footer.css */
+/* Footer.scss */
 .footer {
   transition: all 0.3s ease-in-out;
   position: relative;
   bottom: 0;
   width: 100%;
   z-index: 10;
-  margin-top: auto;
+  margin: 0 !important;
+  padding: 1rem 0 !important; /* Solo padding vertical mínimo */
   flex-shrink: 0;
-  padding-bottom: 20px; /* Añadimos más padding en la parte inferior */
+  
+  .container {
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+  }
+  
+  .row:last-child {
+    margin-bottom: 0 !important;
+  }
+  
+  .col-12:last-child {
+    padding-bottom: 0 !important;
+  }
+  
+  .small:last-child,
+  p:last-child,
+  div:last-child {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
 }
 
 /* Estilos para los enlaces del footer */
@@ -20,8 +40,29 @@
 .footer .bi {
   font-size: 1.25rem;
   transition: transform 0.2s;
+  
+  &:hover {
+    transform: scale(1.2);
+  }
 }
 
-.footer .bi:hover {
-  transform: scale(1.2);
+/* Clase de utilidad para hover */
+.hover-opacity:hover {
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+/* Asegurar que no haya espacios después del footer */
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.footer + * {
+  margin-top: 0 !important;
 }

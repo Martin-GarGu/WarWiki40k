@@ -113,7 +113,9 @@ function Inicio() {
   const handleRules = () => {
     navigate('/rules');
   };
-
+  const handleSpecialRules = () => {
+    navigate('/specialRules');
+  };
   const handleKillTeamGuide = () => {
     // Como no tienes una página de guía, podrías redirigir a la página principal or a otra página existente
     navigate('/rules'); // O cualquier otra página que tengas disponible
@@ -146,8 +148,8 @@ function Inicio() {
             <button onClick={handleRules} className="btn btn1 btn-lg">
               Reglas
             </button>
-            <button onClick={handleRules} className="btn btn-outline-light btn-lg">
-              Reglas Avanzadas
+            <button onClick={handleSpecialRules} className="btn btn-outline-light btn-lg">
+              Reglas Especiales
             </button>
           </div>
         </div>
