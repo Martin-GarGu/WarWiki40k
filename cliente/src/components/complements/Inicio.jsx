@@ -131,7 +131,7 @@ function Inicio() {
 
   const handleVisitGamesWorkshop = () => {
     // Abrir la página de Games Workshop en una nueva pestaña
-    window.open('https://www.games-workshop.com/es-ES/Warhammer-40-000-Kill-Team-2023-spa', '_blank');
+    window.open('https://www.warhammer.com/en-GB/home?srsltid=AfmBOooAX0PzT4Ywr0zdFbMncpis9IFcuIiOvJCCmKHWUPEbv7f6YxiF', '_blank');
   };
 
   return (
