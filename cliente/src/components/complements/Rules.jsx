@@ -19,7 +19,7 @@ const Rules = () => {
         <div>
             {/* Índice de reglas */}
             <div
-                className="sidebar"
+                className="rules-sidebar"
                 style={{
                     backgroundColor: "#2e2e2e",
                     color: "#d4af37",

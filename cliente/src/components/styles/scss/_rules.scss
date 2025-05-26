@@ -1,78 +1,165 @@
 .rules-container {
-    // General container style
-    padding: 20px;
-    background-color: #f4f4f4;
-    color: #333;
-    font-family: Arial, sans-serif;
-    max-width: 1200px; // Límite de ancho para el contenedor
-    margin: 0 auto; // Centrar el contenedor
-    margin-bottom: 50px;
-    // Sección para la imagen
-    .rules-image {
-      display: block;
-      max-width: 80%;  // Controla el tamaño de la imagen
-      height: auto;  // Mantener la proporción de la imagen
-      margin: 30px auto;  // Márgenes superior e inferior y centrado horizontal
-      border-radius: 8px; // Esquinas redondeadas
-    }
-  
-    // Títulos de las reglas
-    .rules-title {
-      font-size: 1.8rem;
-      color: #d4af37;
-      margin-bottom: 20px;
-      text-align: center;
-      font-weight: bold;
-      margin-top: 30px; // Separación superior
-      font-family: 'Roboto Condensed', sans-serif;
-    }
-  
-    // Textos descriptivos debajo de cada título
-    .rules-text {
+  // General container style
+  padding: 20px;
+  background-color: #f4f4f4;
+  color: #333;
+  font-family: Arial, sans-serif;
+  max-width: 1200px; // Límite de ancho para el contenedor
+  margin: 0 auto; // Centrar el contenedor
+  margin-bottom: 50px;
+
+  // Sección para la imagen
+  .rules-image {
+    display: block;
+    max-width: 80%; // Controla el tamaño de la imagen
+    height: auto; // Mantener la proporción de la imagen
+    margin: 30px auto; // Márgenes superior e inferior y centrado horizontal
+    border-radius: 8px; // Esquinas redondeadas
+  }
+
+  // Títulos de las reglas
+  .rules-title {
+    font-size: 1.8rem;
+    color: #d4af37;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 30px; // Separación superior
+    font-family: 'Roboto Condensed', sans-serif;
+  }
+
+  // Textos descriptivos debajo de cada título
+  .rules-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+    text-align: justify;
+    margin: 0 20px 20px 20px; // Márgenes laterales y abajo
+    font-family: 'Droid Serif', serif;
+  }
+
+  // Lista de reglas
+  ul.rules-list {
+    list-style-type: disc; // Estilo de lista con puntos
+    padding-left: 40px; // Espacio a la izquierda para los puntos
+    margin: 0 auto; // Centrado de la lista
+
+    li {
       font-size: 1rem;
       line-height: 1.6;
       color: #555;
-      text-align: justify;
-      margin: 0 20px 20px 20px; // Márgenes laterales y abajo
-      font-family: 'Droid Serif', serif;
-    }
-  
-    // Lista de reglas
-    ul.rules-list {
-      list-style-type: disc; // Estilo de lista con puntos
-      padding-left: 40px; // Espacio a la izquierda para los puntos
-      margin: 0 auto; // Centrado de la lista
-  
-      li {
-        font-size: 1rem;
-        line-height: 1.6;
-        color: #555;
-        margin-bottom: 12px; // Separación entre elementos de la lista
-      }
+      margin-bottom: 12px; // Separación entre elementos de la lista
     }
   }
-  
-  // Media queries para pantallas pequeñas
-  @media (max-width: 768px) {
-    .rules-container {
-      padding: 10px;
-    }
-  
-    .rules-title {
-      font-size: 1.5rem;
-    }
-  
-    .rules-text {
-      font-size: 0.9rem;
-      margin: 0 10px 15px 10px; // Márgenes ajustados en pantallas pequeñas
-    }
-  
-    .rules-image {
-      max-width: 90%; // Ajustar imagen en pantallas pequeñas
-    }
-  
-    ul.rules-list {
-      padding-left: 30px; // Menos espacio a la izquierda
-    }
+}
+
+// Media queries para pantallas pequeñas
+@media (max-width: 768px) {
+  .rules-container {
+    padding: 10px;
   }
-  
+
+  .rules-title {
+    font-size: 1.5rem;
+  }
+
+  .rules-text {
+    font-size: 0.9rem;
+    margin: 0 10px 15px 10px; // Márgenes ajustados en pantallas pequeñas
+  }
+
+  .rules-image {
+    max-width: 90%; // Ajustar imagen en pantallas pequeñas
+  }
+
+  ul.rules-list {
+    padding-left: 30px; // Menos espacio a la izquierda
+  }
+}
+
+.rules-sidebar {
+    position: fixed;
+    top: 140px;
+    left: 20px;
+    width: 20%;
+    height: 400px;
+    overflow-y: auto;
+    background-color: #2e2e2e !important;
+    padding: 20px !important;
+    color: #d4af37 !important;
+    border: 2px solid #d4af37 !important;
+    z-index: 10;
+    border-radius: 10px;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    h5 {
+        border-bottom: 1px solid #d4af37 !important;
+        padding-bottom: 10px !important;
+        margin-bottom: 15px;
+        font-size: 1.2rem;
+        text-align: center !important;
+        color: #d4af37 !important;
+        font-weight: bold;
+        font-family: 'Roboto Condensed', sans-serif;
+    }
+
+    ul {
+        list-style: none !important;
+        padding: 0 !important;
+        margin: 0;
+        text-align: left !important; // Forzar alineación izquierda del contenedor
+    }
+
+    li {
+        margin-bottom: 10px !important;
+        text-align: left !important; // Forzar alineación izquierda
+    }
+
+    a {
+        text-decoration: none !important;
+        color: #d4af37 !important;
+        cursor: pointer !important;
+        display: block;
+        padding: 8px 0px !important; // Sin padding lateral, forzar con !important
+        font-size: 0.95rem;
+        line-height: 1.3;
+        transition: all 0.3s ease;
+        text-align: left !important; // Forzar alineación izquierda
+        border-radius: 4px;
+        font-family: 'Droid Serif', serif;
+
+        &:hover {
+            color: #f0c500 !important;
+            background-color: #333 !important;
+            transform: translateY(-1px);
+            padding-left: 5px !important; // Pequeño indent en hover
+        }
+
+        &:active {
+            transform: translateY(0);
+        }
+    }
+}
+
+// Media queries para pantallas pequeñas
+@media (max-width: 768px) {
+    .rules-sidebar {
+        position: relative;
+        top: auto;
+        left: auto;
+        width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+        padding: 15px;
+
+        h5 {
+            font-size: 1.1rem;
+        }
+
+        a {
+            font-size: 0.9rem;
+            padding: 6px 8px;
+        }
+    }
+}

@@ -31,28 +31,12 @@ export default function SpecialRules() {
     return (
         <div className="container-fluid d-flex" style={{ position: "relative", marginTop: "20px" }} >
             {/* Índice */}
-            <div
-                className="sidebar"
-                style={{
-                    backgroundColor: "#2e2e2e",
-                    color: "#d4af37",
-                    border: "2px solid #d4af37",
-                    width: "20%",
-                    padding: "20px",
-                    marginTop: "120px",
-                    height: "400px",
-                    position: "fixed",
-                    top: "20px",
-                }}
-            >
-                <h5 style={{ borderBottom: "1px solid #d4af37", paddingBottom: "10px" }}>Índice</h5>
-                <ul style={{ listStyle: "none", padding: 0 }}>
+            <div className="special-rules-sidebar">
+                <h5>Índice</h5>
+                <ul>
                     {specialRules.map((rule, index) => (
-                        <li key={index} style={{ marginBottom: "10px" }}>
-                            <a
-                                href={`#rule-${index}`}
-                                style={{ textDecoration: "none", color: "#d4af37", cursor: "pointer" }}
-                            >
+                        <li key={index}>
+                            <a href={`#rule-${index}`}>
                                 {rule.name}
                             </a>
                         </li>
@@ -62,7 +46,7 @@ export default function SpecialRules() {
 
             {/* Contenido principal */}
             <div
-                className="special-rules-container"
+                className="special-rules-main-container"
                 style={{
                     flexGrow: 1,
                     padding: "40px",
@@ -72,12 +56,12 @@ export default function SpecialRules() {
                 }}
             >
                 {isLoading ? (
-                    <p className="loading-text">Cargando...</p>
+                    <p className="special-rules-loading-text">Cargando...</p>
                 ) : errorMessage ? (
-                    <p className="error-text">{errorMessage}</p>
+                    <p className="special-rules-error-text">{errorMessage}</p>
                 ) : (
                     <table
-                        className="table table-dark table-striped"
+                        className="table table-dark table-striped special-rules-data-table"
                         style={{
                             tableLayout: "fixed",
                             width: "100%",
@@ -124,8 +108,8 @@ export default function SpecialRules() {
                         right: "20px",
                         width: "60px",
                         height: "60px",
-                        backgroundColor: "#d4af37", // Mantengo el color de fondo original
-                        backgroundImage: `url(${backToTop})`, // Ruta de la imagen
+                        backgroundColor: "#d4af37",
+                        backgroundImage: `url(${backToTop})`,
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                         border: "none",
@@ -135,7 +119,7 @@ export default function SpecialRules() {
                         zIndex: 1000,
                         transition: "transform 0.3s ease"
                     }}
-                    onMouseOver={(e) => e.target.style.transform = "scale(1.1)"} // Efecto hover
+                    onMouseOver={(e) => e.target.style.transform = "scale(1.1)"}
                     onMouseOut={(e) => e.target.style.transform = "scale(1)"}
                     onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 >
