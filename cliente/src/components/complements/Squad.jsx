@@ -23,62 +23,6 @@ export default function Squad() {
 
     const user = JSON.parse(localStorage.getItem("user"));
 
-    // Optimizado para cargar escuadrón, soldados y verificar favoritos
-    // useEffect(() => {
-    //     const fetchSquadData = async () => {
-    //         if (!slug) {
-    //             setErrorMessage("No se pudo obtener el slug del escuadrón.");
-    //             setIsLoading(false);
-    //             return;
-    //         }
-    //         try {
-    //             const squadResponse = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/squads/${slug}`);
-    //             if (!squadResponse.ok) throw new Error(`Error HTTP: ${squadResponse.status}`);
-    //             const squadData = await squadResponse.json();
-    //             setSquad(squadData);
-
-    //             const soldiersResponse = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/soldiersSquadron/${slug}`);
-    //             if (!soldiersResponse.ok) throw new Error(`Error HTTP: ${soldiersResponse.status}`);
-    //             const soldiersData = await soldiersResponse.json();
-    //             setSoldiers(soldiersData.data || []);
-
-    //             // Si hay un usuario, verificamos si es favorito
-    //             if (user && squadData.id) {
-    //                 try {
-    //                     const token = localStorage.getItem("token");
-    //                     const favoriteResponse = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/favorites/check`, {
-    //                         method: "POST",
-    //                         headers: {
-    //                             "Content-Type": "application/json",
-    //                             "Authorization": `Bearer ${token}`,
-    //                         },
-    //                         body: JSON.stringify({
-    //                             user_id: user.id,
-    //                             favorites_id: squadData.id,
-    //                             favorites_type: "Squadron",
-    //                         }),
-    //                     });
-
-    //                     if (favoriteResponse.ok) {
-    //                         const data = await favoriteResponse.json();
-    //                         setIsFavorite(data.isFavorite);
-    //                     }
-    //                 } catch (error) {
-    //                     console.error("Error al comprobar favoritos:", error);
-    //                 }
-    //             }
-
-    //             setErrorMessage(null);
-    //         } catch (error) {
-    //             console.error("Error:", error);
-    //             setErrorMessage("Error al cargar los datos. Inténtalo nuevamente.");
-    //         } finally {
-    //             setIsLoading(false);
-    //         }
-    //     };
-
-    //     fetchSquadData();
-    // }, [slug, user]);
     useEffect(() => {
         const fetchSquad = async () => {
             if (!slug) {
@@ -299,9 +243,9 @@ export default function Squad() {
                 />
                 <ul style={{ listStyle: "none", padding: 0 }}>
                     {filteredSoldiers.map((s, index) => (
-                        <li key={index} style={{ marginBottom: "10px" }}>
+                        <li key={index} style={{ marginBottom: "10px", textAlign: "left" }}>
                             <a href={`#soldier-${s.id}`}
-                                style={{ textDecoration: "none", color: "#d4af37", cursor: "pointer", transition: "color 0.3s" }}
+                                style={{ textDecoration: "none", color: "#d4af37", cursor: "pointer", transition: "color 0.3s", display: "block", textAlign: "left" }}
                                 onMouseOver={e => e.target.style.color = "#fff"}
                                 onMouseOut={e => e.target.style.color = "#d4af37"}>
                                 {s.name}
