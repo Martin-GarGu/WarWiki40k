@@ -16,13 +16,15 @@ class UserSeeder extends Seeder
             'username'=>'admin',
             'email'=>'admin@admin.com',
             'password'=>'Admin123456',
-            'role'=>'admin'
+            'role'=>'admin',
+            'avatar'=>null
         ],
         [
             'username'=>'prueba',
             'email'=>'prueba@prueba.com',
             'password'=>'Prueba123456',
-            'role'=>'user'
+            'role'=>'user',
+            'avatar'=>null
         ]
     ];
 
@@ -34,6 +36,7 @@ class UserSeeder extends Seeder
             $u->email= $user['email'];
             $u->password= $user['password'];
             $u->role= $user['role'];
+            $u->avatar= $user['avatar'];
             $u->save();
         }
         $this->command->info('Users created with data success!');

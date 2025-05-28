@@ -191,4 +191,40 @@ class UserController extends Controller
             ], 500);
         }
     }
+    public function updateAvatar(Request $request)
+    {
+        // Validar la solicitud
+        $validator = Validator::make($request->all(), [
+            'avatar' => ['nullable', 'string', 'max:255'],
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 422);
+        }
+
+        try {
+            // Obtener el usuario autenticado - solo puede modificar su propio avatar
+            $user = User::find(Auth::id());
+
+            if (!$user) {
+                return response()->json([
+                    'error' => 'Usuario no encontrado'
+                ], 404);
+            }
+
+            // Actualizar el avatar (puede ser null para eliminar el avatar)
+            $user->avatar = $request->avatar;
+            $user->save();
+
+            return response()->json([
+                'message' => 'Avatar actualizado correctamente',
+                'user' => $user
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Error al actualizar el avatar',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
 }
