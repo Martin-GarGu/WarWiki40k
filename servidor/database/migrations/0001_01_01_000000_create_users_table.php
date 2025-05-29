@@ -1,103 +1,51 @@
 <?php
 
-use App\Http\Controllers\FactionController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ArmyController;
-use App\Http\Controllers\FavoriteController;
-use App\Http\Controllers\SoldierController;
-use App\Http\Controllers\SpecialruleController;
-use App\Http\Controllers\WeaponController;
-use App\Http\Controllers\GameController;
-use App\Http\Controllers\SquadronController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\VerificacionController;
-use App\Http\Middleware\RoleMiddleware;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
-    return $request->user();
-});
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('users', function (Blueprint $table) {
+            $table->id();
+            $table->string('username')->unique();
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->string('role')->default('user');
+            $table->string('avatar')->nullable();
+            $table->rememberToken();
+            $table->timestamps();
+        });
 
-Route::middleware(['auth:sanctum', RoleMiddleware::class . ':admin'])->group(function () {
-    #region Create
-    Route::post('/factions/create', [FactionController::class, 'store']);
-    Route::post('/armies/create', [ArmyController::class, 'store']);
-    Route::post('/soldiers/create', [SoldierController::class, 'store']);
-    Route::post('/weapons/create', [WeaponController::class, 'store']);
-    Route::post('/specialrules/create', [SpecialruleController::class, 'store']);
-    Route::post("/squads/create", [SquadronController::class, 'store']);
-    #endregion
-    #region Update
-    Route::put('/factions/{id}', [FactionController::class, 'updateById']);
-    Route::put('/armies/{id}', [ArmyController::class, 'updateById']);
-    Route::put('/soldiers/{id}', [SoldierController::class, 'updateById']);
-    Route::put('/weapons/{weapon}', [WeaponController::class, 'update']);
-    Route::put('/specialrules/{specialrule}', [SpecialruleController::class, 'update']);
-    Route::put("/squads/{id}", [SquadronController::class, 'updateById']);
+        Schema::create('password_reset_tokens', function (Blueprint $table) {
+            $table->string('email')->primary();
+            $table->string('token');
+            $table->timestamp('created_at')->nullable();
+        });
 
-    Route::patch('/factions/{id}', [FactionController::class, 'updateById']);
-    Route::patch('/armies/{id}', [ArmyController::class, 'updateById']);
-    Route::patch('/soldiers/{id}', [SoldierController::class, 'updateById']);
-    Route::patch('/weapons/{weapon}', [WeaponController::class, 'update']);
-    Route::patch('/specialrules/{specialrule}', [SpecialruleController::class, 'update']);
-    Route::patch("/squads/{id}", [SquadronController::class, 'updateById']);
-    #endregion
-    #region Delete
-    Route::delete('/factions/delete/{id}', [FactionController::class, 'destroy']);
-    Route::delete('/armies/delete/{id}', [ArmyController::class, 'destroy']);
-    Route::delete('/soldiers/delete/{id}', [SoldierController::class, 'destroy']);
-    Route::delete('/weapons/delete/{id}', [WeaponController::class, 'destroy']);
-    Route::delete('/specialrules/delete/{id}', [SpecialruleController::class, 'destroy']);
-    Route::delete("/squads/delete/{id}", [SquadronController::class, 'destroy']);
-    #endregion
-});
-Route::middleware(['auth:sanctum', RoleMiddleware::class . ':user,admin'])->group(function () {
-    Route::post('/games/create', [GameController::class, 'store']);
-    Route::post('/favorites/create', [FavoriteController::class, 'store']);
+        Schema::create('sessions', function (Blueprint $table) {
+            $table->string('id')->primary();
+            $table->foreignId('user_id')->nullable()->index();
+            $table->string('ip_address', 45)->nullable();
+            $table->text('user_agent')->nullable();
+            $table->longText('payload');
+            $table->integer('last_activity')->index();
+        });
+    }
 
-    Route::get('/favorites/user/{userId}', [FavoriteController::class, 'getByUser']);
-    Route::post('/favorites/check', [FavoriteController::class, 'checkFavorite']);
-
-    Route::put('/gamesUpdate/{id}', [GameController::class, 'updateById']);
-    Route::put('/games/{game}', [GameController::class, 'update']);
-    Route::patch('/games/{game}', [GameController::class, 'update']);
-    Route::get(('/games/{id}'), [GameController::class, 'searchById']);
-    Route::get('/games', [GameController::class, 'index']);
-    Route::get('/favorites', [FavoriteController::class, 'index']);
-
-    Route::delete('/games/delete/{id}', [GameController::class, 'destroy']);
-    Route::delete('/favorites/delete/{id}', [FavoriteController::class, 'destroy']);
-    Route::delete('/favorites/remove-by-type',[FavoriteController::class, 'removeByUserAndType']);
-});
-// Grupo para rutas que solo permiten al usuario modificar su propio perfil
-Route::middleware(['auth:sanctum'])->group(function () {
-    // Rutas para actualización de perfil
-    Route::post('/profile/update-username', [UserController::class, 'updateUsername']);
-    Route::post('/profile/update-password', [UserController::class, 'updatePassword']);
-    Route::post('/profile/update-avatar', [UserController::class, 'updateAvatar']);
-});
-Route::post('/login', [UserController::class, 'login']);
-Route::post('/register', [UserController::class, 'registro']);
-
-Route::get(('/factions/{slug}'), [FactionController::class, 'getbySlug']);
-Route::get(('/armiesSlug/{slug}'), [ArmyController::class, 'getArmyBySlug']);
-Route::get(('/squadronsArmy/{slug}'), [SquadronController::class, 'getByArmyId']);
-Route::get(('/soldiersSquadron/{slug}'), [SoldierController::class, 'getBySquadronSlug']);
-Route::get(('/armies/{id}'), [ArmyController::class, 'getByFaction']);
-Route::get(('/squads/{slug}'), [SquadronController::class, 'getSquadBySlug']);
-
-
-Route::get(('/userId/{id}'), [UserController::class, 'searchUserbyId']);
-Route::get(('/userUsername/{username}'), [UserController::class, 'searchUserbyUsername']);
-
-
-Route::get('buscarEmail/{email}', [VerificacionController::class, 'buscarEmail']);
-Route::get('buscarUsername/{username}', [VerificacionController::class, 'buscarUsername']);
-
-Route::get('/factions', [FactionController::class, 'index']);
-Route::get('/armies', [ArmyController::class, 'index']);
-Route::get('/soldiers', [SoldierController::class, 'index']);
-Route::get('/weapons', [WeaponController::class, 'index']);
-Route::get('/specialRules', [SpecialruleController::class, 'index']);
-
-Route::get("/squads", [SquadronController::class, 'index']);
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('users');
+        Schema::dropIfExists('password_reset_tokens');
+        Schema::dropIfExists('sessions');
+    }
+};

@@ -16,6 +16,7 @@ export default function Perfil() {
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [newAvatar, setNewAvatar] = useState("");
     const [message, setMessage] = useState(null);
 
     // Estados para mostrar/ocultar contraseñas
@@ -30,10 +31,12 @@ export default function Perfil() {
     const [errorCurrentPassword, setErrorCurrentPassword] = useState({ color: false, text: "" });
     const [errorNewPassword, setErrorNewPassword] = useState({ color: false, text: "" });
     const [errorConfirmPassword, setErrorConfirmPassword] = useState({ color: false, text: "" });
+    const [errorAvatar, setErrorAvatar] = useState({ color: false, text: "" });
 
     // Expresiones regulares para validaciones
     const passRegEx = /^(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
     const enieRegEx = /ñ|Ñ/;
+    const urlRegEx = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
 
     useEffect(() => {
         const userData = localStorage.getItem("user");
@@ -41,6 +44,7 @@ export default function Perfil() {
             const parsedUser = JSON.parse(userData);
             setUser(parsedUser);
             setNewUsername(parsedUser.username);
+            setNewAvatar(parsedUser.avatar || "");
             fetchUserStats(parsedUser.id);
         } else {
             navigate("/login");
@@ -135,6 +139,14 @@ export default function Perfil() {
             }
         } else {
             setErrorUsername({ color: false, text: "" });
+        }
+
+        // Validar avatar
+        if (newAvatar && !urlRegEx.test(newAvatar)) {
+            setErrorAvatar({ color: true, text: "Ingresa una URL válida" });
+            valid = false;
+        } else {
+            setErrorAvatar({ color: false, text: "" });
         }
 
         // Si se quiere cambiar la contraseña, validar todos los campos
@@ -232,6 +244,32 @@ export default function Perfil() {
                 setUser(updatedUser);
             }
 
+            // Actualizar avatar si ha cambiado
+            if (newAvatar !== (user.avatar || "")) {
+                const avatarResponse = await fetch(
+                    `${import.meta.env.VITE_APP_PETICION_IP}/api/profile/update-avatar`,
+                    {
+                        method: "POST",
+                        headers: { 
+                            "Content-Type": "application/json",
+                            Authorization: `Bearer ${token}`
+                        },
+                        body: JSON.stringify({ avatar: newAvatar || null })
+                    }
+                );
+                
+                const avatarData = await avatarResponse.json();
+                
+                if (!avatarResponse.ok) {
+                    throw new Error(avatarData.error?.avatar?.[0] || avatarData.error || "Error al actualizar el avatar");
+                }
+                
+                // Actualizar el usuario en localStorage y en el estado
+                const updatedUser = { ...user, avatar: newAvatar };
+                localStorage.setItem("user", JSON.stringify(updatedUser));
+                setUser(updatedUser);
+            }
+
             // Actualizar contraseña si se proporcionó
             if (newPassword) {
                 const passwordResponse = await fetch(
@@ -295,6 +333,7 @@ export default function Perfil() {
     // Función para abrir modal de editar perfil
     const openEditModal = () => {
         setNewUsername(user?.username || "");
+        setNewAvatar(user?.avatar || "");
         setCurrentPassword("");
         setNewPassword("");
         setConfirmPassword("");
@@ -302,6 +341,7 @@ export default function Perfil() {
         setMessage(null);
         // Limpiar errores
         setErrorUsername({ color: false, text: "" });
+        setErrorAvatar({ color: false, text: "" });
         setErrorCurrentPassword({ color: false, text: "" });
         setErrorNewPassword({ color: false, text: "" });
         setErrorConfirmPassword({ color: false, text: "" });
@@ -317,12 +357,14 @@ export default function Perfil() {
     const closeEditModal = () => {
         setIsEditModalOpen(false);
         setNewUsername(user?.username || "");
+        setNewAvatar(user?.avatar || "");
         setCurrentPassword("");
         setNewPassword("");
         setConfirmPassword("");
         setMessage(null);
         // Limpiar errores
         setErrorUsername({ color: false, text: "" });
+        setErrorAvatar({ color: false, text: "" });
         setErrorCurrentPassword({ color: false, text: "" });
         setErrorNewPassword({ color: false, text: "" });
         setErrorConfirmPassword({ color: false, text: "" });
@@ -365,7 +407,40 @@ export default function Perfil() {
             )}
             
             <div className="perfil-avatar">
-                <div className="avatar-placeholder">
+                {user.avatar ? (
+                    <img 
+                        src={user.avatar} 
+                        alt="Avatar del usuario" 
+                        className="avatar-image"
+                        style={{
+                            width: '80px',
+                            height: '80px',
+                            borderRadius: '50%',
+                            objectFit: 'cover',
+                            border: '3px solid #ddd'
+                        }}
+                        onError={(e) => {
+                            e.target.style.display = 'none';
+                            e.target.nextSibling.style.display = 'flex';
+                        }}
+                    />
+                ) : null}
+                <div 
+                    className="avatar-placeholder" 
+                    style={{ 
+                        display: user.avatar ? 'none' : 'flex',
+                        width: '80px',
+                        height: '80px',
+                        borderRadius: '50%',
+                        backgroundColor: '#007bff',
+                        color: 'white',
+                        fontSize: '32px',
+                        fontWeight: 'bold',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        border: '3px solid #ddd'
+                    }}
+                >
                     {user.username.charAt(0).toUpperCase()}
                 </div>
             </div>
@@ -420,6 +495,53 @@ export default function Perfil() {
                                 />
                                 {errorUsername.text && (
                                     <span className="error-message">{errorUsername.text}</span>
+                                )}
+                            </div>
+
+                            <div className="form-group">
+                                <label>Avatar (URL de imagen):</label>
+                                <input
+                                    type="url"
+                                    value={newAvatar}
+                                    onChange={(e) => setNewAvatar(e.target.value)}
+                                    placeholder="https://ejemplo.com/mi-avatar.jpg"
+                                    className={errorAvatar.color ? 'input-error' : ''}
+                                />
+                                {errorAvatar.text && (
+                                    <span className="error-message">{errorAvatar.text}</span>
+                                )}
+                                {newAvatar && (
+                                    <div className="avatar-preview">
+                                        <p style={{ margin: '8px 0 4px 0', fontSize: '14px', color: '#666' }}>Vista previa:</p>
+                                        <img 
+                                            src={newAvatar} 
+                                            alt="Vista previa del avatar" 
+                                            className="avatar-preview-image"
+                                            style={{
+                                                width: '50px',
+                                                height: '50px',
+                                                borderRadius: '50%',
+                                                objectFit: 'cover',
+                                                border: '2px solid #ddd',
+                                                display: 'block'
+                                            }}
+                                            onError={(e) => {
+                                                e.target.style.display = 'none';
+                                                e.target.nextSibling.style.display = 'block';
+                                            }}
+                                        />
+                                        <span 
+                                            className="avatar-preview-error" 
+                                            style={{ 
+                                                display: 'none', 
+                                                color: 'red', 
+                                                fontSize: '12px',
+                                                marginTop: '4px'
+                                            }}
+                                        >
+                                            No se pudo cargar la imagen
+                                        </span>
+                                    </div>
                                 )}
                             </div>
                             

@@ -74,6 +74,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // Rutas para actualización de perfil
     Route::post('/profile/update-username', [UserController::class, 'updateUsername']);
     Route::post('/profile/update-password', [UserController::class, 'updatePassword']);
+    Route::post('/profile/update-avatar', [UserController::class, 'updateAvatar']);
 });
 Route::post('/login', [UserController::class, 'login']);
 Route::post('/register', [UserController::class, 'registro']);
@@ -100,7 +101,3 @@ Route::get('/weapons', [WeaponController::class, 'index']);
 Route::get('/specialRules', [SpecialruleController::class, 'index']);
 
 Route::get("/squads", [SquadronController::class, 'index']);
-
-
-
-
