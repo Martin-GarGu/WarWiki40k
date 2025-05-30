@@ -105,6 +105,8 @@
     padding: 0.5rem 1rem;
     transition: background-color 0.2s ease;
     text-decoration: none !important;
+    display: flex;
+    align-items: center;
     
     &:hover {
       background-color: #FFECEC; // Un rojo muy claro para los items del dropdown
@@ -117,6 +119,107 @@
     }
   }
   
+  // Estilos específicos para el avatar dropdown
+  .user-dropdown {
+    .dropdown-toggle {
+      padding: 0.5rem 1rem !important;
+      display: flex;
+      align-items: center;
+      
+      &::after {
+        display: none; // Ocultar la flecha por defecto
+      }
+    }
+    
+    &.show {
+      background-color: #600000;
+    }
+  }
+  
+  // Estilos para el avatar
+  .avatar-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    color: #8B0000;
+    font-weight: bold;
+    font-size: 0.9rem;
+    border: 2px solid #fff;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+  }
+  
+  .avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  
+  .avatar-initials {
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  
+  // Estilos para el dropdown del usuario
+  #user-dropdown {
+    .dropdown-menu {
+      border: none;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      border-radius: 8px;
+      padding: 0.5rem 0;
+      min-width: 180px;
+    }
+    
+    .dropdown-item-custom {
+      padding: 0.6rem 1rem;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+      
+      i {
+        width: 16px;
+        text-align: center;
+        margin-right: 0.5rem;
+      }
+      
+      &:hover {
+        background-color: #f8f9fa;
+        color: #8B0000;
+        padding-left: 1.2rem;
+      }
+      
+      &.logout-item {
+        color: #dc3545;
+        
+        &:hover {
+          background-color: #f8d7da;
+          color: #721c24;
+        }
+      }
+    }
+    
+    .dropdown-divider {
+      margin: 0.25rem 0;
+      border-color: #e9ecef;
+    }
+  }
+  
   // Ajustes responsivos
   @media (max-width: 991.98px) {
     .nav-item-custom {
@@ -125,6 +228,16 @@
     }
     
     #account {
+      justify-content: flex-start;
+    }
+    
+    .user-dropdown {
+      .dropdown-toggle {
+        justify-content: flex-start;
+      }
+    }
+    
+    .avatar-container {
       justify-content: flex-start;
     }
   }

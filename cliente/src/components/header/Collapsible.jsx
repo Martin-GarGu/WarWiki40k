@@ -8,13 +8,14 @@ import { useEffect, useState } from "react";
 function Collapsible() {
   const [logeado, setLogeado] = useState(false);
   const [role, setRole] = useState("");
+  const [user, setUser] = useState(null);
   const [factions, setFactions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    const user = JSON.parse(localStorage.getItem("user"));
+    const userData = JSON.parse(localStorage.getItem("user"));
 
     if (token) {
       setLogeado(true);
@@ -22,8 +23,11 @@ function Collapsible() {
       setLogeado(false);
     }
 
-    if (user && user.role) {
-      setRole(user.role);
+    if (userData) {
+      setUser(userData);
+      if (userData.role) {
+        setRole(userData.role);
+      }
     }
     
     // Cargar las facciones al iniciar el componente
@@ -69,6 +73,27 @@ function Collapsible() {
     localStorage.removeItem("user");
     setLogeado(false);
     setRole("");
+    setUser(null);
+  };
+
+  // Función para obtener las iniciales del usuario
+  const getInitials = (user) => {
+    if (!user) return "U";
+    
+    if (user.name) {
+      return user.name
+        .split(" ")
+        .map(word => word[0])
+        .join("")
+        .toUpperCase()
+        .substring(0, 2);
+    } else if (user.username) {
+      return user.username.substring(0, 2).toUpperCase();
+    } else if (user.email) {
+      return user.email.substring(0, 2).toUpperCase();
+    }
+    
+    return "U";
   };
 
   return (
@@ -106,20 +131,40 @@ function Collapsible() {
               <Nav.Link href="/games" className="nav-item-custom">Partidas</Nav.Link>
             )}
             
-            {logeado && (
-              <Nav.Link href="/profile" className="nav-item-custom">Perfil</Nav.Link>
-            )}
-            
-            {/* Admin Panel movido después de Perfil */}
+            {/* Admin Panel - solo visible para admins */}
             {logeado && role === "admin" && (
               <Nav.Link href="/crud" className="nav-item-custom">Admin Panel</Nav.Link>
             )}
           </Nav>
           <Nav className="ms-auto" id="account">
             {logeado ? (
-              <Nav.Link href="/" className="nav-item-custom" onClick={logout}>
-                Cerrar Sesión
-              </Nav.Link>
+              <NavDropdown 
+                title={
+                  <div className="avatar-container">
+                    <div className="avatar">
+                      {user?.avatar ? (
+                        <img src={user.avatar} alt="Avatar" className="avatar-img" />
+                      ) : (
+                        <span className="avatar-initials">{getInitials(user)}</span>
+                      )}
+                    </div>
+                  </div>
+                } 
+                id="user-dropdown" 
+                className="nav-item-custom user-dropdown"
+                align="end"
+              >
+                <NavDropdown.Item href="/profile" className="dropdown-item-custom">
+                  <i className="fas fa-user me-2"></i>Perfil
+                </NavDropdown.Item>
+                <NavDropdown.Item href="/favorites" className="dropdown-item-custom">
+                  <i className="fas fa-heart me-2"></i>Favoritos
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item onClick={logout} className="dropdown-item-custom logout-item">
+                  <i className="fas fa-sign-out-alt me-2"></i>Cerrar Sesión
+                </NavDropdown.Item>
+              </NavDropdown>
             ) : (
               <>
                 <Nav.Link href="/login" className="nav-item-custom">

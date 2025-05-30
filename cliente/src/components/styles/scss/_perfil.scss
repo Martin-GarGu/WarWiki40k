@@ -158,9 +158,9 @@
         }
 
         &.error {
-            background-color: rgba(231, 76, 60, 0.2);
-            color: #e74c3c;
-            border: 1px solid rgba(231, 76, 60, 0.3);
+            background-color: rgba(255, 107, 107, 0.15); // Fondo más claro
+            color: #ff6b6b; // Texto más claro y legible
+            border: 1px solid rgba(255, 107, 107, 0.4);
         }
     }
 }
@@ -231,6 +231,7 @@
 
     .form-group {
         margin-bottom: 20px;
+        position: relative;
 
         label {
             display: block;
@@ -255,6 +256,98 @@
                 border-color: #d4af37;
                 outline: none;
                 box-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+            }
+        }
+
+        .password-input-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+
+            input {
+                padding-right: 45px; // Espacio para el icono
+            }
+
+            .password-toggle {
+                position: absolute;
+                right: 12px;
+                color: #d4af37;
+                cursor: pointer;
+                font-size: 1rem;
+                transition: all 0.3s ease;
+                z-index: 10;
+
+                &:hover {
+                    color: lighten(#d4af37, 15%);
+                    transform: scale(1.1);
+                }
+            }
+        }
+
+        .input-error {
+            border-color: #e74c3c !important;
+            box-shadow: 0 0 8px rgba(231, 76, 60, 0.4) !important;
+        }
+
+        .error-message {
+            display: block;
+            color: #ff6b6b; // Color más claro y visible
+            background-color: rgba(255, 107, 107, 0.1); // Fondo muy sutil
+            font-size: 0.8rem;
+            margin-top: 5px;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-style: italic;
+            border-left: 3px solid #ff6b6b;
+        }
+
+        // Estilos mejorados para la vista previa del avatar
+        .avatar-preview {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 15px;
+            padding: 15px;
+            background-color: rgba(212, 175, 55, 0.05);
+            border: 1px dashed rgba(212, 175, 55, 0.3);
+            border-radius: 8px;
+
+            p {
+                margin: 0 0 10px 0 !important;
+                font-size: 0.85rem;
+                color: #d4af37;
+                text-align: center;
+                border-bottom: none !important;
+                padding-bottom: 0 !important;
+                font-weight: bold;
+            }
+
+            .avatar-preview-image {
+                width: 80px !important;
+                height: 80px !important;
+                border-radius: 50%;
+                object-fit: cover;
+                border: 3px solid #d4af37 !important;
+                box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+                transition: transform 0.3s ease;
+
+                &:hover {
+                    transform: scale(1.05);
+                }
+            }
+
+            .avatar-preview-error {
+                display: none;
+                color: #ff6b6b !important;
+                font-size: 0.8rem !important;
+                margin-top: 10px !important;
+                text-align: center;
+                font-style: italic;
+                background-color: rgba(255, 107, 107, 0.1);
+                padding: 8px 12px;
+                border-radius: 4px;
+                border: 1px solid rgba(255, 107, 107, 0.3);
             }
         }
     }
@@ -295,6 +388,14 @@
                     background-color: #444;
                 }
             }
+        }
+    }
+
+    .message {
+        &.error {
+            background-color: rgba(255, 107, 107, 0.15); // Fondo más claro
+            color: #ff6b6b; // Texto más claro y legible  
+            border: 1px solid rgba(255, 107, 107, 0.4);
         }
     }
 }
@@ -341,71 +442,16 @@
                 }
             }
         }
-    }
-}
 
+        .form-group {
+            .avatar-preview {
+                padding: 10px;
 
-.modal-content {
-    .form-group {
-        position: relative;
-
-        .password-input-container {
-            position: relative;
-            display: flex;
-            align-items: center;
-
-            input {
-                padding-right: 45px; // Espacio para el icono
-            }
-
-            .password-toggle {
-                position: absolute;
-                right: 12px;
-                color: #d4af37;
-                cursor: pointer;
-                font-size: 1rem;
-                transition: all 0.3s ease;
-                z-index: 10;
-
-                &:hover {
-                    color: lighten(#d4af37, 15%);
-                    transform: scale(1.1);
+                .avatar-preview-image {
+                    width: 70px !important;
+                    height: 70px !important;
                 }
             }
         }
-
-        .input-error {
-            border-color: #e74c3c !important;
-            box-shadow: 0 0 8px rgba(231, 76, 60, 0.4) !important;
-        }
-
-        .error-message {
-            display: block;
-            color: #ff6b6b; // Color más claro y visible
-            background-color: rgba(255, 107, 107, 0.1); // Fondo muy sutil
-            font-size: 0.8rem;
-            margin-top: 5px;
-            padding: 4px 8px;
-            border-radius: 3px;
-            font-style: italic;
-            border-left: 3px solid #ff6b6b;
-        }
-    }
-}
-
-// También actualizar los mensajes principales
-.perfil-container .message {
-    &.error {
-        background-color: rgba(255, 107, 107, 0.15); // Fondo más claro
-        color: #ff6b6b; // Texto más claro y legible
-        border: 1px solid rgba(255, 107, 107, 0.4);
-    }
-}
-
-.modal-content .message {
-    &.error {
-        background-color: rgba(255, 107, 107, 0.15); // Fondo más claro
-        color: #ff6b6b; // Texto más claro y legible  
-        border: 1px solid rgba(255, 107, 107, 0.4);
     }
 }
