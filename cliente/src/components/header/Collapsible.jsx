@@ -3,7 +3,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { useEffect, useState } from "react";
-// import './Navbar.scss'; // Importamos el archivo SCSS
+import logo from "../../assets/images/asd.png"
 
 function Collapsible() {
   const [logeado, setLogeado] = useState(false);
@@ -100,7 +100,9 @@ function Collapsible() {
     <Navbar collapseOnSelect expand="lg" className="p-0" id="headerNavbar">
       <Container fluid className="navbar-container p-0">
         <Navbar.Brand href="/" className="nav-link nav-brand-custom">
-          <div id="logo" />
+          <div>
+            <img src={logo} alt="logo" id="logo"/>
+          </div>
           {/* <div style={{backgroundImage: "url(/src/assets/images/asd.png)"}}/> */}
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />

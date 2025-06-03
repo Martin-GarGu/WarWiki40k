@@ -42,14 +42,14 @@
 @import "armyAdmin";
 @import "squadAdmin";
 @import url('http://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto+Condensed&family=Montserrat&family=Droid+Serif&display=swap');
-
+ 
 #logo {
   width: 60px;
   height: 60px;
-  background-image: url("../../../assets/images/asd.png");
+  // background-image: url("../../../assets/images/always.png");
   background-size: cover;
   background-repeat: no-repeat;
-}
+} 
 
 body {
   display: grid;

@@ -61,7 +61,7 @@ export default function SpecialRules() {
                     <p className="special-rules-error-text">{errorMessage}</p>
                 ) : (
                     <table
-                        className="table table-dark table-striped special-rules-data-table"
+                        className="table table-dark special-rules-data-table"
                         style={{
                             tableLayout: "fixed",
                             width: "100%",
