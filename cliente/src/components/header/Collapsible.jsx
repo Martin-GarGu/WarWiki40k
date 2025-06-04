@@ -4,6 +4,7 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { useEffect, useState } from "react";
 import logo from "../../assets/images/asd.png"
+import { useNavigate } from 'react-router-dom';
 
 function Collapsible() {
   const [logeado, setLogeado] = useState(false);
@@ -12,6 +13,7 @@ function Collapsible() {
   const [factions, setFactions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -74,6 +76,7 @@ function Collapsible() {
     setLogeado(false);
     setRole("");
     setUser(null);
+    navigate("/login");
   };
 
   // Función para obtener las iniciales del usuario

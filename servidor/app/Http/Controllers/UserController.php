@@ -11,8 +11,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules;
 
-
-
 class UserController extends Controller
 {
     public function login(Request $request)
@@ -29,7 +27,6 @@ class UserController extends Controller
         }
 
         $user = Auth::user();
-        // $token = $user->createToken('API Token')->plainTextToken;
         $token = $request->user()->createToken($user->email . '_Token')->plainTextToken;
 
         return response()->json([
@@ -37,7 +34,6 @@ class UserController extends Controller
             'user' => $user
         ]);
     }
-
 
     public function registro(Request $request)
     {
@@ -65,7 +61,7 @@ class UserController extends Controller
     public function searchUserByUsername(string $username)
     {
         try {
-            $user = User::where('username', $username)->first(); // Usamos first() en lugar de get()
+            $user = User::where('username', $username)->first();
 
             if (!$user) {
                 return response()->json([
@@ -85,35 +81,31 @@ class UserController extends Controller
         }
     }
 
-
-
     public function searchUserbyId(int $id)
     {
         try {
-            // Buscar el usuario por su ID
             $user = User::find($id);
 
             if (!$user) {
                 return response()->json([
                     'data' => [],
                     'message' => 'No existe ningún usuario asociado a este ID.'
-                ], 404); // Código HTTP 404
+                ], 404);
             }
 
             return response()->json([
                 'data' => $user
             ]);
         } catch (\Exception $e) {
-            // Manejo de errores
             return response()->json([
                 'error' => 'Error al obtener el usuario',
                 'message' => $e->getMessage(),
             ], 500);
         }
     }
+
     public function updateUsername(Request $request)
     {
-        // Validar la solicitud
         $validator = Validator::make($request->all(), [
             'username' => ['required', 'string', 'max:255', 'unique:users,username,' . Auth::id()],
         ]);
@@ -123,7 +115,6 @@ class UserController extends Controller
         }
 
         try {
-            // Obtener el usuario autenticado - solo puede modificar su propio perfil
             $user = User::find(Auth::id());
 
             if (!$user) {
@@ -132,7 +123,6 @@ class UserController extends Controller
                 ], 404);
             }
 
-            // Actualizar el username
             $user->username = $request->username;
             $user->save();
 
@@ -150,7 +140,6 @@ class UserController extends Controller
 
     public function updatePassword(Request $request)
     {
-        // Validar la solicitud
         $validator = Validator::make($request->all(), [
             'current_password' => ['required', 'string'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
@@ -161,7 +150,6 @@ class UserController extends Controller
         }
 
         try {
-            // Obtener el usuario autenticado - solo puede modificar su propia contraseña
             $user = User::find(Auth::id());
 
             if (!$user) {
@@ -170,14 +158,12 @@ class UserController extends Controller
                 ], 404);
             }
 
-            // Verificar que la contraseña actual sea correcta
             if (!Hash::check($request->current_password, $user->password)) {
                 return response()->json([
                     'error' => 'La contraseña actual es incorrecta'
                 ], 401);
             }
 
-            // Actualizar la contraseña
             $user->password = Hash::make($request->password);
             $user->save();
 
@@ -191,11 +177,11 @@ class UserController extends Controller
             ], 500);
         }
     }
+
     public function updateAvatar(Request $request)
     {
-        // Validar la solicitud
         $validator = Validator::make($request->all(), [
-            'avatar' => ['nullable', 'string', 'max:255'],
+            'avatar' => ['nullable', 'string', 'max:2048'],
         ]);
 
         if ($validator->fails()) {
@@ -203,7 +189,6 @@ class UserController extends Controller
         }
 
         try {
-            // Obtener el usuario autenticado - solo puede modificar su propio avatar
             $user = User::find(Auth::id());
 
             if (!$user) {
@@ -212,7 +197,6 @@ class UserController extends Controller
                 ], 404);
             }
 
-            // Actualizar el avatar (puede ser null para eliminar el avatar)
             $user->avatar = $request->avatar;
             $user->save();
 

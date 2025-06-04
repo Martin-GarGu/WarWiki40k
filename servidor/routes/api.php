@@ -51,6 +51,7 @@ Route::middleware(['auth:sanctum', RoleMiddleware::class . ':admin'])->group(fun
     Route::delete("/squads/delete/{id}", [SquadronController::class, 'destroy']);
     #endregion
 });
+
 Route::middleware(['auth:sanctum', RoleMiddleware::class . ':user,admin'])->group(function () {
     Route::post('/games/create', [GameController::class, 'store']);
     Route::post('/favorites/create', [FavoriteController::class, 'store']);
@@ -69,13 +70,14 @@ Route::middleware(['auth:sanctum', RoleMiddleware::class . ':user,admin'])->grou
     Route::delete('/favorites/delete/{id}', [FavoriteController::class, 'destroy']);
     Route::delete('/favorites/remove-by-type',[FavoriteController::class, 'removeByUserAndType']);
 });
-// Grupo para rutas que solo permiten al usuario modificar su propio perfil
+
+// RUTAS DE PERFIL CORREGIDAS CON PUT
 Route::middleware(['auth:sanctum'])->group(function () {
-    // Rutas para actualización de perfil
-    Route::post('/profile/update-username', [UserController::class, 'updateUsername']);
-    Route::post('/profile/update-password', [UserController::class, 'updatePassword']);
-    Route::post('/profile/update-avatar', [UserController::class, 'updateAvatar']);
+    Route::put('/profile/username', [UserController::class, 'updateUsername']);
+    Route::put('/profile/password', [UserController::class, 'updatePassword']);
+    Route::put('/profile/avatar', [UserController::class, 'updateAvatar']);
 });
+
 Route::post('/login', [UserController::class, 'login']);
 Route::post('/register', [UserController::class, 'registro']);
 
@@ -86,10 +88,8 @@ Route::get(('/soldiersSquadron/{slug}'), [SoldierController::class, 'getBySquadr
 Route::get(('/armies/{id}'), [ArmyController::class, 'getByFaction']);
 Route::get(('/squads/{slug}'), [SquadronController::class, 'getSquadBySlug']);
 
-
 Route::get(('/userId/{id}'), [UserController::class, 'searchUserbyId']);
 Route::get(('/userUsername/{username}'), [UserController::class, 'searchUserbyUsername']);
-
 
 Route::get('buscarEmail/{email}', [VerificacionController::class, 'buscarEmail']);
 Route::get('buscarUsername/{username}', [VerificacionController::class, 'buscarUsername']);
@@ -99,5 +99,4 @@ Route::get('/armies', [ArmyController::class, 'index']);
 Route::get('/soldiers', [SoldierController::class, 'index']);
 Route::get('/weapons', [WeaponController::class, 'index']);
 Route::get('/specialRules', [SpecialruleController::class, 'index']);
-
 Route::get("/squads", [SquadronController::class, 'index']);

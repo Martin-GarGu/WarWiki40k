@@ -38,14 +38,44 @@ export default function Perfil() {
     const enieRegEx = /ñ|Ñ/;
     const urlRegEx = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
 
+    // Función segura para parsear datos del localStorage
+    const safeParseUser = (userData) => {
+        try {
+            return JSON.parse(userData);
+        } catch (error) {
+            console.error("Error parsing user data from localStorage:", error);
+            // Limpiar localStorage corrupto
+            localStorage.removeItem("user");
+            localStorage.removeItem("token");
+            return null;
+        }
+    };
+
+    // Función segura para guardar usuario en localStorage
+    const safeSaveUser = (userData) => {
+        try {
+            localStorage.setItem("user", JSON.stringify(userData));
+            return true;
+        } catch (error) {
+            console.error("Error saving user data to localStorage:", error);
+            setMessage({ type: "error", text: "Error al guardar los datos del usuario" });
+            return false;
+        }
+    };
+
     useEffect(() => {
         const userData = localStorage.getItem("user");
         if (userData) {
-            const parsedUser = JSON.parse(userData);
-            setUser(parsedUser);
-            setNewUsername(parsedUser.username);
-            setNewAvatar(parsedUser.avatar || "");
-            fetchUserStats(parsedUser.id);
+            const parsedUser = safeParseUser(userData);
+            if (parsedUser) {
+                setUser(parsedUser);
+                setNewUsername(parsedUser.username);
+                setNewAvatar(parsedUser.avatar || "");
+                fetchUserStats(parsedUser.id);
+            } else {
+                // Si no se pudo parsear, redirigir al login
+                navigate("/login");
+            }
         } else {
             navigate("/login");
         }
@@ -141,10 +171,16 @@ export default function Perfil() {
             setErrorUsername({ color: false, text: "" });
         }
 
-        // Validar avatar
-        if (newAvatar && !urlRegEx.test(newAvatar)) {
-            setErrorAvatar({ color: true, text: "Ingresa una URL válida" });
-            valid = false;
+        // Validar avatar - expresión regular mejorada para URLs con comas
+        if (newAvatar) {
+            // URL más permisiva que acepta comas y otros caracteres especiales
+            const betterUrlRegEx = /^https?:\/\/[^\s<>"{}|\\^`[\]]+$/;
+            if (!betterUrlRegEx.test(newAvatar)) {
+                setErrorAvatar({ color: true, text: "Ingresa una URL válida" });
+                valid = false;
+            } else {
+                setErrorAvatar({ color: false, text: "" });
+            }
         } else {
             setErrorAvatar({ color: false, text: "" });
         }
@@ -221,9 +257,9 @@ export default function Perfil() {
             // Actualizar nombre de usuario si ha cambiado
             if (newUsername !== user.username) {
                 const usernameResponse = await fetch(
-                    `${import.meta.env.VITE_APP_PETICION_IP}/api/profile/update-username`,
+                    `${import.meta.env.VITE_APP_PETICION_IP}/api/profile/username`,
                     {
-                        method: "POST",
+                        method: "PUT",
                         headers: { 
                             "Content-Type": "application/json",
                             Authorization: `Bearer ${token}`
@@ -238,18 +274,20 @@ export default function Perfil() {
                     throw new Error(usernameData.error?.username?.[0] || usernameData.error || "Error al actualizar el nombre de usuario");
                 }
                 
-                // Actualizar el usuario en localStorage y en el estado
+                // Actualizar el usuario en localStorage y en el estado de forma segura
                 const updatedUser = { ...user, username: newUsername };
-                localStorage.setItem("user", JSON.stringify(updatedUser));
-                setUser(updatedUser);
+                const saved = safeSaveUser(updatedUser);
+                if (saved) {
+                    setUser(updatedUser);
+                }
             }
 
             // Actualizar avatar si ha cambiado
             if (newAvatar !== (user.avatar || "")) {
                 const avatarResponse = await fetch(
-                    `${import.meta.env.VITE_APP_PETICION_IP}/api/profile/update-avatar`,
+                    `${import.meta.env.VITE_APP_PETICION_IP}/api/profile/avatar`,
                     {
-                        method: "POST",
+                        method: "PUT",
                         headers: { 
                             "Content-Type": "application/json",
                             Authorization: `Bearer ${token}`
@@ -264,18 +302,20 @@ export default function Perfil() {
                     throw new Error(avatarData.error?.avatar?.[0] || avatarData.error || "Error al actualizar el avatar");
                 }
                 
-                // Actualizar el usuario en localStorage y en el estado
+                // Actualizar el usuario en localStorage y en el estado de forma segura
                 const updatedUser = { ...user, avatar: newAvatar };
-                localStorage.setItem("user", JSON.stringify(updatedUser));
-                setUser(updatedUser);
+                const saved = safeSaveUser(updatedUser);
+                if (saved) {
+                    setUser(updatedUser);
+                }
             }
 
             // Actualizar contraseña si se proporcionó
             if (newPassword) {
                 const passwordResponse = await fetch(
-                    `${import.meta.env.VITE_APP_PETICION_IP}/api/profile/update-password`,
+                    `${import.meta.env.VITE_APP_PETICION_IP}/api/profile/password`,
                     {
-                        method: "POST",
+                        method: "PUT",
                         headers: { 
                             "Content-Type": "application/json",
                             Authorization: `Bearer ${token}`
@@ -326,6 +366,7 @@ export default function Perfil() {
             setMessage({ type: "success", text: "Perfil actualizado correctamente" });
             
         } catch (err) {
+            console.error("Error updating profile:", err);
             setMessage({ type: "error", text: err.message });
         }
     };
