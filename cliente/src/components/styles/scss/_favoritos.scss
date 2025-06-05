@@ -1,68 +1,223 @@
+/* Estilos para el componente Favoritos */
+
 .favorites-container {
-    padding: 20px;
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 0 auto;
-    background-color: #1a1a1a; // Fondo oscuro
+    padding: 20px;
+    margin-top: 15px;
+    background-color: #1a1a1a;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 
     h2 {
-        font-family: 'Cinzel', serif;
-        color: #d4af37; // Color dorado
+        color: #ffd700;
         text-align: center;
         margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 1.8rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        font-family: 'Cinzel', serif;
     }
 
-    .loading-text,
-    .error-text,
+    /* Estilos para estados de carga y error */
+    .loading-text {
+        text-align: center;
+        color: #ffd700;
+        font-size: 18px;
+        padding: 20px;
+    }
+
+    .error-text {
+        text-align: center;
+        color: #dc3545;
+        font-size: 16px;
+        padding: 20px;
+        background-color: rgba(220, 53, 69, 0.1);
+        border-radius: 8px;
+        border: 1px solid #dc3545;
+    }
+
     .no-favorites-text {
         text-align: center;
-        color: #d4af37;
+        color: #ffd700;
         font-size: 1.2rem;
         margin-top: 20px;
+        padding: 20px;
+        background-color: rgba(255, 215, 0, 0.1);
+        border-radius: 8px;
+        border: 1px solid #ffd700;
     }
 
+    /* Estilo para la tabla */
     .favorites-table {
-        width: 100%;
         margin-top: 20px;
+        border-collapse: separate;
+        border-spacing: 0;
+        border-radius: 8px;
+        overflow: hidden;
 
         th {
-            background-color: #d4af37; // Fondo dorado
-            color: #1a1a1a; // Texto oscuro
+            background-color: #333;
+            color: #ffd700;
+            text-transform: uppercase;
+            font-size: 14px;
             text-align: center;
+            padding: 12px 15px;
+            vertical-align: middle;
         }
 
         td {
             color: #eee;
             text-align: center;
+            padding: 12px 15px;
+            vertical-align: middle; /* Alinea verticalmente el contenido de las celdas */
+            height: 56px; /* Altura fija para mantener consistencia con los botones */
         }
 
-        tr:hover td {
-            background-color: #333;
+        tbody tr {
+            transition: background-color 0.2s;
+
+            &:hover {
+                background-color: #2a2a2a;
+            }
         }
     }
 
-    .btn {
+    /* Estilo para botones de acción en la tabla */
+    .btn-sm {
+        width: 32px;
+        height: 32px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        border-radius: 4px;
+        margin-right: 5px;
+        transition: all 0.2s;
         font-family: 'Cinzel', serif;
+        vertical-align: middle; /* Asegura alineación vertical */
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
 
         &.btn-primary {
-            background-color: #d4af37;
-            border-color: #b5862e;
+            background-color: #007bff;
+            border-color: #007bff;
 
             &:hover {
-                background-color: #b5862e;
-                border-color: #8c6924;
+                background-color: #0069d9;
+                border-color: #0062cc;
             }
         }
 
         &.btn-danger {
-            background-color: #ff4d4d;
-            border-color: #ff0000;
+            background-color: #dc3545;
+            border-color: #dc3545;
 
             &:hover {
-                background-color: #ff0000;
-                border-color: #cc0000;
+                background-color: #c82333;
+                border-color: #bd2130;
             }
         }
+    }
+
+    /* Estilo para los botones de paginación */
+    .pagination-controls {
+        margin: 20px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        button {
+            transition: all 0.2s;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 5px;
+            border-radius: 4px;
+            cursor: pointer;
+
+            &:hover:not(:disabled) {
+                transform: translateY(-2px);
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            }
+
+            &:disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+
+            &.btn-secondary {
+                background-color: #6c757d;
+                border-color: #6c757d;
+                color: #fff;
+
+                &:hover:not(:disabled) {
+                    background-color: #5a6268;
+                    border-color: #545b62;
+                }
+            }
+
+            i {
+                font-size: 12px;
+            }
+        }
+
+        span {
+            margin: 0 10px;
+            font-size: 14px;
+            color: #fff;
+            font-weight: bold;
+        }
+    }
+
+    /* Estilos para la vista responsiva */
+    @media (max-width: 768px) {
+        padding: 15px;
+
+        h2 {
+            font-size: 1.5rem;
+        }
+
+        .favorites-table {
+            th, td {
+                padding: 8px;
+                font-size: 14px;
+                height: 48px; /* Altura ajustada para móvil */
+            }
+        }
+
+        .btn-sm {
+            width: 28px;
+            height: 28px;
+            margin-right: 3px;
+        }
+
+        .pagination-controls {
+            button {
+                width: 35px;
+                height: 35px;
+                margin: 0 3px;
+            }
+
+            span {
+                font-size: 12px;
+                margin: 0 8px;
+            }
+        }
+    }
+
+    /* Estilos adicionales para mantener coherencia */
+    .table-dark {
+        background-color: transparent;
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: rgba(255, 255, 255, 0.05);
     }
 }

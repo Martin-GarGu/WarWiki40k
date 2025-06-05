@@ -93,6 +93,15 @@ export default function Favoritos() {
     const currentFavorites = favorites.slice(indexOfFirst, indexOfLast);
     const totalPages = Math.ceil(favorites.length / favoritesPerPage);
 
+    // Funciones de paginación mejoradas
+    const goToFirstPage = () => {
+        setCurrentPage(1);
+    };
+
+    const goToLastPage = () => {
+        setCurrentPage(totalPages || 1);
+    };
+
     if (loading) {
         return <div className="loading-text">Cargando favoritos...</div>; // Mostrar mensaje de carga
     }
@@ -109,10 +118,9 @@ export default function Favoritos() {
                     <table className="favorites-table table table-dark table-striped">
                         <thead>
                             <tr>
-                                <th>Nombre</th>
-                                <th>Tipo</th>
-                                <th>Ir</th>
-                                <th>Eliminar</th>
+                                <th>NOMBRE</th>
+                                <th>TIPO</th>
+                                <th>ACCIONES</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -122,18 +130,18 @@ export default function Favoritos() {
                                     <td>{favorite.favorites_type}</td>
                                     <td>
                                         <button
-                                            className="btn btn-primary btn-sm"
+                                            className="btn btn-primary btn-sm me-2"
                                             onClick={() => handleNavigate(favorite)}
+                                            title="Ir a la página"
                                         >
-                                            Ir
+                                            <i className="fa fa-external-link-alt"></i>
                                         </button>
-                                    </td>
-                                    <td>
                                         <button
                                             className="btn btn-danger btn-sm"
                                             onClick={() => handleEliminate(favorite.id)}
+                                            title="Eliminar de favoritos"
                                         >
-                                            Eliminar
+                                            <i className="fa fa-trash-alt"></i>
                                         </button>
                                     </td>
                                 </tr>
@@ -141,22 +149,40 @@ export default function Favoritos() {
                         </tbody>
                     </table>
 
-                    {/* Controles de Paginación */}
+                    {/* Controles de Paginación mejorados */}
                     <div className="pagination-controls mt-3">
+                        <button
+                            className="btn btn-secondary btn-sm me-2"
+                            onClick={goToFirstPage}
+                            disabled={currentPage === 1}
+                            title="Primera página"
+                        >
+                            <i className="fa fa-angle-double-left"></i>
+                        </button>
                         <button
                             className="btn btn-secondary btn-sm me-2"
                             onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                             disabled={currentPage === 1}
+                            title="Página anterior"
                         >
-                            Anterior
+                            <i className="fa fa-chevron-left"></i>
                         </button>
                         <span className="text-white">Página {currentPage} de {totalPages}</span>
                         <button
                             className="btn btn-secondary btn-sm ms-2"
                             onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                             disabled={currentPage === totalPages}
+                            title="Página siguiente"
                         >
-                            Siguiente
+                            <i className="fa fa-chevron-right"></i>
+                        </button>
+                        <button
+                            className="btn btn-secondary btn-sm ms-2"
+                            onClick={goToLastPage}
+                            disabled={currentPage === totalPages}
+                            title="Última página"
+                        >
+                            <i className="fa fa-angle-double-right"></i>
                         </button>
                     </div>
                 </>

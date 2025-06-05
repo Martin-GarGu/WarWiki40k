@@ -8,9 +8,12 @@ import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
 import SpinnerFormulario from "../SpinnerFormulario";
 import InputAdornment from "@mui/material/InputAdornment";
+import { useUser } from "../../contexts/UserContext.jsx"; // Ajusta la ruta según tu estructura
 
 const Registro = () => {
   const navigate = useNavigate();
+  const { login } = useUser(); // Usar el contexto
+  
   const [pass, setPass] = useState("");
   const [confpass, setConfpass] = useState("");
   const [email, setEmail] = useState("");
@@ -111,10 +114,29 @@ const Registro = () => {
       const jsonData = await response.json();
 
       if (response.ok) {
-        setAlertMessage("Usuario registrado correctamente");
-        setAlertVariant("success");
-        setShowAlert(true);
-        setTimeout(redirigir, 3000);
+        // Si el registro incluye login automático (algunos sistemas lo hacen)
+        if (jsonData.token && jsonData.user) {
+          // Registrar y hacer login automáticamente usando el contexto
+          const loginSuccess = login(jsonData.user, jsonData.token);
+          
+          if (loginSuccess) {
+            setAlertMessage("Usuario registrado correctamente. Sesión iniciada.");
+            setAlertVariant("success");
+            setShowAlert(true);
+            setTimeout(() => navigate("/"), 3000); // Redirigir al home
+          } else {
+            setAlertMessage("Usuario registrado correctamente");
+            setAlertVariant("success");
+            setShowAlert(true);
+            setTimeout(redirigir, 3000);
+          }
+        } else {
+          // Registro exitoso sin login automático
+          setAlertMessage("Usuario registrado correctamente");
+          setAlertVariant("success");
+          setShowAlert(true);
+          setTimeout(redirigir, 3000);
+        }
       } else {
         if (jsonData?.message?.includes("email")) {
           setErrorEmail({
@@ -127,7 +149,7 @@ const Registro = () => {
             text: "Este nombre de usuario ya está registrado",
           });
         } else {
-          setAlertMessage("Error al registrar el usuario");
+          setAlertMessage(jsonData?.message || "Error al registrar el usuario");
           setAlertVariant("danger");
           setShowAlert(true);
         }

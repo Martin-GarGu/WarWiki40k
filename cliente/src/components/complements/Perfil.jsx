@@ -1,9 +1,13 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useUser } from '../../contexts/UserContext.jsx'; // Importar useUser
 
 export default function Perfil() {
     const navigate = useNavigate();
-    const [user, setUser] = useState(null);
+    
+    // Usar el contexto en lugar de estado local
+    const { user, isLogged, updateUser } = useUser();
+    
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [stats, setStats] = useState({
@@ -36,50 +40,18 @@ export default function Perfil() {
     // Expresiones regulares para validaciones
     const passRegEx = /^(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
     const enieRegEx = /ñ|Ñ/;
-    const urlRegEx = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
-
-    // Función segura para parsear datos del localStorage
-    const safeParseUser = (userData) => {
-        try {
-            return JSON.parse(userData);
-        } catch (error) {
-            console.error("Error parsing user data from localStorage:", error);
-            // Limpiar localStorage corrupto
-            localStorage.removeItem("user");
-            localStorage.removeItem("token");
-            return null;
-        }
-    };
-
-    // Función segura para guardar usuario en localStorage
-    const safeSaveUser = (userData) => {
-        try {
-            localStorage.setItem("user", JSON.stringify(userData));
-            return true;
-        } catch (error) {
-            console.error("Error saving user data to localStorage:", error);
-            setMessage({ type: "error", text: "Error al guardar los datos del usuario" });
-            return false;
-        }
-    };
 
     useEffect(() => {
-        const userData = localStorage.getItem("user");
-        if (userData) {
-            const parsedUser = safeParseUser(userData);
-            if (parsedUser) {
-                setUser(parsedUser);
-                setNewUsername(parsedUser.username);
-                setNewAvatar(parsedUser.avatar || "");
-                fetchUserStats(parsedUser.id);
-            } else {
-                // Si no se pudo parsear, redirigir al login
-                navigate("/login");
-            }
-        } else {
+        // Usar el contexto en lugar de localStorage
+        if (!isLogged || !user) {
             navigate("/login");
+            return;
         }
-    }, [navigate]);
+        
+        setNewUsername(user.username);
+        setNewAvatar(user.avatar || "");
+        fetchUserStats(user.id);
+    }, [navigate, isLogged, user]);
 
     // Auto-ocultar mensajes después de 5 segundos
     useEffect(() => {
@@ -171,7 +143,7 @@ export default function Perfil() {
             setErrorUsername({ color: false, text: "" });
         }
 
-        // Validar avatar - expresión regular mejorada para URLs con comas
+        // Validar avatar - expresión regular mejorada para URLs
         if (newAvatar) {
             // URL más permisiva que acepta comas y otros caracteres especiales
             const betterUrlRegEx = /^https?:\/\/[^\s<>"{}|\\^`[\]]+$/;
@@ -240,12 +212,11 @@ export default function Perfil() {
         navigate("/games");
     };
 
-    // Función para manejar el envío del formulario
+    // Función para manejar el envío del formulario - MODIFICADA para usar contexto
     const handleSubmitProfile = async (e) => {
         e.preventDefault();
         setMessage(null);
         
-        // Validar formulario antes de enviar
         const isValid = await validarFormulario();
         if (!isValid) {
             return;
@@ -254,6 +225,8 @@ export default function Perfil() {
         const token = localStorage.getItem("token");
 
         try {
+            let updatedUser = { ...user };
+            
             // Actualizar nombre de usuario si ha cambiado
             if (newUsername !== user.username) {
                 const usernameResponse = await fetch(
@@ -274,12 +247,7 @@ export default function Perfil() {
                     throw new Error(usernameData.error?.username?.[0] || usernameData.error || "Error al actualizar el nombre de usuario");
                 }
                 
-                // Actualizar el usuario en localStorage y en el estado de forma segura
-                const updatedUser = { ...user, username: newUsername };
-                const saved = safeSaveUser(updatedUser);
-                if (saved) {
-                    setUser(updatedUser);
-                }
+                updatedUser.username = newUsername;
             }
 
             // Actualizar avatar si ha cambiado
@@ -302,12 +270,7 @@ export default function Perfil() {
                     throw new Error(avatarData.error?.avatar?.[0] || avatarData.error || "Error al actualizar el avatar");
                 }
                 
-                // Actualizar el usuario en localStorage y en el estado de forma segura
-                const updatedUser = { ...user, avatar: newAvatar };
-                const saved = safeSaveUser(updatedUser);
-                if (saved) {
-                    setUser(updatedUser);
-                }
+                updatedUser.avatar = newAvatar;
             }
 
             // Actualizar contraseña si se proporcionó
@@ -361,7 +324,12 @@ export default function Perfil() {
                 }
             }
 
-            // Si llegamos aquí, todo salió bien
+            // Actualizar usando el contexto
+            const saved = updateUser(updatedUser);
+            if (!saved) {
+                throw new Error("Error al guardar los cambios localmente");
+            }
+
             closeEditModal();
             setMessage({ type: "success", text: "Perfil actualizado correctamente" });
             

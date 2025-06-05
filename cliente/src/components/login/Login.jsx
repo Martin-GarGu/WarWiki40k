@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Container, TextField, Button, Typography, InputAdornment, Link } from "@mui/material";
 import Alert from "react-bootstrap/Alert";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../../contexts/UserContext.jsx"; // Ajusta la ruta según tu estructura
 
 function Login() {
     const [email, setEmail] = useState("");
@@ -15,6 +16,7 @@ function Login() {
     const [alertMessage, setAlertMessage] = useState("");
 
     const navigate = useNavigate();
+    const { login } = useUser(); // Usar el contexto
 
     const emailRegEx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -63,20 +65,25 @@ function Login() {
             const data = await response.json();
 
             if (data.token && data.user) {
-                localStorage.setItem("token", data.token);
-                localStorage.setItem("user", JSON.stringify(data.user));
+                // Usar el contexto en lugar de localStorage directamente
+                const loginSuccess = login(data.user, data.token);
+                
+                if (loginSuccess) {
+                    setAlertVariant("success");
+                    setAlertMessage("Inicio de sesión exitoso");
+                    setShowAlert(true);
 
-                setAlertVariant("success");
-                setAlertMessage("Inicio de sesión exitoso");
-                setShowAlert(true);
-
-                setTimeout(handleRedirection, 3000);
+                    setTimeout(handleRedirection, 3000);
+                } else {
+                    throw new Error("Error al guardar los datos del usuario");
+                }
             } else {
                 throw new Error("Correo o contraseña incorrectos");
             }
         } catch (error) {
+            console.error("Error en login:", error);
             setAlertVariant("danger");
-            setAlertMessage("Correo o contraseña incorrectos");
+            setAlertMessage(error.message || "Correo o contraseña incorrectos");
             setShowAlert(true);
         } finally {
             setLoading(false);

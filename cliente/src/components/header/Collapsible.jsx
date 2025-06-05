@@ -5,39 +5,22 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import { useEffect, useState } from "react";
 import logo from "../../assets/images/asd.png"
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '../../contexts/UserContext.jsx';
 
 function Collapsible() {
-  const [logeado, setLogeado] = useState(false);
-  const [role, setRole] = useState("");
-  const [user, setUser] = useState(null);
+  const { user, isLogged, logout: contextLogout, getUserRole } = useUser();
+  
   const [factions, setFactions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const userData = JSON.parse(localStorage.getItem("user"));
-
-    if (token) {
-      setLogeado(true);
-    } else {
-      setLogeado(false);
-    }
-
-    if (userData) {
-      setUser(userData);
-      if (userData.role) {
-        setRole(userData.role);
-      }
-    }
-    
-    // Cargar las facciones al iniciar el componente
     fetchFactions();
   }, []);
 
   const fetchFactions = async () => {
-    let isMounted = true; // Para verificar si el componente sigue montado
+    let isMounted = true;
     try {
       const respuesta = await fetch(`${import.meta.env.VITE_APP_PETICION_IP}/api/factions`, {
         method: "GET",
@@ -66,17 +49,19 @@ function Collapsible() {
     }
 
     return () => {
-      isMounted = false; // Limpiar el flag cuando el componente se desmonte
+      isMounted = false;
     };
   };
 
   const logout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    setLogeado(false);
-    setRole("");
-    setUser(null);
+    contextLogout();
     navigate("/login");
+  };
+
+  // Función para manejar navegación sin recargar la página
+  const handleNavigation = (e, path) => {
+    e.preventDefault();
+    navigate(path);
   };
 
   // Función para obtener las iniciales del usuario
@@ -102,18 +87,19 @@ function Collapsible() {
   return (
     <Navbar collapseOnSelect expand="lg" className="p-0" id="headerNavbar">
       <Container fluid className="navbar-container p-0">
-        <Navbar.Brand href="/" className="nav-link nav-brand-custom">
+        <Navbar.Brand onClick={(e) => handleNavigation(e, "/")} className="nav-link nav-brand-custom" style={{ cursor: 'pointer' }}>
           <div>
             <img src={logo} alt="logo" id="logo"/>
           </div>
-          {/* <div style={{backgroundImage: "url(/src/assets/images/asd.png)"}}/> */}
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto" id="nav">
-            <Nav.Link href="/rules" className="nav-item-custom">Reglas</Nav.Link>
+            <Nav.Link onClick={(e) => handleNavigation(e, "/rules")} className="nav-item-custom">
+              Reglas
+            </Nav.Link>
             
-            {/* Dropdown de facciones - visible para todos */}
+            {/* Dropdown de facciones */}
             <NavDropdown title="Facciones" id="factions-dropdown" className="nav-item-custom">
               {isLoading ? (
                 <NavDropdown.Item disabled>Cargando...</NavDropdown.Item>
@@ -121,7 +107,11 @@ function Collapsible() {
                 <NavDropdown.Item disabled>Error al cargar facciones</NavDropdown.Item>
               ) : (
                 factions.map((faction) => (
-                  <NavDropdown.Item key={faction._id} href={`/${faction.slug}`} className="dropdown-item-custom">
+                  <NavDropdown.Item 
+                    key={faction._id} 
+                    onClick={(e) => handleNavigation(e, `/${faction.slug}`)} 
+                    className="dropdown-item-custom"
+                  >
                     {faction.name}
                   </NavDropdown.Item>
                 ))
@@ -131,18 +121,20 @@ function Collapsible() {
               )}
             </NavDropdown>
             
-            {/* Enlace a Partidas - solo visible si está logueado */}
-            {logeado && (
-              <Nav.Link href="/games" className="nav-item-custom">Partidas</Nav.Link>
+            {isLogged && (
+              <Nav.Link onClick={(e) => handleNavigation(e, "/games")} className="nav-item-custom">
+                Partidas
+              </Nav.Link>
             )}
             
-            {/* Admin Panel - solo visible para admins */}
-            {logeado && role === "admin" && (
-              <Nav.Link href="/crud" className="nav-item-custom">Admin Panel</Nav.Link>
+            {isLogged && getUserRole() === "admin" && (
+              <Nav.Link onClick={(e) => handleNavigation(e, "/crud")} className="nav-item-custom">
+                Admin Panel
+              </Nav.Link>
             )}
           </Nav>
           <Nav className="ms-auto" id="account">
-            {logeado ? (
+            {isLogged ? (
               <NavDropdown 
                 title={
                   <div className="avatar-container">
@@ -159,10 +151,10 @@ function Collapsible() {
                 className="nav-item-custom user-dropdown"
                 align="end"
               >
-                <NavDropdown.Item href="/profile" className="dropdown-item-custom">
+                <NavDropdown.Item onClick={(e) => handleNavigation(e, "/profile")} className="dropdown-item-custom">
                   <i className="fas fa-user me-2"></i>Perfil
                 </NavDropdown.Item>
-                <NavDropdown.Item href="/favorites" className="dropdown-item-custom">
+                <NavDropdown.Item onClick={(e) => handleNavigation(e, "/favorites")} className="dropdown-item-custom">
                   <i className="fas fa-heart me-2"></i>Favoritos
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
@@ -172,10 +164,10 @@ function Collapsible() {
               </NavDropdown>
             ) : (
               <>
-                <Nav.Link href="/login" className="nav-item-custom">
+                <Nav.Link onClick={(e) => handleNavigation(e, "/login")} className="nav-item-custom">
                   Iniciar Sesión
                 </Nav.Link>
-                <Nav.Link href="/register" className="nav-item-custom">
+                <Nav.Link onClick={(e) => handleNavigation(e, "/register")} className="nav-item-custom">
                   Registro
                 </Nav.Link>
               </>
