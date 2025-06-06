@@ -4,6 +4,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 const Footer = React.forwardRef((props, ref) => {
+  const handleNavigation = () => {
+    // Triple asegurado que va ARRIBA DEL TODO
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  };
+
   return (
     <footer ref={ref} className="footer bg-dark text-white w-100">
       <div className="container">
@@ -21,12 +28,20 @@ const Footer = React.forwardRef((props, ref) => {
             <h5 className="mb-3">Enlaces útiles</h5>
             <ul className="list-unstyled">
               <li className="mb-2">
-                <Link to="/" className="text-white text-decoration-none hover-opacity">
+                <Link 
+                  to="/" 
+                  className="text-white text-decoration-none hover-opacity"
+                  onClick={handleNavigation}
+                >
                   <i className="bi bi-house-door me-2"></i>Inicio
                 </Link>
               </li>
               <li>
-                <Link to="/rules" className="text-white text-decoration-none hover-opacity">
+                <Link 
+                  to="/rules" 
+                  className="text-white text-decoration-none hover-opacity"
+                  onClick={handleNavigation}
+                >
                   <i className="bi bi-journal-text me-2"></i>Reglas
                 </Link>
               </li>

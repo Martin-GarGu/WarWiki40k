@@ -104,29 +104,72 @@ function Inicio() {
 
   const handleClickFactions = (faction) => {
     navigate(`/${faction.slug}`);
+    // FORZAR scroll arriba
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }, 10);
   };
 
   const handleViewKillTeam = (squad) => {
     navigate(`/squads/${squad.slug}`);
+    // FORZAR scroll arriba
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }, 10);
   };
 
   const handleRules = () => {
     navigate('/rules');
+    // FORZAR scroll arriba
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }, 10);
   };
+
   const handleSpecialRules = () => {
     navigate('/specialRules');
+    // FORZAR scroll arriba
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }, 10);
   };
+
   const handleKillTeamGuide = () => {
-    // Como no tienes una página de guía, podrías redirigir a la página principal or a otra página existente
-    navigate('/rules'); // O cualquier otra página que tengas disponible
+    navigate('/rules');
+    // FORZAR scroll arriba
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }, 10);
   };
 
   const handleRegister = () => {
     navigate('/register');
+    // FORZAR scroll arriba
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }, 10);
   };
 
   const handleLogin = () => {
     navigate('/login');
+    // FORZAR scroll arriba
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }, 10);
   };
 
   const handleVisitGamesWorkshop = () => {
