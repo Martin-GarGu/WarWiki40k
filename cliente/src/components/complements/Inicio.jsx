@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import FactionCarousel from "./Carrousel";
 import routeApi from "../../routeApi";
 import backToTop from "../../assets/images/backToTop.png";
+import inicioBanner from "../../assets/images/inicioBanner.png"; // NUEVA IMPORTACIÓN
 
 function Inicio() {
   const [factions, setFactions] = useState([]);
@@ -179,9 +180,21 @@ function Inicio() {
 
   return (
     <div className="inicio-container">
-      {/* Banner principal */}
-      <div className="hero-banner text-center mb-5 position-relative">
-        <div className="overlay d-flex flex-column justify-content-center align-items-center p-5">
+      {/* Banner principal - MODIFICADO CON IMAGEN DE FONDO */}
+      <div 
+        className="hero-banner text-center mb-5 position-relative"
+        style={{
+          backgroundImage: `url(${inicioBanner})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          minHeight: '500px'
+        }}
+      >
+        <div className="overlay d-flex flex-column justify-content-center align-items-center p-5" style={{
+          backgroundColor: 'rgba(0, 0, 0, 0.6)', // Capa oscura semitransparente para mejor legibilidad
+          minHeight: '500px'
+        }}>
           <h1 className="display-4 fw-bold inicio-title mb-4">WarWiki40K</h1>
           <h2 className="h3 mb-4 text-light">Tu guía definitiva para Kill Team</h2>
           <p className="lead text-light mb-4">
